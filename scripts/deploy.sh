@@ -6,6 +6,7 @@ set -e
 
 PROJ_DIR="$HOME/tumbil/tumbil-os"
 DASHBOARD_DIR="$PROJ_DIR/dashboard"
+PASSWORD="muskokasummit"
 
 echo "[TumbilOS] Starting deploy at $(date)"
 
@@ -13,16 +14,16 @@ echo "[TumbilOS] Starting deploy at $(date)"
 echo "[TumbilOS] Syncing TGE data..."
 python3 "$PROJ_DIR/scripts/sync_data.py"
 
-# Step 2: Update gh-pages branch
+# Step 2: Encrypt the dashboard HTML with password
+echo "[TumbilOS] Encrypting dashboard..."
+TMPDIR=$(mktemp -d)
+npx --yes staticrypt "$DASHBOARD_DIR/index.html" -p "$PASSWORD" -d "$TMPDIR" --remember 30 --title "TumbilOS" -c false --short 2>/dev/null
+cp "$DASHBOARD_DIR/data.json" "$TMPDIR/"
+
+# Step 3: Update gh-pages branch
 echo "[TumbilOS] Deploying to GitHub Pages..."
 cd "$PROJ_DIR"
 
-# Copy dashboard files to a temp location
-TMPDIR=$(mktemp -d)
-cp "$DASHBOARD_DIR/index.html" "$TMPDIR/"
-cp "$DASHBOARD_DIR/data.json" "$TMPDIR/"
-
-# Switch to gh-pages, update files, push
 git checkout gh-pages
 cp "$TMPDIR/index.html" .
 cp "$TMPDIR/data.json" .
