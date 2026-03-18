@@ -1,0 +1,431 @@
+{
+  "generated_at": "2026-03-18T13:44:39.548794",
+  "latest_briefing_date": "2026-03-18",
+  "executive_summary": "Weak Tuesday: 7 orders placed (-35% vs avg), $352 order value (-46%). 0 returning customers for 3rd time in 4 days. Blended CPA spiked to $13.01 (+64%). Zero recommendations implemented in 14 days - the biggest growth blocker is execution, not strategy. Carrying forward Spring Refresh reactivation email (day 4).",
+  "scorecard": [
+    {
+      "metric": "Orders Placed",
+      "yesterday": "7",
+      "seven_day_avg": "10.7",
+      "change": "-34.6%",
+      "status": "red"
+    },
+    {
+      "metric": "Orders Delivered",
+      "yesterday": "9",
+      "seven_day_avg": "11.0",
+      "change": "-18.2%",
+      "status": "yellow"
+    },
+    {
+      "metric": "Order Value, placed, ex. HST",
+      "yesterday": "$352.26",
+      "seven_day_avg": "$654.69",
+      "change": "-46.2%",
+      "status": "red"
+    },
+    {
+      "metric": "Revenue, delivered, ex. HST",
+      "yesterday": "$618.13",
+      "seven_day_avg": "$684.04",
+      "change": "-9.6%",
+      "status": "green"
+    },
+    {
+      "metric": "AOV, placed, ex. HST",
+      "yesterday": "$50.32",
+      "seven_day_avg": "$61.10",
+      "change": "-17.6%",
+      "status": "yellow"
+    },
+    {
+      "metric": "Ad Spend",
+      "yesterday": "$91.09",
+      "seven_day_avg": "$84.86",
+      "change": "+7.3%",
+      "status": "green"
+    },
+    {
+      "metric": "Blended CPA",
+      "yesterday": "$13.01",
+      "seven_day_avg": "$7.92",
+      "change": "+64.3%",
+      "status": "red"
+    },
+    {
+      "metric": "New Customers",
+      "yesterday": "2",
+      "seven_day_avg": "2.9",
+      "change": "-31.0%",
+      "status": "red"
+    },
+    {
+      "metric": "Returning Customers",
+      "yesterday": "0",
+      "seven_day_avg": "1.0",
+      "change": "-100.0%",
+      "status": "red"
+    },
+    {
+      "metric": "Habitual Customers",
+      "yesterday": "5",
+      "seven_day_avg": "6.9",
+      "change": "-27.5%",
+      "status": "yellow"
+    },
+    {
+      "metric": "Cancellations 7d",
+      "yesterday": "9.3%",
+      "seven_day_avg": "8.5%",
+      "change": "+9.4%",
+      "status": "green"
+    },
+    {
+      "metric": "Failed Payments 7d",
+      "yesterday": "1",
+      "seven_day_avg": "0",
+      "change": "+1",
+      "status": "yellow"
+    }
+  ],
+  "implementation": {
+    "total_recommendations": 23,
+    "implemented": 1,
+    "not_implemented": 22,
+    "implementation_rate": 4.3,
+    "streak_without_action": 22
+  },
+  "today_recommendation": {
+    "category": "retention",
+    "summary": "Send Spring Refresh reactivation email to 410 one-and-done customers via Mailchimp offering $5 off. Carried forward from Mar 16 - day 4.",
+    "impact": "410 one-and-done customers x 2% reactivation = 8 reorders week 1. 8 x $57.25 AOV = $458 first week (~$65/day). Conservative ongoing: +$17-30/day for zero ad spend.",
+    "time": "45 minutes",
+    "steps": [
+      "Open Mailchimp, create new campaign targeting 'Tumbil Customers' audience (list ID: 21c9ffcaad)",
+      "Segment: customers with exactly 1 completed order AND last order >21 days ago",
+      "Subject: 'We saved you a spot - $5 off your next pickup'. From: matthew@tumbil.com",
+      "Body: Short, personal. Remind them of the convenience. Include $5 promo code. Clear CTA to book.",
+      "Send test email to hello@tumbil.com for review",
+      "Send campaign. Track orders from reactivated customers over 7 days"
+    ],
+    "rationale": "Carried forward from Mar 16 - not yet implemented. No urgent override (no outage, payment failure, or spend anomaly >2x). 410 one-and-done customers is the largest addressable cohort at zero incremental ad spend."
+  },
+  "candidates": [
+    {
+      "category": "revenue_leaks",
+      "action": "Investigate 7 cancellations in 7 days (9.3% rate, up from 8.5% prior). Pull cancellation reasons and check WashPro/city patterns.",
+      "data_signal": "Cancel rate 9.3% (7/75) vs 8.5% prior (9/106). Mar 17 had 1 cancellation on only 7 orders (14.3% daily rate).",
+      "estimated_impact": "+$15/day if cancel rate returns to 7% (saving ~0.25 orders/day x $61 AOV)",
+      "confidence": "low",
+      "implementation_time": "30 minutes"
+    },
+    {
+      "category": "conversion_funnel",
+      "action": "15-min UX audit: place 3 test orders (mobile web, desktop, app) to identify top friction points in 42% draft abandonment.",
+      "data_signal": "Draft-to-placed 58% (30d: 410/707). Recommended 4 times, never performed.",
+      "estimated_impact": "+$41/day from 3pp improvement (0.7 orders/day x $57.25 AOV)",
+      "confidence": "medium",
+      "implementation_time": "15 minutes"
+    },
+    {
+      "category": "paid_acquisition",
+      "action": "Reallocate budget from zero-conversion city campaigns (Barrie, Mississauga, Whitby, Brampton, Vaughan) to GTA Click and GTA Conversion.",
+      "data_signal": "Yesterday $22.44 across 5 city campaigns, 0 conversions. GTA Click $28.60/2 conv. 7 days stale.",
+      "estimated_impact": "+$22/day redeployed, ~1-2 additional orders/day",
+      "confidence": "medium-high",
+      "implementation_time": "20 minutes"
+    },
+    {
+      "category": "organic_growth",
+      "action": "Expand Hamilton city page from 220 to 1,500 words. Position 12 for 'laundry service hamilton' with 24 impressions - striking distance.",
+      "data_signal": "GSC: 'laundry service hamilton' position 12, 24 impressions, 4.17% CTR. Hamilton page 342 impressions, 1.17% CTR. 9 days stale.",
+      "estimated_impact": "+$8/day if Hamilton moves to position 5 (3x clicks x 3% CVR x $57 AOV)",
+      "confidence": "medium",
+      "implementation_time": "2 hours"
+    },
+    {
+      "category": "retention",
+      "action": "Send Spring Refresh reactivation email to 410 one-and-done customers via Mailchimp offering $5 off. Carried forward from Mar 16 (day 4).",
+      "data_signal": "410/722 customers (56.8%) never reordered. 0 returning customers 3 of last 4 days. Feb 16 cohort hit 51.9% reorder rate.",
+      "estimated_impact": "+$17-30/day (2% reactivation = 8 orders week 1 at $57 AOV)",
+      "confidence": "medium",
+      "implementation_time": "45 minutes"
+    },
+    {
+      "category": "expansion",
+      "action": "Launch Refer a Friend email to 196 habitual customers (3+ orders) offering $10 credit per referral via Mailchimp.",
+      "data_signal": "196 customers with 3+ orders, driving 66.3% of daily orders. No referral program exists.",
+      "estimated_impact": "+$20/day (5% response, 30% convert = 3 new customers/week x $57 AOV)",
+      "confidence": "medium",
+      "implementation_time": "1 hour"
+    }
+  ],
+  "winner_index": 4,
+  "trends": {
+    "daily_orders": [
+      {
+        "date": "2026-03-02",
+        "placed": 20,
+        "delivered": 14,
+        "order_value": 1247.26,
+        "revenue": 917.93,
+        "aov_placed": 62.36
+      },
+      {
+        "date": "2026-03-03",
+        "placed": 11,
+        "delivered": 18,
+        "order_value": 398.75,
+        "revenue": 1190.0,
+        "aov_placed": 36.25
+      },
+      {
+        "date": "2026-03-04",
+        "placed": 11,
+        "delivered": 11,
+        "order_value": 1779.26,
+        "revenue": 522.62,
+        "aov_placed": 161.75
+      },
+      {
+        "date": "2026-03-05",
+        "placed": 16,
+        "delivered": 10,
+        "order_value": 895.27,
+        "revenue": 633.64,
+        "aov_placed": 55.95
+      },
+      {
+        "date": "2026-03-06",
+        "placed": 20,
+        "delivered": 12,
+        "order_value": 919.51,
+        "revenue": 617.63,
+        "aov_placed": 45.98
+      },
+      {
+        "date": "2026-03-07",
+        "placed": 16,
+        "delivered": 16,
+        "order_value": 979.52,
+        "revenue": 728.89,
+        "aov_placed": 61.22
+      },
+      {
+        "date": "2026-03-08",
+        "placed": 14,
+        "delivered": 23,
+        "order_value": 766.5,
+        "revenue": 1422.27,
+        "aov_placed": 54.75
+      },
+      {
+        "date": "2026-03-09",
+        "placed": 13,
+        "delivered": 6,
+        "order_value": 645.27,
+        "revenue": 344.31,
+        "aov_placed": 49.64
+      },
+      {
+        "date": "2026-03-10",
+        "placed": 16,
+        "delivered": 16,
+        "order_value": 708.53,
+        "revenue": 854.51,
+        "aov_placed": 44.28
+      },
+      {
+        "date": "2026-03-11",
+        "placed": 6,
+        "delivered": 14,
+        "order_value": 419.26,
+        "revenue": 870.01,
+        "aov_placed": 69.88
+      },
+      {
+        "date": "2026-03-12",
+        "placed": 15,
+        "delivered": 8,
+        "order_value": 735.01,
+        "revenue": 549.01,
+        "aov_placed": 49.0
+      },
+      {
+        "date": "2026-03-13",
+        "placed": 14,
+        "delivered": 11,
+        "order_value": 648.27,
+        "revenue": 625.26,
+        "aov_placed": 46.31
+      },
+      {
+        "date": "2026-03-14",
+        "placed": 18,
+        "delivered": 10,
+        "order_value": 1502.27,
+        "revenue": 419.5,
+        "aov_placed": 83.46
+      },
+      {
+        "date": "2026-03-15",
+        "placed": 7,
+        "delivered": 18,
+        "order_value": 466.02,
+        "revenue": 1000.27,
+        "aov_placed": 66.57
+      },
+      {
+        "date": "2026-03-16",
+        "placed": 8,
+        "delivered": 7,
+        "order_value": 459.75,
+        "revenue": 706.13,
+        "aov_placed": 57.47
+      }
+    ]
+  },
+  "thirty_day": {},
+  "ad_performance": {
+    "total_spend_7d": 0,
+    "total_conversions_7d": 0,
+    "campaigns": []
+  },
+  "recent_recommendations": [
+    {
+      "date": "2026-03-04",
+      "category": "conversion_funnel",
+      "summary": "Manual UX audit: walk 3 complete order flows on tumbil.com, time each step, document friction points causing 47% draft abandonment",
+      "impact": "+$16-27/day (3-5pp draft-to-placed improvement)",
+      "implemented": "unknown",
+      "time": "30 minutes"
+    },
+    {
+      "date": "2026-03-05",
+      "category": "conversion_funnel",
+      "summary": "Manual UX audit: walk 3 order flows, time each step, document friction points causing 47% draft abandonment. Carried forward from Mar 4.",
+      "impact": "+$39/day (3pp draft-to-placed improvement = 0.7 orders/day x $55.95 AOV)",
+      "implemented": "unknown",
+      "time": "45 minutes"
+    },
+    {
+      "date": "2026-03-06",
+      "category": "retention",
+      "summary": "Send Spring Refresh reactivation email via Mailchimp to 2,364 subscribers targeting 56.7% one-and-done customer problem. Executable via Mailchimp MCP.",
+      "impact": "+$30/day first week, potential $184/month recurring",
+      "implemented": "unknown",
+      "time": "45 minutes"
+    },
+    {
+      "date": "2026-03-07",
+      "category": "retention",
+      "summary": "Send Spring Refresh reactivation email via Mailchimp to 389 one-and-done customers (56.8% of base). Carried forward from Mar 6.",
+      "impact": "+$30/day first week, +$33/day ongoing",
+      "implemented": "unknown",
+      "time": "1 hour"
+    },
+    {
+      "date": "2026-03-08",
+      "category": "organic_growth",
+      "summary": "Expand Barrie city page from 220 to 1,500 words targeting 'laundry service barrie' at position 9.7 (32 impressions). SEO Change #5 pilot.",
+      "impact": "+$5/day Barrie, +$60/day at full 22-city rollout",
+      "implemented": "unknown",
+      "time": "2-3 hours"
+    },
+    {
+      "date": "2026-03-09",
+      "category": "organic_growth",
+      "summary": "Expand Barrie city page from 220 to 1,500 words targeting 'laundry service barrie' at position 9.2. SEO Change #5 pilot. Carried forward from Mar 8.",
+      "impact": "+$5/day Barrie, +$60/day at full 22-city rollout",
+      "implemented": "unknown",
+      "time": "2-3 hours"
+    },
+    {
+      "date": "2026-03-10",
+      "category": "paid_acquisition",
+      "summary": "Reallocate $21/day from 5 zero-conversion city campaigns (Barrie, Whitby, Kitchener, Niagara, Brampton) to GTA Click campaign ($2.86/reg, 3.6x more efficient).",
+      "impact": "+$44-88/day (1-2 additional orders)",
+      "implemented": "unknown",
+      "time": "30 minutes"
+    },
+    {
+      "date": "2026-03-11",
+      "category": "paid_acquisition",
+      "summary": "Reallocate $27/day from 5 zero-conversion campaigns to Hamilton and GTA Click. Carried forward from Mar 10.",
+      "impact": "+$44-88/day (1-2 additional orders)",
+      "implemented": "not_implemented",
+      "time": "20 minutes"
+    },
+    {
+      "date": "2026-03-12",
+      "category": "revenue_leaks",
+      "summary": "Diagnose Google Ads spend crash (-58.5% to $43.79/day). Check billing, budget caps, campaign status. Restore if unintentional.",
+      "impact": "+$331/day net if spend restored to $105/day avg",
+      "implemented": "not_implemented",
+      "time": "15-20 minutes"
+    },
+    {
+      "date": "2026-03-12",
+      "category": "revenue_leaks",
+      "summary": "Diagnose 7-day ad spend decline from $152 to $44 (-71%). Check billing, budget caps, bid strategy in Google Ads. Carried forward from Mar 12.",
+      "impact": "+$196/day in order value if spend restored to $105/day",
+      "implemented": "not_implemented",
+      "time": "15 minutes"
+    },
+    {
+      "date": "2026-03-13",
+      "category": "expansion",
+      "summary": "Launch Refer a Friend email to 192 habitual customers (3+ orders) offering $10 credit per referral via Mailchimp MCP.",
+      "impact": "+$20/day ($520/month new customer revenue + referrer reorders)",
+      "implemented": "unknown",
+      "time": "30 min via Mailchimp MCP"
+    },
+    {
+      "date": "2026-03-14",
+      "category": "conversion_funnel",
+      "summary": "15-min UX audit: place 3 test orders (mobile, desktop, app) to identify top 3 friction points causing 42.6% draft abandonment. Document and create ClickUp tickets.",
+      "impact": "+$41/day (+$1,230/month) from 3pp draft-to-placed improvement",
+      "implemented": "unknown",
+      "time": "30 minutes"
+    },
+    {
+      "date": "2026-03-15",
+      "category": "conversion_funnel",
+      "summary": "15-min UX audit: place 3 test orders (mobile, desktop, app) to find top 3 friction points causing 41.6% draft abandonment. Carried forward from Mar 14.",
+      "impact": "+$41/day (+$1,209/month) from 3pp draft-to-placed improvement",
+      "implemented": "unknown",
+      "time": "15 minutes for audit, 5 min per ClickUp ticket"
+    },
+    {
+      "date": "2026-03-16",
+      "category": "retention",
+      "summary": "Send Spring Refresh reactivation email to 406 one-and-done customers (56.5% of base) via Mailchimp offering $5 off next order.",
+      "impact": "+$17-30/day ($500-900 first month)",
+      "implemented": "unknown",
+      "time": "30 minutes"
+    },
+    {
+      "date": "2026-03-17",
+      "category": "retention",
+      "summary": "Send Spring Refresh reactivation email to 410 one-and-done customers via Mailchimp offering $5 off. Carried forward from Mar 16 - day 4.",
+      "impact": "+$17-30/day ($458 first week from 2% reactivation at $57 AOV)",
+      "implemented": "unknown",
+      "time": "45 minutes"
+    }
+  ],
+  "category_distribution": {
+    "paid_acquisition": 4,
+    "conversion_funnel": 5,
+    "retention": 5,
+    "organic_growth": 3,
+    "revenue_leaks": 4,
+    "expansion": 2
+  },
+  "notable_signals": [
+    "Returning customers at 0 for 3 of last 4 days - new-to-repeat pipeline is broken.",
+    "Blended CPA $13.01 (+64%) is a symptom of low order volume on steady spend, not a cause.",
+    "Zero-conversion city campaigns spent $22.44 yesterday (Barrie $7, Mississauga $6, Whitby $4, Hamilton $3, Brampton $2, Vaughan $0.40).",
+    "'fabricare' + 'fabricare barrie' cost $5.22 with 0 conversions - competitor name waste. Flag for manual review.",
+    "Feb 16 cohort hit 51.9% reorder rate (14/27) - best in 9 weeks. Worth investigating what drove it."
+  ]
+}

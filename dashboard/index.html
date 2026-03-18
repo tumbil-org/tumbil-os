@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TumbilOS - Operations Dashboard</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface-2: #1a1a1a;
+    --border: #262626;
+    --text: #e5e5e5;
+    --text-dim: #737373;
+    --text-muted: #525252;
+    --accent: #f97316;
+    --accent-dim: #c2410c;
+    --green: #22c55e;
+    --green-dim: #15803d;
+    --red: #ef4444;
+    --red-dim: #b91c1c;
+    --yellow: #eab308;
+    --yellow-dim: #a16207;
+    --blue: #3b82f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .header h1 span { color: var(--accent); }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  .header-meta .live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-right: 4px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .exec-summary {
+    padding: 16px 24px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--surface);
+    padding: 20px 24px;
+  }
+
+  .panel-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Implementation Rate - the north star */
+  .impl-rate {
+    grid-column: 1 / -1;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 20px 24px;
+  }
+
+  .impl-big-number {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: 1;
+  }
+
+  .impl-big-number.bad { color: var(--red); }
+  .impl-big-number.ok { color: var(--yellow); }
+  .impl-big-number.good { color: var(--green); }
+
+  .impl-details {
+    flex: 1;
+  }
+
+  .impl-details h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .impl-details p {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .impl-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .impl-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 1s ease;
+  }
+
+  .streak-badge {
+    background: var(--red-dim);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Scorecard */
+  .scorecard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .metric-card {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-left: 3px solid var(--border);
+  }
+
+  .metric-card.green { border-left-color: var(--green); }
+  .metric-card.yellow { border-left-color: var(--yellow); }
+  .metric-card.red { border-left-color: var(--red); }
+
+  .metric-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .metric-value {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .metric-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .metric-change {
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .metric-change.up { color: var(--green); }
+  .metric-change.down { color: var(--red); }
+  .metric-change.flat { color: var(--text-dim); }
+
+  /* Today's Rec */
+  .rec-card {
+    background: var(--surface-2);
+    border: 1px solid var(--accent-dim);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .rec-category {
+    display: inline-block;
+    background: var(--accent-dim);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  .rec-summary {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .rec-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .rec-meta strong { color: var(--text); }
+
+  .rec-steps {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .rec-steps ol {
+    padding-left: 20px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .rec-steps li { margin-bottom: 4px; }
+
+  /* Candidates */
+  .candidate {
+    background: var(--surface-2);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--border);
+  }
+
+  .candidate.winner { border-left-color: var(--accent); }
+
+  .candidate-cat {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .candidate-action {
+    font-size: 13px;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .candidate-impact {
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+
+  /* Trend chart */
+  .chart-container {
+    position: relative;
+    height: 160px;
+    margin-top: 8px;
+  }
+
+  .chart-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Recommendation history */
+  .rec-history-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .rec-history-item:last-child { border-bottom: none; }
+
+  .rec-date {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    min-width: 48px;
+  }
+
+  .rec-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .rec-status-dot.implemented { background: var(--green); }
+  .rec-status-dot.not_implemented { background: var(--red); }
+  .rec-status-dot.unknown { background: var(--text-muted); }
+
+  .rec-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .rec-body-cat {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+
+  .rec-body-text {
+    color: var(--text-dim);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  /* Notable signals */
+  .signal {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .signal:last-child { border-bottom: none; }
+
+  .signal::before {
+    content: "!";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--yellow-dim);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  /* 30-day summary */
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+
+  .stat-label { color: var(--text-dim); }
+  .stat-value { font-weight: 600; }
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Tumbil<span>OS</span></h1>
+  <div class="header-meta">
+    <span class="live-dot"></span> <span id="last-updated">Loading...</span>
+  </div>
+</div>
+
+<div class="exec-summary" id="exec-summary">Loading...</div>
+
+<div class="grid">
+
+  <!-- Implementation Rate -->
+  <div class="impl-rate" id="impl-section">
+    <div>
+      <div class="impl-big-number bad" id="impl-rate-number">0%</div>
+    </div>
+    <div class="impl-details">
+      <h3>Implementation Rate</h3>
+      <p id="impl-desc">Loading...</p>
+      <div class="impl-bar">
+        <div class="impl-bar-fill" id="impl-bar" style="width: 0%; background: var(--red);"></div>
+      </div>
+    </div>
+    <div class="streak-badge" id="streak-badge">-- days idle</div>
+  </div>
+
+  <!-- Scorecard -->
+  <div class="panel full-width">
+    <div class="panel-title">Daily Scorecard</div>
+    <div class="scorecard-grid" id="scorecard"></div>
+  </div>
+
+  <!-- Today's Recommendation -->
+  <div class="panel">
+    <div class="panel-title">Today's #1 Recommendation</div>
+    <div id="today-rec"></div>
+  </div>
+
+  <!-- All Candidates -->
+  <div class="panel">
+    <div class="panel-title">All Candidates Considered</div>
+    <div id="candidates"></div>
+  </div>
+
+  <!-- Order Trend Chart -->
+  <div class="panel">
+    <div class="panel-title">Orders Trend (Last 15 Days)</div>
+    <div class="chart-container" id="chart-container"></div>
+  </div>
+
+  <!-- 30-Day Summary -->
+  <div class="panel">
+    <div class="panel-title">30-Day Summary</div>
+    <div id="thirty-day"></div>
+  </div>
+
+  <!-- Notable Signals -->
+  <div class="panel">
+    <div class="panel-title">Notable Signals</div>
+    <div id="signals"></div>
+  </div>
+
+  <!-- Recommendation History -->
+  <div class="panel">
+    <div class="panel-title">
+      Recommendation History (14d)
+      <span id="rec-count" style="color: var(--text-dim); font-size: 11px; text-transform: none; letter-spacing: 0;"></span>
+    </div>
+    <div id="rec-history" style="max-height: 400px; overflow-y: auto;"></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  TumbilOS v0.1 - Built by Cliff & Claude - Data refreshed daily at 6 AM ET via TGE Pipeline
+</div>
+
+<script>
+async function loadData() {
+  try {
+    const resp = await fetch('data.json');
+    const data = await resp.json();
+    render(data);
+  } catch (e) {
+    document.getElementById('exec-summary').textContent = 'Error loading data: ' + e.message;
+  }
+}
+
+function render(data) {
+  // Header
+  const dt = new Date(data.generated_at);
+  document.getElementById('last-updated').textContent =
+    `Briefing: ${data.latest_briefing_date} | Updated: ${dt.toLocaleString()}`;
+
+  // Executive summary
+  document.getElementById('exec-summary').textContent = data.executive_summary;
+
+  // Implementation rate
+  const impl = data.implementation;
+  const rateEl = document.getElementById('impl-rate-number');
+  rateEl.textContent = impl.implementation_rate + '%';
+  rateEl.className = 'impl-big-number ' +
+    (impl.implementation_rate < 20 ? 'bad' : impl.implementation_rate < 50 ? 'ok' : 'good');
+
+  document.getElementById('impl-desc').textContent =
+    `${impl.implemented} of ${impl.total_recommendations} recommendations implemented. ${impl.not_implemented} pending.`;
+
+  const bar = document.getElementById('impl-bar');
+  bar.style.width = impl.implementation_rate + '%';
+  bar.style.background = impl.implementation_rate < 20 ? 'var(--red)' :
+    impl.implementation_rate < 50 ? 'var(--yellow)' : 'var(--green)';
+
+  document.getElementById('streak-badge').textContent =
+    impl.streak_without_action + ' days idle';
+
+  // Scorecard
+  const scorecardEl = document.getElementById('scorecard');
+  scorecardEl.innerHTML = data.scorecard.map(m => {
+    const changeNum = parseFloat(m.change);
+    // For CPA, higher is worse
+    const isCostMetric = m.metric.includes('CPA') || m.metric.includes('Spend');
+    let changeClass = 'flat';
+    if (!isNaN(changeNum)) {
+      if (isCostMetric) {
+        changeClass = changeNum > 0 ? 'down' : changeNum < 0 ? 'up' : 'flat';
+      } else {
+        changeClass = changeNum > 0 ? 'up' : changeNum < 0 ? 'down' : 'flat';
+      }
+    }
+    return `<div class="metric-card ${m.status}">
+      <div class="metric-label">${m.metric}</div>
+      <div class="metric-value">${m.yesterday}</div>
+      <div class="metric-sub">
+        7d avg: ${m.seven_day_avg}
+        <span class="metric-change ${changeClass}">${m.change}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Today's recommendation
+  const rec = data.today_recommendation;
+  const todayRecEl = document.getElementById('today-rec');
+  if (rec && rec.summary) {
+    todayRecEl.innerHTML = `
+      <div class="rec-card">
+        <div class="rec-category">${rec.category.replace(/_/g, ' ')}</div>
+        <div class="rec-summary">${rec.summary}</div>
+        <div class="rec-meta">
+          <span>Impact: <strong>${rec.impact}</strong></span>
+          <span>Time: <strong>${rec.time}</strong></span>
+        </div>
+        ${rec.steps && rec.steps.length ? `
+        <div class="rec-steps">
+          <ol>${rec.steps.map(s => `<li>${s}</li>`).join('')}</ol>
+        </div>` : ''}
+      </div>`;
+  } else {
+    todayRecEl.innerHTML = '<p style="color: var(--text-dim);">No recommendation available.</p>';
+  }
+
+  // Candidates
+  const candidatesEl = document.getElementById('candidates');
+  candidatesEl.innerHTML = (data.candidates || []).map((c, i) => `
+    <div class="candidate ${i === data.winner_index ? 'winner' : ''}">
+      <div class="candidate-cat">${c.category.replace(/_/g, ' ')} ${i === data.winner_index ? '- WINNER' : ''}</div>
+      <div class="candidate-action">${c.action}</div>
+      <div class="candidate-impact">${c.estimated_impact} (${c.confidence} confidence, ${c.implementation_time})</div>
+    </div>
+  `).join('');
+
+  // Order trend chart
+  renderChart(data.trends.daily_orders);
+
+  // 30-day summary
+  const thirtyEl = document.getElementById('thirty-day');
+  const td = data.thirty_day;
+  if (td && Object.keys(td).length) {
+    const stats = [
+      ['Total Orders', td.total_placed || td.orders_placed || '-'],
+      ['Total Revenue', td.total_revenue ? '$' + Number(td.total_revenue).toLocaleString() : '-'],
+      ['Avg Daily Orders', td.avg_daily_placed ? td.avg_daily_placed.toFixed(1) : '-'],
+      ['AOV', td.aov ? '$' + Number(td.aov).toFixed(2) : '-'],
+      ['Draft-to-Placed', td.draft_to_placed_pct ? td.draft_to_placed_pct + '%' : '-'],
+      ['Repeat Customer Rate', td.repeat_customer_pct ? td.repeat_customer_pct + '%' : '-'],
+      ['Cancellation Rate', td.cancellation_rate_pct ? td.cancellation_rate_pct + '%' : '-'],
+    ];
+    thirtyEl.innerHTML = stats.map(([label, value]) =>
+      `<div class="stat-row"><span class="stat-label">${label}</span><span class="stat-value">${value}</span></div>`
+    ).join('');
+  } else {
+    thirtyEl.innerHTML = '<p style="color: var(--text-dim);">No 30-day data available.</p>';
+  }
+
+  // Notable signals
+  const signalsEl = document.getElementById('signals');
+  signalsEl.innerHTML = (data.notable_signals || []).map(s =>
+    `<div class="signal">${s}</div>`
+  ).join('') || '<p style="color: var(--text-dim);">No signals.</p>';
+
+  // Recommendation history
+  const recHistEl = document.getElementById('rec-history');
+  document.getElementById('rec-count').textContent = `${data.recent_recommendations.length} recs`;
+  recHistEl.innerHTML = (data.recent_recommendations || []).map(r => `
+    <div class="rec-history-item">
+      <div class="rec-date">${r.date ? r.date.slice(5) : '-'}</div>
+      <div class="rec-status-dot ${r.implemented || 'unknown'}"></div>
+      <div class="rec-body">
+        <div class="rec-body-cat">${(r.category || '').replace(/_/g, ' ')}</div>
+        <div class="rec-body-text">${r.summary || '-'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderChart(dailyOrders) {
+  const container = document.getElementById('chart-container');
+  if (!dailyOrders || !dailyOrders.length) {
+    container.innerHTML = '<p style="color: var(--text-dim);">No trend data.</p>';
+    return;
+  }
+
+  const w = container.clientWidth || 500;
+  const h = 160;
+  const padding = { top: 20, right: 40, bottom: 30, left: 0 };
+  const chartW = w - padding.left - padding.right;
+  const chartH = h - padding.top - padding.bottom;
+
+  const maxOrders = Math.max(...dailyOrders.map(d => Math.max(d.placed || 0, d.delivered || 0)), 1);
+  const yMax = Math.ceil(maxOrders / 5) * 5 + 5;
+
+  // Build SVG
+  let svg = `<svg class="chart-svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">`;
+
+  // Grid lines
+  for (let i = 0; i <= 4; i++) {
+    const y = padding.top + (chartH / 4) * i;
+    const val = Math.round(yMax - (yMax / 4) * i);
+    svg += `<line x1="${padding.left}" y1="${y}" x2="${w - padding.right}" y2="${y}" stroke="#262626" stroke-width="1"/>`;
+    svg += `<text x="${w - padding.right + 4}" y="${y + 4}" fill="#525252" font-size="10">${val}</text>`;
+  }
+
+  // Breakeven line at 20
+  const breakY = padding.top + chartH * (1 - 20 / yMax);
+  svg += `<line x1="${padding.left}" y1="${breakY}" x2="${w - padding.right}" y2="${breakY}" stroke="#c2410c" stroke-width="1" stroke-dasharray="4,4"/>`;
+  svg += `<text x="${w - padding.right + 4}" y="${breakY + 4}" fill="#c2410c" font-size="9">BE</text>`;
+
+  // Plot placed orders
+  const points = dailyOrders.map((d, i) => {
+    const x = padding.left + (chartW / (dailyOrders.length - 1 || 1)) * i;
+    const y = padding.top + chartH * (1 - (d.placed || 0) / yMax);
+    return { x, y, d };
+  });
+
+  // Area fill
+  const areaPath = `M ${points[0].x} ${padding.top + chartH} ` +
+    points.map(p => `L ${p.x} ${p.y}`).join(' ') +
+    ` L ${points[points.length - 1].x} ${padding.top + chartH} Z`;
+  svg += `<path d="${areaPath}" fill="url(#grad)" opacity="0.3"/>`;
+
+  // Line
+  const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+  svg += `<path d="${linePath}" fill="none" stroke="#f97316" stroke-width="2"/>`;
+
+  // Dots + labels
+  points.forEach((p, i) => {
+    svg += `<circle cx="${p.x}" cy="${p.y}" r="3" fill="#f97316"/>`;
+    // Date labels (every other)
+    if (i % 2 === 0 || i === points.length - 1) {
+      const dateLabel = p.d.date ? p.d.date.slice(5) : '';
+      svg += `<text x="${p.x}" y="${h - 4}" fill="#525252" font-size="9" text-anchor="middle">${dateLabel}</text>`;
+    }
+  });
+
+  // Gradient def
+  svg += `<defs><linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f97316" stop-opacity="0.4"/>
+    <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+  </linearGradient></defs>`;
+
+  svg += '</svg>';
+  container.innerHTML = svg;
+}
+
+// Load on page load
+loadData();
+// Auto-refresh every 5 minutes
+setInterval(loadData, 300000);
+</script>
+</body>
+</html>
