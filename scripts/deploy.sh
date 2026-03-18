@@ -24,6 +24,7 @@ cp "$DASHBOARD_DIR/data.json" "$TMPDIR/"
 echo "[TumbilOS] Deploying to GitHub Pages..."
 cd "$PROJ_DIR"
 
+git stash --include-untracked -q 2>/dev/null || true
 git checkout gh-pages
 cp "$TMPDIR/index.html" .
 cp "$TMPDIR/data.json" .
@@ -40,4 +41,5 @@ else
 fi
 
 git checkout main
+git stash pop -q 2>/dev/null || true
 echo "[TumbilOS] Done at $(date)"
