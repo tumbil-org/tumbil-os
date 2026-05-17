@@ -1,6 +1,7 @@
 # TumbilOS - Founder/Company Dashboard
 
 > Also read `~/tumbil/CLAUDE.md` for org-wide rules and `~/tumbil/.shared-memory/project_briefings/global.md`.
+> Also read `~/tumbil/.shared-memory/project_briefings/tumbil-os.md` for cross-project context.
 
 ## What this is
 
