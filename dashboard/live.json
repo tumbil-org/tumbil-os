@@ -1,29 +1,29 @@
 {
   "version": 1,
-  "generated_at": "2026-05-17T06:15:28.144701-04:00",
+  "generated_at": "2026-05-17T12:34:50.942335-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 1,
-    "order_value_cad": 38.0,
-    "aov_cad": 38.0,
+    "placed_orders": 6,
+    "order_value_cad": 390.0,
+    "aov_cad": 65.0,
     "customer_mix": {
-      "brand_new": 1,
-      "second_order": 0,
-      "regular": 0,
-      "returning_regular_total": 0
+      "brand_new": 2,
+      "second_order": 1,
+      "regular": 3,
+      "returning_regular_total": 4
     },
     "business_date": "2026-05-17",
-    "as_of_et": "2026-05-17T06:15:22.754798-04:00",
+    "as_of_et": "2026-05-17T12:34:48.201276-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 5.0,
-    "same_time_7d_avg_orders": 0.7,
-    "same_time_delta_orders": 0.3,
-    "same_time_7d_avg_order_value_cad": 58.29,
-    "same_time_7d_avg_new_customers": 0.4,
+    "pace_to_target_pct": 30.0,
+    "same_time_7d_avg_orders": 8.3,
+    "same_time_delta_orders": -2.3,
+    "same_time_7d_avg_order_value_cad": 480.29,
+    "same_time_7d_avg_new_customers": 1.4,
     "deliveries": {
-      "count": 0,
-      "revenue_cad": 0.0,
-      "aov_cad": 0.0
+      "count": 5,
+      "revenue_cad": 212.5,
+      "aov_cad": 42.5
     }
   },
   "customer_type_labels": {
@@ -35,53 +35,53 @@
   "same_time_7d_samples": [
     {
       "date": "2026-05-16",
-      "placed_orders": 1,
-      "order_value_cad": 88.5,
-      "new_customers": 1
-    },
-    {
-      "date": "2026-05-15",
-      "placed_orders": 3,
-      "order_value_cad": 281.5,
+      "placed_orders": 14,
+      "order_value_cad": 878.75,
       "new_customers": 2
     },
     {
+      "date": "2026-05-15",
+      "placed_orders": 10,
+      "order_value_cad": 736.75,
+      "new_customers": 4
+    },
+    {
       "date": "2026-05-14",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 5,
+      "order_value_cad": 327.25,
+      "new_customers": 1
     },
     {
       "date": "2026-05-13",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 9,
+      "order_value_cad": 444.0,
+      "new_customers": 1
     },
     {
       "date": "2026-05-12",
-      "placed_orders": 0,
-      "order_value_cad": 0,
+      "placed_orders": 6,
+      "order_value_cad": 240.5,
       "new_customers": 0
     },
     {
       "date": "2026-05-11",
-      "placed_orders": 1,
-      "order_value_cad": 38.0,
-      "new_customers": 0
+      "placed_orders": 7,
+      "order_value_cad": 326.75,
+      "new_customers": 1
     },
     {
       "date": "2026-05-10",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 7,
+      "order_value_cad": 408.0,
+      "new_customers": 1
     }
   ],
   "acquisition": {
-    "new_customer_orders": 1,
+    "new_customer_orders": 2,
     "sources": [
       {
         "bucket": "Direct / Unknown",
-        "orders": 1,
+        "orders": 2,
         "confidence": "low"
       }
     ],
@@ -95,17 +95,27 @@
         "campaign": null,
         "referral_code": null,
         "referral_owner_name": null
+      },
+      {
+        "order_id": 4398,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "GA4 source was direct or empty.",
+        "match_quality": "ga4_direct_or_empty",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
       }
     ],
-    "unknown_orders": 1,
+    "unknown_orders": 2,
     "ga4_status": {
       "status": "ok",
       "primary": "ga4_data_api",
       "ga4_data_api": {
         "status": "ok",
         "source": "ga4_data_api",
-        "rows": 1,
-        "row_count": 1,
+        "rows": 2,
+        "row_count": 2,
         "date_start": "2026-05-17",
         "date_end": "2026-05-17",
         "auth": "service_account",
@@ -113,16 +123,16 @@
       },
       "bigquery": {
         "status": "ok",
-        "rows": 3,
+        "rows": 7,
         "method": "rest"
       },
-      "rows": 4
+      "rows": 9
     },
     "appsflyer": {
       "status": "ok",
       "date": "2026-05-17",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-17T05:54:30.893471-04:00",
+      "fetched_at": "2026-05-17T12:30:12.411903-04:00",
       "cache_status": "hit",
       "apps": [
         {
@@ -134,17 +144,27 @@
         {
           "status": "ok",
           "app_id": "com.tumbil",
-          "rows": 0,
+          "rows": 1,
           "platform": "android"
         }
       ],
       "totals": {
-        "purchase_events": 1,
-        "unique_users": 1,
+        "purchase_events": 2,
+        "unique_users": 2,
         "sales_cad": 50.94
       },
       "google_ads_purchase_events": 1,
       "media_sources": [
+        {
+          "media_source": "Organic",
+          "campaign": "None",
+          "purchase_events": 1,
+          "unique_users": 1,
+          "sales_cad": 0.0,
+          "apps": [
+            "com.tumbil"
+          ]
+        },
         {
           "media_source": "googleadwords_int",
           "campaign": "22497318368",
@@ -196,7 +216,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-17T06:15:22.754798-04:00"
+      "as_of_et": "2026-05-17T12:34:48.201276-04:00"
     },
     "ga4_attribution": {
       "status": "ok",
@@ -204,8 +224,8 @@
       "ga4_data_api": {
         "status": "ok",
         "source": "ga4_data_api",
-        "rows": 1,
-        "row_count": 1,
+        "rows": 2,
+        "row_count": 2,
         "date_start": "2026-05-17",
         "date_end": "2026-05-17",
         "auth": "service_account",
@@ -213,14 +233,14 @@
       },
       "bigquery": {
         "status": "ok",
-        "rows": 3,
+        "rows": 7,
         "method": "rest"
       },
-      "rows": 4
+      "rows": 9
     },
     "ga4_bigquery": {
       "status": "ok",
-      "rows": 3,
+      "rows": 7,
       "method": "rest"
     },
     "appsflyer": {
@@ -236,7 +256,7 @@
         {
           "status": "ok",
           "app_id": "com.tumbil",
-          "rows": 0,
+          "rows": 1,
           "platform": "android"
         }
       ]
