@@ -1,0 +1,46 @@
+name: TumbilOS Regression
+
+on:
+  push:
+    paths:
+      - 'dashboard/**'
+      - 'scripts/deploy.sh'
+      - 'scripts/deploy_live.sh'
+      - 'scripts/encrypt_dashboard_payloads.js'
+      - 'scripts/sync_*dashboard*.py'
+      - 'scripts/sync_customer_details.py'
+      - 'scripts/sync_service_details.py'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'playwright.config.js'
+      - '.github/workflows/tumbilos-regression.yml'
+  pull_request:
+    paths:
+      - 'dashboard/**'
+      - 'scripts/deploy.sh'
+      - 'scripts/deploy_live.sh'
+      - 'scripts/encrypt_dashboard_payloads.js'
+      - 'scripts/sync_*dashboard*.py'
+      - 'scripts/sync_customer_details.py'
+      - 'scripts/sync_service_details.py'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'playwright.config.js'
+      - '.github/workflows/tumbilos-regression.yml'
+  workflow_dispatch:
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:tumbilos:full
