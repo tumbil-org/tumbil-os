@@ -1,0 +1,13 @@
+{
+  "name": "tumbil-tge",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test:tumbilos": "playwright test",
+    "test:tumbilos:quick": "playwright test --grep @critical",
+    "test:tumbilos:full": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0"
+  }
+}

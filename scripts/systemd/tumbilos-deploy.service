@@ -1,0 +1,22 @@
+[Unit]
+Description=TumbilOS Dashboard Deploy (sync + encrypt + push to GitHub Pages)
+After=network-online.target
+Wants=network-online.target
+# Self-heal: allow up to 4 starts per 15 min, then stop retrying so a
+# persistent failure still surfaces in arch-review instead of looping.
+StartLimitIntervalSec=900
+StartLimitBurst=4
+
+[Service]
+Type=oneshot
+ExecStart=%h/tumbil/tumbil-os/scripts/deploy.sh
+WorkingDirectory=%h/tumbil/tumbil-os
+EnvironmentFile=%h/.config/tge/tge-env
+Environment=PATH=/home/yoygurt/.local/bin:/home/yoygurt/.nvm/versions/node/v22.22.0/bin:/usr/local/bin:/usr/bin:/bin
+# A failed deploy is almost always transient (DB/network/git blip) and the
+# deploy script is idempotent, so retry automatically a couple minutes later.
+Restart=on-failure
+RestartSec=120
+
+[Install]
+WantedBy=default.target

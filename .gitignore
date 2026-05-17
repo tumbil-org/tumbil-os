@@ -1,0 +1,11 @@
+.env
+.env.*
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+dashboard-deploy/
+node_modules/
+playwright-report/
+test-results/
+.claude/settings.local.json

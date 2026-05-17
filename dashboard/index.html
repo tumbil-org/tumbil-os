@@ -3,704 +3,2640 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TumbilOS - Operations Dashboard</title>
+<title>TumbilOS - Company Dashboard</title>
+<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0a;
-    --surface: #141414;
-    --surface-2: #1a1a1a;
-    --border: #262626;
-    --text: #e5e5e5;
-    --text-dim: #737373;
-    --text-muted: #525252;
-    --accent: #f97316;
-    --accent-dim: #c2410c;
-    --green: #22c55e;
-    --green-dim: #15803d;
-    --red: #ef4444;
-    --red-dim: #b91c1c;
-    --yellow: #eab308;
-    --yellow-dim: #a16207;
-    --blue: #3b82f6;
+  @font-face {
+    font-family: 'Oceanwide';
+    src: url('fonts/Oceanwide-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @font-face {
+    font-family: 'Oceanwide';
+    src: url('fonts/Oceanwide-Semibold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #090b0d;
+    --surface: #121518;
+    --surface-2: #191d21;
+    --surface-3: #20262b;
+    --border: #2b333a;
+    --text: #f1f5f7;
+    --text-dim: #a6b0b8;
+    --text-muted: #75818a;
+    --accent: #00a3e7;
+    --accent-2: #43d17b;
+    --amber: #e8b34b;
+    --red: #f05d5e;
+    --violet: #b48cff;
+    --radius: 8px;
+  }
+
+  * { box-sizing: border-box; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.5;
-    min-height: 100vh;
+    font-family: Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.45;
   }
 
-  .header {
+  button, input, select, textarea {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 24px;
+    gap: 18px;
+    padding: 14px 22px;
+    background: rgba(18, 21, 24, 0.96);
     border-bottom: 1px solid var(--border);
-    background: var(--surface);
+    backdrop-filter: blur(12px);
   }
 
-  .header h1 {
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .brand h1 {
+    margin: 0;
+    font-family: 'Oceanwide', Arial, sans-serif;
     font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    line-height: 1;
+    font-weight: 600;
   }
 
-  .header h1 span { color: var(--accent); }
+  .brand h1 span {
+    color: var(--accent);
+  }
 
-  .header-meta {
+  .brand small {
+    color: var(--text-muted);
     font-size: 12px;
-    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 12px;
     text-align: right;
   }
 
-  .header-meta .live-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
+  .dot {
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--green);
-    margin-right: 4px;
-    animation: pulse 2s infinite;
+    background: var(--accent-2);
+    display: inline-block;
+    margin-right: 6px;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  .dot.stale { background: var(--amber); }
+  .dot.error { background: var(--red); }
 
-  .exec-summary {
-    padding: 16px 24px;
+  .logout-btn,
+  .icon-btn,
+  .primary-btn,
+  .ghost-btn {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     background: var(--surface-2);
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
+    color: var(--text);
+    padding: 8px 11px;
+    min-height: 34px;
+  }
+
+  .primary-btn {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #041015;
+    font-weight: 700;
+  }
+
+  .ghost-btn {
     color: var(--text-dim);
-    line-height: 1.6;
+    background: transparent;
+  }
+
+  .logout-btn {
+    color: var(--text-dim);
+    background: transparent;
+    padding: 6px 10px;
+    min-height: 30px;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.58;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 2px;
+    padding: 0 22px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .tab {
+    appearance: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--text-dim);
+    padding: 12px 14px 10px;
+    white-space: nowrap;
+  }
+
+  .tab.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  main {
+    padding: 22px;
+  }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .band {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .summary {
+    color: var(--text-dim);
+    font-size: 14px;
+    max-width: 1180px;
+  }
+
+  .summary strong {
+    color: var(--text);
   }
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
+    gap: 14px;
   }
 
-  @media (max-width: 900px) {
-    .grid { grid-template-columns: 1fr; }
+  .grid.kpis {
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+  }
+
+  .grid.two {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .panel {
     background: var(--surface);
-    padding: 20px 24px;
-  }
-
-  .panel-title {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  /* Implementation Rate - the north star */
-  .impl-rate {
-    grid-column: 1 / -1;
-    background: var(--surface);
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    padding: 20px 24px;
-  }
-
-  .impl-big-number {
-    font-size: 56px;
-    font-weight: 800;
-    letter-spacing: -3px;
-    line-height: 1;
-  }
-
-  .impl-big-number.bad { color: var(--red); }
-  .impl-big-number.ok { color: var(--yellow); }
-  .impl-big-number.good { color: var(--green); }
-
-  .impl-details {
-    flex: 1;
-  }
-
-  .impl-details h3 {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .impl-details p {
-    font-size: 13px;
-    color: var(--text-dim);
-  }
-
-  .impl-bar {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    margin-top: 8px;
-    overflow: hidden;
-  }
-
-  .impl-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 1s ease;
-  }
-
-  .streak-badge {
-    background: var(--red-dim);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  /* Scorecard */
-  .scorecard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-  }
-
-  .metric-card {
-    background: var(--surface-2);
-    border-radius: 8px;
-    padding: 12px 14px;
-    border-left: 3px solid var(--border);
-  }
-
-  .metric-card.green { border-left-color: var(--green); }
-  .metric-card.yellow { border-left-color: var(--yellow); }
-  .metric-card.red { border-left-color: var(--red); }
-
-  .metric-label {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-  }
-
-  .metric-value {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-
-  .metric-sub {
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
-
-  .metric-change {
-    font-size: 11px;
-    font-weight: 600;
-  }
-
-  .metric-change.up { color: var(--green); }
-  .metric-change.down { color: var(--red); }
-  .metric-change.flat { color: var(--text-dim); }
-
-  /* Today's Rec */
-  .rec-card {
-    background: var(--surface-2);
-    border: 1px solid var(--accent-dim);
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: 16px;
-  }
-
-  .rec-category {
-    display: inline-block;
-    background: var(--accent-dim);
-    color: white;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-  }
-
-  .rec-summary {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
-
-  .rec-meta {
-    display: flex;
-    gap: 16px;
-    font-size: 12px;
-    color: var(--text-dim);
-  }
-
-  .rec-meta strong { color: var(--text); }
-
-  .rec-steps {
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
-  }
-
-  .rec-steps ol {
-    padding-left: 20px;
-    font-size: 12px;
-    color: var(--text-dim);
-  }
-
-  .rec-steps li { margin-bottom: 4px; }
-
-  /* Candidates */
-  .candidate {
-    background: var(--surface-2);
-    border-radius: 6px;
-    padding: 12px;
-    margin-bottom: 8px;
-    border-left: 3px solid var(--border);
-  }
-
-  .candidate.winner { border-left-color: var(--accent); }
-
-  .candidate-cat {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    font-weight: 600;
-  }
-
-  .candidate-action {
-    font-size: 13px;
-    margin-top: 4px;
-    line-height: 1.4;
-  }
-
-  .candidate-impact {
-    font-size: 11px;
-    color: var(--accent);
-    margin-top: 4px;
-  }
-
-  /* Trend chart */
-  .chart-container {
-    position: relative;
-    height: 160px;
-    margin-top: 8px;
-  }
-
-  .chart-svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Recommendation history */
-  .rec-history-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-
-  .rec-history-item:last-child { border-bottom: none; }
-
-  .rec-date {
-    font-size: 11px;
-    color: var(--text-muted);
-    white-space: nowrap;
-    min-width: 48px;
-  }
-
-  .rec-status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-top: 6px;
-    flex-shrink: 0;
-  }
-
-  .rec-status-dot.implemented { background: var(--green); }
-  .rec-status-dot.not_implemented { background: var(--red); }
-  .rec-status-dot.unknown { background: var(--text-muted); }
-
-  .rec-body {
-    flex: 1;
     min-width: 0;
   }
 
-  .rec-body-cat {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  .panel-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
     color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
-  .rec-body-text {
+  .kpi {
+    min-height: 118px;
+  }
+
+  .kpi.clickable {
+    cursor: pointer;
+    transition: border-color 0.12s ease, transform 0.12s ease, background 0.12s ease;
+  }
+
+  .kpi.clickable:hover {
+    border-color: #3b4851;
+    background: var(--surface-2);
+    transform: translateY(-1px);
+  }
+
+  .kpi .label {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .kpi .value {
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 800;
+  }
+
+  .kpi .sub {
+    margin-top: 8px;
     color: var(--text-dim);
-    line-height: 1.4;
-    margin-top: 2px;
+    font-size: 12px;
   }
 
-  /* Notable signals */
-  .signal {
-    padding: 8px 0;
+  .value.accent { color: var(--accent); }
+  .value.green { color: var(--accent-2); }
+  .value.amber { color: var(--amber); }
+  .value.red { color: var(--red); }
+
+  .progress {
+    height: 8px;
+    background: var(--surface-3);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+
+  .progress span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+  }
+
+  .mix-row,
+  .source-row,
+  .stat-row,
+  .health-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 9px 0;
     border-bottom: 1px solid var(--border);
-    font-size: 13px;
     color: var(--text-dim);
-    line-height: 1.4;
+    font-size: 13px;
   }
 
-  .signal:last-child { border-bottom: none; }
+  .mix-row:last-child,
+  .source-row:last-child,
+  .stat-row:last-child,
+  .health-row:last-child {
+    border-bottom: 0;
+  }
 
-  .signal::before {
-    content: "!";
+  .mix-row strong,
+  .source-row strong,
+  .stat-row strong,
+  .health-row strong {
+    color: var(--text);
+  }
+
+  .source-section-title {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-top: 14px;
+    padding-top: 12px;
+    text-transform: uppercase;
+    border-top: 1px solid var(--border);
+  }
+
+  .confidence {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--yellow-dim);
-    color: white;
+    min-width: 58px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 8px;
     font-size: 10px;
-    font-weight: 700;
-    margin-right: 8px;
-    flex-shrink: 0;
+    color: var(--text-dim);
   }
 
-  /* 30-day summary */
-  .stat-row {
+  .confidence.high { color: var(--accent-2); border-color: rgba(67, 209, 123, 0.45); }
+  .confidence.medium { color: var(--amber); border-color: rgba(232, 179, 75, 0.45); }
+  .confidence.low { color: var(--text-muted); }
+
+  .chart {
+    height: 190px;
+    width: 100%;
+  }
+
+  .scorecard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
+    gap: 10px;
+  }
+
+  .metric {
+    background: var(--surface-2);
+    border-left: 3px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    min-height: 98px;
+  }
+
+  .metric.green { border-left-color: var(--accent-2); }
+  .metric.yellow { border-left-color: var(--amber); }
+  .metric.red { border-left-color: var(--red); }
+
+  .metric .name {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-bottom: 5px;
+  }
+
+  .metric .number {
+    font-size: 23px;
+    font-weight: 800;
+  }
+
+  .metric .base {
+    color: var(--text-dim);
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  .brief {
+    color: var(--text-dim);
+    font-size: 14px;
+    max-width: 960px;
+  }
+
+  .brief p {
+    margin: 0 0 12px;
+  }
+
+  .brief strong {
+    color: var(--text);
+  }
+
+  .brief ul {
+    margin: 0 0 12px 20px;
+    padding: 0;
+  }
+
+  .date-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .date-nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .date-label {
+    min-width: 190px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .priorities-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  #priorities-view {
+    --priority-bg-image: none;
+    min-height: calc(100vh - 154px);
+    margin: -6px -8px 0;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius);
+    background-color: #162125;
+    background-image:
+      linear-gradient(180deg, rgba(8, 12, 15, 0.20), rgba(8, 12, 15, 0.42)),
+      var(--priority-bg-image);
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+  }
+
+  #priorities-view .priorities-toolbar {
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: var(--radius);
+    background: rgba(9, 12, 10, 0.82);
+    backdrop-filter: blur(12px);
+  }
+
+  .priority-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .board-status {
+    min-width: 118px;
+    color: var(--text-muted);
+    font-size: 12px;
+    text-align: right;
+  }
+
+  .board-status.saving { color: var(--amber); }
+  .board-status.synced { color: var(--accent-2); }
+  .board-status.local { color: var(--amber); }
+  .board-status.error { color: var(--red); }
+
+  .board {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(252px, 292px);
+    gap: 12px;
+    overflow-x: auto;
+    align-items: start;
+    padding: 2px 2px 10px;
+  }
+
+  .lane {
+    min-width: 220px;
+    max-height: calc(100vh - 260px);
+    background: rgba(8, 11, 7, 0.86);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: var(--radius);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    min-height: 460px;
+    transition: border-color 0.12s ease, background 0.12s ease;
+  }
+
+  .lane.drag-over {
+    border-color: var(--accent);
+    background: rgba(0, 163, 231, 0.08);
+  }
+
+  .lane-title {
     display: flex;
     justify-content: space-between;
-    padding: 6px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 10px;
   }
 
-  .stat-row:last-child { border-bottom: none; }
+  .lane-cards {
+    flex: 1;
+    min-height: 90px;
+    overflow-y: auto;
+    padding-right: 2px;
+  }
 
-  .stat-label { color: var(--text-dim); }
-  .stat-value { font-weight: 600; }
+  .task {
+    background: rgba(30, 32, 35, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    padding: 11px;
+    margin-bottom: 9px;
+    cursor: grab;
+    transition: border-color 0.12s ease, opacity 0.12s ease, transform 0.12s ease;
+  }
 
-  .full-width {
+  .task:hover {
+    border-color: #3b4851;
+    transform: translateY(-1px);
+  }
+
+  .task.dragging {
+    opacity: 0.42;
+  }
+
+  .task-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    color: var(--text-dim);
+    font-size: 11px;
+  }
+
+  .pill {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 7px;
+  }
+
+  .pill.product { color: var(--accent); }
+  .pill.finance { color: var(--accent-2); }
+  .pill.eng { color: var(--amber); }
+  .pill.ai { color: var(--violet); }
+
+  .task-note {
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .task-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .task-actions button {
+    padding: 5px 8px;
+    min-height: 28px;
+    font-size: 11px;
+  }
+
+  .quick-add {
+    margin-top: 8px;
+    display: grid;
+    gap: 7px;
+  }
+
+  .quick-add .quick-row {
+    display: grid;
+    grid-template-columns: 1fr 42px;
+    gap: 7px;
+  }
+
+  .quick-add input {
+    width: 100%;
+    min-height: 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    color: var(--text);
+    padding: 8px 9px;
+  }
+
+  dialog {
+    width: min(680px, calc(100vw - 32px));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    padding: 0;
+  }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.68);
+  }
+
+  .modal-head,
+  .modal-foot {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .modal-foot {
+    border-top: 1px solid var(--border);
+    border-bottom: 0;
+    justify-content: flex-end;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field.full {
     grid-column: 1 / -1;
   }
 
-  /* Footer */
-  .footer {
-    padding: 16px 24px;
-    text-align: center;
-    font-size: 11px;
+  .field label {
     color: var(--text-muted);
-    border-top: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    color: var(--text);
+    padding: 9px 10px;
+    min-height: 38px;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .toast {
+    position: fixed;
+    left: 22px;
+    bottom: 22px;
+    z-index: 30;
+    max-width: 460px;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    color: var(--text-dim);
+    display: none;
+  }
+
+  .toast.show { display: block; }
+
+  .empty {
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 10px 0;
+  }
+
+  .customer-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .customer-summary {
+    color: var(--text-dim);
+    font-size: 14px;
+    max-width: 920px;
+  }
+
+  .customer-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .customer-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 15px;
+  }
+
+  .customer-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .customer-name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .customer-id-line,
+  .customer-order-line {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .customer-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .customer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 14px;
+  }
+
+  .customer-field {
+    min-width: 0;
+  }
+
+  .customer-field-label {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .customer-field-value {
+    color: var(--text);
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media (max-width: 980px) {
+    .grid.kpis,
+    .grid.two,
+    .grid.three {
+      grid-template-columns: 1fr;
+    }
+
+    .board {
+      grid-template-columns: repeat(5, 240px);
+    }
+
+    .topbar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .meta {
+      width: 100%;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 620px) {
+    main { padding: 14px; }
+    .topbar { padding: 14px; }
+    .tabs { padding: 0 14px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .kpi .value { font-size: 34px; }
+    .date-label { min-width: 128px; }
+    .customer-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-
-<div class="header">
-  <h1>Tumbil<span>OS</span></h1>
-  <div class="header-meta">
-    <span class="live-dot"></span> <span id="last-updated">Loading...</span>
-  </div>
-</div>
-
-<div class="exec-summary" id="exec-summary">Loading...</div>
-
-<div class="grid">
-
-  <!-- Implementation Rate -->
-  <div class="impl-rate" id="impl-section">
-    <div>
-      <div class="impl-big-number bad" id="impl-rate-number">0%</div>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Tumbil<span>OS</span></h1>
+      <small>Company dashboard</small>
     </div>
-    <div class="impl-details">
-      <h3>Implementation Rate</h3>
-      <p id="impl-desc">Loading...</p>
-      <div class="impl-bar">
-        <div class="impl-bar-fill" id="impl-bar" style="width: 0%; background: var(--red);"></div>
+    <div class="meta">
+      <div>
+        <div id="business-date">Loading...</div>
+        <div><span id="fresh-dot" class="dot"></span><span id="freshness">Loading...</span></div>
       </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
-    <div class="streak-badge" id="streak-badge">-- days idle</div>
-  </div>
+  </header>
 
-  <!-- Scorecard -->
-  <div class="panel full-width">
-    <div class="panel-title">Daily Scorecard</div>
-    <div class="scorecard-grid" id="scorecard"></div>
-  </div>
+  <nav class="tabs" aria-label="Dashboard sections">
+    <button class="tab active" data-view="today-view">Overview</button>
+    <button class="tab" data-view="acquisition-view">Acquisition</button>
+    <button class="tab" data-view="brief-view">Analyst Brief</button>
+    <button class="tab" data-view="priorities-view">Priorities</button>
+    <button class="tab" data-view="health-view">Data Health</button>
+  </nav>
 
-  <!-- Today's Recommendation -->
-  <div class="panel">
-    <div class="panel-title">Today's #1 Recommendation</div>
-    <div id="today-rec"></div>
-  </div>
+  <main>
+    <section id="today-view" class="view active">
+      <div class="date-nav" id="today-date-nav"></div>
+      <div class="band">
+        <div class="summary" id="today-summary">Loading...</div>
+      </div>
+      <div class="grid kpis">
+        <div class="panel kpi">
+          <div class="label">Placed Today</div>
+          <div class="value accent" id="placed-today">-</div>
+          <div class="sub" id="placed-sub">-</div>
+          <div class="progress"><span id="target-progress"></span></div>
+        </div>
+        <div class="panel kpi clickable" data-customer-type="brand_new">
+          <div class="label">New Customers</div>
+          <div class="value green" id="brand-new">-</div>
+          <div class="sub" id="brand-new-sub">-</div>
+        </div>
+        <div class="panel kpi clickable" data-customer-type="second_order">
+          <div class="label">Second-Order Customers</div>
+          <div class="value amber" id="second-order">-</div>
+          <div class="sub" id="second-order-sub">-</div>
+        </div>
+        <div class="panel kpi clickable" data-customer-type="regular">
+          <div class="label">Habitual Customers</div>
+          <div class="value" id="habitual-customers">-</div>
+          <div class="sub" id="habitual-sub">-</div>
+        </div>
+        <div class="panel kpi">
+          <div class="label">Delivered</div>
+          <div class="value accent" id="delivered-count">-</div>
+          <div class="sub" id="delivered-sub">-</div>
+        </div>
+        <div class="panel kpi clickable" data-service-type="tips">
+          <div class="label">Tips Received</div>
+          <div class="value green" id="tips-total">-</div>
+          <div class="sub" id="tips-sub">-</div>
+        </div>
+        <div class="panel kpi clickable" data-service-type="ratings">
+          <div class="label">Star Ratings</div>
+          <div class="value amber" id="ratings-value">-</div>
+          <div class="sub" id="ratings-sub">-</div>
+        </div>
+        <div class="panel kpi">
+          <div class="label">Order Value</div>
+          <div class="value" id="order-value">-</div>
+          <div class="sub" id="aov-sub">-</div>
+        </div>
+      </div>
 
-  <!-- All Candidates -->
-  <div class="panel">
-    <div class="panel-title">All Candidates Considered</div>
-    <div id="candidates"></div>
-  </div>
+      <div class="grid two" style="margin-top: 14px;">
+        <div class="panel">
+          <div class="panel-title">Customer Mix</div>
+          <div id="customer-mix"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Placed Orders Trend</div>
+          <div class="chart" id="orders-chart"></div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Order Trend Chart -->
-  <div class="panel">
-    <div class="panel-title">Orders Trend (Last 15 Days)</div>
-    <div class="chart-container" id="chart-container"></div>
-  </div>
+    <section id="acquisition-view" class="view">
+      <div class="date-nav" id="acquisition-date-nav"></div>
+      <div class="grid two">
+        <div class="panel">
+          <div class="panel-title">Where New Customers Came From</div>
+          <div id="source-mix"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Referrals</div>
+          <div id="referrals"></div>
+        </div>
+      </div>
+      <div class="panel" style="margin-top: 14px;">
+        <div class="panel-title">Top Referral Codes (30d)</div>
+        <div id="top-referrals"></div>
+      </div>
+    </section>
 
-  <!-- 30-Day Summary -->
-  <div class="panel">
-    <div class="panel-title">30-Day Summary</div>
-    <div id="thirty-day"></div>
-  </div>
+    <section id="brief-view" class="view">
+      <div class="panel">
+        <div class="panel-title">Daily Analyst Brief <span id="brief-date"></span></div>
+        <div class="brief" id="analyst-brief">Loading...</div>
+      </div>
+      <div class="panel" style="margin-top: 14px;">
+        <div class="panel-title">Scorecard</div>
+        <div class="scorecard" id="scorecard"></div>
+      </div>
+    </section>
 
-  <!-- Notable Signals -->
-  <div class="panel">
-    <div class="panel-title">Notable Signals</div>
-    <div id="signals"></div>
-  </div>
+    <section id="priorities-view" class="view">
+      <div class="priorities-toolbar">
+        <div class="summary" id="priorities-summary">Loading...</div>
+        <div class="priority-actions">
+          <span class="board-status" id="priority-status">Loading...</span>
+          <button class="ghost-btn" onclick="refreshPriorities()">Refresh</button>
+          <button class="primary-btn" onclick="openTaskDialog()">Add Card</button>
+        </div>
+      </div>
+      <div class="board" id="priority-board"></div>
+    </section>
 
-  <!-- Recommendation History -->
-  <div class="panel">
-    <div class="panel-title">
-      Recommendation History (14d)
-      <span id="rec-count" style="color: var(--text-dim); font-size: 11px; text-transform: none; letter-spacing: 0;"></span>
-    </div>
-    <div id="rec-history" style="max-height: 400px; overflow-y: auto;"></div>
-  </div>
+    <section id="health-view" class="view">
+      <div class="grid two">
+        <div class="panel">
+          <div class="panel-title">Sources</div>
+          <div id="health"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Validation Notes</div>
+          <div class="brief" id="validation-notes">Loading...</div>
+        </div>
+      </div>
+      <div class="panel" style="margin-top: 14px;">
+        <div class="panel-title">Data Footnotes</div>
+        <div id="footnotes"></div>
+      </div>
+    </section>
 
-</div>
+    <section id="customer-detail-view" class="view">
+      <div class="customer-toolbar">
+        <button class="ghost-btn" id="customer-back-btn">Back to Overview</button>
+        <div class="summary" id="customer-screen-title">Customer detail</div>
+      </div>
+      <div class="date-nav" id="customer-date-nav"></div>
+      <div class="panel">
+        <div class="panel-title">Customer Detail</div>
+        <div class="customer-summary" id="customer-screen-summary">Loading...</div>
+        <div class="customer-list" id="customer-list" style="margin-top: 14px;"></div>
+      </div>
+    </section>
 
-<div class="footer">
-  TumbilOS v0.1 - Built by Cliff & Claude - Data refreshed daily at 6 AM ET via TGE Pipeline
-</div>
+    <section id="service-detail-view" class="view">
+      <div class="customer-toolbar">
+        <button class="ghost-btn" id="service-back-btn">Back to Overview</button>
+        <div class="summary" id="service-screen-title">Service detail</div>
+      </div>
+      <div class="date-nav" id="service-date-nav"></div>
+      <div class="panel">
+        <div class="panel-title" id="service-panel-title">Service Detail</div>
+        <div class="customer-summary" id="service-screen-summary">Loading...</div>
+        <div class="customer-list" id="service-list" style="margin-top: 14px;"></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="task-dialog">
+    <form method="dialog" id="task-form">
+      <div class="modal-head">
+        <strong id="task-dialog-title">Priority</strong>
+        <button class="ghost-btn" value="cancel">Close</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="task-id">
+        <div class="form-grid">
+          <div class="field full">
+            <label for="task-title">Title</label>
+            <input id="task-title" required maxlength="160">
+          </div>
+          <div class="field">
+            <label for="task-owner">Owner</label>
+            <input id="task-owner" value="Cliff" maxlength="80">
+          </div>
+          <div class="field">
+            <label for="task-area">Area</label>
+            <select id="task-area"></select>
+          </div>
+          <div class="field">
+            <label for="task-priority">Priority</label>
+            <select id="task-priority">
+              <option>P0</option><option selected>P1</option><option>P2</option><option>P3</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="task-status">Status</label>
+            <select id="task-status"></select>
+          </div>
+          <div class="field">
+            <label for="task-target">Target Date</label>
+            <input id="task-target" type="date">
+          </div>
+          <div class="field">
+            <label for="task-updated-by">Updated By</label>
+            <input id="task-updated-by" value="Cliff" maxlength="80">
+          </div>
+          <div class="field full">
+            <label for="task-why">Why</label>
+            <textarea id="task-why"></textarea>
+          </div>
+          <div class="field full">
+            <label for="task-notes">Notes</label>
+            <textarea id="task-notes"></textarea>
+          </div>
+          <div class="field full">
+            <label for="task-links">Links</label>
+            <input id="task-links" placeholder="https://...">
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="ghost-btn" type="button" id="delete-task">Archive</button>
+        <button class="ghost-btn" value="cancel">Cancel</button>
+        <button class="primary-btn" id="save-task" value="default">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
 
 <script>
-async function loadData() {
-  try {
-    const resp = await fetch('data.json');
-    const data = await resp.json();
-    render(data);
-  } catch (e) {
-    document.getElementById('exec-summary').textContent = 'Error loading data: ' + e.message;
-  }
+const state = {
+  daily: null,
+  live: null,
+  customers: null,
+  serviceDetails: null,
+  priorities: null,
+  editingTask: null,
+  draggedTaskId: null,
+  priorityMode: 'snapshot',
+  prioritySaving: false,
+  selectedDate: null,
+  customerDrilldownType: 'brand_new',
+  serviceDrilldownType: 'tips',
+  activeView: 'today-view',
+};
+
+const defaultColumns = [
+  'BACKBURNER / ONGOING',
+  'NEW FOR DISCUSSION',
+  'BACKLOG',
+  'IN PROGRESS',
+  'DONE FOR ENG/DISCUSS',
+  'DONE & ARCHIVED',
+];
+const defaultAreas = ['Product', 'Finance', 'Eng', 'AI Infra'];
+const validViewIds = new Set([
+  'today-view',
+  'acquisition-view',
+  'brief-view',
+  'priorities-view',
+  'health-view',
+  'customer-detail-view',
+  'service-detail-view',
+]);
+const validCustomerTypes = new Set(['brand_new', 'second_order', 'regular']);
+const validServiceTypes = new Set(['tips', 'ratings']);
+
+function screenForViewId(viewId) {
+  return {
+    'today-view': 'today',
+    'acquisition-view': 'acquisition',
+    'brief-view': 'brief',
+    'priorities-view': 'priorities',
+    'health-view': 'health',
+    'customer-detail-view': 'customer',
+    'service-detail-view': 'service',
+  }[viewId] || 'today';
 }
 
-function render(data) {
-  // Header
-  const dt = new Date(data.generated_at);
-  document.getElementById('last-updated').textContent =
-    `Briefing: ${data.latest_briefing_date} | Updated: ${dt.toLocaleString()}`;
+function viewIdForScreen(screen) {
+  return {
+    today: 'today-view',
+    acquisition: 'acquisition-view',
+    brief: 'brief-view',
+    priorities: 'priorities-view',
+    health: 'health-view',
+    customer: 'customer-detail-view',
+    service: 'service-detail-view',
+  }[screen] || 'today-view';
+}
 
-  // Executive summary
-  document.getElementById('exec-summary').textContent = data.executive_summary;
+function activeTabViewFor(viewId) {
+  return viewId === 'customer-detail-view' || viewId === 'service-detail-view'
+    ? null
+    : viewId;
+}
 
-  // Implementation rate
-  const impl = data.implementation;
-  const rateEl = document.getElementById('impl-rate-number');
-  rateEl.textContent = impl.implementation_rate + '%';
-  rateEl.className = 'impl-big-number ' +
-    (impl.implementation_rate < 20 ? 'bad' : impl.implementation_rate < 50 ? 'ok' : 'good');
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
 
-  document.getElementById('impl-desc').textContent =
-    `${impl.implemented} of ${impl.total_recommendations} recommendations implemented. ${impl.not_implemented} pending.`;
+function money(value) {
+  return '$' + Number(value || 0).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
 
-  const bar = document.getElementById('impl-bar');
-  bar.style.width = impl.implementation_rate + '%';
-  bar.style.background = impl.implementation_rate < 20 ? 'var(--red)' :
-    impl.implementation_rate < 50 ? 'var(--yellow)' : 'var(--green)';
+function number(value) {
+  return Number(value || 0).toLocaleString();
+}
 
-  document.getElementById('streak-badge').textContent =
-    impl.streak_without_action + ' days idle';
+function numericValue(value) {
+  if (value == null) return 0;
+  if (typeof value === 'number') return value;
+  const parsed = parseFloat(String(value).replace(/[^0-9.-]/g, ''));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
 
-  // Scorecard
-  const scorecardEl = document.getElementById('scorecard');
-  scorecardEl.innerHTML = data.scorecard.map(m => {
-    const changeNum = parseFloat(m.change);
-    // For CPA, higher is worse
-    const isCostMetric = m.metric.includes('CPA') || m.metric.includes('Spend');
-    let changeClass = 'flat';
-    if (!isNaN(changeNum)) {
-      if (isCostMetric) {
-        changeClass = changeNum > 0 ? 'down' : changeNum < 0 ? 'up' : 'flat';
-      } else {
-        changeClass = changeNum > 0 ? 'up' : changeNum < 0 ? 'down' : 'flat';
+function pct(value) {
+  return Number(value || 0).toFixed(1) + '%';
+}
+
+function customerTypeDisplay(key) {
+  return {
+    brand_new: 'New Customers',
+    second_order: 'Second-Order Customers',
+    regular: 'Habitual Customers',
+    returning_regular_total: 'Second-Order + Habitual Customers',
+  }[key] || key;
+}
+
+function serviceTypeDisplay(key) {
+  return {
+    tips: 'Tips Received',
+    ratings: 'Star Ratings',
+  }[key] || key;
+}
+
+function minutesOld(iso) {
+  if (!iso) return Infinity;
+  return Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+}
+
+function businessDateLabel(date) {
+  if (!date) return 'No date';
+  return new Date(date + 'T12:00:00').toLocaleDateString(undefined, {
+    weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+  });
+}
+
+function availableDates() {
+  const historyDates = ((state.daily && state.daily.history && state.daily.history.days) || []).map(day => day.date);
+  const currentDate = currentBusinessDate();
+  return [...new Set([...historyDates, currentDate].filter(Boolean))].sort();
+}
+
+function customerAvailableDates() {
+  return ((state.customers && state.customers.days) || []).map(day => day.date).sort();
+}
+
+function serviceAvailableDates() {
+  return ((state.serviceDetails && state.serviceDetails.days) || []).map(day => day.date).sort();
+}
+
+function dateRangeForView(viewId = state.activeView) {
+  if (viewId === 'customer-detail-view') return customerAvailableDates();
+  if (viewId === 'service-detail-view') return serviceAvailableDates();
+  return availableDates();
+}
+
+function currentBusinessDate() {
+  return state.live && state.live.today && state.live.today.business_date;
+}
+
+function selectedDate() {
+  const dates = dateRangeForView();
+  if (!dates.length) return null;
+  if (!state.selectedDate || !dates.includes(state.selectedDate)) {
+    state.selectedDate = dates.includes(currentBusinessDate()) ? currentBusinessDate() : dates[dates.length - 1];
+  }
+  return state.selectedDate;
+}
+
+function isSelectedLiveDate() {
+  return selectedDate() === currentBusinessDate();
+}
+
+function historicalDayFor(date) {
+  return ((state.daily && state.daily.history && state.daily.history.days) || [])
+    .find(day => day.date === date) || null;
+}
+
+function customerHistoryDayFor(date) {
+  return ((state.customers && state.customers.days) || []).find(day => day.date === date) || null;
+}
+
+function serviceHistoryDayFor(date) {
+  return ((state.serviceDetails && state.serviceDetails.days) || []).find(day => day.date === date) || null;
+}
+
+function currentCustomerTypeLabel() {
+  return customerTypeDisplay(state.customerDrilldownType);
+}
+
+function currentServiceTypeLabel() {
+  return serviceTypeDisplay(state.serviceDrilldownType);
+}
+
+function historicalScorecardMetric(day, metricName) {
+  return ((day && day.scorecard) || []).find(metric => metric.metric === metricName) || null;
+}
+
+function liveCustomerSourceMap() {
+  const map = new Map();
+  (((state.live || {}).acquisition || {}).classified_orders || []).forEach(row => {
+    map.set(Number(row.order_id), {
+      bucket: row.bucket || 'Direct / Unknown',
+      confidence: row.confidence || 'low',
+      detail: row.reason || '',
+      match_quality: row.match_quality || null,
+      campaign: row.campaign || null,
+    });
+  });
+  return map;
+}
+
+function confidenceRank(source) {
+  return { high: 3, medium: 2, low: 1 }[(source || {}).confidence] || 0;
+}
+
+function sourceRank(source) {
+  const bucket = (source || {}).bucket || '';
+  if (bucket === 'Google Ads') return 100 + confidenceRank(source);
+  if (bucket && bucket !== 'Direct / Unknown' && bucket !== 'Unknown') return 50 + confidenceRank(source);
+  return confidenceRank(source);
+}
+
+function customerRowsForDate(date) {
+  const day = customerHistoryDayFor(date);
+  if (!day) return [];
+  const rows = (((day.customers_by_type || {})[state.customerDrilldownType]) || []).map(row => ({ ...row }));
+  if (date === currentBusinessDate()) {
+    const sources = liveCustomerSourceMap();
+    rows.forEach(row => {
+      if (state.customerDrilldownType === 'brand_new' && sources.has(Number(row.order_id))) {
+        const liveSource = sources.get(Number(row.order_id));
+        const currentSource = row.source || {};
+        const currentUnknown = !currentSource.bucket || currentSource.bucket === 'Direct / Unknown' || currentSource.bucket === 'Unknown';
+        if (currentUnknown || sourceRank(liveSource) >= sourceRank(currentSource)) {
+          row.source = liveSource;
+        }
       }
-    }
-    return `<div class="metric-card ${m.status}">
-      <div class="metric-label">${m.metric}</div>
-      <div class="metric-value">${m.yesterday}</div>
-      <div class="metric-sub">
-        7d avg: ${m.seven_day_avg}
-        <span class="metric-change ${changeClass}">${m.change}</span>
-      </div>
-    </div>`;
-  }).join('');
-
-  // Today's recommendation
-  const rec = data.today_recommendation;
-  const todayRecEl = document.getElementById('today-rec');
-  if (rec && rec.summary) {
-    todayRecEl.innerHTML = `
-      <div class="rec-card">
-        <div class="rec-category">${rec.category.replace(/_/g, ' ')}</div>
-        <div class="rec-summary">${rec.summary}</div>
-        <div class="rec-meta">
-          <span>Impact: <strong>${rec.impact}</strong></span>
-          <span>Time: <strong>${rec.time}</strong></span>
-        </div>
-        ${rec.steps && rec.steps.length ? `
-        <div class="rec-steps">
-          <ol>${rec.steps.map(s => `<li>${s}</li>`).join('')}</ol>
-        </div>` : ''}
-      </div>`;
-  } else {
-    todayRecEl.innerHTML = '<p style="color: var(--text-dim);">No recommendation available.</p>';
+    });
   }
-
-  // Candidates
-  const candidatesEl = document.getElementById('candidates');
-  candidatesEl.innerHTML = (data.candidates || []).map((c, i) => `
-    <div class="candidate ${i === data.winner_index ? 'winner' : ''}">
-      <div class="candidate-cat">${c.category.replace(/_/g, ' ')} ${i === data.winner_index ? '- WINNER' : ''}</div>
-      <div class="candidate-action">${c.action}</div>
-      <div class="candidate-impact">${c.estimated_impact} (${c.confidence} confidence, ${c.implementation_time})</div>
-    </div>
-  `).join('');
-
-  // Order trend chart
-  renderChart(data.trends.daily_orders);
-
-  // 30-day summary
-  const thirtyEl = document.getElementById('thirty-day');
-  const td = data.thirty_day;
-  if (td && Object.keys(td).length) {
-    const stats = [
-      ['Total Orders', td.total_placed || td.orders_placed || '-'],
-      ['Total Revenue', td.total_revenue ? '$' + Number(td.total_revenue).toLocaleString() : '-'],
-      ['Avg Daily Orders', td.avg_daily_placed ? td.avg_daily_placed.toFixed(1) : '-'],
-      ['AOV', td.aov ? '$' + Number(td.aov).toFixed(2) : '-'],
-      ['Draft-to-Placed', td.draft_to_placed_pct ? td.draft_to_placed_pct + '%' : '-'],
-      ['Repeat Customer Rate', td.repeat_customer_pct ? td.repeat_customer_pct + '%' : '-'],
-      ['Cancellation Rate', td.cancellation_rate_pct ? td.cancellation_rate_pct + '%' : '-'],
-    ];
-    thirtyEl.innerHTML = stats.map(([label, value]) =>
-      `<div class="stat-row"><span class="stat-label">${label}</span><span class="stat-value">${value}</span></div>`
-    ).join('');
-  } else {
-    thirtyEl.innerHTML = '<p style="color: var(--text-dim);">No 30-day data available.</p>';
-  }
-
-  // Notable signals
-  const signalsEl = document.getElementById('signals');
-  signalsEl.innerHTML = (data.notable_signals || []).map(s =>
-    `<div class="signal">${s}</div>`
-  ).join('') || '<p style="color: var(--text-dim);">No signals.</p>';
-
-  // Recommendation history
-  const recHistEl = document.getElementById('rec-history');
-  document.getElementById('rec-count').textContent = `${data.recent_recommendations.length} recs`;
-  recHistEl.innerHTML = (data.recent_recommendations || []).map(r => `
-    <div class="rec-history-item">
-      <div class="rec-date">${r.date ? r.date.slice(5) : '-'}</div>
-      <div class="rec-status-dot ${r.implemented || 'unknown'}"></div>
-      <div class="rec-body">
-        <div class="rec-body-cat">${(r.category || '').replace(/_/g, ' ')}</div>
-        <div class="rec-body-text">${r.summary || '-'}</div>
-      </div>
-    </div>
-  `).join('');
+  return rows;
 }
 
-function renderChart(dailyOrders) {
-  const container = document.getElementById('chart-container');
-  if (!dailyOrders || !dailyOrders.length) {
-    container.innerHTML = '<p style="color: var(--text-dim);">No trend data.</p>';
+function acquisitionSourceSummaryForDate(date) {
+  const rows = customerHistoryDayFor(date)
+    ? ((((customerHistoryDayFor(date).customers_by_type || {}).brand_new) || []).map(row => ({ ...row })))
+    : [];
+  if (!rows.length) {
+    return { buckets: [], attributed: 0, unattributed: 0 };
+  }
+  const counts = new Map();
+  let attributed = 0;
+  let unattributed = 0;
+  rows.forEach(row => {
+    const bucket = ((row.source || {}).bucket) || 'Unknown';
+    counts.set(bucket, (counts.get(bucket) || 0) + 1);
+    if (bucket === 'Direct / Unknown' || bucket === 'Unknown') {
+      unattributed += 1;
+    } else {
+      attributed += 1;
+    }
+  });
+  const buckets = [...counts.entries()]
+    .map(([bucket, orders]) => ({ bucket, orders, confidence: 'low' }))
+    .sort((a, b) => b.orders - a.orders || a.bucket.localeCompare(b.bucket));
+  return { buckets, attributed, unattributed };
+}
+
+function clampSelectedDateToCustomerRange() {
+  const dates = customerAvailableDates();
+  if (!dates.length) return;
+  if (!dates.includes(state.selectedDate)) {
+    state.selectedDate = dates[dates.length - 1];
+  }
+}
+
+function clampSelectedDateToServiceRange() {
+  const dates = serviceAvailableDates();
+  if (!dates.length) return;
+  if (!dates.includes(state.selectedDate)) {
+    state.selectedDate = dates[dates.length - 1];
+  }
+}
+
+function normalizeRouteState() {
+  if (!validViewIds.has(state.activeView)) {
+    state.activeView = 'today-view';
+  }
+  if (!validCustomerTypes.has(state.customerDrilldownType)) {
+    state.customerDrilldownType = 'brand_new';
+  }
+  if (!validServiceTypes.has(state.serviceDrilldownType)) {
+    state.serviceDrilldownType = 'tips';
+  }
+
+  if (state.activeView === 'customer-detail-view') {
+    const dates = customerAvailableDates();
+    if (dates.length && (!state.selectedDate || !dates.includes(state.selectedDate))) {
+      state.selectedDate = dates.includes(currentBusinessDate()) ? currentBusinessDate() : dates[dates.length - 1];
+    }
+  } else if (state.activeView === 'service-detail-view') {
+    const dates = serviceAvailableDates();
+    if (dates.length && (!state.selectedDate || !dates.includes(state.selectedDate))) {
+      state.selectedDate = dates.includes(currentBusinessDate()) ? currentBusinessDate() : dates[dates.length - 1];
+    }
+  } else {
+    const allDates = availableDates();
+    if (allDates.length && (!state.selectedDate || !allDates.includes(state.selectedDate))) {
+      state.selectedDate = currentBusinessDate() || allDates[allDates.length - 1];
+    }
+  }
+}
+
+function syncUrlFromState(replace = false) {
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  params.delete('staticrypt_pwd');
+  params.delete('v');
+  params.set('screen', screenForViewId(state.activeView));
+
+  if (state.selectedDate) params.set('date', state.selectedDate);
+  else params.delete('date');
+
+  if (state.activeView === 'customer-detail-view') {
+    params.set('customerType', state.customerDrilldownType);
+  } else {
+    params.delete('customerType');
+  }
+
+  if (state.activeView === 'service-detail-view') {
+    params.set('serviceType', state.serviceDrilldownType);
+  } else {
+    params.delete('serviceType');
+  }
+
+  const nextSearch = params.toString();
+  const nextUrl = `${url.pathname}${nextSearch ? '?' + nextSearch : ''}${url.hash || ''}`;
+  const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (nextUrl === currentUrl) return;
+  const method = replace ? 'replaceState' : 'pushState';
+  window.history[method]({
+    screen: screenForViewId(state.activeView),
+    date: state.selectedDate,
+    customerType: state.customerDrilldownType,
+    serviceType: state.serviceDrilldownType,
+  }, '', nextUrl);
+}
+
+function applyRouteFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const hasExplicitDate = params.has('date');
+  state.activeView = viewIdForScreen(params.get('screen') || 'today');
+  state.selectedDate = params.get('date') || state.selectedDate;
+  state.customerDrilldownType = params.get('customerType') || state.customerDrilldownType;
+  state.serviceDrilldownType = params.get('serviceType') || state.serviceDrilldownType;
+  if (!hasExplicitDate && state.activeView === 'today-view') {
+    state.selectedDate = currentBusinessDate() || state.selectedDate;
+  }
+  normalizeRouteState();
+}
+
+function navigate(partialState = {}, options = {}) {
+  const { replace = false, skipUrl = false } = options;
+  Object.assign(state, partialState);
+  normalizeRouteState();
+  render();
+  if (!skipUrl) {
+    syncUrlFromState(replace);
+  }
+}
+
+function selectedDayContext() {
+  const date = selectedDate();
+  if (!date) return { date: null, mode: 'empty', today: null };
+  if (date === currentBusinessDate() && state.live && state.live.today) {
+    return { date, mode: 'live', today: state.live.today, acquisition: state.live.acquisition, referrals: state.live.referrals };
+  }
+  const day = historicalDayFor(date);
+  return { date, mode: 'historical', today: day, acquisition: day && day.acquisition, referrals: null };
+}
+
+function renderDateNav(targetId) {
+  const el = document.getElementById(targetId);
+  if (!el) return;
+  const customerNav = targetId === 'customer-date-nav';
+  const serviceNav = targetId === 'service-date-nav';
+  const dates = customerNav ? customerAvailableDates() : serviceNav ? serviceAvailableDates() : availableDates();
+  if (!dates.length) {
+    el.innerHTML = '';
+    return;
+  }
+  const navOwnsSelectedDate =
+    (customerNav && state.activeView === 'customer-detail-view') ||
+    (serviceNav && state.activeView === 'service-detail-view') ||
+    (!customerNav && !serviceNav && state.activeView !== 'customer-detail-view' && state.activeView !== 'service-detail-view');
+  const fallbackDate = dates.includes(currentBusinessDate()) ? currentBusinessDate() : dates[dates.length - 1];
+  if (navOwnsSelectedDate && (!state.selectedDate || !dates.includes(state.selectedDate))) {
+    state.selectedDate = fallbackDate;
+  }
+  const date = dates.includes(state.selectedDate) ? state.selectedDate : fallbackDate;
+  const index = dates.indexOf(date);
+  const canBack = index > 0;
+  const canForward = index >= 0 && index < dates.length - 1;
+  const live = date === currentBusinessDate();
+  const coverageLabel = customerNav
+    ? `Customer detail window: ${businessDateLabel(dates[0])} to ${businessDateLabel(dates[dates.length - 1])}`
+    : serviceNav
+    ? `Service detail window: ${businessDateLabel(dates[0])} to ${businessDateLabel(dates[dates.length - 1])}`
+    : `${live ? 'Live today-to-date' : 'Historical daily view'}`;
+  el.innerHTML = `
+    <div class="summary">${coverageLabel}</div>
+    <div class="date-nav-controls">
+      <button class="ghost-btn" data-date-step="-1" ${canBack ? '' : 'disabled'}>Back</button>
+      <div class="date-label">${escapeHtml(businessDateLabel(date))}</div>
+      <button class="ghost-btn" data-date-step="1" ${canForward ? '' : 'disabled'}>Forward</button>
+      <button class="ghost-btn" data-date-today ${live ? 'disabled' : ''}>Today</button>
+    </div>
+  `;
+  el.querySelectorAll('[data-date-step]').forEach(button => {
+    button.addEventListener('click', () => {
+      const next = dates[index + Number(button.dataset.dateStep)];
+      if (next) {
+        navigate({ selectedDate: next });
+      }
+    });
+  });
+  const todayButton = el.querySelector('[data-date-today]');
+  if (todayButton) {
+    todayButton.addEventListener('click', () => {
+      navigate({ selectedDate: currentBusinessDate() || dates[dates.length - 1] });
+    });
+  }
+}
+
+async function decryptDashboardPayload(ciphertext, hashedPassword) {
+  const hexToBytes = hex => {
+    const bytes = new Uint8Array(hex.length / 2);
+    for (let i = 0; i < hex.length; i += 2) {
+      bytes[i / 2] = parseInt(hex.slice(i, i + 2), 16);
+    }
+    return bytes;
+  };
+  const ivHexLength = 32;
+  const iv = hexToBytes(ciphertext.slice(0, ivHexLength));
+  const encrypted = hexToBytes(ciphertext.slice(ivHexLength));
+  const key = await crypto.subtle.importKey(
+    'raw',
+    hexToBytes(hashedPassword),
+    'AES-CBC',
+    false,
+    ['decrypt']
+  );
+  const plainBuffer = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, key, encrypted);
+  return new TextDecoder().decode(new Uint8Array(plainBuffer));
+}
+
+async function fetchJson(path) {
+  const resp = await fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
+  if (!resp.ok) throw new Error(`${path} ${resp.status}`);
+  const payload = await resp.json();
+  if (!payload || !payload.encrypted) return payload;
+  const hashedPassword = localStorage.getItem('staticrypt_passphrase');
+  if (!hashedPassword) throw new Error(`${path} requires dashboard unlock state`);
+  const decrypted = await decryptDashboardPayload(payload.ciphertext, hashedPassword);
+  return JSON.parse(decrypted);
+}
+
+async function loadAll() {
+  const [daily, live, customers, serviceDetails, priorities] = await Promise.allSettled([
+    fetchJson('data.json'),
+    fetchJson('live.json'),
+    fetchJson('customers.json'),
+    fetchJson('service-details.json'),
+    loadPriorities(),
+  ]);
+  if (daily.status === 'fulfilled') state.daily = daily.value;
+  if (live.status === 'fulfilled') state.live = live.value;
+  if (customers.status === 'fulfilled') state.customers = customers.value;
+  if (serviceDetails.status === 'fulfilled') state.serviceDetails = serviceDetails.value;
+  if (priorities.status === 'fulfilled') state.priorities = priorities.value;
+  applyRouteFromUrl();
+  syncUrlFromState(true);
+  render();
+}
+
+async function loadPriorities() {
+  let snapshot = null;
+  const base = localStorage.getItem('tumbilos_priority_api_base');
+  if (base) {
+    try {
+      const resp = await fetch(base.replace(/\/$/, '') + '/v1/priorities', { cache: 'no-store' });
+      if (resp.ok) {
+        state.priorityMode = 'api';
+        return resp.json();
+      }
+    } catch (e) {
+      console.warn('Priority API unavailable, using snapshot', e);
+    }
+  }
+  try {
+    snapshot = await fetchJson('priorities.json');
+  } catch (e) {
+    console.warn('Priority snapshot unavailable', e);
+  }
+  const local = localStorage.getItem('tumbilos_priority_local');
+  if (local) {
+    try {
+      const localData = JSON.parse(local);
+      if (!isStalePriorityLocalDraft(localData, snapshot)) {
+        state.priorityMode = 'local';
+        return localData;
+      }
+      localStorage.removeItem('tumbilos_priority_local');
+    } catch (e) {
+      localStorage.removeItem('tumbilos_priority_local');
+    }
+  }
+  state.priorityMode = 'snapshot';
+  return snapshot || fetchJson('priorities.json');
+}
+
+function isStalePriorityLocalDraft(localData, snapshotData) {
+  if (!snapshotData || !Array.isArray(snapshotData.columns)) return false;
+  if (!localData || !Array.isArray(localData.columns)) return true;
+  const localColumns = localData.columns.join('|');
+  const snapshotColumns = snapshotData.columns.join('|');
+  const schemaMismatch = localColumns !== snapshotColumns;
+  const snapshotImportedAt = Date.parse((snapshotData.source && snapshotData.source.imported_at) || snapshotData.updated_at || '');
+  const localUpdatedAt = Date.parse(localData.updated_at || '');
+  return schemaMismatch && (!localUpdatedAt || !snapshotImportedAt || localUpdatedAt < snapshotImportedAt);
+}
+
+function render() {
+  normalizeRouteState();
+  selectedDate();
+  activateView(state.activeView, activeTabViewFor(state.activeView));
+  renderDateNav('today-date-nav');
+  renderDateNav('acquisition-date-nav');
+  renderDateNav('customer-date-nav');
+  renderDateNav('service-date-nav');
+  renderHeader();
+  renderToday();
+  renderAcquisition();
+  renderBrief();
+  renderPriorities();
+  renderHealth();
+  renderCustomerDetail();
+  renderServiceDetail();
+}
+
+function renderHeader() {
+  const dot = document.getElementById('fresh-dot');
+  const context = selectedDayContext();
+  if (!context.date) {
+    document.getElementById('business-date').textContent = 'Data unavailable';
+    document.getElementById('freshness').textContent = 'No date payload';
+    dot.className = 'dot error';
+    return;
+  }
+  const asOf = context.mode === 'live' ? (context.today.as_of_et || state.live.generated_at) : state.daily && state.daily.generated_at;
+  const age = minutesOld(asOf);
+  document.getElementById('business-date').textContent = businessDateLabel(context.date);
+  if (context.mode === 'live') {
+    document.getElementById('freshness').textContent =
+      `${age} min old, as of ${new Date(asOf).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })} ET`;
+    dot.className = age > 10 ? 'dot stale' : 'dot';
+  } else {
+    document.getElementById('freshness').textContent = 'Historical TGE report';
+    dot.className = 'dot stale';
+  }
+}
+
+function renderToday() {
+  const daily = state.daily;
+  const context = selectedDayContext();
+  if (!context.today) {
+    document.getElementById('today-summary').textContent = 'No daily metrics available for this date.';
+    document.getElementById('placed-today').textContent = '-';
+    document.getElementById('placed-sub').textContent = 'No archived TGE payload for this date';
+    document.getElementById('target-progress').style.width = '0%';
+    document.getElementById('brand-new').textContent = '-';
+    document.getElementById('brand-new-sub').textContent = 'No customer mix snapshot';
+    document.getElementById('second-order').textContent = '-';
+    document.getElementById('second-order-sub').textContent = 'No customer mix snapshot';
+    document.getElementById('habitual-customers').textContent = '-';
+    document.getElementById('habitual-sub').textContent = 'No customer mix snapshot';
+    document.getElementById('delivered-count').textContent = '-';
+    document.getElementById('delivered-sub').textContent = 'No delivered snapshot';
+    document.getElementById('tips-total').textContent = '-';
+    document.getElementById('tips-sub').textContent = 'No tip snapshot';
+    document.getElementById('ratings-value').textContent = '-';
+    document.getElementById('ratings-sub').textContent = 'No ratings snapshot';
+    document.getElementById('order-value').textContent = '-';
+    document.getElementById('aov-sub').textContent = 'No order-value snapshot';
+    document.getElementById('customer-mix').innerHTML = '<div class="empty">No archived customer mix for this date.</div>';
+    renderChart((daily && daily.trends && daily.trends.daily_orders) || [], context.date);
+    return;
+  }
+  const t = context.today;
+  const mix = t.customer_mix || {};
+  const delta = Number(t.same_time_delta_orders || 0);
+  const deltaText = `${delta >= 0 ? '+' : ''}${delta.toFixed(1)} vs same-time 7d avg`;
+  const placedLabel = context.mode === 'live' ? 'placed today-to-date' : 'placed on this day';
+  const historicalNewAvg = numericValue((historicalScorecardMetric(t, 'New Customers') || {}).seven_day_avg);
+  const newCustomerAvg = context.mode === 'live'
+    ? numericValue(t.same_time_7d_avg_new_customers)
+    : (numericValue(t.same_time_7d_avg_new_customers) || historicalNewAvg);
+  const deliveredCount = context.mode === 'live'
+    ? numericValue(((t.deliveries || {}).count))
+    : (numericValue(((t.deliveries || {}).count)) || numericValue((historicalScorecardMetric(t, 'Orders Delivered') || {}).yesterday));
+  const deliveredRevenue = context.mode === 'live'
+    ? numericValue(((t.deliveries || {}).revenue_cad))
+    : (numericValue(((t.deliveries || {}).revenue_cad)) || numericValue((historicalScorecardMetric(t, 'Revenue, delivered, ex. HST') || {}).yesterday));
+  const deliveredAov = context.mode === 'live'
+    ? numericValue(((t.deliveries || {}).aov_cad))
+    : (deliveredCount ? Math.round((deliveredRevenue / deliveredCount) * 100) / 100 : 0);
+  const serviceDay = serviceHistoryDayFor(context.date);
+  const tips = (serviceDay && serviceDay.tips) || null;
+  const ratings = (serviceDay && serviceDay.ratings) || null;
+
+  document.getElementById('today-summary').innerHTML =
+    `<strong>${number(t.placed_orders)}</strong> ${placedLabel}, ` +
+    `<strong>${number(mix.brand_new)}</strong> new customer orders, ` +
+    `<strong>${number(mix.second_order)}</strong> second-order customer orders, and ` +
+    `<strong>${number(mix.regular)}</strong> habitual customer orders. ` +
+    `${deltaText}.`;
+  document.getElementById('placed-today').textContent = number(t.placed_orders);
+  document.getElementById('placed-sub').textContent =
+    `${pct(t.pace_to_target_pct)} of ${number(t.target_placed_orders)} daily target`;
+  document.getElementById('target-progress').style.width = Math.min(Number(t.pace_to_target_pct || 0), 100) + '%';
+  document.getElementById('brand-new').textContent = number(mix.brand_new);
+  document.getElementById('brand-new-sub').textContent =
+    `${number(newCustomerAvg)} new-customer 7d avg`;
+  document.getElementById('second-order').textContent = number(mix.second_order);
+  document.getElementById('second-order-sub').textContent = 'Exactly 1 prior completed order';
+  document.getElementById('habitual-customers').textContent = number(mix.regular);
+  document.getElementById('habitual-sub').textContent = '2+ prior completed orders';
+  document.getElementById('delivered-count').textContent = number(deliveredCount);
+  document.getElementById('delivered-sub').textContent =
+    `${money(deliveredRevenue)} ex. HST · ${money(deliveredAov)} AOV`;
+  document.getElementById('tips-total').textContent = tips ? money(tips.total_tips_cad) : '-';
+  document.getElementById('tips-sub').textContent = tips
+    ? `${number(tips.tip_count)} tipped orders`
+    : 'Tip snapshot unavailable for this date';
+  document.getElementById('ratings-value').textContent = ratings && ratings.rating_count
+    ? `${Number(ratings.avg_rating || 0).toFixed(1)}★`
+    : ratings ? '0.0★' : '-';
+  document.getElementById('ratings-sub').textContent = ratings
+    ? `${number(ratings.rating_count)} ratings · ${number(ratings.five_star_count)} five-star · ${number(ratings.low_rating_count)} low`
+    : 'Rating snapshot unavailable for this date';
+  document.getElementById('order-value').textContent = money(t.order_value_cad);
+  document.getElementById('aov-sub').textContent = `${money(t.aov_cad)} AOV, ex. HST`;
+
+  document.getElementById('customer-mix').innerHTML = [
+    ['brand_new', mix.brand_new],
+    ['second_order', mix.second_order],
+    ['regular', mix.regular],
+  ].map(([key, val]) => `
+    <div class="mix-row">
+      <span>${escapeHtml(customerTypeDisplay(key))}</span>
+      <strong>${number(val)}</strong>
+    </div>
+  `).join('');
+
+  renderChart((daily && daily.trends && daily.trends.daily_orders) || [], context.date);
+}
+
+function renderCustomerDetail() {
+  const date = selectedDate();
+  const rows = customerRowsForDate(date);
+  const label = currentCustomerTypeLabel();
+  const live = date === currentBusinessDate();
+  const summaryEl = document.getElementById('customer-screen-summary');
+  const titleEl = document.getElementById('customer-screen-title');
+  const listEl = document.getElementById('customer-list');
+  titleEl.textContent = `${label} - ${businessDateLabel(date)}`;
+
+  if (!date) {
+    summaryEl.textContent = 'No customer detail available.';
+    listEl.innerHTML = '<div class="empty">No customer detail available.</div>';
     return;
   }
 
-  const w = container.clientWidth || 500;
-  const h = 160;
-  const padding = { top: 20, right: 40, bottom: 30, left: 0 };
-  const chartW = w - padding.left - padding.right;
-  const chartH = h - padding.top - padding.bottom;
-
-  const maxOrders = Math.max(...dailyOrders.map(d => Math.max(d.placed || 0, d.delivered || 0)), 1);
-  const yMax = Math.ceil(maxOrders / 5) * 5 + 5;
-
-  // Build SVG
-  let svg = `<svg class="chart-svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">`;
-
-  // Grid lines
-  for (let i = 0; i <= 4; i++) {
-    const y = padding.top + (chartH / 4) * i;
-    const val = Math.round(yMax - (yMax / 4) * i);
-    svg += `<line x1="${padding.left}" y1="${y}" x2="${w - padding.right}" y2="${y}" stroke="#262626" stroke-width="1"/>`;
-    svg += `<text x="${w - padding.right + 4}" y="${y + 4}" fill="#525252" font-size="10">${val}</text>`;
+  const customerDates = customerAvailableDates();
+  if (!customerHistoryDayFor(date)) {
+    const start = customerDates[0] ? businessDateLabel(customerDates[0]) : 'n/a';
+    const end = customerDates[customerDates.length - 1] ? businessDateLabel(customerDates[customerDates.length - 1]) : 'n/a';
+    summaryEl.textContent = `Customer-level detail is available only from ${start} to ${end}.`;
+    listEl.innerHTML = '<div class="empty">No customer detail payload exists for this date.</div>';
+    return;
   }
 
-  // Breakeven line at 20
-  const breakY = padding.top + chartH * (1 - 20 / yMax);
-  svg += `<line x1="${padding.left}" y1="${breakY}" x2="${w - padding.right}" y2="${breakY}" stroke="#c2410c" stroke-width="1" stroke-dasharray="4,4"/>`;
-  svg += `<text x="${w - padding.right + 4}" y="${breakY + 4}" fill="#c2410c" font-size="9">BE</text>`;
+  const liveText = live ? 'Live today-to-date' : 'Historical closed day';
+  summaryEl.textContent = rows.length
+    ? `${rows.length} ${label.toLowerCase()} for ${businessDateLabel(date)}. ${liveText}.`
+    : `No ${label.toLowerCase()} found for ${businessDateLabel(date)}. ${liveText}.`;
 
-  // Plot placed orders
-  const points = dailyOrders.map((d, i) => {
-    const x = padding.left + (chartW / (dailyOrders.length - 1 || 1)) * i;
-    const y = padding.top + chartH * (1 - (d.placed || 0) / yMax);
-    return { x, y, d };
-  });
-
-  // Area fill
-  const areaPath = `M ${points[0].x} ${padding.top + chartH} ` +
-    points.map(p => `L ${p.x} ${p.y}`).join(' ') +
-    ` L ${points[points.length - 1].x} ${padding.top + chartH} Z`;
-  svg += `<path d="${areaPath}" fill="url(#grad)" opacity="0.3"/>`;
-
-  // Line
-  const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-  svg += `<path d="${linePath}" fill="none" stroke="#f97316" stroke-width="2"/>`;
-
-  // Dots + labels
-  points.forEach((p, i) => {
-    svg += `<circle cx="${p.x}" cy="${p.y}" r="3" fill="#f97316"/>`;
-    // Date labels (every other)
-    if (i % 2 === 0 || i === points.length - 1) {
-      const dateLabel = p.d.date ? p.d.date.slice(5) : '';
-      svg += `<text x="${p.x}" y="${h - 4}" fill="#525252" font-size="9" text-anchor="middle">${dateLabel}</text>`;
-    }
-  });
-
-  // Gradient def
-  svg += `<defs><linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="#f97316" stop-opacity="0.4"/>
-    <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
-  </linearGradient></defs>`;
-
-  svg += '</svg>';
-  container.innerHTML = svg;
+  listEl.innerHTML = rows.length ? rows.map(row => `
+    <article class="customer-card">
+      <div class="customer-card-head">
+        <div>
+          <div class="customer-name">${escapeHtml(row.name)}</div>
+          <div class="customer-id-line">Customer #${number(row.customer_id)}</div>
+          <div class="customer-order-line">Order #${number(row.order_id)} · ${escapeHtml(row.placed_at_et || 'Unknown time')} ET</div>
+        </div>
+        <div class="customer-chip-row">
+          <span class="confidence ${escapeHtml((row.source || {}).confidence || 'low')}">${escapeHtml((row.source || {}).bucket || 'Unknown')}</span>
+          <span class="confidence low">${escapeHtml(row.status || 'unknown')}</span>
+          <span class="confidence low">${escapeHtml(row.delivery_type || 'unknown')}</span>
+        </div>
+      </div>
+      <div class="customer-grid">
+        <div class="customer-field">
+          <div class="customer-field-label">Contact</div>
+          <div class="customer-field-value">${escapeHtml(row.email || 'No email')}<br>${escapeHtml(row.mobile || 'No mobile')}</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Web/App Source</div>
+          <div class="customer-field-value">${escapeHtml((row.source || {}).detail || 'No source detail')}</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Order Value</div>
+          <div class="customer-field-value">${money(row.order_value_cad)} ex. HST</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">What They Purchased</div>
+          <div class="customer-field-value">Small ${number((row.bags || {}).small)}, Regular ${number((row.bags || {}).regular)}, Large ${number((row.bags || {}).large)}, Oversize ${number((row.bags || {}).oversize)} · ${number(row.weight_lbs)} lb</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Pickup Window</div>
+          <div class="customer-field-value">${escapeHtml(row.pickup_by_et || 'Not set')} ET</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Delivery Window</div>
+          <div class="customer-field-value">${escapeHtml(row.delivery_by_et || 'Not set')} ET</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Signup Time</div>
+          <div class="customer-field-value">${escapeHtml(row.signup_at_et || 'Unknown')} ET</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Prior Completed Orders</div>
+          <div class="customer-field-value">${number(row.prior_completed_orders)}</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Promo/Referral Code</div>
+          <div class="customer-field-value">${escapeHtml(row.referral_code || 'None')}${row.referral && row.referral.owner_name ? `<br>${escapeHtml(row.referral.owner_name)}` : ''}</div>
+        </div>
+      </div>
+    </article>
+  `).join('') : '<div class="empty">No customers in this segment for the selected date.</div>';
 }
 
-// Load on page load
-loadData();
-// Auto-refresh every 5 minutes
-setInterval(loadData, 300000);
+function serviceRowsForDate(date) {
+  const day = serviceHistoryDayFor(date);
+  if (!day) return [];
+  return (((day[state.serviceDrilldownType] || {}).rows) || []).map(row => ({ ...row }));
+}
+
+function renderServiceDetail() {
+  const date = selectedDate();
+  const rows = serviceRowsForDate(date);
+  const label = currentServiceTypeLabel();
+  const summaryEl = document.getElementById('service-screen-summary');
+  const titleEl = document.getElementById('service-screen-title');
+  const panelTitleEl = document.getElementById('service-panel-title');
+  const listEl = document.getElementById('service-list');
+  titleEl.textContent = `${label} - ${businessDateLabel(date)}`;
+  panelTitleEl.textContent = label;
+
+  if (!date) {
+    summaryEl.textContent = 'No service detail available.';
+    listEl.innerHTML = '<div class="empty">No service detail available.</div>';
+    return;
+  }
+
+  const serviceDates = serviceAvailableDates();
+  const day = serviceHistoryDayFor(date);
+  if (!day) {
+    const start = serviceDates[0] ? businessDateLabel(serviceDates[0]) : 'n/a';
+    const end = serviceDates[serviceDates.length - 1] ? businessDateLabel(serviceDates[serviceDates.length - 1]) : 'n/a';
+    summaryEl.textContent = `Service detail is available only from ${start} to ${end}.`;
+    listEl.innerHTML = '<div class="empty">No service-detail payload exists for this date.</div>';
+    return;
+  }
+
+  if (state.serviceDrilldownType === 'tips') {
+    const total = (day.tips || {}).total_tips_cad || 0;
+    const count = (day.tips || {}).tip_count || 0;
+    summaryEl.textContent = count
+      ? `${money(total)} across ${number(count)} tipped orders for ${businessDateLabel(date)}.`
+      : `No tips captured for ${businessDateLabel(date)}.`;
+    listEl.innerHTML = rows.length ? rows.map(row => `
+      <article class="customer-card">
+        <div class="customer-card-head">
+          <div>
+            <div class="customer-name">${escapeHtml(row.customer_name)}</div>
+            <div class="customer-id-line">Gave tip · Customer #${number(row.customer_id)}</div>
+            <div class="customer-order-line">Order #${number(row.order_id)} · ${escapeHtml(row.captured_at_et || 'Unknown time')} ET</div>
+          </div>
+          <div class="customer-chip-row">
+            <span class="confidence high">${money(row.tip_cad)}</span>
+            <span class="confidence low">${escapeHtml(row.status || 'unknown')}</span>
+            <span class="confidence low">${escapeHtml(row.delivery_type || 'unknown')}</span>
+          </div>
+        </div>
+        <div class="customer-grid">
+          <div class="customer-field">
+            <div class="customer-field-label">Who Gave The Tip</div>
+            <div class="customer-field-value">${escapeHtml(row.customer_name)} · Customer #${number(row.customer_id)}</div>
+          </div>
+          <div class="customer-field">
+            <div class="customer-field-label">Who Received The Tip</div>
+            <div class="customer-field-value">${escapeHtml(row.washpro_name || 'Unassigned WashPro')}${row.washpro_id ? ` · WashPro #${number(row.washpro_id)}` : ''}</div>
+          </div>
+          <div class="customer-field">
+            <div class="customer-field-label">Tip Amount</div>
+            <div class="customer-field-value">${money(row.tip_cad)}</div>
+          </div>
+          <div class="customer-field">
+            <div class="customer-field-label">Captured Time</div>
+            <div class="customer-field-value">${escapeHtml(row.captured_at_et || 'Unknown')} ET</div>
+          </div>
+        </div>
+      </article>
+    `).join('') : '<div class="empty">No tips captured on the selected date.</div>';
+    return;
+  }
+
+  const ratingCount = (day.ratings || {}).rating_count || 0;
+  const avgRating = Number((day.ratings || {}).avg_rating || 0).toFixed(1);
+  const fiveStar = (day.ratings || {}).five_star_count || 0;
+  const low = (day.ratings || {}).low_rating_count || 0;
+  summaryEl.textContent = ratingCount
+    ? `${avgRating} stars across ${number(ratingCount)} ratings for ${businessDateLabel(date)}. ${number(fiveStar)} five-star, ${number(low)} low-rating.`
+    : `No ratings submitted for ${businessDateLabel(date)}.`;
+  listEl.innerHTML = rows.length ? rows.map(row => `
+    <article class="customer-card">
+      <div class="customer-card-head">
+        <div>
+          <div class="customer-name">${escapeHtml(row.customer_name)}</div>
+          <div class="customer-id-line">Left rating · Customer #${number(row.customer_id)}</div>
+          <div class="customer-order-line">Order #${number(row.order_id)} · ${escapeHtml(row.submitted_at_et || 'Unknown time')} ET</div>
+        </div>
+        <div class="customer-chip-row">
+          <span class="confidence ${row.rating <= 3 ? 'low' : row.rating === 5 ? 'high' : 'medium'}">${number(row.rating)}★</span>
+          <span class="confidence low">${escapeHtml(row.status || 'unknown')}</span>
+          <span class="confidence low">${escapeHtml(row.delivery_type || 'unknown')}</span>
+        </div>
+      </div>
+      <div class="customer-grid">
+        <div class="customer-field">
+          <div class="customer-field-label">Who Left The Rating</div>
+          <div class="customer-field-value">${escapeHtml(row.customer_name)} · Customer #${number(row.customer_id)}</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Who Received The Rating</div>
+          <div class="customer-field-value">${escapeHtml(row.washpro_name || 'Unassigned WashPro')}${row.washpro_id ? ` · WashPro #${number(row.washpro_id)}` : ''}</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Star Rating</div>
+          <div class="customer-field-value">${number(row.rating)} out of 5</div>
+        </div>
+        <div class="customer-field">
+          <div class="customer-field-label">Submitted Time</div>
+          <div class="customer-field-value">${escapeHtml(row.submitted_at_et || 'Unknown')} ET</div>
+        </div>
+      </div>
+    </article>
+  `).join('') : '<div class="empty">No ratings submitted on the selected date.</div>';
+}
+
+function renderAcquisition() {
+  const context = selectedDayContext();
+  const acq = context.acquisition || {};
+  const live = state.live || {};
+  const isLive = context.mode === 'live';
+  const sourceSummary = isLive
+    ? {
+        buckets: acq.sources || [],
+        attributed: (acq.sources || []).reduce((sum, row) => {
+          const bucket = row.bucket || '';
+          if (bucket === 'Direct / Unknown' || bucket === 'Unknown') return sum;
+          return sum + Number(row.orders || 0);
+        }, 0),
+        unattributed: Number(acq.unknown_orders || 0),
+      }
+    : acquisitionSourceSummaryForDate(context.date);
+  const sources = sourceSummary.buckets || [];
+  const attributedOrders = sourceSummary.attributed || 0;
+  const unknownOrders = sourceSummary.unattributed || 0;
+  const sourceRows = sources.length ? sources.map(s => `
+    <div class="source-row">
+      <span>${escapeHtml(s.bucket)} <span class="confidence ${escapeHtml(s.confidence)}">${escapeHtml(s.confidence)}</span></span>
+      <strong>${number(s.orders)}</strong>
+    </div>
+  `).join('') : '';
+  const af = isLive ? (acq.appsflyer || {}) : null;
+  const afTotals = (af && af.totals) || {};
+  const afRows = ((af && af.media_sources) || []).slice(0, 6).map(row => {
+    const campaign = row.campaign && row.campaign !== 'None' ? ` · ${row.campaign}` : '';
+    return `
+      <div class="source-row">
+        <span>${escapeHtml(row.media_source || 'Unknown')}${escapeHtml(campaign)}</span>
+        <strong>${number(row.purchase_events)} events · ${money(row.sales_cad)}</strong>
+      </div>
+    `;
+  }).join('');
+  const appsflyerBlock = isLive ? `
+    <div class="source-section-title">AppsFlyer App Attribution</div>
+    <div class="source-row"><span>Status</span><strong>${escapeHtml(af.status || 'unavailable')}</strong></div>
+    <div class="source-row"><span>Purchase Events</span><strong>${number(afTotals.purchase_events || 0)}</strong></div>
+    <div class="source-row"><span>Google Ads Purchase Events</span><strong>${number(af.google_ads_purchase_events || 0)}</strong></div>
+    <div class="source-row"><span>Attributed Sales</span><strong>${money(afTotals.sales_cad || 0)}</strong></div>
+    ${afRows || '<div class="empty">No AppsFlyer app purchase events for this date yet.</div>'}
+  ` : '';
+  document.getElementById('source-mix').innerHTML = `
+    <div class="source-row"><span>New Customer Orders</span><strong>${number(acq.new_customer_orders)}</strong></div>
+    <div class="source-row"><span>Attributed Orders</span><strong>${isLive ? number(attributedOrders) : 'n/a'}</strong></div>
+    <div class="source-row"><span>Unattributed Orders</span><strong>${isLive ? number(unknownOrders) : 'n/a'}</strong></div>
+    <div class="source-row"><span>Google Ads Spend</span><strong>${acq.ad_spend_cad == null ? 'n/a' : money(acq.ad_spend_cad)}</strong></div>
+    <div class="source-row"><span>Cost per New Customer</span><strong>${acq.cost_per_new_customer_cad == null ? 'n/a' : money(acq.cost_per_new_customer_cad)}</strong></div>
+    <div class="source-row"><span>Ad Clicks</span><strong>${acq.ad_clicks == null ? 'n/a' : number(acq.ad_clicks)}</strong></div>
+    ${sourceRows}
+    ${appsflyerBlock}
+    <div class="empty">${escapeHtml(
+      isLive
+        ? (acq.caveat || 'Live source buckets are best-effort GA4 attribution matches only; AppsFlyer aggregate app attribution is not joined to individual customers. Referral promo codes are tracked separately.')
+        : (acq.source_note || 'Historical source buckets are unavailable for this date.')
+    )}</div>
+  `;
+
+  if (isLive) {
+    const r = live.referrals || {};
+    document.getElementById('referrals').innerHTML = [
+      ['Today', r.today],
+      ['7 days', r.seven_day],
+      ['30 days', r.thirty_day],
+    ].map(([label, row]) => `
+      <div class="stat-row">
+        <span>${label}</span>
+        <strong>${number(row && row.orders)} orders · ${money(row && row.order_value_cad)}</strong>
+      </div>
+    `).join('');
+
+    const top = r.top_codes_30d || [];
+    document.getElementById('top-referrals').innerHTML = top.length ? top.map(row => `
+      <div class="source-row">
+        <span><strong>${escapeHtml(row.code)}</strong> ${escapeHtml(row.owner_name || '')}</span>
+        <strong>${number(row.orders)} · ${money(row.order_value_cad)}</strong>
+      </div>
+    `).join('') : '<div class="empty">No referral promo orders in the last 30 days.</div>';
+    return;
+  }
+
+  const historicalReferrals = (context.today || {}).referrals || {};
+  document.getElementById('referrals').innerHTML = `
+    <div class="stat-row"><span>Referral Orders</span><strong>${number(historicalReferrals.orders)}</strong></div>
+    <div class="stat-row"><span>Referral Customers</span><strong>${number(historicalReferrals.customers)}</strong></div>
+    <div class="stat-row"><span>Referral Order Value</span><strong>${money(historicalReferrals.order_value_cad)}</strong></div>
+    <div class="empty">Historical referral stats are for the selected day only.</div>
+  `;
+  const topCodes = historicalReferrals.top_codes || [];
+  document.getElementById('top-referrals').innerHTML = topCodes.length ? topCodes.map(row => `
+    <div class="source-row">
+      <span><strong>${escapeHtml(row.code)}</strong> ${escapeHtml(row.owner_name || '')}</span>
+      <strong>${number(row.orders)} · ${money(row.order_value_cad)}</strong>
+    </div>
+  `).join('') : `
+    <div class="source-row"><span>Selected Date</span><strong>${escapeHtml(businessDateLabel(context.date))}</strong></div>
+    <div class="empty">No referral promo orders on this date.</div>
+  `;
+}
+
+function renderBrief() {
+  const daily = state.daily || {};
+  document.getElementById('brief-date').textContent = daily.data_date ? daily.data_date : '';
+  document.getElementById('analyst-brief').innerHTML = markdownLite(daily.analyst_brief || daily.executive_summary || 'No analyst brief available.');
+  document.getElementById('scorecard').innerHTML = (daily.scorecard || []).map(m => `
+    <div class="metric ${escapeHtml(m.status || '')}">
+      <div class="name">${escapeHtml(m.metric)}</div>
+      <div class="number">${escapeHtml(m.yesterday)}</div>
+      <div class="base">7d avg: ${escapeHtml(m.seven_day_avg)} · ${escapeHtml(m.change)}</div>
+    </div>
+  `).join('');
+}
+
+function markdownLite(text) {
+  const lines = escapeHtml(text).split(/\n+/);
+  let html = '';
+  let inList = false;
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    if (trimmed.startsWith('- ')) {
+      if (!inList) { html += '<ul>'; inList = true; }
+      html += '<li>' + inlineMarkdown(trimmed.slice(2)) + '</li>';
+    } else {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += '<p>' + inlineMarkdown(trimmed) + '</p>';
+    }
+  }
+  if (inList) html += '</ul>';
+  return html;
+}
+
+function inlineMarkdown(text) {
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+}
+
+function renderPriorities() {
+  const data = normalizePriorityData(state.priorities);
+  state.priorities = data;
+  const items = data.items || [];
+  const columns = data.columns || defaultColumns;
+  applyPriorityBackground(data.background);
+  document.getElementById('priorities-summary').textContent =
+    `${items.length} items · updated ${data.updated_at ? new Date(data.updated_at).toLocaleString() : 'unknown'}`;
+  document.getElementById('task-area').innerHTML = (data.areas || defaultAreas).map(a => `<option>${escapeHtml(a)}</option>`).join('');
+  document.getElementById('task-status').innerHTML = columns.map(c => `<option>${escapeHtml(c)}</option>`).join('');
+  renderPriorityStatus();
+
+  document.getElementById('priority-board').innerHTML = columns.map(column => {
+    const laneItems = items
+      .filter(item => item.status === column)
+      .sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    return `
+      <div class="lane" data-status="${escapeHtml(column)}">
+        <div class="lane-title"><span>${escapeHtml(column)}</span><span>${laneItems.length}</span></div>
+        <div class="lane-cards">
+          ${laneItems.length ? laneItems.map(renderTask).join('') : '<div class="empty">No cards</div>'}
+        </div>
+        <form class="quick-add" data-status="${escapeHtml(column)}">
+          <div class="quick-row">
+            <input autocomplete="off" maxlength="160" placeholder="Add a card...">
+            <button class="ghost-btn" type="submit">+</button>
+          </div>
+        </form>
+      </div>
+    `;
+  }).join('');
+  attachPriorityEvents();
+}
+
+function renderTask(item) {
+  const areaClass = String(item.area || '').toLowerCase().replace('ai infra', 'ai');
+  return `
+    <article class="task" draggable="true" data-id="${escapeHtml(item.id)}">
+      <div class="task-title">${escapeHtml(item.title)}</div>
+      <div class="task-meta">
+        <span class="pill ${escapeHtml(areaClass)}">${escapeHtml(item.area)}</span>
+        <span class="pill">${escapeHtml(item.priority)}</span>
+        <span class="pill">${escapeHtml(item.owner)}</span>
+      </div>
+      ${item.why ? `<div class="task-note">${escapeHtml(item.why)}</div>` : ''}
+      <div class="task-actions">
+        <button class="ghost-btn" type="button" data-edit="${escapeHtml(item.id)}">Edit</button>
+      </div>
+    </article>
+  `;
+}
+
+function normalizePriorityData(data) {
+  data = data || {};
+  return {
+    version: 1,
+    updated_at: data.updated_at || new Date().toISOString(),
+    columns: data.columns || defaultColumns,
+    areas: data.areas || defaultAreas,
+    background: data.background || null,
+    source: data.source || null,
+    items: Array.isArray(data.items) ? data.items : [],
+  };
+}
+
+function applyPriorityBackground(background) {
+  const view = document.getElementById('priorities-view');
+  if (!view) return;
+  const url = background && background.image_url ? String(background.image_url) : '';
+  if (!url) {
+    view.style.setProperty('--priority-bg-image', 'none');
+    return;
+  }
+  const safeUrl = url.replace(/["\\\n\r]/g, '');
+  view.style.setProperty('--priority-bg-image', `url("${safeUrl}")`);
+}
+
+function renderPriorityStatus(message, kind) {
+  const el = document.getElementById('priority-status');
+  if (!el) return;
+  if (message) {
+    el.textContent = message;
+    el.className = `board-status ${kind || ''}`;
+    return;
+  }
+  const label = state.priorityMode === 'api' ? 'Saved' : state.priorityMode === 'local' ? 'Local draft' : 'Snapshot';
+  el.textContent = state.prioritySaving ? 'Saving...' : label;
+  el.className = `board-status ${state.prioritySaving ? 'saving' : state.priorityMode === 'api' ? 'synced' : state.priorityMode === 'local' ? 'local' : ''}`;
+}
+
+function attachPriorityEvents() {
+  document.querySelectorAll('.task').forEach(card => {
+    card.addEventListener('dragstart', event => {
+      state.draggedTaskId = card.dataset.id;
+      card.classList.add('dragging');
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', card.dataset.id);
+    });
+    card.addEventListener('dragend', () => {
+      state.draggedTaskId = null;
+      card.classList.remove('dragging');
+      document.querySelectorAll('.lane.drag-over').forEach(lane => lane.classList.remove('drag-over'));
+    });
+    card.addEventListener('click', event => {
+      if (!event.target.closest('button')) openTaskDialog(card.dataset.id);
+    });
+  });
+
+  document.querySelectorAll('[data-edit]').forEach(button => {
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+      openTaskDialog(button.dataset.edit);
+    });
+  });
+
+  document.querySelectorAll('.lane').forEach(lane => {
+    lane.addEventListener('dragover', event => {
+      event.preventDefault();
+      lane.classList.add('drag-over');
+    });
+    lane.addEventListener('dragleave', event => {
+      if (!lane.contains(event.relatedTarget)) lane.classList.remove('drag-over');
+    });
+    lane.addEventListener('drop', event => {
+      event.preventDefault();
+      lane.classList.remove('drag-over');
+      const id = event.dataTransfer.getData('text/plain') || state.draggedTaskId;
+      const before = getDropBeforeCard(lane.querySelector('.lane-cards'), event.clientY);
+      movePriorityCard(id, lane.dataset.status, before ? before.dataset.id : null);
+    });
+  });
+
+  document.querySelectorAll('.quick-add').forEach(form => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      quickAddPriority(form);
+    });
+  });
+}
+
+function getDropBeforeCard(container, y) {
+  const cards = [...container.querySelectorAll('.task:not(.dragging)')];
+  return cards.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) return { offset, element: child };
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY, element: null }).element;
+}
+
+function renderHealth() {
+  const daily = state.daily || {};
+  const live = state.live || {};
+  const rows = [];
+  Object.entries(daily.data_health || {}).forEach(([key, value]) => rows.push([value.label || key, value.status || 'unknown']));
+  Object.entries(live.data_health || {}).forEach(([key, value]) => rows.push([key.replace(/_/g, ' '), value.status || 'unknown']));
+  document.getElementById('health').innerHTML = rows.map(([label, status]) => `
+    <div class="health-row"><span>${escapeHtml(label)}</span><strong>${escapeHtml(status)}</strong></div>
+  `).join('') || '<div class="empty">No source status available.</div>';
+  document.getElementById('validation-notes').innerHTML = markdownLite(daily.validation_notes || 'No validation notes available.');
+  document.getElementById('footnotes').innerHTML = (daily.data_footnotes || []).map(f => `
+    <div class="stat-row"><span>${escapeHtml(f)}</span></div>
+  `).join('') || '<div class="empty">No footnotes available.</div>';
+}
+
+function renderChart(points, selected) {
+  const el = document.getElementById('orders-chart');
+  if (!points.length) {
+    el.innerHTML = '<div class="empty">No trend data available.</div>';
+    return;
+  }
+  const data = points.slice(-15);
+  const w = el.clientWidth || 620;
+  const h = 190;
+  const pad = { t: 18, r: 32, b: 28, l: 6 };
+  const chartW = w - pad.l - pad.r;
+  const chartH = h - pad.t - pad.b;
+  const max = Math.max(20, ...data.map(d => Number(d.placed || 0)));
+  const yMax = Math.ceil(max / 5) * 5 + 5;
+  const toX = i => pad.l + (chartW / Math.max(data.length - 1, 1)) * i;
+  const toY = v => pad.t + chartH * (1 - Number(v || 0) / yMax);
+  const pts = data.map((d, i) => ({ x: toX(i), y: toY(d.placed), d }));
+  const line = pts.map((p, i) => `${i ? 'L' : 'M'} ${p.x} ${p.y}`).join(' ');
+  const area = `M ${pts[0].x} ${pad.t + chartH} ${pts.map(p => `L ${p.x} ${p.y}`).join(' ')} L ${pts[pts.length - 1].x} ${pad.t + chartH} Z`;
+  const beY = toY(20);
+  let svg = `<svg viewBox="0 0 ${w} ${h}" width="100%" height="100%" preserveAspectRatio="none">`;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.t + (chartH / 4) * i;
+    const label = Math.round(yMax - (yMax / 4) * i);
+    svg += `<line x1="${pad.l}" y1="${y}" x2="${w - pad.r}" y2="${y}" stroke="#2b333a"/>`;
+    svg += `<text x="${w - pad.r + 5}" y="${y + 4}" fill="#75818a" font-size="10">${label}</text>`;
+  }
+  svg += `<line x1="${pad.l}" y1="${beY}" x2="${w - pad.r}" y2="${beY}" stroke="#e8b34b" stroke-dasharray="4 4"/>`;
+  svg += `<text x="${w - pad.r + 5}" y="${beY + 4}" fill="#e8b34b" font-size="9">20</text>`;
+  svg += `<path d="${area}" fill="#00a3e7" opacity="0.18"/>`;
+  svg += `<path d="${line}" fill="none" stroke="#00a3e7" stroke-width="2.4"/>`;
+  pts.forEach((p, i) => {
+    const active = selected && p.d.date === selected;
+    svg += `<circle cx="${p.x}" cy="${p.y}" r="${active ? 5 : 3}" fill="${active ? '#e8b34b' : '#00a3e7'}"/>`;
+    if (i % 2 === 0 || i === pts.length - 1) {
+      svg += `<text x="${p.x}" y="${h - 6}" fill="#75818a" font-size="9" text-anchor="middle">${escapeHtml((p.d.date || '').slice(5))}</text>`;
+    }
+  });
+  svg += '</svg>';
+  el.innerHTML = svg;
+}
+
+function priorityApiConfig() {
+  const base = (localStorage.getItem('tumbilos_priority_api_base') || '').trim().replace(/\/$/, '');
+  const token = localStorage.getItem('tumbilos_priority_api_token') || '';
+  return base && token ? { base, token } : null;
+}
+
+function actorName() {
+  return localStorage.getItem('tumbilos_priority_actor') ||
+    document.getElementById('task-updated-by')?.value ||
+    'Cliff';
+}
+
+function localPriorityItem(raw, existing) {
+  existing = existing || {};
+  return {
+    id: existing.id || raw.id || `local-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    title: String(raw.title || existing.title || '').trim(),
+    owner: String(raw.owner || existing.owner || 'Cliff').trim() || 'Cliff',
+    area: raw.area || existing.area || 'Product',
+    priority: raw.priority || existing.priority || 'P1',
+    status: raw.status || existing.status || 'Now',
+    target_date: raw.target_date || existing.target_date || null,
+    why: String(raw.why || existing.why || '').trim(),
+    links: raw.links || existing.links || [],
+    notes: String(raw.notes || existing.notes || '').trim(),
+    sort: Number(raw.sort || existing.sort || 0),
+    created_at: existing.created_at || new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    updated_by: String(raw.updated_by || existing.updated_by || actorName()).trim() || 'Cliff',
+  };
+}
+
+function saveLocalPriorities() {
+  state.priorities.updated_at = new Date().toISOString();
+  localStorage.setItem('tumbilos_priority_local', JSON.stringify(state.priorities));
+  state.priorityMode = 'local';
+  renderPriorityStatus('Local draft', 'local');
+}
+
+async function priorityApiRequest(path, options = {}) {
+  const api = priorityApiConfig();
+  if (!api) throw new Error('Priority API is not configured.');
+  const resp = await fetch(api.base + path, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${api.token}`,
+      ...(options.headers || {}),
+    },
+  });
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    throw new Error(err.error || `Priority API ${resp.status}`);
+  }
+  return resp.status === 204 ? null : resp.json();
+}
+
+async function refreshPriorities() {
+  try {
+    state.priorities = await loadPriorities();
+    renderPriorities();
+    toast('Priorities refreshed.');
+  } catch (err) {
+    renderPriorityStatus('Refresh failed', 'error');
+    toast(err.message);
+  }
+}
+
+async function quickAddPriority(form) {
+  const input = form.querySelector('input');
+  const title = input.value.trim();
+  if (!title) return;
+  input.disabled = true;
+  const status = form.dataset.status;
+  const count = (state.priorities.items || []).filter(item => item.status === status).length;
+  try {
+    await createPriority({
+      title,
+      status,
+      area: 'Product',
+      priority: 'P1',
+      owner: 'Cliff',
+      updated_by: actorName(),
+      sort: count + 1,
+    });
+    input.value = '';
+    focusQuickAdd(status);
+  } catch (err) {
+    toast(err.message);
+  } finally {
+    input.disabled = false;
+  }
+}
+
+function focusQuickAdd(status) {
+  const form = [...document.querySelectorAll('.quick-add')].find(el => el.dataset.status === status);
+  form?.querySelector('input')?.focus();
+}
+
+async function createPriority(payload) {
+  if (!payload.title || !payload.title.trim()) throw new Error('Title is required.');
+  if (!payload.sort) {
+    payload.sort = (state.priorities.items || []).filter(item => item.status === payload.status).length + 1;
+  }
+  const api = priorityApiConfig();
+  state.prioritySaving = true;
+  renderPriorityStatus();
+  try {
+    if (api) {
+      state.priorities = await priorityApiRequest('/v1/priorities', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+      state.priorityMode = 'api';
+      renderPriorities();
+      return;
+    }
+    state.priorities.items.push(localPriorityItem(payload));
+    saveLocalPriorities();
+    renderPriorities();
+  } finally {
+    state.prioritySaving = false;
+    renderPriorityStatus();
+  }
+}
+
+async function updatePriority(id, payload) {
+  if (!payload.title || !payload.title.trim()) throw new Error('Title is required.');
+  const api = priorityApiConfig();
+  state.prioritySaving = true;
+  renderPriorityStatus();
+  try {
+    if (api) {
+      state.priorities = await priorityApiRequest(`/v1/priorities/${encodeURIComponent(id)}`, {
+        method: 'PATCH',
+        body: JSON.stringify(payload),
+      });
+      state.priorityMode = 'api';
+      renderPriorities();
+      return;
+    }
+    const idx = state.priorities.items.findIndex(item => item.id === id);
+    if (idx >= 0) state.priorities.items[idx] = localPriorityItem(payload, state.priorities.items[idx]);
+    saveLocalPriorities();
+    renderPriorities();
+  } finally {
+    state.prioritySaving = false;
+    renderPriorityStatus();
+  }
+}
+
+function orderedPriorityIds() {
+  const data = normalizePriorityData(state.priorities);
+  return data.columns.flatMap(column =>
+    data.items
+      .filter(item => item.status === column)
+      .sort((a, b) => (a.sort || 0) - (b.sort || 0))
+      .map(item => item.id)
+  );
+}
+
+async function movePriorityCard(id, status, beforeId) {
+  if (!id || !status) return;
+  const data = normalizePriorityData(state.priorities);
+  const moved = data.items.find(item => item.id === id);
+  if (!moved) return;
+  const oldStatus = moved.status;
+  const columns = data.columns || defaultColumns;
+  const nextItems = [];
+
+  columns.forEach(column => {
+    let laneItems = data.items
+      .filter(item => item.id !== id && item.status === column)
+      .sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    if (column === status) {
+      const insertAt = beforeId ? laneItems.findIndex(item => item.id === beforeId) : -1;
+      const updated = { ...moved, status, updated_at: new Date().toISOString(), updated_by: actorName() };
+      if (insertAt >= 0) laneItems.splice(insertAt, 0, updated);
+      else laneItems.push(updated);
+    }
+    laneItems.forEach((item, idx) => nextItems.push({ ...item, sort: idx + 1 }));
+  });
+
+  data.items
+    .filter(item => !columns.includes(item.status) && item.id !== id)
+    .forEach(item => nextItems.push(item));
+  data.items = nextItems;
+  data.updated_at = new Date().toISOString();
+  state.priorities = data;
+  renderPriorities();
+
+  const api = priorityApiConfig();
+  if (!api) {
+    saveLocalPriorities();
+    return;
+  }
+
+  state.prioritySaving = true;
+  renderPriorityStatus();
+  try {
+    if (oldStatus !== status) {
+      const movedNow = state.priorities.items.find(item => item.id === id);
+      await priorityApiRequest(`/v1/priorities/${encodeURIComponent(id)}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ ...movedNow, updated_by: actorName() }),
+      });
+    }
+    state.priorities = await priorityApiRequest('/v1/priorities/reorder', {
+      method: 'POST',
+      body: JSON.stringify({ order: orderedPriorityIds(), updated_by: actorName() }),
+    });
+    state.priorityMode = 'api';
+    renderPriorities();
+  } catch (err) {
+    renderPriorityStatus('Save failed', 'error');
+    toast(err.message);
+  } finally {
+    state.prioritySaving = false;
+    renderPriorityStatus();
+  }
+}
+
+function openTaskDialog(id) {
+  const data = state.priorities || { items: [] };
+  const item = id ? data.items.find(t => t.id === id) : null;
+  state.editingTask = item || null;
+  document.getElementById('task-dialog-title').textContent = item ? 'Edit Priority' : 'Add Priority';
+  document.getElementById('task-id').value = item ? item.id : '';
+  document.getElementById('task-title').value = item ? item.title || '' : '';
+  document.getElementById('task-owner').value = item ? item.owner || 'Cliff' : 'Cliff';
+  document.getElementById('task-area').value = item ? item.area || 'Product' : 'Product';
+  document.getElementById('task-priority').value = item ? item.priority || 'P1' : 'P1';
+  document.getElementById('task-status').value = item ? item.status || 'Now' : 'Now';
+  document.getElementById('task-target').value = item ? item.target_date || '' : '';
+  document.getElementById('task-updated-by').value = item ? item.updated_by || 'Cliff' : 'Cliff';
+  document.getElementById('task-why').value = item ? item.why || '' : '';
+  document.getElementById('task-notes').value = item ? item.notes || '' : '';
+  document.getElementById('task-links').value = item && item.links ? item.links.join(', ') : '';
+  document.getElementById('delete-task').style.display = item ? 'inline-flex' : 'none';
+  document.getElementById('task-dialog').showModal();
+}
+
+async function saveTask(event) {
+  event.preventDefault();
+  const id = document.getElementById('task-id').value;
+  const payload = {
+    title: document.getElementById('task-title').value,
+    owner: document.getElementById('task-owner').value,
+    area: document.getElementById('task-area').value,
+    priority: document.getElementById('task-priority').value,
+    status: document.getElementById('task-status').value,
+    target_date: document.getElementById('task-target').value || null,
+    updated_by: document.getElementById('task-updated-by').value,
+    why: document.getElementById('task-why').value,
+    notes: document.getElementById('task-notes').value,
+    links: document.getElementById('task-links').value.split(',').map(s => s.trim()).filter(Boolean),
+  };
+  const button = document.getElementById('save-task');
+  button.disabled = true;
+  try {
+    localStorage.setItem('tumbilos_priority_actor', payload.updated_by || 'Cliff');
+    if (id) await updatePriority(id, payload);
+    else await createPriority(payload);
+    document.getElementById('task-dialog').close();
+    toast(priorityApiConfig() ? 'Saved.' : 'Saved locally.');
+  } catch (err) {
+    toast(err.message);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function archiveTask() {
+  const id = document.getElementById('task-id').value;
+  if (!id) return;
+  if (!confirm('Archive this card?')) return;
+  const api = priorityApiConfig();
+  state.prioritySaving = true;
+  renderPriorityStatus();
+  try {
+    if (api) {
+      state.priorities = await priorityApiRequest(`/v1/priorities/${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+      });
+      state.priorityMode = 'api';
+    } else {
+      state.priorities.items = (state.priorities.items || []).filter(item => item.id !== id);
+      saveLocalPriorities();
+    }
+    document.getElementById('task-dialog').close();
+    renderPriorities();
+    toast('Archived.');
+  } catch (err) {
+    renderPriorityStatus('Archive failed', 'error');
+    toast(err.message);
+  } finally {
+    state.prioritySaving = false;
+    renderPriorityStatus();
+  }
+}
+
+function activateView(viewId, activeTabViewId = viewId) {
+  state.activeView = viewId;
+  document.querySelectorAll('.tab').forEach(button => {
+    button.classList.toggle('active', button.dataset.view === activeTabViewId);
+  });
+  document.querySelectorAll('.view').forEach(view => {
+    view.classList.toggle('active', view.id === viewId);
+  });
+}
+
+function openCustomerDetail(kind) {
+  navigate({
+    customerDrilldownType: kind,
+    activeView: 'customer-detail-view',
+  });
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function openServiceDetail(kind) {
+  navigate({
+    serviceDrilldownType: kind,
+    activeView: 'service-detail-view',
+  });
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function toast(message) {
+  const el = document.getElementById('toast');
+  el.textContent = message;
+  el.className = 'toast show';
+  setTimeout(() => { el.className = 'toast'; }, 3500);
+}
+
+function logout() {
+  localStorage.removeItem('staticrypt_passphrase');
+  localStorage.removeItem('staticrypt_expiration');
+  location.reload();
+}
+
+document.querySelectorAll('.tab').forEach(button => {
+  button.addEventListener('click', () => {
+    const nextView = button.dataset.view;
+    navigate({
+      activeView: nextView,
+      ...(nextView === 'today-view'
+        ? { selectedDate: currentBusinessDate() || availableDates()[availableDates().length - 1] || null }
+        : {}),
+    });
+  });
+});
+
+document.querySelectorAll('[data-customer-type]').forEach(card => {
+  card.addEventListener('click', () => openCustomerDetail(card.dataset.customerType));
+});
+document.querySelectorAll('[data-service-type]').forEach(card => {
+  card.addEventListener('click', () => openServiceDetail(card.dataset.serviceType));
+});
+document.getElementById('customer-back-btn').addEventListener('click', () => {
+  navigate({
+    activeView: 'today-view',
+  });
+});
+document.getElementById('service-back-btn').addEventListener('click', () => {
+  navigate({
+    activeView: 'today-view',
+  });
+});
+document.getElementById('task-form').addEventListener('submit', saveTask);
+document.getElementById('delete-task').addEventListener('click', archiveTask);
+
+window.addEventListener('popstate', () => {
+  applyRouteFromUrl();
+  render();
+});
+
+loadAll().catch(err => {
+  toast(err.message);
+  console.error(err);
+});
+setInterval(() => loadAll().catch(console.error), 300000);
 </script>
 </body>
 </html>

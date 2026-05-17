@@ -1,0 +1,2232 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-13T11:35:13.462694-04:00",
+  "columns": [
+    "BACKBURNER / ONGOING",
+    "NEW FOR DISCUSSION",
+    "BACKLOG",
+    "IN PROGRESS",
+    "DONE FOR ENG/DISCUSS",
+    "DONE & ARCHIVED"
+  ],
+  "areas": [
+    "Product",
+    "Finance",
+    "Eng",
+    "AI Infra"
+  ],
+  "background": {
+    "type": "trello_image",
+    "image_url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/5c761fe036cf43966c4afe004ab4a309/photo-1694125398686-fdbce8ca1054",
+    "source_url": "https://images.unsplash.com/photo-1694125398686-fdbce8ca1054?ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjk1NzM0NTU3fA&ixlib=rb-4.0.3&w=2560&h=2048&q=90",
+    "top_color": "#f8f7f4",
+    "bottom_color": "#3d3a30",
+    "brightness": "light"
+  },
+  "source": {
+    "type": "trello_import",
+    "board_id": "669e6aa43c59480a54df4279",
+    "board_name": "Tumbil Product & Finance",
+    "board_url": "https://trello.com/b/MvWECI4d/tumbil-product-finance",
+    "imported_at": "2026-05-13T11:35:13.462694-04:00",
+    "card_count": 122
+  },
+  "items": [
+    {
+      "id": "trello_68cc1dbcc999991aed187bc9",
+      "title": "REVIEW CLAWBACKS AND BONUSES",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P2",
+      "status": "BACKBURNER / ONGOING",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/7Xb9Wi80/86-review-clawbacks-and-bonuses"
+      ],
+      "notes": "",
+      "sort": 1,
+      "created_at": "2025-09-18T14:57:03.686Z",
+      "updated_at": "2025-09-18T14:57:03.686Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6852b6eb68b5afee8e972240",
+      "title": "Update Stripe Implementation (we dont know revenue without this): Create research ticket WAITING ON HOTSHOTS",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P2",
+      "status": "BACKBURNER / ONGOING",
+      "target_date": null,
+      "why": "We need to finalize and then implement plan to retrofit stripe integration - will require engineering research",
+      "links": [
+        "https://trello.com/c/ifdOscB7/16-update-stripe-implementation-we-dont-know-revenue-without-this-create-research-ticket-waiting-on-hotshots"
+      ],
+      "notes": "We need to finalize and then implement plan to retrofit stripe integration - will require engineering research",
+      "sort": 2,
+      "created_at": "2025-10-10T16:47:40.001Z",
+      "updated_at": "2025-10-10T16:47:40.001Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_685d47e308ab93012e42fae3",
+      "title": "Clickup Ticket Testing",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P2",
+      "status": "BACKBURNER / ONGOING",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/08bMBbJP/26-clickup-ticket-testing"
+      ],
+      "notes": "",
+      "sort": 3,
+      "created_at": "2025-06-26T13:15:15.600Z",
+      "updated_at": "2025-06-26T13:15:15.600Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_694598d636eddd8f65bbaf0e",
+      "title": "tel number validation (currently accepts too many digits)",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "NEW FOR DISCUSSION",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/1PiiVca3/128-tel-number-validation-currently-accepts-too-many-digits"
+      ],
+      "notes": "",
+      "sort": 1,
+      "created_at": "2025-12-19T18:26:30.846Z",
+      "updated_at": "2025-12-19T18:26:30.846Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_692af4865eea80364010fe29",
+      "title": "Touch up mailchimp emails designs",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "NEW FOR DISCUSSION",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/7SGC0xJN/123-touch-up-mailchimp-emails-designs"
+      ],
+      "notes": "",
+      "sort": 2,
+      "created_at": "2025-11-29T13:26:30.960Z",
+      "updated_at": "2025-11-29T13:26:30.960Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68d9309fb42e8d8811df4c6f",
+      "title": "Switch pickup and delivery to 9pm or 10pm",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "NEW FOR DISCUSSION",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/dG4B4Tp1/96-switch-pickup-and-delivery-to-9pm-or-10pm"
+      ],
+      "notes": "",
+      "sort": 3,
+      "created_at": "2025-10-16T13:47:11.251Z",
+      "updated_at": "2025-10-16T13:47:11.251Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_685c1b9565f7b64959d04c2e",
+      "title": "People including Matt don't know where we service (need easy way to identify service areas)",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "NEW FOR DISCUSSION",
+      "target_date": null,
+      "why": "Would be good to add postal code check on marketing site Cliff could maybe build on his own",
+      "links": [
+        "https://trello.com/c/2ucYsgws/25-people-including-matt-dont-know-where-we-service-need-easy-way-to-identify-service-areas"
+      ],
+      "notes": "Would be good to add postal code check on marketing site\n\n- Cliff could maybe build on his own",
+      "sort": 4,
+      "created_at": "2025-10-16T13:49:10.164Z",
+      "updated_at": "2025-10-16T13:49:10.164Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6855a197a7a528ac83da0f62",
+      "title": "Marketing Site: Expand coverage area of hero section on homepage ie 'Ontario' (may be part of city pages update)",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "NEW FOR DISCUSSION",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/9V3s7zZa/21-marketing-site-expand-coverage-area-of-hero-section-on-homepage-ie-ontario-may-be-part-of-city-pages-update"
+      ],
+      "notes": "",
+      "sort": 5,
+      "created_at": "2025-10-10T16:46:51.411Z",
+      "updated_at": "2025-10-10T16:46:51.411Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68daad15a253f9a49a877b6e",
+      "title": "need to add ability to close tip / rating modal (re-open 3 times or something). Alternatively, allow messaging washpro but nothing else (and re-enable post order messaging)",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "NEW FOR DISCUSSION",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/MloT6hkE/98-need-to-add-ability-to-close-tip-rating-modal-re-open-3-times-or-something-alternatively-allow-messaging-washpro-but-nothing-els"
+      ],
+      "notes": "",
+      "sort": 6,
+      "created_at": "2025-10-08T22:07:47.217Z",
+      "updated_at": "2025-10-08T22:07:47.217Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_697907816547b963c3718994",
+      "title": "Re-design automated emails",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/uNH4FQVv/136-re-design-automated-emails"
+      ],
+      "notes": "",
+      "sort": 1,
+      "created_at": "2026-02-04T14:13:59.890Z",
+      "updated_at": "2026-02-04T14:13:59.890Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6894bd78b7faca53acde9134",
+      "title": "Add special instructions label for if field contains text (change placeholder text to include words 'drop-off' explictly)",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "Additional pickup and/or dropoff instructions, eave blank if none",
+      "links": [
+        "https://trello.com/c/eCvzeMmC/59-add-special-instructions-label-for-if-field-contains-text-change-placeholder-text-to-include-words-drop-off-explictly"
+      ],
+      "notes": "Additional pickup and/or dropoff instructions, eave blank if none\n\n![image.png](https://trello.com/1/cards/6894bd78b7faca53acde9134/attachments/6894bd7fc5533a41376a52bc/download/image.png)",
+      "sort": 2,
+      "created_at": "2025-12-31T13:05:10.031Z",
+      "updated_at": "2025-12-31T13:05:10.031Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_69206c5bb2cdeab6030b004e",
+      "title": "adjust customer app download links in marketing site footer",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/h1YnUfSJ/119-adjust-customer-app-download-links-in-marketing-site-footer"
+      ],
+      "notes": "",
+      "sort": 3,
+      "created_at": "2025-12-29T14:19:03.936Z",
+      "updated_at": "2025-12-29T14:19:03.936Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68f0f086cc50f48605698352",
+      "title": "Investigate Notifications to signed out WashPros as reported happening to Matt",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/8u0GLnKN/105-investigate-notifications-to-signed-out-washpros-as-reported-happening-to-matt"
+      ],
+      "notes": "",
+      "sort": 4,
+      "created_at": "2025-10-16T13:51:41.838Z",
+      "updated_at": "2025-10-16T13:51:41.838Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68936fcc11ea64f98170d616",
+      "title": "Shorten hanger text remove no extra fee as unnecessary",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/dRwRLq32/54-shorten-hanger-text-remove-no-extra-fee-as-unnecessary"
+      ],
+      "notes": "",
+      "sort": 5,
+      "created_at": "2025-08-07T14:53:37.862Z",
+      "updated_at": "2025-08-07T14:53:37.862Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68daba8ee5a25ac3bad910d2",
+      "title": "missing lb decimal in customer receipt...",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/vvl4ETYQ/101-missing-lb-decimal-in-customer-receipt"
+      ],
+      "notes": "",
+      "sort": 6,
+      "created_at": "2025-10-10T16:38:44.092Z",
+      "updated_at": "2025-10-10T16:38:44.092Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68559ee6babded8e5eaff521",
+      "title": "Update FAQ Cursor to finger Tumbil Marketing Site",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/mFidDJol/20-update-faq-cursor-to-finger-tumbil-marketing-site"
+      ],
+      "notes": "",
+      "sort": 7,
+      "created_at": "2025-07-24T14:35:23.712Z",
+      "updated_at": "2025-07-24T14:35:23.712Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_692714efe4db4496be83e678",
+      "title": "Create Status 'Suspended' for WPs",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "To deal with issue where wp suspended but needs to setup stripe",
+      "links": [
+        "https://trello.com/c/OG5N0k6k/120-create-status-suspended-for-wps"
+      ],
+      "notes": "To deal with issue where wp suspended but needs to setup stripe\n\n![image.png](https://trello.com/1/cards/692714efe4db4496be83e678/attachments/6927150277f0ee614695afd9/download/image.png)",
+      "sort": 8,
+      "created_at": "2025-11-27T14:46:21.671Z",
+      "updated_at": "2025-11-27T14:46:21.671Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6856a3c089f00519e449dfdb",
+      "title": "Retrofit Users page in Admin to make Mobile friendly and hide alert chips",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "Specific Issues to address: Resposive for Mobile User chips at top annoying to scroll through (when a large number of them)",
+      "links": [
+        "https://trello.com/c/sOA8eP9m/22-retrofit-users-page-in-admin-to-make-mobile-friendly-and-hide-alert-chips"
+      ],
+      "notes": "Specific Issues to address:\n\\- Resposive for Mobile\n\\- User chips at top annoying to scroll through (when a large number of them)",
+      "sort": 9,
+      "created_at": "2025-06-26T13:26:44.781Z",
+      "updated_at": "2025-06-26T13:26:44.781Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6851895e799e59e763d06293",
+      "title": "Hotel orders: Add hotel name and customer name to Pickup and WashPro screen in WashPro App",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "For hotel orders: Ideally add hotel name if possible on Pickup screen (poplin does not do this and it\u2019s a nice to have only) Label step: If 'Front Desk' add note about adding custo",
+      "links": [
+        "https://trello.com/c/y1HVxBYa/13-hotel-orders-add-hotel-name-and-customer-name-to-pickup-and-washpro-screen-in-washpro-app"
+      ],
+      "notes": "For hotel orders:\n\\- Ideally add hotel name if possible on Pickup screen (poplin does not do this and it\u2019s a nice to have only)\n\\- Label step: If 'Front Desk' add note about adding customer name and room number",
+      "sort": 10,
+      "created_at": "2025-12-04T15:17:05.799Z",
+      "updated_at": "2025-12-04T15:17:05.799Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6869189f410dc41d5efe97d7",
+      "title": "Add column to show tips in the admin dashboard, next to rating.",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/XGaeQvid/34-add-column-to-show-tips-in-the-admin-dashboard-next-to-rating"
+      ],
+      "notes": "",
+      "sort": 11,
+      "created_at": "2025-07-11T14:43:19.406Z",
+      "updated_at": "2025-07-11T14:43:19.406Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686918cac4ec84a02518cb63",
+      "title": "Make it more clear that the tip is for the quality of the WashPro and delivery/pickup.",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/TNGxzrqd/35-make-it-more-clear-that-the-tip-is-for-the-quality-of-the-washpro-and-delivery-pickup"
+      ],
+      "notes": "",
+      "sort": 12,
+      "created_at": "2025-07-11T14:46:35.140Z",
+      "updated_at": "2025-07-11T14:46:35.140Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68628cd13084f4993fb0eae7",
+      "title": "Clean up admin, dark background, smaller left side bard, logout to within email top right, etc.",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/6AEnWpwr/30-clean-up-admin-dark-background-smaller-left-side-bard-logout-to-within-email-top-right-etc"
+      ],
+      "notes": "",
+      "sort": 13,
+      "created_at": "2025-07-11T14:42:45.201Z",
+      "updated_at": "2025-07-11T14:42:45.201Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68a6749fc3e6143484078408",
+      "title": "Customers should have the ability to prevent their orders from being assigned to specific WashPros they\u2019ve previously had a negative experience with.",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "Why this matters: \u2022\tBuilds customer trust and satisfaction \u2022\tReduces churn from repeated bad experiences \u2022\tEmpowers customers to feel more in control of their laundry experience Is",
+      "links": [
+        "https://trello.com/c/4VtaifWz/67-customers-should-have-the-ability-to-prevent-their-orders-from-being-assigned-to-specific-washpros-theyve-previously-had-a-negat"
+      ],
+      "notes": "Why this matters:\n\t\u2022\tBuilds customer trust and satisfaction\n\t\u2022\tReduces churn from repeated bad experiences\n\t\u2022\tEmpowers customers to feel more in control of their laundry experience\n\nIssue:\n- what if they are in an area where that is the ONLY WP available?",
+      "sort": 14,
+      "created_at": "2025-10-16T13:43:56.759Z",
+      "updated_at": "2025-10-16T13:43:56.759Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6955204d22f2f35e9b4e3d28",
+      "title": "Deep linking",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P1",
+      "status": "BACKLOG",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/64QxSXH8/129-deep-linking"
+      ],
+      "notes": "",
+      "sort": 15,
+      "created_at": "2025-12-31T13:08:29.775Z",
+      "updated_at": "2025-12-31T13:08:29.775Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68823dbb660681d9f2fac6d4",
+      "title": "Create Tumbil Blog Template in Webflow ('Best Laundry Unfolded')",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P2",
+      "status": "DONE FOR ENG/DISCUSS",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/lJsinudn/49-create-tumbil-blog-template-in-webflow-best-laundry-unfolded"
+      ],
+      "notes": "",
+      "sort": 1,
+      "created_at": "2026-01-22T20:14:58.488Z",
+      "updated_at": "2026-01-22T20:14:58.488Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_695d3fd90ef01c1cba9f6a14",
+      "title": "Add new city pages: Collingwood, Wasaga, Keswick",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P2",
+      "status": "DONE FOR ENG/DISCUSS",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/kTt53Ppm/135-add-new-city-pages-collingwood-wasaga-keswick"
+      ],
+      "notes": "",
+      "sort": 2,
+      "created_at": "2026-01-16T17:37:17.639Z",
+      "updated_at": "2026-01-16T17:37:17.639Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_695523fdc0a222f888ebeee9",
+      "title": "New engagement with Hotshots, resolve unused hours for Jan, Etc",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P2",
+      "status": "DONE FOR ENG/DISCUSS",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/VVQ015Qx/131-new-engagement-with-hotshots-resolve-unused-hours-for-jan-etc"
+      ],
+      "notes": "",
+      "sort": 3,
+      "created_at": "2026-01-16T17:37:13.969Z",
+      "updated_at": "2026-01-16T17:37:13.969Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6955239ddf4ca92f25451520",
+      "title": "Email: Deep Links (resolve issues with implementation)",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P2",
+      "status": "DONE FOR ENG/DISCUSS",
+      "target_date": null,
+      "why": "[https://app.clickup.com/t/869axgw22](https://app.clickup.com/t/869axgw22 \"smartCard-inline\")",
+      "links": [
+        "https://trello.com/c/XiqoCEwR/130-email-deep-links-resolve-issues-with-implementation"
+      ],
+      "notes": "[https://app.clickup.com/t/869axgw22](https://app.clickup.com/t/869axgw22 \"smartCard-inline\")",
+      "sort": 4,
+      "created_at": "2026-01-16T17:37:09.395Z",
+      "updated_at": "2026-01-16T17:37:09.395Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68d54b1a4ccf5d9a40ab2cdf",
+      "title": "Time Zones for expansion to Alberta, BC and beyond (Get estimate)",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P2",
+      "status": "DONE FOR ENG/DISCUSS",
+      "target_date": null,
+      "why": "Awaiting estimate[https://app.clickup.com/t/8697x956d](https://app.clickup.com/t/8697x956d \"smartCard-inline\")",
+      "links": [
+        "https://trello.com/c/siGnCuoH/92-time-zones-for-expansion-to-alberta-bc-and-beyond-get-estimate"
+      ],
+      "notes": "Awaiting estimate[https://app.clickup.com/t/8697x956d](https://app.clickup.com/t/8697x956d \"smartCard-inline\")",
+      "sort": 5,
+      "created_at": "2026-01-04T16:54:53.334Z",
+      "updated_at": "2026-01-04T16:54:53.334Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6957c9073aab5c82e8bb8c6e",
+      "title": "QB Dec Reconcile",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P2",
+      "status": "DONE FOR ENG/DISCUSS",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/vWbOGzQR/132-qb-dec-reconcile"
+      ],
+      "notes": "",
+      "sort": 6,
+      "created_at": "2026-01-04T15:59:01.987Z",
+      "updated_at": "2026-01-04T15:59:01.987Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6931a72291656ce318c5a118",
+      "title": "Referral Codes for General discounts",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P2",
+      "status": "DONE FOR ENG/DISCUSS",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/yPMht1Y7/124-referral-codes-for-general-discounts"
+      ],
+      "notes": "",
+      "sort": 7,
+      "created_at": "2025-12-31T13:04:50.402Z",
+      "updated_at": "2025-12-31T13:04:50.402Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_695a8f0ebf3a592b25ce0261",
+      "title": "Evaluate adroll conversions",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P2",
+      "status": "DONE FOR ENG/DISCUSS",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/UTmH2Izf/133-evaluate-adroll-conversions"
+      ],
+      "notes": "",
+      "sort": 8,
+      "created_at": "2026-01-04T16:02:31.807Z",
+      "updated_at": "2026-01-04T16:02:31.807Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68f65b4c9ced4cb0ee5af791",
+      "title": "Customers complaining about inability to close tip/rating modal in order to check receipt, get in touch with support, etc.",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/wq0hHmPq/108-customers-complaining-about-inability-to-close-tip-rating-modal-in-order-to-check-receipt-get-in-touch-with-support-etc"
+      ],
+      "notes": "![image.png](https://trello.com/1/cards/68f65b4c9ced4cb0ee5af791/attachments/68f65f43afc586a86586174b/download/image.png)",
+      "sort": 1,
+      "created_at": "2026-02-05T14:45:39.740Z",
+      "updated_at": "2026-02-05T14:45:39.740Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686fcbc782011c1360217ab5",
+      "title": "WashPro Referral Program",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/ANEmrPv8/41-washpro-referral-program"
+      ],
+      "notes": "",
+      "sort": 2,
+      "created_at": "2025-12-11T14:57:30.990Z",
+      "updated_at": "2025-12-11T14:57:30.990Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68f0f8fe2a51e56fffc2c4b4",
+      "title": "Spec out Promo Codes",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Need to flesh this out more but something like\u2026 Allow customer to use link or promo code to get discount on order If Promo attached to WashPro then Washpro is added to preferred li",
+      "links": [
+        "https://trello.com/c/lruysnqr/106-spec-out-promo-codes"
+      ],
+      "notes": "Need to flesh this out more but something like\u2026\n\\- Allow customer to use link or promo code to get discount on order\n\\- If Promo attached to WashPro then Washpro is added to preferred list in number one spot\n\nHow Poplin does it\u2026\n[https://poplin-laundry-pro.zendesk.com/hc/en-us/articles/15981356851099-Referrals-Growing-my-customer-base?utm_source=chatgpt.com#h_01HBCZ326DM58DXH6CQ9CJN44B](https://poplin-laundry-pro.zendesk.com/hc/en-us/articles/15981356851099-Referrals-Growing-my-customer-base?utm_source=chatgpt.com#h_01HBCZ326DM58DXH6CQ9CJN44B \"smartCard-inline\")\n\nNotes:\n\\- show banner on /login and then modal on authentication\n\\- if second time order no modal on authentication\n\\- on signup send message to wp",
+      "sort": 3,
+      "created_at": "2025-12-11T14:57:33.435Z",
+      "updated_at": "2025-12-11T14:57:33.435Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6931a72b3ac2f5f622aba6bf",
+      "title": "The silent pre-auth",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/a5RqMiF5/125-the-silent-pre-auth"
+      ],
+      "notes": "",
+      "sort": 4,
+      "created_at": "2025-12-11T14:57:32.062Z",
+      "updated_at": "2025-12-11T14:57:32.062Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_692864723ffb3fb30962827b",
+      "title": "Add abandoned_review to mailchimp",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/bT2qyrcr/121-add-abandonedreview-to-mailchimp"
+      ],
+      "notes": "",
+      "sort": 5,
+      "created_at": "2025-12-11T14:57:30.225Z",
+      "updated_at": "2025-12-11T14:57:30.225Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6928648f06035881fd195833",
+      "title": "Add Google and Apple Pay to Checkout",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/5DkJGFDd/122-add-google-and-apple-pay-to-checkout"
+      ],
+      "notes": "",
+      "sort": 6,
+      "created_at": "2025-12-11T14:57:28.700Z",
+      "updated_at": "2025-12-11T14:57:28.700Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6931a7406ec651a1cb7d10bc",
+      "title": "ga4 consolidate for proper attribution tracking",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/jL8xr66z/126-ga4-consolidate-for-proper-attribution-tracking"
+      ],
+      "notes": "",
+      "sort": 7,
+      "created_at": "2025-12-11T14:57:27.520Z",
+      "updated_at": "2025-12-11T14:57:27.520Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6931a75f53abbb9a8c962454",
+      "title": "Staging correct configuration - separate apps",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/S0rQU0tS/127-staging-correct-configuration-separate-apps"
+      ],
+      "notes": "",
+      "sort": 8,
+      "created_at": "2025-12-11T14:57:24.574Z",
+      "updated_at": "2025-12-11T14:57:24.574Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_685d47f4fbf6b68f625d3e2b",
+      "title": "Consider removing SIN from WP application",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Considered, and decided against for time being",
+      "links": [
+        "https://trello.com/c/BvnWa5aM/27-consider-removing-sin-from-wp-application"
+      ],
+      "notes": "Considered, and decided against for time being",
+      "sort": 9,
+      "created_at": "2025-12-11T14:57:09.466Z",
+      "updated_at": "2025-12-11T14:57:09.466Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686d401018f366144aa00159",
+      "title": "Automation of Welcome Message",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "15 min after customer creates new account - send email from Brian Maurice welcoming customer ChatGPT suggests using mailgun",
+      "links": [
+        "https://trello.com/c/iCBxKUr3/37-automation-of-welcome-message"
+      ],
+      "notes": "- 15 min after customer creates new account - send email from Brian Maurice welcoming customer\n- ChatGPT suggests using mailgun",
+      "sort": 10,
+      "created_at": "2025-12-04T15:14:23.506Z",
+      "updated_at": "2025-12-04T15:14:23.506Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68febb658b57bdbe195576fd",
+      "title": "Update https://app.tumbil.com/login to remove 'Toronto'",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/y6JSdzVP/111-update-https-apptumbilcom-login-to-remove-toronto"
+      ],
+      "notes": "",
+      "sort": 11,
+      "created_at": "2025-11-27T14:46:33.185Z",
+      "updated_at": "2025-11-27T14:46:33.185Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_691f2fe92e464cbabbb4382f",
+      "title": "app.tumbil.com/login re-design",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/Ze3JK4yS/118-apptumbilcom-login-re-design"
+      ],
+      "notes": "",
+      "sort": 12,
+      "created_at": "2025-11-22T22:41:10.438Z",
+      "updated_at": "2025-11-22T22:41:10.438Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_690b3388d3b8d65d792776dd",
+      "title": "Web App > Match Payment Screen to Figma",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/e5vr0E1G/114-web-app-match-payment-screen-to-figma"
+      ],
+      "notes": "",
+      "sort": 13,
+      "created_at": "2025-11-21T13:42:24.348Z",
+      "updated_at": "2025-11-21T13:42:24.348Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_690df45d843568ba05aa74f9",
+      "title": "Cancel Sigma Stripe",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/Cq8UojrB/116-cancel-sigma-stripe"
+      ],
+      "notes": "",
+      "sort": 14,
+      "created_at": "2025-11-21T13:42:25.576Z",
+      "updated_at": "2025-11-21T13:42:25.576Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_690b41a8da6f95622243efa3",
+      "title": "Fix spec / log ticket for order placed at 3pm on the nose",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/Z8WfHeO8/115-fix-spec-log-ticket-for-order-placed-at-3pm-on-the-nose"
+      ],
+      "notes": "",
+      "sort": 15,
+      "created_at": "2025-11-21T13:42:14.718Z",
+      "updated_at": "2025-11-21T13:42:14.718Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_690a96ea8ec02b982a4a9a36",
+      "title": "October Quickbooks Reconciliation",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/uffwHUES/113-october-quickbooks-reconciliation"
+      ],
+      "notes": "",
+      "sort": 16,
+      "created_at": "2025-11-21T13:42:15.880Z",
+      "updated_at": "2025-11-21T13:42:15.880Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_691daac4a080d775f78bb8ad",
+      "title": "Add GTM to marketing site and start tracking CTA",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/hyFriA1s/117-add-gtm-to-marketing-site-and-start-tracking-cta"
+      ],
+      "notes": "",
+      "sort": 17,
+      "created_at": "2025-11-21T13:42:09.676Z",
+      "updated_at": "2025-11-21T13:42:09.676Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68fa2bb84739fb97f851c189",
+      "title": "Prepare Marketing Site for Web App",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/g4y4gI23/110-prepare-marketing-site-for-web-app"
+      ],
+      "notes": "",
+      "sort": 18,
+      "created_at": "2025-11-06T15:09:02.995Z",
+      "updated_at": "2025-11-06T15:09:02.995Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_690944edd513d17840a9c6a7",
+      "title": "Appsflyer - research / register",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/VgCOKHXb/112-appsflyer-research-register"
+      ],
+      "notes": "",
+      "sort": 19,
+      "created_at": "2025-11-06T14:44:56.506Z",
+      "updated_at": "2025-11-06T14:44:56.506Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68f23797e0f20aa3b45518fc",
+      "title": "Test iphone with throttled internet (ideally iphone 16)",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "nkem says app crashing nicole says can't upload photos both on iphone 16",
+      "links": [
+        "https://trello.com/c/uOIet7lm/107-test-iphone-with-throttled-internet-ideally-iphone-16"
+      ],
+      "notes": "nkem says app crashing\n\nnicole says can't upload photos\n\nboth on iphone 16",
+      "sort": 20,
+      "created_at": "2025-10-23T13:44:04.163Z",
+      "updated_at": "2025-10-23T13:44:04.163Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68d71197e9d7fd1d8ab880e6",
+      "title": "Web App Hour Tally",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "75% Done [https://docs.google.com/spreadsheets/d/1DE0-YJnVp0ydgDBxM-xqDHDZpYkIRKWZGzzv7XMicVs/edit?gid=1913889420#gid=1913889420](https://docs.google.com/spreadsheets/d/1DE0-YJnVp0",
+      "links": [
+        "https://trello.com/c/PgPeejm8/95-web-app-hour-tally"
+      ],
+      "notes": "75% Done [https://docs.google.com/spreadsheets/d/1DE0-YJnVp0ydgDBxM-xqDHDZpYkIRKWZGzzv7XMicVs/edit?gid=1913889420#gid=1913889420](https://docs.google.com/spreadsheets/d/1DE0-YJnVp0ydgDBxM-xqDHDZpYkIRKWZGzzv7XMicVs/edit?gid=1913889420#gid=1913889420 \"smartCard-inline\")",
+      "sort": 21,
+      "created_at": "2025-10-16T13:42:55.839Z",
+      "updated_at": "2025-10-16T13:42:55.839Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68d54a8e86a50a10cdf28ecb",
+      "title": "Figure out Release Versioning naming conventions etc.",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/5YDHFsmj/90-figure-out-release-versioning-naming-conventions-etc"
+      ],
+      "notes": "",
+      "sort": 22,
+      "created_at": "2025-10-16T13:42:24.917Z",
+      "updated_at": "2025-10-16T13:42:24.917Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68d6e059bdc418ea63d68b43",
+      "title": "Install SDK Manager to troubleshoot GA4 Android",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/8xndmngZ/93-install-sdk-manager-to-troubleshoot-ga4-android"
+      ],
+      "notes": "",
+      "sort": 23,
+      "created_at": "2025-10-16T13:39:01.572Z",
+      "updated_at": "2025-10-16T13:39:01.572Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68d54aaed955443d1a90b88d",
+      "title": "Deal with hotshots estimation/billling/etc",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/5kWb6Sen/91-deal-with-hotshots-estimation-billling-etc"
+      ],
+      "notes": "",
+      "sort": 24,
+      "created_at": "2025-10-16T13:29:43.067Z",
+      "updated_at": "2025-10-16T13:29:43.067Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68cd6f7a929d34a13dd1e45f",
+      "title": "Test Herman photo upload on galaxy s7",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "s7 works no issue - emailed hernan that fix not possible",
+      "links": [
+        "https://trello.com/c/QTmPxZUy/88-test-herman-photo-upload-on-galaxy-s7"
+      ],
+      "notes": "s7 works no issue - emailed hernan that fix not possible",
+      "sort": 25,
+      "created_at": "2025-10-16T13:29:16.931Z",
+      "updated_at": "2025-10-16T13:29:16.931Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68e2c9f6c29dc4f19f610d5f",
+      "title": "WPs are reporting orders staying in open state and visible after accepted by another wp. IE iphone thread with Cherrie",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/Pd2SpyHB/103-wps-are-reporting-orders-staying-in-open-state-and-visible-after-accepted-by-another-wp-ie-iphone-thread-with-cherrie"
+      ],
+      "notes": "",
+      "sort": 26,
+      "created_at": "2025-10-16T13:28:12.205Z",
+      "updated_at": "2025-10-16T13:28:12.205Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68ed1d2fcdf6048c3edcdf58",
+      "title": "Web App > Log Remaining Tickets for bugs, polishing, etc",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/NnjeHWId/104-web-app-log-remaining-tickets-for-bugs-polishing-etc"
+      ],
+      "notes": "",
+      "sort": 27,
+      "created_at": "2025-10-23T13:43:43.584Z",
+      "updated_at": "2025-10-23T13:43:43.584Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68d70bc39e7c5731469cf0d2",
+      "title": "Refunds, Clawbacks, bonuses, etc",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/PYhBwNpb/94-refunds-clawbacks-bonuses-etc"
+      ],
+      "notes": "",
+      "sort": 28,
+      "created_at": "2025-10-16T13:27:18.924Z",
+      "updated_at": "2025-10-16T13:27:18.924Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_689cc6b9d90ab556a518771e",
+      "title": "Customers keep selecting 'I will Provide' detergent and then not providing",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Matt to inquire from customers why they are doing this",
+      "links": [
+        "https://trello.com/c/umcUQVvp/60-customers-keep-selecting-i-will-provide-detergent-and-then-not-providing"
+      ],
+      "notes": "Matt to inquire from customers why they are doing this",
+      "sort": 29,
+      "created_at": "2025-10-16T13:24:23.310Z",
+      "updated_at": "2025-10-16T13:24:23.310Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68daa48a87c7606952e15583",
+      "title": "File Annual Business Return with Ownr",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/PafZf5KK/97-file-annual-business-return-with-ownr"
+      ],
+      "notes": "",
+      "sort": 30,
+      "created_at": "2025-10-16T13:15:56.808Z",
+      "updated_at": "2025-10-16T13:15:56.808Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68d17bcfe854ad494be0f23c",
+      "title": "Spec out fix for image upload issue on Android reported by Hernan",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "[https://app.clickup.com/t/869aj6vzc](https://app.clickup.com/t/869aj6vzc \"smartCard-inline\")",
+      "links": [
+        "https://trello.com/c/x8EOriSA/89-spec-out-fix-for-image-upload-issue-on-android-reported-by-hernan"
+      ],
+      "notes": "[https://app.clickup.com/t/869aj6vzc](https://app.clickup.com/t/869aj6vzc \"smartCard-inline\")",
+      "sort": 31,
+      "created_at": "2025-09-25T13:48:47.806Z",
+      "updated_at": "2025-09-25T13:48:47.806Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68a443cababa5698488b28a4",
+      "title": "Verify/update old city page images that may not make sense",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/7sPrkP5p/64-verify-update-old-city-page-images-that-may-not-make-sense"
+      ],
+      "notes": "",
+      "sort": 32,
+      "created_at": "2025-09-25T13:45:06.880Z",
+      "updated_at": "2025-09-25T13:45:06.880Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68cc1e37b5c6e7e57e78cfc7",
+      "title": "Delete User spec, design, etc.",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/to64Kbs5/87-delete-user-spec-design-etc"
+      ],
+      "notes": "",
+      "sort": 33,
+      "created_at": "2025-09-25T13:44:55.082Z",
+      "updated_at": "2025-09-25T13:44:55.082Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68cb43c06a126cb434c6ce63",
+      "title": "Add City Pages, Whitby, Ajax, Pickering, Innisfil",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/ukUMa0Ct/85-add-city-pages-whitby-ajax-pickering-innisfil"
+      ],
+      "notes": "",
+      "sort": 34,
+      "created_at": "2025-09-25T13:43:41.209Z",
+      "updated_at": "2025-09-25T13:43:41.209Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68c4c1dec39415b0490020f0",
+      "title": "System for staying up to date with clawbacks and bonuses",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/4WFeptes/83-system-for-staying-up-to-date-with-clawbacks-and-bonuses"
+      ],
+      "notes": "",
+      "sort": 35,
+      "created_at": "2025-09-18T14:57:02.342Z",
+      "updated_at": "2025-09-18T14:57:02.342Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68c60414e2f4114b5ec03929",
+      "title": "AI Assisted SEO Optimization",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "\u200c Added to marketing site Google Organization structured data to marketing site gpt says \u2018we\u2019re cooking' [https://developers.google.com/search/docs/appearance/structured-data/organ",
+      "links": [
+        "https://trello.com/c/n8EKKAty/84-ai-assisted-seo-optimization"
+      ],
+      "notes": "\u200c\n\n- Added to marketing site\n  - Google Organization structured data to marketing site\n  - gpt says \u2018we\u2019re cooking'\n\n[https://developers.google.com/search/docs/appearance/structured-data/organization](https://developers.google.com/search/docs/appearance/structured-data/organization \"smartCard-inline\")",
+      "sort": 36,
+      "created_at": "2025-09-18T14:56:29.201Z",
+      "updated_at": "2025-09-18T14:56:29.201Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68fa2b98fa93f3ae03cf5897",
+      "title": "Get access to application repositories GitHub",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/t7Wb3MhN/109-get-access-to-application-repositories-github"
+      ],
+      "notes": "",
+      "sort": 37,
+      "created_at": "2025-10-23T13:43:14.888Z",
+      "updated_at": "2025-10-23T13:43:14.888Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68a44480cba037723cfbb24a",
+      "title": "Test i will bring my own detergent issue (The 3 Big Bugs)",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Customers keep inadvertently selecting bring my own detergent I will bring my own Custom Instructions Delete User delete Orders",
+      "links": [
+        "https://trello.com/c/pUOPT4qW/66-test-i-will-bring-my-own-detergent-issue-the-3-big-bugs"
+      ],
+      "notes": "Customers keep inadvertently selecting bring my own detergent\n\nI will bring my own\n\nCustom Instructions\n\nDelete User delete Orders",
+      "sort": 38,
+      "created_at": "2025-09-18T14:56:27.744Z",
+      "updated_at": "2025-09-18T14:56:27.744Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68bb1164aab8ef851a96cb06",
+      "title": "Confluence Operations Manual (2 policies research/discussion)",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/jpgwCnNF/77-confluence-operations-manual-2-policies-research-discussion"
+      ],
+      "notes": "",
+      "sort": 39,
+      "created_at": "2025-09-11T13:56:35.072Z",
+      "updated_at": "2025-09-11T13:56:35.072Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68b9954a1fb9b9894b4ab88e",
+      "title": "Estimate hours outstanding for web app",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "[https://docs.google.com/spreadsheets/u/1/d/1DE0-YJnVp0ydgDBxM-xqDHDZpYkIRKWZGzzv7XMicVs/edit?usp=drive_web&ouid=104380719836463475198](https://docs.google.com/spreadsheets/u/1/d/1",
+      "links": [
+        "https://trello.com/c/pJblSI5v/76-estimate-hours-outstanding-for-web-app"
+      ],
+      "notes": "[https://docs.google.com/spreadsheets/u/1/d/1DE0-YJnVp0ydgDBxM-xqDHDZpYkIRKWZGzzv7XMicVs/edit?usp=drive_web&ouid=104380719836463475198](https://docs.google.com/spreadsheets/u/1/d/1DE0-YJnVp0ydgDBxM-xqDHDZpYkIRKWZGzzv7XMicVs/edit?usp=drive_web&ouid=104380719836463475198 \"smartCard-inline\")",
+      "sort": 40,
+      "created_at": "2025-09-11T13:56:22.346Z",
+      "updated_at": "2025-09-11T13:56:22.346Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68bd9dba57bbcfedd25be73d",
+      "title": "Customer Notifications Ticket Investigation",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/IX38QHFc/78-customer-notifications-ticket-investigation"
+      ],
+      "notes": "",
+      "sort": 41,
+      "created_at": "2025-09-11T13:55:38.267Z",
+      "updated_at": "2025-09-11T13:55:38.267Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68be36a467b016a7be071d40",
+      "title": "Update washpro splash page",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/Q1tfoN6o/79-update-washpro-splash-page"
+      ],
+      "notes": "",
+      "sort": 42,
+      "created_at": "2025-09-11T13:42:11.581Z",
+      "updated_at": "2025-09-11T13:42:11.581Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68c039387a9958e668fa2751",
+      "title": "Google Indexing Email Alert",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "This is not an issue - it\u2019s the privacy policy name change redirect",
+      "links": [
+        "https://trello.com/c/y01b1Qq8/81-google-indexing-email-alert"
+      ],
+      "notes": "- This is not an issue - it\u2019s the privacy policy name change redirect",
+      "sort": 43,
+      "created_at": "2025-09-11T13:40:20.099Z",
+      "updated_at": "2025-09-11T13:40:20.099Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6852b3624cd10506617d8aec",
+      "title": "Reallocate HST in QB to determine balance owing",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/nT4kOBj3/15-reallocate-hst-in-qb-to-determine-balance-owing"
+      ],
+      "notes": "",
+      "sort": 44,
+      "created_at": "2025-09-11T13:39:51.225Z",
+      "updated_at": "2025-09-11T13:39:51.225Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6893701f3b254abd37430bf7",
+      "title": "Marketing Site > About Us > Photos",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Go with photos as on figma (towels photo but get rid of hand)",
+      "links": [
+        "https://trello.com/c/ywjYj6CG/55-marketing-site-about-us-photos"
+      ],
+      "notes": "Go with photos as on figma (towels photo but get rid of hand)",
+      "sort": 45,
+      "created_at": "2025-09-04T14:04:23.353Z",
+      "updated_at": "2025-09-04T14:04:23.353Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68ade7d06791db30b3a6ff74",
+      "title": "Update Quickbooks / Finance Reconciliation / Invoicing",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/JNdJXspe/74-update-quickbooks-finance-reconciliation-invoicing"
+      ],
+      "notes": "",
+      "sort": 46,
+      "created_at": "2025-09-04T13:58:43.763Z",
+      "updated_at": "2025-09-04T13:58:43.763Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68ade78b9f0f157b0e26e07b",
+      "title": "Web App Design and Testing",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/6gO6MdC2/73-web-app-design-and-testing"
+      ],
+      "notes": "",
+      "sort": 47,
+      "created_at": "2025-09-04T13:42:31.600Z",
+      "updated_at": "2025-09-04T13:42:31.600Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68ade74d77c4695b615f83ec",
+      "title": "Add new city pages Niagara Falls, Etc",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/JuQMFL7J/72-add-new-city-pages-niagara-falls-etc"
+      ],
+      "notes": "",
+      "sort": 48,
+      "created_at": "2025-08-28T14:20:19.525Z",
+      "updated_at": "2025-08-28T14:20:19.525Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_689dcacff6aa885cfb92ee3b",
+      "title": "Fix marketing site footer, code flicker, indentation, etc",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/k7LyRHqj/63-fix-marketing-site-footer-code-flicker-indentation-etc"
+      ],
+      "notes": "",
+      "sort": 49,
+      "created_at": "2025-08-28T14:20:00.664Z",
+      "updated_at": "2025-08-28T14:20:00.664Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6852c54e777119a557aa51dc",
+      "title": "Add Google Reviews to Homepage",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/ltbuHlLL/17-add-google-reviews-to-homepage"
+      ],
+      "notes": "",
+      "sort": 50,
+      "created_at": "2025-08-28T14:19:55.269Z",
+      "updated_at": "2025-08-28T14:19:55.269Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68ab52379a0cf9c1735785c5",
+      "title": "Investigate pickup window going out late (and ability to message before pickup window sent)",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/8Nlo8yrQ/70-investigate-pickup-window-going-out-late-and-ability-to-message-before-pickup-window-sent"
+      ],
+      "notes": "",
+      "sort": 51,
+      "created_at": "2025-08-28T13:50:39.713Z",
+      "updated_at": "2025-08-28T13:50:39.713Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68b04553191425fe83ec6727",
+      "title": "https://app.clickup.com/t/8699ja87p final testing",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/r23M3UBk/75-https-appclickupcom-t-8699ja87p-final-testing"
+      ],
+      "notes": "",
+      "sort": 52,
+      "created_at": "2025-08-28T13:50:24.105Z",
+      "updated_at": "2025-08-28T13:50:24.105Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_689cc760570578957861d962",
+      "title": "Monthly revenue doc, rev reconciliation, stripe investigation with Maksym",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/Xjq2ba9t/62-monthly-revenue-doc-rev-reconciliation-stripe-investigation-with-maksym"
+      ],
+      "notes": "",
+      "sort": 53,
+      "created_at": "2025-08-14T14:13:06.047Z",
+      "updated_at": "2025-08-14T14:13:06.047Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_689cc710958bfaeed32b1136",
+      "title": "Sprint 7 testing",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/h4k0X2iF/61-sprint-7-testing"
+      ],
+      "notes": "",
+      "sort": 54,
+      "created_at": "2025-08-14T14:09:08.722Z",
+      "updated_at": "2025-08-14T14:09:08.722Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6894b5af2d9c5dec2d860023",
+      "title": "Add more city pages",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Hamilton, Burlington, Oakville, St. catharines, Niagara, Markham, New Market",
+      "links": [
+        "https://trello.com/c/RxFhoz4O/58-add-more-city-pages"
+      ],
+      "notes": "Hamilton, Burlington, Oakville, St. catharines, Niagara, Markham, New Market",
+      "sort": 55,
+      "created_at": "2025-08-14T13:53:28.337Z",
+      "updated_at": "2025-08-14T13:53:28.337Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_688e0a0e61a93fb88e8b467e",
+      "title": "Google Cloud Billing is crazy",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Dev team working on [https://app.clickup.com/t/86997k2jx](https://app.clickup.com/t/86997k2jx \"smartCard-inline\")  in current sprint Say that removing postal code from predictive s",
+      "links": [
+        "https://trello.com/c/U9xmtNGe/51-google-cloud-billing-is-crazy"
+      ],
+      "notes": "- Dev team working on [https://app.clickup.com/t/86997k2jx](https://app.clickup.com/t/86997k2jx \"smartCard-inline\")  in current sprint\n- Say that removing postal code from predictive search to make significant difference",
+      "sort": 56,
+      "created_at": "2025-08-07T14:28:38.594Z",
+      "updated_at": "2025-08-07T14:28:38.594Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68933fa09a545d473abf37fe",
+      "title": "Web App Design > Authenticate, Dashboard, Etc.",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/Q9tLYFJ0/53-web-app-design-authenticate-dashboard-etc"
+      ],
+      "notes": "",
+      "sort": 57,
+      "created_at": "2025-08-07T14:28:18.888Z",
+      "updated_at": "2025-08-07T14:28:18.888Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6893744ab9abad53039ddc83",
+      "title": "GTM Investigation",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Proceeding with GA4 direct",
+      "links": [
+        "https://trello.com/c/mPLJZdkf/56-gtm-investigation"
+      ],
+      "notes": "Proceeding with GA4 direct",
+      "sort": 58,
+      "created_at": "2025-08-07T14:19:53.939Z",
+      "updated_at": "2025-08-07T14:19:53.939Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68937f5b994c353eb5979a7c",
+      "title": "Quickbooks Reconciliation Aug 2025",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/ltUdwPpB/57-quickbooks-reconciliation-aug-2025"
+      ],
+      "notes": "",
+      "sort": 59,
+      "created_at": "2025-08-07T13:48:35.862Z",
+      "updated_at": "2025-08-07T13:48:35.862Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_685179454a3621806dcc1947",
+      "title": "City Pages > Implement targeted city pages",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "add dedicated city pages to marketing site",
+      "links": [
+        "https://trello.com/c/MWQvuGge/9-city-pages-implement-targeted-city-pages"
+      ],
+      "notes": "- add dedicated city pages to marketing site",
+      "sort": 60,
+      "created_at": "2025-08-07T10:25:25.227Z",
+      "updated_at": "2025-08-07T10:25:25.227Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_685d4dbb0a2e6962ff6360be",
+      "title": "Enable Apple masked email commuincation",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/1tLjszi3/28-enable-apple-masked-email-commuincation"
+      ],
+      "notes": "",
+      "sort": 61,
+      "created_at": "2025-07-24T14:37:09.536Z",
+      "updated_at": "2025-07-24T14:37:09.536Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_687e84ad460272db7e877f6b",
+      "title": "GA4 Retrofit > Capture Purchase Events, User IDs and Transaction ID correctly",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/kfuYkcGP/48-ga4-retrofit-capture-purchase-events-user-ids-and-transaction-id-correctly"
+      ],
+      "notes": "",
+      "sort": 62,
+      "created_at": "2025-07-24T14:03:14.780Z",
+      "updated_at": "2025-07-24T14:03:14.780Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68518c63946ea1cf6d8bc468",
+      "title": "Capture Name and email upon registration ie for ios (design / spec)",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/ssMQnJeA/14-capture-name-and-email-upon-registration-ie-for-ios-design-spec"
+      ],
+      "notes": "",
+      "sort": 63,
+      "created_at": "2025-07-24T14:00:49.353Z",
+      "updated_at": "2025-07-24T14:00:49.353Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68791fa3bb002bd0c9858b8d",
+      "title": "Setup autodeposit for finance@tumbil.com (payments@tumbil.com not working)",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/zzuxJyMI/46-setup-autodeposit-for-financetumbilcom-paymentstumbilcom-not-working"
+      ],
+      "notes": "",
+      "sort": 64,
+      "created_at": "2025-07-18T15:23:18.199Z",
+      "updated_at": "2025-07-18T15:23:18.199Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6877e44b83a8869b3bf34c03",
+      "title": "Determine how to remove Staging from GA4",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/YTJEm4M8/45-determine-how-to-remove-staging-from-ga4"
+      ],
+      "notes": "",
+      "sort": 65,
+      "created_at": "2025-07-18T15:23:06.967Z",
+      "updated_at": "2025-07-18T15:23:06.967Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_687a587b3946c5d1b36bab94",
+      "title": "Review Hours/Spend to date on Web App",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/yqFl38iO/47-review-hours-spend-to-date-on-web-app"
+      ],
+      "notes": "",
+      "sort": 66,
+      "created_at": "2025-07-18T14:56:25.531Z",
+      "updated_at": "2025-07-18T14:56:25.531Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_685183186cf910876cd1f72d",
+      "title": "Quickbooks and Financial Reconciliation July 2025",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/8mC2hsor/10-quickbooks-and-financial-reconciliation-july-2025"
+      ],
+      "notes": "",
+      "sort": 67,
+      "created_at": "2025-07-18T14:49:39.306Z",
+      "updated_at": "2025-07-18T14:49:39.306Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686576ea3fe74196b25331f8",
+      "title": "Deal with clearing Mohpreet Singh Balance Owing",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/vvUOolSa/33-deal-with-clearing-mohpreet-singh-balance-owing"
+      ],
+      "notes": "",
+      "sort": 68,
+      "created_at": "2025-07-11T14:43:11.141Z",
+      "updated_at": "2025-07-11T14:43:11.141Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_68657572e07d2f55d891b51e",
+      "title": "Need to test if Order #363 went to Advanced and Associates at the same time",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/8bCMV4NQ/32-need-to-test-if-order-363-went-to-advanced-and-associates-at-the-same-time"
+      ],
+      "notes": "",
+      "sort": 69,
+      "created_at": "2025-07-11T14:43:01.778Z",
+      "updated_at": "2025-07-11T14:43:01.778Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686fffcf208a1dab5002d94b",
+      "title": "Troubleshooting Push Notifications",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "[https://app.clickup.com/t/8699q22p6](https://app.clickup.com/t/8699q22p6 \"smartCard-inline\")",
+      "links": [
+        "https://trello.com/c/vigdjRmi/42-troubleshooting-push-notifications"
+      ],
+      "notes": "[https://app.clickup.com/t/8699q22p6](https://app.clickup.com/t/8699q22p6 \"smartCard-inline\")",
+      "sort": 70,
+      "created_at": "2025-07-11T14:16:48.088Z",
+      "updated_at": "2025-07-11T14:16:48.088Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686fa95791850f26105b5013",
+      "title": "New spec to track standard URL schema in GA4 Customer App",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/OJp0b8lP/39-new-spec-to-track-standard-url-schema-in-ga4-customer-app"
+      ],
+      "notes": "",
+      "sort": 71,
+      "created_at": "2025-07-11T14:13:37.871Z",
+      "updated_at": "2025-07-11T14:13:37.871Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686fa8b2140c833e5b2c99a1",
+      "title": "Add Google Analytics Data Streams (get correct userIDs)",
+      "owner": "Cliff",
+      "area": "AI Infra",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "[https://app.clickup.com/t/8698rrnua](https://app.clickup.com/t/8698rrnua \"smartCard-inline\")",
+      "links": [
+        "https://trello.com/c/BxekFddF/38-add-google-analytics-data-streams-get-correct-userids"
+      ],
+      "notes": "[https://app.clickup.com/t/8698rrnua](https://app.clickup.com/t/8698rrnua \"smartCard-inline\")",
+      "sort": 72,
+      "created_at": "2025-07-11T14:11:05.753Z",
+      "updated_at": "2025-07-11T14:11:05.753Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686423719523f36171befa5b",
+      "title": "Force update feature",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "[https://app.clickup.com/t/8699fqvp9](https://app.clickup.com/t/8699fqvp9 \"smartCard-inline\")",
+      "links": [
+        "https://trello.com/c/bZ1LVpsA/31-force-update-feature"
+      ],
+      "notes": "[https://app.clickup.com/t/8699fqvp9](https://app.clickup.com/t/8699fqvp9 \"smartCard-inline\")",
+      "sort": 73,
+      "created_at": "2025-07-11T14:08:07.443Z",
+      "updated_at": "2025-07-11T14:08:07.443Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6861eea907f27025e43a27f6",
+      "title": "Export Admin Tables to CSV",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "[https://app.clickup.com/t/8699kr1u7](https://app.clickup.com/t/8699kr1u7 \"smartCard-inline\")",
+      "links": [
+        "https://trello.com/c/8Jf8MTAz/29-export-admin-tables-to-csv"
+      ],
+      "notes": "[https://app.clickup.com/t/8699kr1u7](https://app.clickup.com/t/8699kr1u7 \"smartCard-inline\")",
+      "sort": 74,
+      "created_at": "2025-07-11T14:07:53.077Z",
+      "updated_at": "2025-07-11T14:07:53.077Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_686fc03b5dc169b0a15719fd",
+      "title": "Add Help to Customer App Order Flow",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "[https://app.clickup.com/t/8699rgtvk](https://app.clickup.com/t/8699rgtvk \"\u200c\")",
+      "links": [
+        "https://trello.com/c/v5VbgRIX/40-add-help-to-customer-app-order-flow"
+      ],
+      "notes": "[https://app.clickup.com/t/8699rgtvk](https://app.clickup.com/t/8699rgtvk \"\u200c\")",
+      "sort": 75,
+      "created_at": "2025-07-11T14:06:01.302Z",
+      "updated_at": "2025-07-11T14:06:01.302Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6852d6dcbd66bf8b55014605",
+      "title": "Force update on release design/spec",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "See [https://chatgpt.com/c/6852cf24-2d4c-8009-9280-9fd62b48a78e](https://chatgpt.com/c/6852cf24-2d4c-8009-9280-9fd62b48a78e \"smartCard-inline\") Jane creating clickup, conversation",
+      "links": [
+        "https://trello.com/c/lY0E4oew/18-force-update-on-release-design-spec"
+      ],
+      "notes": "- See [https://chatgpt.com/c/6852cf24-2d4c-8009-9280-9fd62b48a78e](https://chatgpt.com/c/6852cf24-2d4c-8009-9280-9fd62b48a78e \"smartCard-inline\")\n\n- Jane creating clickup, conversation in slack",
+      "sort": 76,
+      "created_at": "2025-06-26T13:10:08.099Z",
+      "updated_at": "2025-06-26T13:10:08.099Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_685183608d20326aa4dbfa84",
+      "title": "Desktop App Email Design/Spec for Hotshots Web App",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/LcvQPfAX/11-desktop-app-email-design-spec-for-hotshots-web-app"
+      ],
+      "notes": "",
+      "sort": 77,
+      "created_at": "2025-06-26T13:09:33.107Z",
+      "updated_at": "2025-06-26T13:09:33.107Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_6856a620384171b5e4dadf6f",
+      "title": "Create Tumbil URL Schema for Jane",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/RDquOiHZ/23-create-tumbil-url-schema-for-jane"
+      ],
+      "notes": "",
+      "sort": 78,
+      "created_at": "2025-06-26T13:08:41.495Z",
+      "updated_at": "2025-06-26T13:08:41.495Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_67ed5047303845cd44dc1645",
+      "title": "Customer Reviews",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/3EOdbOzM/4-customer-reviews"
+      ],
+      "notes": "",
+      "sort": 79,
+      "created_at": "2025-06-18T13:55:54.238Z",
+      "updated_at": "2025-06-18T13:55:54.238Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_685183bd4106183c8edb79ef",
+      "title": "Check iOS Age Rating",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/BrzyfQFG/12-check-ios-age-rating"
+      ],
+      "notes": "",
+      "sort": 80,
+      "created_at": "2025-06-18T13:55:53.054Z",
+      "updated_at": "2025-06-18T13:55:53.054Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_67ed5315d3f02f0c0a6418d1",
+      "title": "Admin > Add map of WashPro Coverage Areas",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/JVAGFXQr/6-admin-add-map-of-washpro-coverage-areas"
+      ],
+      "notes": "",
+      "sort": 81,
+      "created_at": "2025-05-27T14:45:55.827Z",
+      "updated_at": "2025-05-27T14:45:55.827Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_67ed4fed5264b25612624449",
+      "title": "Map of WashPro coverage areas",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/JNMoPp8X/3-map-of-washpro-coverage-areas"
+      ],
+      "notes": "",
+      "sort": 82,
+      "created_at": "2025-05-27T14:45:48.957Z",
+      "updated_at": "2025-05-27T14:45:48.957Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_67ed506df640e940b4387a33",
+      "title": "Admin > Users > Add WashPro Application Status to Users Table",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/qSAVSci4/5-admin-users-add-washpro-application-status-to-users-table"
+      ],
+      "notes": "",
+      "sort": 83,
+      "created_at": "2025-05-27T14:37:13.142Z",
+      "updated_at": "2025-05-27T14:37:13.142Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_67ed457115d4fd3df5873fe7",
+      "title": "Admin > Ability to delete users",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/t7YAqgO8/1-admin-ability-to-delete-users"
+      ],
+      "notes": "",
+      "sort": 84,
+      "created_at": "2025-05-27T14:36:39.251Z",
+      "updated_at": "2025-05-27T14:36:39.251Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_669e6aa43c59480a54df42aa",
+      "title": "Complete UI/UX flow for CASL consent",
+      "owner": "Cliff",
+      "area": "Eng",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "TOS and Privacy Policy is on Welcome Screen (great) but we need a manual checkbox popup for new users after OAuth Authentication. For now we should just say something like \u2018to use",
+      "links": [
+        "https://trello.com/c/hWSESN5I/6-complete-ui-ux-flow-for-casl-consent"
+      ],
+      "notes": "TOS and Privacy Policy is on Welcome Screen (great) but we need a manual checkbox popup for new users after OAuth Authentication.\n\nFor now we should just say something like \u2018to use Tumbil you must agree to receive email and text communication - you can unsubscribe from promotional messages at any time\u2019",
+      "sort": 85,
+      "created_at": "2025-04-02T14:10:30.388Z",
+      "updated_at": "2025-04-02T14:10:30.388Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_669e6aa43c59480a54df42a2",
+      "title": "Setup RBC Bank Account",
+      "owner": "Cliff",
+      "area": "Finance",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "We need to go in to the branch together and sign",
+      "links": [
+        "https://trello.com/c/oJKvsyJZ/2-setup-rbc-bank-account"
+      ],
+      "notes": "We need to go in to the branch together and sign",
+      "sort": 86,
+      "created_at": "2024-07-22T14:20:20.994Z",
+      "updated_at": "2024-07-22T14:20:20.994Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_669e6aa43c59480a54df42a8",
+      "title": "Godaddy website builder / interim site",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/sdXbPvis/5-godaddy-website-builder-interim-site"
+      ],
+      "notes": "",
+      "sort": 87,
+      "created_at": "2024-07-22T14:20:21.049Z",
+      "updated_at": "2024-07-22T14:20:21.049Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_669e6aa43c59480a54df42a6",
+      "title": "Incorporation",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "Done",
+      "links": [
+        "https://trello.com/c/uz1I5AX9/4-incorporation"
+      ],
+      "notes": "Done",
+      "sort": 88,
+      "created_at": "2024-07-22T14:20:21.032Z",
+      "updated_at": "2024-07-22T14:20:21.032Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_669e6aa43c59480a54df42a0",
+      "title": "Acquire URL",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "URL considerations between .xyz vs .com Negotiate purchase of .xyz",
+      "links": [
+        "https://trello.com/c/UPW1njMv/1-acquire-url"
+      ],
+      "notes": "- URL considerations between .xyz vs .com\n- Negotiate purchase of .xyz",
+      "sort": 89,
+      "created_at": "2024-07-22T14:20:20.891Z",
+      "updated_at": "2024-07-22T14:20:20.891Z",
+      "updated_by": "Trello import"
+    },
+    {
+      "id": "trello_669e6aa43c59480a54df42a4",
+      "title": "Competitor List",
+      "owner": "Cliff",
+      "area": "Product",
+      "priority": "P3",
+      "status": "DONE & ARCHIVED",
+      "target_date": null,
+      "why": "",
+      "links": [
+        "https://trello.com/c/MWHe9YRx/3-competitor-list"
+      ],
+      "notes": "",
+      "sort": 90,
+      "created_at": "2024-07-22T14:20:21.013Z",
+      "updated_at": "2024-07-22T14:20:21.013Z",
+      "updated_by": "Trello import"
+    }
+  ]
+}

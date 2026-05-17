@@ -1,0 +1,9 @@
+[Unit]
+Description=TumbilOS Dashboard Deploy (15 min after TGE pipeline)
+
+[Timer]
+OnCalendar=*-*-* 06:15:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

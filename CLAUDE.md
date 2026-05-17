@@ -1,78 +1,78 @@
-# TumbilOS - The Operating System for Tumbil
+# TumbilOS - Founder/Company Dashboard
 
-## The Vibe
+> Also read `~/tumbil/CLAUDE.md` for org-wide rules and `~/tumbil/.shared-memory/project_briefings/global.md`.
 
-We looked at Polsia doing $6M ARR running companies autonomously. We looked at TGE generating 22 days of brilliant recommendations with a 0% implementation rate. We said: enough analysis paralysis. Time to build the machine that actually does things.
+## What this is
 
-TumbilOS is where strategy meets execution. TGE is the brain - it sees everything, analyzes everything, knows exactly what to do. TumbilOS is the body - it tracks what needs doing, shows what's happening, and increasingly does things on its own.
+The founder/company dashboard for Cliff and Matt. Live order pace, customer mix, new-customer source mix, referrals, the daily analyst brief from TGE, and the Product/Finance/Eng/AI Infra priorities board.
 
-This isn't a dashboard project. This is an operating system for running Tumbil. The dashboard is just the interface.
+Different from `admin.tumbil.com` (that's the order operations console for ops staff).
 
-## What TumbilOS Does
-
-### Phase 1: See (NOW)
-- Real-time ops dashboard accessible to Cliff and Matt
-- Live metrics from production DB, Google Ads, GSC
-- Recommendation tracker showing what TGE says to do and whether it got done
-- Implementation rate as the north star metric (currently 0% - unacceptable)
-
-### Phase 2: Track (NEXT)
-- Turn TGE recommendations into actionable tasks with owners and deadlines
-- Auto-create ClickUp tickets from recommendations
-- Track outcomes of implemented recommendations
-- Weekly velocity reports
-
-### Phase 3: Do (FUTURE)
-- Auto-execute safe recommendations (send Mailchimp emails, adjust ad budgets)
-- Auto-create ClickUp tickets for engineering work
-- Auto-generate content (city page expansions, blog posts)
-- Cold outreach automation (B2B hotels, Airbnb hosts)
-- Social media posting
+URL: https://tumbil-org.github.io/tumbil-os/ (password gated)
 
 ## Architecture
 
-- **Data source:** TGE daily reports (`~/tumbil/tge/reports/`)
-- **Sync script:** `scripts/sync_data.py` - pulls latest TGE data into dashboard format
-- **Dashboard:** Static HTML deployed to GitHub Pages
-- **Auto-update:** launchd runs after TGE daily pipeline completes
-- **Access:** Public GitHub Pages URL (no auth needed - metrics aren't secret)
+- **Repo:** `tumbil-org/tumbil-os` (public). Source on `main`, encrypted static bundle published to `gh-pages`.
+- **Hosted by:** GitHub Pages from `gh-pages` branch.
+- **Source split:** TumbilOS = dashboard + sync + deploy. TGE (`~/tumbil/tge/`) = the daily analyst brief that TumbilOS consumes from `tge/reports/*-analysis.json`.
 
-## Data Flow
+## Where everything lives
 
-```
-Production DB ─┐
-Google Ads ────┤
-GSC ───────────┼──> TGE Pipeline (6 AM) ──> TGE Reports
-GA4 ───────────┤                                │
-Intercom ──────┘                                │
-                                                v
-                                    TumbilOS Sync Script
-                                                │
-                                                v
-                                    dashboard/data.json
-                                                │
-                                                v
-                                    GitHub Pages Dashboard
-                                    (Matt + Cliff access)
-```
-
-## Key Files
-
-| File | Purpose |
+| Path | Purpose |
 |------|---------|
-| `CLAUDE.md` | This file - project context and instructions |
-| `scripts/sync_data.py` | Pulls TGE data into dashboard format |
-| `scripts/deploy.sh` | Builds and pushes dashboard to GitHub Pages |
-| `dashboard/index.html` | The ops dashboard |
-| `dashboard/data.json` | Current metrics data |
-| `data/` | Raw data archive |
-| `tasks/` | Task definitions and status |
+| `dashboard/index.html` | Static dashboard (HTML + inline JS). |
+| `dashboard/data.json` | Daily analyst brief payload. |
+| `dashboard/live.json` | Today-to-date live metrics (refreshed every 5 min). |
+| `dashboard/customers.json` | Rolling customer drill-down. |
+| `dashboard/service-details.json` | Rolling tips/ratings drill-down. |
+| `dashboard/priorities.json` | Priority-board snapshot (mutable via priority API). |
+| `dashboard/priorities-audit.jsonl` | Append-only priority edit log. |
+| `dashboard-deploy/` | Shallow clone of `gh-pages` for publishing. Gitignored. |
+| `scripts/deploy.sh` | Full daily deploy. |
+| `scripts/deploy_live.sh` | 5-minute live deploy. |
+| `scripts/sync_data.py` | Reads latest TGE analysis -> `dashboard/data.json`. |
+| `scripts/sync_live_dashboard_data.py` | DB + GA4 + AppsFlyer -> `dashboard/live.json`. |
+| `scripts/sync_customer_details.py` | DB + GA4 -> `dashboard/customers.json`. |
+| `scripts/sync_service_details.py` | DB -> `dashboard/service-details.json`. |
+| `scripts/encrypt_dashboard_payloads.js` | staticrypt-compatible payload encryption. |
+| `scripts/tumbilos_priority_api.py` | Token-authenticated priority write API (always-on systemd service). |
+| `scripts/test_tumbilos.sh` | Playwright regression gate. |
+| `scripts/systemd/` | systemd units installed on ThinkPad. |
+| `tests/tumbilos_playwright.spec.js` | Browser-level regression tests. |
 
-## Rules
+## Shared dependencies
 
-1. Keep it simple. Static HTML + JSON. No frameworks, no build tools, no servers to maintain.
-2. TGE is the brain, TumbilOS is the body. Don't duplicate TGE's analysis - consume it.
-3. The implementation rate metric is sacred. If it stays at 0%, nothing else matters.
-4. Every recommendation should have an owner and a deadline within 24 hours of being generated.
-5. If something can be automated, automate it. That's the whole point.
-6. Matt should be able to open one URL and know exactly where Tumbil stands.
+Sync scripts import from `~/tumbil/infrastructure/libs/` (the canonical home for shared Tumbil python modules):
+- `query_db` - DB connection + canonical query helpers
+- `ga4_attribution` - GA4 purchase attribution helpers
+- `tumbil_db` package - SQL fragments and timezone helpers
+
+## Runs on ThinkPad
+
+All TumbilOS deploys run on the ThinkPad via systemd user units:
+- `tumbilos-deploy.timer` - 6:15 AM ET daily full deploy
+- `tumbilos-live-deploy.timer` - every 5 minutes live data
+- `tumbilos-priority-api.service` - always-on priority API
+
+Mac launchd plist `infrastructure/mac/LaunchAgents/com.tumbil.os-deploy.plist` exists as a fallback but is currently disabled.
+
+## Secrets
+
+All secrets read from `~/.config/tge/tge-env`:
+- `TGE_DB_PASSWORD` - DB readonly
+- `TUMBILOS_DASHBOARD_PASSWORD` - staticrypt password (gates the dashboard)
+- `TUMBILOS_PRIORITY_TOKEN` - bearer token for the priority API
+
+## Regression gate
+
+`scripts/deploy.sh` runs the full Playwright suite after sync and before encryption/push. Set `TUMBILOS_SKIP_TESTS=1` only for emergency manual deploys. Every user-found dashboard regression should become a named test in `tests/tumbilos_playwright.spec.js`.
+
+## Data rules
+
+- DB is authoritative for order counts, order value, and customer type.
+- Placed orders use `order_timelines.timestamp` where `type='placed'`, with ET day boundaries.
+- Customer type labels: New = 0 prior completed orders. Second = 1. Habitual = 2+.
+- GA4/BigQuery attribution is best-effort labeling only - never for order counts or revenue.
+- AppsFlyer Pull API attribution is aggregate app purchase data by media source/campaign. Not joined to individual DB orders.
+- Referral promo counts: `promo_code_usages` joined to `promo_codes.type='referral'`.
+- Monetary values are CAD ex. HST unless explicitly labeled otherwise.
