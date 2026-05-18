@@ -1,29 +1,29 @@
 {
   "version": 1,
-  "generated_at": "2026-05-17T12:34:50.942335-04:00",
+  "generated_at": "2026-05-18T06:15:17.419332-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 6,
-    "order_value_cad": 390.0,
-    "aov_cad": 65.0,
+    "placed_orders": 0,
+    "order_value_cad": 0,
+    "aov_cad": 0.0,
     "customer_mix": {
-      "brand_new": 2,
-      "second_order": 1,
-      "regular": 3,
-      "returning_regular_total": 4
+      "brand_new": 0,
+      "second_order": 0,
+      "regular": 0,
+      "returning_regular_total": 0
     },
-    "business_date": "2026-05-17",
-    "as_of_et": "2026-05-17T12:34:48.201276-04:00",
+    "business_date": "2026-05-18",
+    "as_of_et": "2026-05-18T06:15:15.963143-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 30.0,
-    "same_time_7d_avg_orders": 8.3,
-    "same_time_delta_orders": -2.3,
-    "same_time_7d_avg_order_value_cad": 480.29,
-    "same_time_7d_avg_new_customers": 1.4,
+    "pace_to_target_pct": 0.0,
+    "same_time_7d_avg_orders": 0.9,
+    "same_time_delta_orders": -0.9,
+    "same_time_7d_avg_order_value_cad": 63.71,
+    "same_time_7d_avg_new_customers": 0.6,
     "deliveries": {
-      "count": 5,
-      "revenue_cad": 212.5,
-      "aov_cad": 42.5
+      "count": 0,
+      "revenue_cad": 0.0,
+      "aov_cad": 0.0
     }
   },
   "customer_type_labels": {
@@ -34,148 +34,84 @@
   },
   "same_time_7d_samples": [
     {
+      "date": "2026-05-17",
+      "placed_orders": 1,
+      "order_value_cad": 38.0,
+      "new_customers": 1
+    },
+    {
       "date": "2026-05-16",
-      "placed_orders": 14,
-      "order_value_cad": 878.75,
-      "new_customers": 2
+      "placed_orders": 1,
+      "order_value_cad": 88.5,
+      "new_customers": 1
     },
     {
       "date": "2026-05-15",
-      "placed_orders": 10,
-      "order_value_cad": 736.75,
-      "new_customers": 4
+      "placed_orders": 3,
+      "order_value_cad": 281.5,
+      "new_customers": 2
     },
     {
       "date": "2026-05-14",
-      "placed_orders": 5,
-      "order_value_cad": 327.25,
-      "new_customers": 1
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
     },
     {
       "date": "2026-05-13",
-      "placed_orders": 9,
-      "order_value_cad": 444.0,
-      "new_customers": 1
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
     },
     {
       "date": "2026-05-12",
-      "placed_orders": 6,
-      "order_value_cad": 240.5,
+      "placed_orders": 0,
+      "order_value_cad": 0,
       "new_customers": 0
     },
     {
       "date": "2026-05-11",
-      "placed_orders": 7,
-      "order_value_cad": 326.75,
-      "new_customers": 1
-    },
-    {
-      "date": "2026-05-10",
-      "placed_orders": 7,
-      "order_value_cad": 408.0,
-      "new_customers": 1
+      "placed_orders": 1,
+      "order_value_cad": 38.0,
+      "new_customers": 0
     }
   ],
   "acquisition": {
-    "new_customer_orders": 2,
-    "sources": [
-      {
-        "bucket": "Direct / Unknown",
-        "orders": 2,
-        "confidence": "low"
-      }
-    ],
-    "classified_orders": [
-      {
-        "order_id": 5577,
-        "bucket": "Direct / Unknown",
-        "confidence": "low",
-        "reason": "GA4 source was direct or empty.",
-        "match_quality": "ga4_direct_or_empty",
-        "campaign": null,
-        "referral_code": null,
-        "referral_owner_name": null
-      },
-      {
-        "order_id": 4398,
-        "bucket": "Direct / Unknown",
-        "confidence": "low",
-        "reason": "GA4 source was direct or empty.",
-        "match_quality": "ga4_direct_or_empty",
-        "campaign": null,
-        "referral_code": null,
-        "referral_owner_name": null
-      }
-    ],
-    "unknown_orders": 2,
+    "new_customer_orders": 0,
+    "sources": [],
+    "classified_orders": [],
+    "unknown_orders": 0,
     "ga4_status": {
-      "status": "ok",
-      "primary": "ga4_data_api",
-      "ga4_data_api": {
-        "status": "ok",
-        "source": "ga4_data_api",
-        "rows": 2,
-        "row_count": 2,
-        "date_start": "2026-05-17",
-        "date_end": "2026-05-17",
-        "auth": "service_account",
-        "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
-      },
-      "bigquery": {
-        "status": "ok",
-        "rows": 7,
-        "method": "rest"
-      },
-      "rows": 9
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-05-17",
+      "date": "2026-05-18",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-17T12:30:12.411903-04:00",
-      "cache_status": "hit",
+      "fetched_at": "2026-05-18T06:15:15.963143-04:00",
+      "cache_status": "miss",
       "apps": [
         {
           "status": "ok",
           "app_id": "id6738962991",
-          "rows": 1,
+          "rows": 0,
           "platform": "ios"
         },
         {
           "status": "ok",
           "app_id": "com.tumbil",
-          "rows": 1,
+          "rows": 0,
           "platform": "android"
         }
       ],
       "totals": {
-        "purchase_events": 2,
-        "unique_users": 2,
-        "sales_cad": 50.94
+        "purchase_events": 0,
+        "unique_users": 0,
+        "sales_cad": 0.0
       },
-      "google_ads_purchase_events": 1,
-      "media_sources": [
-        {
-          "media_source": "Organic",
-          "campaign": "None",
-          "purchase_events": 1,
-          "unique_users": 1,
-          "sales_cad": 0.0,
-          "apps": [
-            "com.tumbil"
-          ]
-        },
-        {
-          "media_source": "googleadwords_int",
-          "campaign": "22497318368",
-          "purchase_events": 1,
-          "unique_users": 1,
-          "sales_cad": 50.94,
-          "apps": [
-            "id6738962991"
-          ]
-        }
-      ],
+      "google_ads_purchase_events": 0,
+      "media_sources": [],
       "note": "AppsFlyer aggregate app purchase events by media source. These are not joined to DB orders or customers."
     },
     "caveat": "Order counts and customer status come from DB. Source labels are GA4 attribution-only, with GA4 Data API purchase/tumbil_id matches preferred over BigQuery raw-event fallback. AppsFlyer is included as aggregate app purchase attribution and is not joined to individual customers. Referral promo codes are tracked separately."
@@ -216,47 +152,30 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-17T12:34:48.201276-04:00"
+      "as_of_et": "2026-05-18T06:15:15.963143-04:00"
     },
     "ga4_attribution": {
-      "status": "ok",
-      "primary": "ga4_data_api",
-      "ga4_data_api": {
-        "status": "ok",
-        "source": "ga4_data_api",
-        "rows": 2,
-        "row_count": 2,
-        "date_start": "2026-05-17",
-        "date_end": "2026-05-17",
-        "auth": "service_account",
-        "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
-      },
-      "bigquery": {
-        "status": "ok",
-        "rows": 7,
-        "method": "rest"
-      },
-      "rows": 9
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "ga4_bigquery": {
-      "status": "ok",
-      "rows": 7,
-      "method": "rest"
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-05-17",
+      "date": "2026-05-18",
       "apps": [
         {
           "status": "ok",
           "app_id": "id6738962991",
-          "rows": 1,
+          "rows": 0,
           "platform": "ios"
         },
         {
           "status": "ok",
           "app_id": "com.tumbil",
-          "rows": 1,
+          "rows": 0,
           "platform": "android"
         }
       ]
