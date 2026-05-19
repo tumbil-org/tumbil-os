@@ -733,6 +733,23 @@
     padding: 15px;
   }
 
+  a.customer-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a.customer-card-link .customer-card {
+    cursor: pointer;
+    transition: border-color 0.12s ease, background 0.12s ease, transform 0.12s ease;
+  }
+
+  a.customer-card-link:hover .customer-card {
+    border-color: #3b4851;
+    background: var(--surface-2);
+    transform: translateY(-1px);
+  }
+
   .customer-card-head {
     display: flex;
     flex-wrap: wrap;
@@ -1876,6 +1893,7 @@ function renderServiceDetail() {
     ? `${avgRating} stars across ${number(ratingCount)} ratings for ${businessDateLabel(date)}. ${number(fiveStar)} five-star, ${number(low)} low-rating.`
     : `No ratings submitted for ${businessDateLabel(date)}.`;
   listEl.innerHTML = rows.length ? rows.map(row => `
+    ${row.order_id ? `<a class="customer-card-link" href="https://admin.tumbil.com/orders/${Number(row.order_id)}" target="_blank" rel="noopener noreferrer">` : ''}
     <article class="customer-card">
       <div class="customer-card-head">
         <div>
@@ -1908,6 +1926,7 @@ function renderServiceDetail() {
         </div>
       </div>
     </article>
+    ${row.order_id ? `</a>` : ''}
   `).join('') : '<div class="empty">No ratings submitted on the selected date.</div>';
 }
 
