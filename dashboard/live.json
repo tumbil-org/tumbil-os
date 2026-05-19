@@ -1,29 +1,29 @@
 {
   "version": 1,
-  "generated_at": "2026-05-19T06:15:18.278288-04:00",
+  "generated_at": "2026-05-19T13:26:58.636640-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 1,
-    "order_value_cad": 50.5,
-    "aov_cad": 50.5,
+    "placed_orders": 10,
+    "order_value_cad": 402.5,
+    "aov_cad": 40.25,
     "customer_mix": {
-      "brand_new": 0,
-      "second_order": 0,
-      "regular": 1,
-      "returning_regular_total": 1
+      "brand_new": 3,
+      "second_order": 1,
+      "regular": 6,
+      "returning_regular_total": 7
     },
     "business_date": "2026-05-19",
-    "as_of_et": "2026-05-19T06:15:16.968379-04:00",
+    "as_of_et": "2026-05-19T13:26:55.420268-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 5.0,
-    "same_time_7d_avg_orders": 0.7,
-    "same_time_delta_orders": 0.3,
-    "same_time_7d_avg_order_value_cad": 58.29,
-    "same_time_7d_avg_new_customers": 0.6,
+    "pace_to_target_pct": 50.0,
+    "same_time_7d_avg_orders": 9.0,
+    "same_time_delta_orders": 1.0,
+    "same_time_7d_avg_order_value_cad": 536.96,
+    "same_time_7d_avg_new_customers": 2.1,
     "deliveries": {
-      "count": 0,
-      "revenue_cad": 0.0,
-      "aov_cad": 0.0
+      "count": 2,
+      "revenue_cad": 93.63,
+      "aov_cad": 46.81
     }
   },
   "customer_type_labels": {
@@ -35,61 +35,114 @@
   "same_time_7d_samples": [
     {
       "date": "2026-05-18",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 8,
+      "order_value_cad": 503.0,
+      "new_customers": 3
     },
     {
       "date": "2026-05-17",
-      "placed_orders": 1,
-      "order_value_cad": 38.0,
-      "new_customers": 1
+      "placed_orders": 7,
+      "order_value_cad": 428.0,
+      "new_customers": 3
     },
     {
       "date": "2026-05-16",
-      "placed_orders": 1,
-      "order_value_cad": 88.5,
-      "new_customers": 1
-    },
-    {
-      "date": "2026-05-15",
-      "placed_orders": 3,
-      "order_value_cad": 281.5,
+      "placed_orders": 14,
+      "order_value_cad": 878.75,
       "new_customers": 2
     },
     {
+      "date": "2026-05-15",
+      "placed_orders": 11,
+      "order_value_cad": 823.25,
+      "new_customers": 4
+    },
+    {
       "date": "2026-05-14",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 5,
+      "order_value_cad": 327.25,
+      "new_customers": 1
     },
     {
       "date": "2026-05-13",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 10,
+      "order_value_cad": 482.0,
+      "new_customers": 1
     },
     {
       "date": "2026-05-12",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 8,
+      "order_value_cad": 316.5,
+      "new_customers": 1
     }
   ],
   "acquisition": {
-    "new_customer_orders": 0,
-    "sources": [],
-    "classified_orders": [],
-    "unknown_orders": 0,
+    "new_customer_orders": 3,
+    "sources": [
+      {
+        "bucket": "Direct / Unknown",
+        "orders": 3,
+        "confidence": "low"
+      }
+    ],
+    "classified_orders": [
+      {
+        "order_id": 5617,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "GA4 source was direct or empty.",
+        "match_quality": "ga4_direct_or_empty",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
+      },
+      {
+        "order_id": 5451,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "GA4 source was direct or empty.",
+        "match_quality": "ga4_direct_or_empty",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
+      },
+      {
+        "order_id": 5628,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "No GA4 match",
+        "match_quality": "unmatched",
+        "campaign": null,
+        "referral_code": "MIRANR",
+        "referral_owner_name": "Miranda-sue Ranger"
+      }
+    ],
+    "unknown_orders": 3,
     "ga4_status": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "primary": "ga4_data_api",
+      "ga4_data_api": {
+        "status": "ok",
+        "source": "ga4_data_api",
+        "rows": 2,
+        "row_count": 2,
+        "date_start": "2026-05-19",
+        "date_end": "2026-05-19",
+        "auth": "service_account",
+        "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
+      },
+      "bigquery": {
+        "status": "ok",
+        "rows": 5,
+        "method": "rest"
+      },
+      "rows": 7
     },
     "appsflyer": {
       "status": "ok",
       "date": "2026-05-19",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-19T06:15:16.968379-04:00",
+      "fetched_at": "2026-05-19T13:26:55.420268-04:00",
       "cache_status": "miss",
       "apps": [
         {
@@ -118,27 +171,27 @@
   },
   "referrals": {
     "today": {
-      "orders": 0,
-      "customers": 0,
-      "order_value_cad": 0.0
-    },
-    "seven_day": {
       "orders": 1,
       "customers": 1,
-      "order_value_cad": 70.5
+      "order_value_cad": 35.5
+    },
+    "seven_day": {
+      "orders": 2,
+      "customers": 2,
+      "order_value_cad": 106.01
     },
     "thirty_day": {
-      "orders": 3,
-      "customers": 3,
-      "order_value_cad": 179.0
+      "orders": 4,
+      "customers": 4,
+      "order_value_cad": 214.5
     },
     "top_codes_30d": [
       {
         "code": "MIRANR",
         "owner_id": 2096,
         "owner_name": "Miranda-sue Ranger",
-        "orders": 2,
-        "order_value_cad": 124.75
+        "orders": 3,
+        "order_value_cad": 160.26
       },
       {
         "code": "SHANAK",
@@ -152,15 +205,32 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-19T06:15:16.968379-04:00"
+      "as_of_et": "2026-05-19T13:26:55.420268-04:00"
     },
     "ga4_attribution": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "primary": "ga4_data_api",
+      "ga4_data_api": {
+        "status": "ok",
+        "source": "ga4_data_api",
+        "rows": 2,
+        "row_count": 2,
+        "date_start": "2026-05-19",
+        "date_end": "2026-05-19",
+        "auth": "service_account",
+        "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
+      },
+      "bigquery": {
+        "status": "ok",
+        "rows": 5,
+        "method": "rest"
+      },
+      "rows": 7
     },
     "ga4_bigquery": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "rows": 5,
+      "method": "rest"
     },
     "appsflyer": {
       "status": "ok",
