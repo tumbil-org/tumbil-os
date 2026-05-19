@@ -77,13 +77,14 @@ cp "$TMPDIR/priorities.json" "$DEPLOY_REPO/"
 cp "$TMPDIR/customers.json" "$DEPLOY_REPO/"
 cp "$TMPDIR/service-details.json" "$DEPLOY_REPO/"
 cp -R "$DASHBOARD_DIR/fonts" "$DEPLOY_REPO/"
+cp "$DASHBOARD_DIR/favicon.svg" "$DEPLOY_REPO/"
 rm -rf "$TMPDIR"
 
 cd "$DEPLOY_REPO"
-if git diff --quiet index.html data.json live.json priorities.json customers.json service-details.json fonts 2>/dev/null; then
+if git diff --quiet index.html data.json live.json priorities.json customers.json service-details.json fonts favicon.svg 2>/dev/null; then
     echo "[TumbilOS] No changes to deploy."
 else
-    git add index.html data.json live.json priorities.json customers.json service-details.json fonts
+    git add index.html data.json live.json priorities.json customers.json service-details.json fonts favicon.svg
     git commit -m "Update dashboard data $(date +%Y-%m-%d)"
     git push origin gh-pages
     echo "[TumbilOS] Deployed successfully."
