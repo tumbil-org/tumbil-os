@@ -1,24 +1,24 @@
 {
   "version": 1,
-  "generated_at": "2026-05-18T06:15:17.419332-04:00",
+  "generated_at": "2026-05-19T06:15:18.278288-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 0,
-    "order_value_cad": 0,
-    "aov_cad": 0.0,
+    "placed_orders": 1,
+    "order_value_cad": 50.5,
+    "aov_cad": 50.5,
     "customer_mix": {
       "brand_new": 0,
       "second_order": 0,
-      "regular": 0,
-      "returning_regular_total": 0
+      "regular": 1,
+      "returning_regular_total": 1
     },
-    "business_date": "2026-05-18",
-    "as_of_et": "2026-05-18T06:15:15.963143-04:00",
+    "business_date": "2026-05-19",
+    "as_of_et": "2026-05-19T06:15:16.968379-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 0.0,
-    "same_time_7d_avg_orders": 0.9,
-    "same_time_delta_orders": -0.9,
-    "same_time_7d_avg_order_value_cad": 63.71,
+    "pace_to_target_pct": 5.0,
+    "same_time_7d_avg_orders": 0.7,
+    "same_time_delta_orders": 0.3,
+    "same_time_7d_avg_order_value_cad": 58.29,
     "same_time_7d_avg_new_customers": 0.6,
     "deliveries": {
       "count": 0,
@@ -33,6 +33,12 @@
     "returning_regular_total": "Second-Order + Habitual Customers"
   },
   "same_time_7d_samples": [
+    {
+      "date": "2026-05-18",
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
+    },
     {
       "date": "2026-05-17",
       "placed_orders": 1,
@@ -68,12 +74,6 @@
       "placed_orders": 0,
       "order_value_cad": 0,
       "new_customers": 0
-    },
-    {
-      "date": "2026-05-11",
-      "placed_orders": 1,
-      "order_value_cad": 38.0,
-      "new_customers": 0
     }
   ],
   "acquisition": {
@@ -87,9 +87,9 @@
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-05-18",
+      "date": "2026-05-19",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-18T06:15:15.963143-04:00",
+      "fetched_at": "2026-05-19T06:15:16.968379-04:00",
       "cache_status": "miss",
       "apps": [
         {
@@ -152,7 +152,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-18T06:15:15.963143-04:00"
+      "as_of_et": "2026-05-19T06:15:16.968379-04:00"
     },
     "ga4_attribution": {
       "status": "skipped",
@@ -164,7 +164,7 @@
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-05-18",
+      "date": "2026-05-19",
       "apps": [
         {
           "status": "ok",
