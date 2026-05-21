@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-05-20T06:15:24.900085-04:00",
+  "generated_at": "2026-05-21T06:15:18.210443-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 0,
@@ -12,8 +12,8 @@
       "regular": 0,
       "returning_regular_total": 0
     },
-    "business_date": "2026-05-20",
-    "as_of_et": "2026-05-20T06:15:23.025397-04:00",
+    "business_date": "2026-05-21",
+    "as_of_et": "2026-05-21T06:15:15.962530-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 0.0,
     "same_time_7d_avg_orders": 0.9,
@@ -33,6 +33,12 @@
     "returning_regular_total": "Second-Order + Habitual Customers"
   },
   "same_time_7d_samples": [
+    {
+      "date": "2026-05-20",
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
+    },
     {
       "date": "2026-05-19",
       "placed_orders": 1,
@@ -68,12 +74,6 @@
       "placed_orders": 0,
       "order_value_cad": 0,
       "new_customers": 0
-    },
-    {
-      "date": "2026-05-13",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
     }
   ],
   "acquisition": {
@@ -87,9 +87,9 @@
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-05-20",
+      "date": "2026-05-21",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-20T06:15:23.025397-04:00",
+      "fetched_at": "2026-05-21T06:15:15.962530-04:00",
       "cache_status": "miss",
       "apps": [
         {
@@ -152,7 +152,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-20T06:15:23.025397-04:00"
+      "as_of_et": "2026-05-21T06:15:15.962530-04:00"
     },
     "ga4_attribution": {
       "status": "skipped",
@@ -164,7 +164,7 @@
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-05-20",
+      "date": "2026-05-21",
       "apps": [
         {
           "status": "ok",
