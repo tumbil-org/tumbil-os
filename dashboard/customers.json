@@ -1,307 +1,30 @@
 {
   "version": 1,
-  "generated_at": "2026-05-22T06:15:28.019407-04:00",
+  "generated_at": "2026-05-23T06:15:16.655571-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
   "ga4_source_status": {
     "status": "ok",
     "primary": "ga4_data_api",
-    "rows": 90,
+    "rows": 85,
     "ga4_data_api": {
       "status": "ok",
       "source": "ga4_data_api",
-      "rows": 15,
-      "row_count": 15,
-      "date_start": "2026-05-16",
-      "date_end": "2026-05-22",
+      "rows": 16,
+      "row_count": 16,
+      "date_start": "2026-05-17",
+      "date_end": "2026-05-23",
       "auth": "service_account",
       "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
     },
     "bigquery": {
       "status": "ok",
-      "rows": 75,
+      "rows": 69,
       "method": "rest"
     }
   },
   "days": [
-    {
-      "date": "2026-04-08",
-      "counts": {
-        "brand_new": 2,
-        "second_order": 1,
-        "regular": 6
-      },
-      "customers_by_type": {
-        "brand_new": [
-          {
-            "customer_id": 4078,
-            "order_id": 4286,
-            "name": "Sara Zwicker",
-            "email": "smurfygirl124@gmail.com",
-            "mobile": "9052433673",
-            "placed_at_et": "2026-04-08 08:15 AM",
-            "signup_at_et": "2026-03-19 01:58 PM",
-            "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "Historical source data is not retained in the DB."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "completed",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-08 08:00 PM",
-            "delivery_by_et": "2026-04-09 08:00 PM",
-            "bags": {
-              "small": 0,
-              "regular": 0,
-              "large": 2,
-              "oversize": 0
-            },
-            "weight_lbs": 26.0,
-            "order_value_cad": 50.5,
-            "prior_completed_orders": 0
-          },
-          {
-            "customer_id": 4358,
-            "order_id": 4690,
-            "name": "Chris Raynor",
-            "email": "chris@humantwopointzero.com",
-            "mobile": "6133016968",
-            "placed_at_et": "2026-04-08 07:13 AM",
-            "signup_at_et": "2026-04-06 07:35 AM",
-            "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "Historical source data is not retained in the DB."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "completed",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-08 08:00 PM",
-            "delivery_by_et": "2026-04-09 08:00 PM",
-            "bags": {
-              "small": 0,
-              "regular": 1,
-              "large": 0,
-              "oversize": 0
-            },
-            "weight_lbs": 6.0,
-            "order_value_cad": 38.0,
-            "prior_completed_orders": 0
-          }
-        ],
-        "second_order": [
-          {
-            "customer_id": 2720,
-            "order_id": 4664,
-            "name": "Robin Darasha",
-            "email": "rdarasha@gmail.com",
-            "mobile": "6138522991",
-            "placed_at_et": "2026-04-08 12:13 PM",
-            "signup_at_et": "2026-01-02 04:28 PM",
-            "source": {
-              "bucket": "Returning customer",
-              "confidence": "high",
-              "detail": "Source is only classified on first-order acquisition."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "completed",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-08 08:00 PM",
-            "delivery_by_et": "2026-04-09 08:00 PM",
-            "bags": {
-              "small": 0,
-              "regular": 2,
-              "large": 0,
-              "oversize": 0
-            },
-            "weight_lbs": 28.8,
-            "order_value_cad": 38.0,
-            "prior_completed_orders": 1
-          }
-        ],
-        "regular": [
-          {
-            "customer_id": 4004,
-            "order_id": 4521,
-            "name": "Firas Karwashan",
-            "email": "firas979@gmail.com",
-            "mobile": "7809349448",
-            "placed_at_et": "2026-04-08 08:12 PM",
-            "signup_at_et": "2026-03-14 02:16 PM",
-            "source": {
-              "bucket": "Returning customer",
-              "confidence": "high",
-              "detail": "Source is only classified on first-order acquisition."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "completed",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-09 08:00 PM",
-            "delivery_by_et": "2026-04-10 08:00 PM",
-            "bags": {
-              "small": 2,
-              "regular": 0,
-              "large": 0,
-              "oversize": 0
-            },
-            "weight_lbs": 9.8,
-            "order_value_cad": 38.0,
-            "prior_completed_orders": 2
-          },
-          {
-            "customer_id": 1612,
-            "order_id": 4747,
-            "name": "Julia Shrive",
-            "email": "juliabrooks.jb@gmail.com",
-            "mobile": "5089547402",
-            "placed_at_et": "2026-04-08 04:37 PM",
-            "signup_at_et": "2025-10-03 08:48 AM",
-            "source": {
-              "bucket": "Returning customer",
-              "confidence": "high",
-              "detail": "Source is only classified on first-order acquisition."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "cancelled",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-09 08:00 PM",
-            "delivery_by_et": "2026-04-10 08:00 PM",
-            "bags": {
-              "small": 0,
-              "regular": 0,
-              "large": 1,
-              "oversize": 0
-            },
-            "weight_lbs": 19.0,
-            "order_value_cad": 38.0,
-            "prior_completed_orders": 2
-          },
-          {
-            "customer_id": 3771,
-            "order_id": 4742,
-            "name": "Lori L",
-            "email": "llounds@gmail.com",
-            "mobile": "4168189680",
-            "placed_at_et": "2026-04-08 09:54 AM",
-            "signup_at_et": "2026-03-02 01:56 PM",
-            "source": {
-              "bucket": "Returning customer",
-              "confidence": "high",
-              "detail": "Source is only classified on first-order acquisition."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "completed",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-08 08:00 PM",
-            "delivery_by_et": "2026-04-09 08:00 PM",
-            "bags": {
-              "small": 0,
-              "regular": 0,
-              "large": 3,
-              "oversize": 1
-            },
-            "weight_lbs": 31.8,
-            "order_value_cad": 86.25,
-            "prior_completed_orders": 4
-          },
-          {
-            "customer_id": 1816,
-            "order_id": 4741,
-            "name": "Kevin Yip",
-            "email": "kevinhyip@gmail.com",
-            "mobile": "4168809445",
-            "placed_at_et": "2026-04-08 08:04 AM",
-            "signup_at_et": "2025-10-26 12:03 PM",
-            "source": {
-              "bucket": "Returning customer",
-              "confidence": "high",
-              "detail": "Source is only classified on first-order acquisition."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "completed",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-08 08:00 PM",
-            "delivery_by_et": "2026-04-09 08:00 PM",
-            "bags": {
-              "small": 0,
-              "regular": 0,
-              "large": 1,
-              "oversize": 0
-            },
-            "weight_lbs": 20.0,
-            "order_value_cad": 38.0,
-            "prior_completed_orders": 24
-          },
-          {
-            "customer_id": 869,
-            "order_id": 4737,
-            "name": "hrishika rai",
-            "email": "hr16ms113@gmail.com",
-            "mobile": null,
-            "placed_at_et": "2026-04-08 07:13 AM",
-            "signup_at_et": "2025-07-19 09:38 AM",
-            "source": {
-              "bucket": "Returning customer",
-              "confidence": "high",
-              "detail": "Source is only classified on first-order acquisition."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "completed",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-08 08:00 PM",
-            "delivery_by_et": "2026-04-09 08:00 PM",
-            "bags": {
-              "small": 0,
-              "regular": 1,
-              "large": 0,
-              "oversize": 0
-            },
-            "weight_lbs": 36.0,
-            "order_value_cad": 38.0,
-            "prior_completed_orders": 4
-          },
-          {
-            "customer_id": 2820,
-            "order_id": 4740,
-            "name": "Brooke Bauer",
-            "email": "5t4bbd99wk@privaterelay.appleid.com",
-            "mobile": "5194961752",
-            "placed_at_et": "2026-04-08 06:13 AM",
-            "signup_at_et": "2026-01-08 12:53 PM",
-            "source": {
-              "bucket": "Returning customer",
-              "confidence": "high",
-              "detail": "Source is only classified on first-order acquisition."
-            },
-            "referral_code": null,
-            "referral": null,
-            "status": "completed",
-            "delivery_type": "standard",
-            "pickup_by_et": "2026-04-08 08:00 PM",
-            "delivery_by_et": "2026-04-09 08:00 PM",
-            "bags": {
-              "small": 0,
-              "regular": 0,
-              "large": 1,
-              "oversize": 0
-            },
-            "weight_lbs": 15.0,
-            "order_value_cad": 38.0,
-            "prior_completed_orders": 6
-          }
-        ]
-      }
-    },
     {
       "date": "2026-04-09",
       "counts": {
@@ -14719,9 +14442,7 @@
             "source": {
               "bucket": "Direct / Unknown",
               "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "detail": "Historical source data is not retained in the DB."
             },
             "referral_code": null,
             "referral": null,
@@ -14750,9 +14471,7 @@
             "source": {
               "bucket": "Direct / Unknown",
               "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "detail": "Historical source data is not retained in the DB."
             },
             "referral_code": null,
             "referral": null,
@@ -14779,11 +14498,9 @@
             "placed_at_et": "2026-05-16 05:03 AM",
             "signup_at_et": "2026-05-16 05:00 AM",
             "source": {
-              "bucket": "Google Ads",
-              "confidence": "high",
-              "detail": "GA4 purchase matched tumbil_id with Google Ads campaign City Target (GTA) Click.",
-              "match_quality": "ga4_purchase_tumbil_id",
-              "campaign": "City Target (GTA) Click"
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "Historical source data is not retained in the DB."
             },
             "referral_code": null,
             "referral": null,
@@ -16517,7 +16234,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-19 08:00 PM",
             "delivery_by_et": "2026-05-20 08:00 PM",
@@ -16619,7 +16336,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-20 08:00 PM",
             "delivery_by_et": "2026-05-21 08:00 PM",
@@ -16629,7 +16346,7 @@
               "large": 1,
               "oversize": 3
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 46.0,
             "order_value_cad": 74.0,
             "prior_completed_orders": 0
           }
@@ -16680,7 +16397,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-21 08:00 PM",
             "delivery_by_et": "2026-05-22 08:00 PM",
@@ -16767,7 +16484,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-20 08:00 PM",
             "delivery_by_et": "2026-05-21 08:00 PM",
@@ -16777,7 +16494,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 14.0,
+            "weight_lbs": 15.6,
             "order_value_cad": 38.0,
             "prior_completed_orders": 6
           }
@@ -16810,7 +16527,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-22 08:00 PM",
             "delivery_by_et": "2026-05-23 08:00 PM",
@@ -16833,15 +16550,15 @@
             "placed_at_et": "2026-05-21 07:07 PM",
             "signup_at_et": "2026-05-18 03:07 PM",
             "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "bucket": "Google Ads",
+              "confidence": "medium",
+              "detail": "GA4 purchase matched tumbil_id with Google Ads campaign City Target (GTA) Click.",
+              "match_quality": "ga4_purchase_tumbil_id",
+              "campaign": "City Target (GTA) Click"
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-22 08:00 PM",
             "delivery_by_et": "2026-05-23 08:00 PM",
@@ -16851,7 +16568,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 53.1,
             "order_value_cad": 38.0,
             "prior_completed_orders": 0
           },
@@ -16859,15 +16576,16 @@
             "customer_id": 5014,
             "order_id": 5671,
             "name": "Jan B",
-            "email": "zmgztkkzj5@privaterelay.appleid.com",
+            "email": "janicelball@icloud.com",
             "mobile": "6472345264",
             "placed_at_et": "2026-05-21 08:07 AM",
             "signup_at_et": "2026-05-21 06:55 AM",
             "source": {
               "bucket": "Direct / Unknown",
               "confidence": "low",
-              "detail": "No GA4 attribution match for this user in the retained event window. AppsFlyer is not joined into this dashboard yet.",
-              "match_quality": "unmatched"
+              "detail": "GA4 source was direct or empty.",
+              "match_quality": "ga4_direct_or_empty",
+              "campaign": null
             },
             "referral_code": null,
             "referral": null,
@@ -16902,7 +16620,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-21 08:00 PM",
             "delivery_by_et": "2026-05-22 08:00 PM",
@@ -16931,7 +16649,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-21 08:00 PM",
             "delivery_by_et": "2026-05-22 08:00 PM",
@@ -16962,7 +16680,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-22 08:00 PM",
             "delivery_by_et": "2026-05-23 08:00 PM",
@@ -16991,7 +16709,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-22 08:00 PM",
             "delivery_by_et": "2026-05-23 08:00 PM",
@@ -17001,7 +16719,7 @@
               "large": 2,
               "oversize": 0
             },
-            "weight_lbs": 38.0,
+            "weight_lbs": 29.0,
             "order_value_cad": 50.5,
             "prior_completed_orders": 9
           },
@@ -17020,7 +16738,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-22 08:00 PM",
             "delivery_by_et": "2026-05-23 08:00 PM",
@@ -17030,7 +16748,7 @@
               "large": 3,
               "oversize": 0
             },
-            "weight_lbs": 57.0,
+            "weight_lbs": 53.7,
             "order_value_cad": 74.25,
             "prior_completed_orders": 10
           },
@@ -17049,7 +16767,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-21 08:00 PM",
             "delivery_by_et": "2026-05-22 08:00 PM",
@@ -17059,7 +16777,7 @@
               "large": 2,
               "oversize": 0
             },
-            "weight_lbs": 38.0,
+            "weight_lbs": 36.4,
             "order_value_cad": 50.5,
             "prior_completed_orders": 5
           },
@@ -17078,7 +16796,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-21 08:00 PM",
             "delivery_by_et": "2026-05-22 08:00 PM",
@@ -17088,7 +16806,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 22.0,
             "order_value_cad": 38.0,
             "prior_completed_orders": 22
           },
@@ -17107,7 +16825,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-21 08:00 PM",
             "delivery_by_et": "2026-05-22 08:00 PM",
@@ -17117,7 +16835,7 @@
               "large": 4,
               "oversize": 0
             },
-            "weight_lbs": 76.0,
+            "weight_lbs": 57.2,
             "order_value_cad": 98.0,
             "prior_completed_orders": 34
           },
@@ -17136,7 +16854,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-21 08:00 PM",
             "delivery_by_et": "2026-05-22 08:00 PM",
@@ -17146,9 +16864,424 @@
               "large": 0,
               "oversize": 1
             },
-            "weight_lbs": 56.0,
+            "weight_lbs": 32.4,
             "order_value_cad": 85.0,
             "prior_completed_orders": 7
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-05-22",
+      "counts": {
+        "brand_new": 3,
+        "second_order": 0,
+        "regular": 8
+      },
+      "customers_by_type": {
+        "brand_new": [
+          {
+            "customer_id": 5021,
+            "order_id": 5685,
+            "name": "Alpha Chan",
+            "email": "chan.alpha@gmail.com",
+            "mobile": "93521512",
+            "placed_at_et": "2026-05-22 11:59 PM",
+            "signup_at_et": "2026-05-22 04:54 AM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "GA4 source was direct or empty.",
+              "match_quality": "ga4_direct_or_empty",
+              "campaign": null
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-23 08:00 PM",
+            "delivery_by_et": "2026-05-24 08:00 PM",
+            "bags": {
+              "small": 2,
+              "regular": 0,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 22.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 0
+          },
+          {
+            "customer_id": 4819,
+            "order_id": 5360,
+            "name": "towman 321",
+            "email": "towman695@gmail.com",
+            "mobile": "6133255556",
+            "placed_at_et": "2026-05-22 08:55 PM",
+            "signup_at_et": "2026-05-07 04:19 PM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "GA4 source was direct or empty.",
+              "match_quality": "ga4_direct_or_empty",
+              "campaign": null
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-23 08:00 PM",
+            "delivery_by_et": "2026-05-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 0
+          },
+          {
+            "customer_id": 4973,
+            "order_id": 5622,
+            "name": "Ayfer Sonmez",
+            "email": "ayfersonmez70@gmail.com",
+            "mobile": "9058080317",
+            "placed_at_et": "2026-05-22 09:05 AM",
+            "signup_at_et": "2026-05-19 04:12 AM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "GA4 source was direct or empty.",
+              "match_quality": "ga4_direct_or_empty",
+              "campaign": null
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "picked_up",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-22 08:00 PM",
+            "delivery_by_et": "2026-05-23 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 2,
+              "oversize": 0
+            },
+            "weight_lbs": 38.0,
+            "order_value_cad": 50.5,
+            "prior_completed_orders": 0
+          }
+        ],
+        "second_order": [],
+        "regular": [
+          {
+            "customer_id": 3991,
+            "order_id": 5704,
+            "name": "Caitlyn Veiga",
+            "email": "caitlynveiga1@gmail.com",
+            "mobile": "6477466590",
+            "placed_at_et": "2026-05-22 10:48 PM",
+            "signup_at_et": "2026-03-13 09:14 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-23 08:00 PM",
+            "delivery_by_et": "2026-05-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 10
+          },
+          {
+            "customer_id": 2477,
+            "order_id": 5701,
+            "name": "Clare Mintzer",
+            "email": "Clare.Mintzer@gmail.com",
+            "mobile": "4168244715",
+            "placed_at_et": "2026-05-22 07:49 PM",
+            "signup_at_et": "2025-12-15 07:46 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-23 08:00 PM",
+            "delivery_by_et": "2026-05-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 16
+          },
+          {
+            "customer_id": 4231,
+            "order_id": 5680,
+            "name": "Juliette Simard",
+            "email": "jsima031@uottawa.ca",
+            "mobile": "4185508633",
+            "placed_at_et": "2026-05-22 07:19 PM",
+            "signup_at_et": "2026-03-29 04:42 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-23 08:00 PM",
+            "delivery_by_et": "2026-05-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 5
+          },
+          {
+            "customer_id": 3043,
+            "order_id": 5698,
+            "name": "Kimia Veisi",
+            "email": "7vmqjtn5z4@privaterelay.appleid.com",
+            "mobile": "6477870119",
+            "placed_at_et": "2026-05-22 06:07 PM",
+            "signup_at_et": "2026-01-19 11:05 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-23 08:00 PM",
+            "delivery_by_et": "2026-05-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 23
+          },
+          {
+            "customer_id": 4125,
+            "order_id": 5693,
+            "name": "Fernando Martinez",
+            "email": "martinezmfernando27@gmail.com",
+            "mobile": "4373315869",
+            "placed_at_et": "2026-05-22 03:05 PM",
+            "signup_at_et": "2026-03-22 10:46 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "picked_up",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-23 08:00 PM",
+            "delivery_by_et": "2026-05-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 8
+          },
+          {
+            "customer_id": 4453,
+            "order_id": 5691,
+            "name": "Anita Dhillon",
+            "email": "wrwk8nbkby@privaterelay.appleid.com",
+            "mobile": "4167378555",
+            "placed_at_et": "2026-05-22 01:58 PM",
+            "signup_at_et": "2026-04-12 10:47 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "picked_up",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-22 08:00 PM",
+            "delivery_by_et": "2026-05-23 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 4,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 38.0,
+            "order_value_cad": 73.0,
+            "prior_completed_orders": 4
+          },
+          {
+            "customer_id": 2315,
+            "order_id": 5690,
+            "name": "Alandra Jordan",
+            "email": "alandra.monette@gmail.com",
+            "mobile": "6476212014",
+            "placed_at_et": "2026-05-22 01:02 PM",
+            "signup_at_et": "2025-12-04 01:57 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "picked_up",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-22 08:00 PM",
+            "delivery_by_et": "2026-05-23 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 3,
+              "oversize": 0
+            },
+            "weight_lbs": 57.0,
+            "order_value_cad": 74.25,
+            "prior_completed_orders": 2
+          },
+          {
+            "customer_id": 3995,
+            "order_id": 5687,
+            "name": "Richard Foster",
+            "email": "sirrichardfoster@gmail.com",
+            "mobile": "6133159344",
+            "placed_at_et": "2026-05-22 12:11 PM",
+            "signup_at_et": "2026-03-13 11:42 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "picked_up",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-22 08:00 PM",
+            "delivery_by_et": "2026-05-23 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 2,
+              "oversize": 0
+            },
+            "weight_lbs": 38.0,
+            "order_value_cad": 50.5,
+            "prior_completed_orders": 3
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-05-23",
+      "counts": {
+        "brand_new": 1,
+        "second_order": 0,
+        "regular": 1
+      },
+      "customers_by_type": {
+        "brand_new": [
+          {
+            "customer_id": 5041,
+            "order_id": 5706,
+            "name": "Nico D",
+            "email": "Nicodip15@aol.com",
+            "mobile": "2607103110",
+            "placed_at_et": "2026-05-23 12:59 AM",
+            "signup_at_et": "2026-05-23 12:55 AM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "GA4 source was direct or empty.",
+              "match_quality": "ga4_direct_or_empty",
+              "campaign": null
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "rapid",
+            "pickup_by_et": "2026-05-23 04:00 PM",
+            "delivery_by_et": "2026-05-23 10:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 68.0,
+            "prior_completed_orders": 0
+          }
+        ],
+        "second_order": [],
+        "regular": [
+          {
+            "customer_id": 2022,
+            "order_id": 5705,
+            "name": "Rukhsar K",
+            "email": "rukhsarzkarim@gmail.com",
+            "mobile": "4379853911",
+            "placed_at_et": "2026-05-23 12:20 AM",
+            "signup_at_et": "2025-11-12 12:14 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-23 08:00 PM",
+            "delivery_by_et": "2026-05-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 3,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 42.0,
+            "order_value_cad": 55.5,
+            "prior_completed_orders": 23
           }
         ]
       }

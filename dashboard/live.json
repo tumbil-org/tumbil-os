@@ -1,25 +1,25 @@
 {
   "version": 1,
-  "generated_at": "2026-05-22T06:15:22.267188-04:00",
+  "generated_at": "2026-05-23T06:15:14.464243-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 0,
-    "order_value_cad": 0,
-    "aov_cad": 0.0,
+    "placed_orders": 2,
+    "order_value_cad": 123.5,
+    "aov_cad": 61.75,
     "customer_mix": {
-      "brand_new": 0,
+      "brand_new": 1,
       "second_order": 0,
-      "regular": 0,
-      "returning_regular_total": 0
+      "regular": 1,
+      "returning_regular_total": 1
     },
-    "business_date": "2026-05-22",
-    "as_of_et": "2026-05-22T06:15:20.967898-04:00",
+    "business_date": "2026-05-23",
+    "as_of_et": "2026-05-23T06:15:10.963731-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 0.0,
-    "same_time_7d_avg_orders": 0.9,
-    "same_time_delta_orders": -0.9,
-    "same_time_7d_avg_order_value_cad": 65.5,
-    "same_time_7d_avg_new_customers": 0.6,
+    "pace_to_target_pct": 10.0,
+    "same_time_7d_avg_orders": 0.4,
+    "same_time_delta_orders": 1.6,
+    "same_time_7d_avg_order_value_cad": 25.29,
+    "same_time_7d_avg_new_customers": 0.3,
     "deliveries": {
       "count": 0,
       "revenue_cad": 0.0,
@@ -33,6 +33,12 @@
     "returning_regular_total": "Second-Order + Habitual Customers"
   },
   "same_time_7d_samples": [
+    {
+      "date": "2026-05-22",
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
+    },
     {
       "date": "2026-05-21",
       "placed_orders": 0,
@@ -68,28 +74,55 @@
       "placed_orders": 1,
       "order_value_cad": 88.5,
       "new_customers": 1
-    },
-    {
-      "date": "2026-05-15",
-      "placed_orders": 3,
-      "order_value_cad": 281.5,
-      "new_customers": 2
     }
   ],
   "acquisition": {
-    "new_customer_orders": 0,
-    "sources": [],
-    "classified_orders": [],
-    "unknown_orders": 0,
+    "new_customer_orders": 1,
+    "sources": [
+      {
+        "bucket": "Direct / Unknown",
+        "orders": 1,
+        "confidence": "low"
+      }
+    ],
+    "classified_orders": [
+      {
+        "order_id": 5706,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "GA4 source was direct or empty.",
+        "match_quality": "ga4_direct_or_empty",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
+      }
+    ],
+    "unknown_orders": 1,
     "ga4_status": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "primary": "ga4_data_api",
+      "ga4_data_api": {
+        "status": "ok",
+        "source": "ga4_data_api",
+        "rows": 1,
+        "row_count": 1,
+        "date_start": "2026-05-23",
+        "date_end": "2026-05-23",
+        "auth": "service_account",
+        "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
+      },
+      "bigquery": {
+        "status": "ok",
+        "rows": 0,
+        "method": "rest"
+      },
+      "rows": 1
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-05-22",
+      "date": "2026-05-23",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-22T06:15:20.967898-04:00",
+      "fetched_at": "2026-05-23T06:15:10.963731-04:00",
       "cache_status": "miss",
       "apps": [
         {
@@ -152,19 +185,36 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-22T06:15:20.967898-04:00"
+      "as_of_et": "2026-05-23T06:15:10.963731-04:00"
     },
     "ga4_attribution": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "primary": "ga4_data_api",
+      "ga4_data_api": {
+        "status": "ok",
+        "source": "ga4_data_api",
+        "rows": 1,
+        "row_count": 1,
+        "date_start": "2026-05-23",
+        "date_end": "2026-05-23",
+        "auth": "service_account",
+        "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
+      },
+      "bigquery": {
+        "status": "ok",
+        "rows": 0,
+        "method": "rest"
+      },
+      "rows": 1
     },
     "ga4_bigquery": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "rows": 0,
+      "method": "rest"
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-05-22",
+      "date": "2026-05-23",
       "apps": [
         {
           "status": "ok",
