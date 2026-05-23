@@ -1,29 +1,29 @@
 {
   "version": 1,
-  "generated_at": "2026-05-23T06:15:14.464243-04:00",
+  "generated_at": "2026-05-23T17:29:09.690300-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 2,
-    "order_value_cad": 123.5,
-    "aov_cad": 61.75,
+    "placed_orders": 16,
+    "order_value_cad": 877.5,
+    "aov_cad": 54.84,
     "customer_mix": {
-      "brand_new": 1,
-      "second_order": 0,
-      "regular": 1,
-      "returning_regular_total": 1
+      "brand_new": 3,
+      "second_order": 1,
+      "regular": 12,
+      "returning_regular_total": 13
     },
     "business_date": "2026-05-23",
-    "as_of_et": "2026-05-23T06:15:10.963731-04:00",
+    "as_of_et": "2026-05-23T17:29:04.521362-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 10.0,
-    "same_time_7d_avg_orders": 0.4,
-    "same_time_delta_orders": 1.6,
-    "same_time_7d_avg_order_value_cad": 25.29,
-    "same_time_7d_avg_new_customers": 0.3,
+    "pace_to_target_pct": 80.0,
+    "same_time_7d_avg_orders": 10.1,
+    "same_time_delta_orders": 5.9,
+    "same_time_7d_avg_order_value_cad": 572.79,
+    "same_time_7d_avg_new_customers": 2.1,
     "deliveries": {
-      "count": 0,
-      "revenue_cad": 0.0,
-      "aov_cad": 0.0
+      "count": 7,
+      "revenue_cad": 382.76,
+      "aov_cad": 54.68
     }
   },
   "customer_type_labels": {
@@ -35,53 +35,53 @@
   "same_time_7d_samples": [
     {
       "date": "2026-05-22",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 5,
+      "order_value_cad": 286.25,
+      "new_customers": 1
     },
     {
       "date": "2026-05-21",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 9,
+      "order_value_cad": 652.5,
+      "new_customers": 1
     },
     {
       "date": "2026-05-20",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 5,
+      "order_value_cad": 250.5,
+      "new_customers": 1
     },
     {
       "date": "2026-05-19",
-      "placed_orders": 1,
-      "order_value_cad": 50.5,
-      "new_customers": 0
+      "placed_orders": 16,
+      "order_value_cad": 732.0,
+      "new_customers": 3
     },
     {
       "date": "2026-05-18",
-      "placed_orders": 0,
-      "order_value_cad": 0,
-      "new_customers": 0
+      "placed_orders": 13,
+      "order_value_cad": 705.5,
+      "new_customers": 3
     },
     {
       "date": "2026-05-17",
-      "placed_orders": 1,
-      "order_value_cad": 38.0,
-      "new_customers": 1
+      "placed_orders": 9,
+      "order_value_cad": 504.0,
+      "new_customers": 4
     },
     {
       "date": "2026-05-16",
-      "placed_orders": 1,
-      "order_value_cad": 88.5,
-      "new_customers": 1
+      "placed_orders": 14,
+      "order_value_cad": 878.75,
+      "new_customers": 2
     }
   ],
   "acquisition": {
-    "new_customer_orders": 1,
+    "new_customer_orders": 3,
     "sources": [
       {
         "bucket": "Direct / Unknown",
-        "orders": 1,
+        "orders": 3,
         "confidence": "low"
       }
     ],
@@ -95,17 +95,37 @@
         "campaign": null,
         "referral_code": null,
         "referral_owner_name": null
+      },
+      {
+        "order_id": 5694,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "GA4 source was direct or empty.",
+        "match_quality": "ga4_direct_or_empty",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
+      },
+      {
+        "order_id": 5719,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "GA4 source was direct or empty.",
+        "match_quality": "ga4_direct_or_empty",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
       }
     ],
-    "unknown_orders": 1,
+    "unknown_orders": 3,
     "ga4_status": {
       "status": "ok",
       "primary": "ga4_data_api",
       "ga4_data_api": {
         "status": "ok",
         "source": "ga4_data_api",
-        "rows": 1,
-        "row_count": 1,
+        "rows": 2,
+        "row_count": 2,
         "date_start": "2026-05-23",
         "date_end": "2026-05-23",
         "auth": "service_account",
@@ -113,16 +133,16 @@
       },
       "bigquery": {
         "status": "ok",
-        "rows": 0,
+        "rows": 2,
         "method": "rest"
       },
-      "rows": 1
+      "rows": 4
     },
     "appsflyer": {
       "status": "ok",
       "date": "2026-05-23",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-23T06:15:10.963731-04:00",
+      "fetched_at": "2026-05-23T17:29:04.521362-04:00",
       "cache_status": "miss",
       "apps": [
         {
@@ -185,7 +205,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-23T06:15:10.963731-04:00"
+      "as_of_et": "2026-05-23T17:29:04.521362-04:00"
     },
     "ga4_attribution": {
       "status": "ok",
@@ -193,8 +213,8 @@
       "ga4_data_api": {
         "status": "ok",
         "source": "ga4_data_api",
-        "rows": 1,
-        "row_count": 1,
+        "rows": 2,
+        "row_count": 2,
         "date_start": "2026-05-23",
         "date_end": "2026-05-23",
         "auth": "service_account",
@@ -202,14 +222,14 @@
       },
       "bigquery": {
         "status": "ok",
-        "rows": 0,
+        "rows": 2,
         "method": "rest"
       },
-      "rows": 1
+      "rows": 4
     },
     "ga4_bigquery": {
       "status": "ok",
-      "rows": 0,
+      "rows": 2,
       "method": "rest"
     },
     "appsflyer": {
