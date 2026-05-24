@@ -1,29 +1,29 @@
 {
   "version": 1,
-  "generated_at": "2026-05-23T17:29:09.690300-04:00",
+  "generated_at": "2026-05-24T06:15:31.979605-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 16,
-    "order_value_cad": 877.5,
-    "aov_cad": 54.84,
+    "placed_orders": 0,
+    "order_value_cad": 0,
+    "aov_cad": 0.0,
     "customer_mix": {
-      "brand_new": 3,
-      "second_order": 1,
-      "regular": 12,
-      "returning_regular_total": 13
+      "brand_new": 0,
+      "second_order": 0,
+      "regular": 0,
+      "returning_regular_total": 0
     },
-    "business_date": "2026-05-23",
-    "as_of_et": "2026-05-23T17:29:04.521362-04:00",
+    "business_date": "2026-05-24",
+    "as_of_et": "2026-05-24T06:15:31.382938-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 80.0,
-    "same_time_7d_avg_orders": 10.1,
-    "same_time_delta_orders": 5.9,
-    "same_time_7d_avg_order_value_cad": 572.79,
-    "same_time_7d_avg_new_customers": 2.1,
+    "pace_to_target_pct": 0.0,
+    "same_time_7d_avg_orders": 0.6,
+    "same_time_delta_orders": -0.6,
+    "same_time_7d_avg_order_value_cad": 30.29,
+    "same_time_7d_avg_new_customers": 0.3,
     "deliveries": {
-      "count": 7,
-      "revenue_cad": 382.76,
-      "aov_cad": 54.68
+      "count": 0,
+      "revenue_cad": 0.0,
+      "aov_cad": 0.0
     }
   },
   "customer_type_labels": {
@@ -34,127 +34,74 @@
   },
   "same_time_7d_samples": [
     {
-      "date": "2026-05-22",
-      "placed_orders": 5,
-      "order_value_cad": 286.25,
+      "date": "2026-05-23",
+      "placed_orders": 2,
+      "order_value_cad": 123.5,
       "new_customers": 1
+    },
+    {
+      "date": "2026-05-22",
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
     },
     {
       "date": "2026-05-21",
-      "placed_orders": 9,
-      "order_value_cad": 652.5,
-      "new_customers": 1
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
     },
     {
       "date": "2026-05-20",
-      "placed_orders": 5,
-      "order_value_cad": 250.5,
-      "new_customers": 1
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
     },
     {
       "date": "2026-05-19",
-      "placed_orders": 16,
-      "order_value_cad": 732.0,
-      "new_customers": 3
+      "placed_orders": 1,
+      "order_value_cad": 50.5,
+      "new_customers": 0
     },
     {
       "date": "2026-05-18",
-      "placed_orders": 13,
-      "order_value_cad": 705.5,
-      "new_customers": 3
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
     },
     {
       "date": "2026-05-17",
-      "placed_orders": 9,
-      "order_value_cad": 504.0,
-      "new_customers": 4
-    },
-    {
-      "date": "2026-05-16",
-      "placed_orders": 14,
-      "order_value_cad": 878.75,
-      "new_customers": 2
+      "placed_orders": 1,
+      "order_value_cad": 38.0,
+      "new_customers": 1
     }
   ],
   "acquisition": {
-    "new_customer_orders": 3,
-    "sources": [
-      {
-        "bucket": "Direct / Unknown",
-        "orders": 3,
-        "confidence": "low"
-      }
-    ],
-    "classified_orders": [
-      {
-        "order_id": 5706,
-        "bucket": "Direct / Unknown",
-        "confidence": "low",
-        "reason": "GA4 source was direct or empty.",
-        "match_quality": "ga4_direct_or_empty",
-        "campaign": null,
-        "referral_code": null,
-        "referral_owner_name": null
-      },
-      {
-        "order_id": 5694,
-        "bucket": "Direct / Unknown",
-        "confidence": "low",
-        "reason": "GA4 source was direct or empty.",
-        "match_quality": "ga4_direct_or_empty",
-        "campaign": null,
-        "referral_code": null,
-        "referral_owner_name": null
-      },
-      {
-        "order_id": 5719,
-        "bucket": "Direct / Unknown",
-        "confidence": "low",
-        "reason": "GA4 source was direct or empty.",
-        "match_quality": "ga4_direct_or_empty",
-        "campaign": null,
-        "referral_code": null,
-        "referral_owner_name": null
-      }
-    ],
-    "unknown_orders": 3,
+    "new_customer_orders": 0,
+    "sources": [],
+    "classified_orders": [],
+    "unknown_orders": 0,
     "ga4_status": {
-      "status": "ok",
-      "primary": "ga4_data_api",
-      "ga4_data_api": {
-        "status": "ok",
-        "source": "ga4_data_api",
-        "rows": 2,
-        "row_count": 2,
-        "date_start": "2026-05-23",
-        "date_end": "2026-05-23",
-        "auth": "service_account",
-        "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
-      },
-      "bigquery": {
-        "status": "ok",
-        "rows": 2,
-        "method": "rest"
-      },
-      "rows": 4
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "appsflyer": {
-      "status": "ok",
-      "date": "2026-05-23",
+      "status": "error",
+      "date": "2026-05-24",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-23T17:29:04.521362-04:00",
+      "fetched_at": "2026-05-24T06:15:31.382938-04:00",
       "cache_status": "miss",
       "apps": [
         {
-          "status": "ok",
+          "status": "error",
           "app_id": "id6738962991",
-          "rows": 0,
+          "reason": "Limit reached for partners-daily-report",
           "platform": "ios"
         },
         {
-          "status": "ok",
+          "status": "error",
           "app_id": "com.tumbil",
-          "rows": 0,
+          "reason": "Limit reached for partners-daily-report",
           "platform": "android"
         }
       ],
@@ -181,9 +128,9 @@
       "order_value_cad": 35.5
     },
     "thirty_day": {
-      "orders": 3,
-      "customers": 3,
-      "order_value_cad": 160.26
+      "orders": 2,
+      "customers": 2,
+      "order_value_cad": 106.01
     },
     "top_codes_30d": [
       {
@@ -192,60 +139,36 @@
         "owner_name": "Miranda-sue Ranger",
         "orders": 2,
         "order_value_cad": 106.01
-      },
-      {
-        "code": "SHANAK",
-        "owner_id": 3630,
-        "owner_name": "Shanaz K",
-        "orders": 1,
-        "order_value_cad": 54.25
       }
     ]
   },
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-23T17:29:04.521362-04:00"
+      "as_of_et": "2026-05-24T06:15:31.382938-04:00"
     },
     "ga4_attribution": {
-      "status": "ok",
-      "primary": "ga4_data_api",
-      "ga4_data_api": {
-        "status": "ok",
-        "source": "ga4_data_api",
-        "rows": 2,
-        "row_count": 2,
-        "date_start": "2026-05-23",
-        "date_end": "2026-05-23",
-        "auth": "service_account",
-        "credentials": "/home/yoygurt/.config/ga4-mcp/credentials.json"
-      },
-      "bigquery": {
-        "status": "ok",
-        "rows": 2,
-        "method": "rest"
-      },
-      "rows": 4
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "ga4_bigquery": {
-      "status": "ok",
-      "rows": 2,
-      "method": "rest"
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "appsflyer": {
-      "status": "ok",
-      "date": "2026-05-23",
+      "status": "error",
+      "date": "2026-05-24",
       "apps": [
         {
-          "status": "ok",
+          "status": "error",
           "app_id": "id6738962991",
-          "rows": 0,
+          "reason": "Limit reached for partners-daily-report",
           "platform": "ios"
         },
         {
-          "status": "ok",
+          "status": "error",
           "app_id": "com.tumbil",
-          "rows": 0,
+          "reason": "Limit reached for partners-daily-report",
           "platform": "android"
         }
       ]
