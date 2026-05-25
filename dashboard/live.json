@@ -1,25 +1,25 @@
 {
   "version": 1,
-  "generated_at": "2026-05-24T06:15:31.979605-04:00",
+  "generated_at": "2026-05-25T06:15:24.353335-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 0,
-    "order_value_cad": 0,
-    "aov_cad": 0.0,
+    "placed_orders": 1,
+    "order_value_cad": 50.5,
+    "aov_cad": 50.5,
     "customer_mix": {
       "brand_new": 0,
-      "second_order": 0,
+      "second_order": 1,
       "regular": 0,
-      "returning_regular_total": 0
+      "returning_regular_total": 1
     },
-    "business_date": "2026-05-24",
-    "as_of_et": "2026-05-24T06:15:31.382938-04:00",
+    "business_date": "2026-05-25",
+    "as_of_et": "2026-05-25T06:15:22.835948-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 0.0,
-    "same_time_7d_avg_orders": 0.6,
-    "same_time_delta_orders": -0.6,
-    "same_time_7d_avg_order_value_cad": 30.29,
-    "same_time_7d_avg_new_customers": 0.3,
+    "pace_to_target_pct": 5.0,
+    "same_time_7d_avg_orders": 0.4,
+    "same_time_delta_orders": 0.6,
+    "same_time_7d_avg_order_value_cad": 24.86,
+    "same_time_7d_avg_new_customers": 0.1,
     "deliveries": {
       "count": 0,
       "revenue_cad": 0.0,
@@ -33,6 +33,12 @@
     "returning_regular_total": "Second-Order + Habitual Customers"
   },
   "same_time_7d_samples": [
+    {
+      "date": "2026-05-24",
+      "placed_orders": 0,
+      "order_value_cad": 0,
+      "new_customers": 0
+    },
     {
       "date": "2026-05-23",
       "placed_orders": 2,
@@ -68,12 +74,6 @@
       "placed_orders": 0,
       "order_value_cad": 0,
       "new_customers": 0
-    },
-    {
-      "date": "2026-05-17",
-      "placed_orders": 1,
-      "order_value_cad": 38.0,
-      "new_customers": 1
     }
   ],
   "acquisition": {
@@ -86,22 +86,22 @@
       "reason": "No brand-new orders today"
     },
     "appsflyer": {
-      "status": "error",
-      "date": "2026-05-24",
+      "status": "ok",
+      "date": "2026-05-25",
       "timezone": "America/Toronto",
-      "fetched_at": "2026-05-24T06:15:31.382938-04:00",
+      "fetched_at": "2026-05-25T06:15:22.835948-04:00",
       "cache_status": "miss",
       "apps": [
         {
-          "status": "error",
+          "status": "ok",
           "app_id": "id6738962991",
-          "reason": "Limit reached for partners-daily-report",
+          "rows": 0,
           "platform": "ios"
         },
         {
-          "status": "error",
+          "status": "ok",
           "app_id": "com.tumbil",
-          "reason": "Limit reached for partners-daily-report",
+          "rows": 0,
           "platform": "android"
         }
       ],
@@ -145,7 +145,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-05-24T06:15:31.382938-04:00"
+      "as_of_et": "2026-05-25T06:15:22.835948-04:00"
     },
     "ga4_attribution": {
       "status": "skipped",
@@ -156,19 +156,19 @@
       "reason": "No brand-new orders today"
     },
     "appsflyer": {
-      "status": "error",
-      "date": "2026-05-24",
+      "status": "ok",
+      "date": "2026-05-25",
       "apps": [
         {
-          "status": "error",
+          "status": "ok",
           "app_id": "id6738962991",
-          "reason": "Limit reached for partners-daily-report",
+          "rows": 0,
           "platform": "ios"
         },
         {
-          "status": "error",
+          "status": "ok",
           "app_id": "com.tumbil",
-          "reason": "Limit reached for partners-daily-report",
+          "rows": 0,
           "platform": "android"
         }
       ]
