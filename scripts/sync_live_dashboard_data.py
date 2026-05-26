@@ -271,10 +271,48 @@ LTV_COHORT_DAYS = 180
 LTV_CONTRIBUTION_MARGIN = 0.225
 
 
+LTV_SENSITIVITY_CUTOFFS = [0, 30, 60, 90, 120, 180, 270, 365]
+
+
+def _per_customer_lifetime_rows(conn) -> list[dict]:
+    """One row per customer: their first placed-order UTC + lifetime totals.
+
+    Reused by the cohort breakdown and the sensitivity sweep so we hit the
+    DB once instead of once per cutoff.
+    """
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT
+            o.user_id,
+            MIN(ot.timestamp) AS first_placed_utc,
+            COUNT(DISTINCT p.order_id) AS total_orders,
+            COALESCE(SUM(od.actual_amount), 0) AS rev_gross_cents
+        FROM payments p
+        JOIN orders o ON o.id = p.order_id
+        JOIN order_timelines ot ON ot.order_id = o.id AND ot.type = 'placed'
+        LEFT JOIN order_details od ON od.order_id = o.id
+        WHERE p.transaction_type = 'base_charge'
+          AND p.status = 'captured'
+          AND o.status != 'cancelled'
+        GROUP BY o.user_id
+    """)
+    rows = cur.fetchall()
+    cur.close()
+    return rows
+
+
+def _aggregate(per_cust_rows: list[dict]) -> tuple[int, int, float]:
+    """Return (customers, total_orders, revenue_net_cad)."""
+    customers = len(per_cust_rows)
+    total_orders = sum(int(r["total_orders"] or 0) for r in per_cust_rows)
+    rev_gross = sum(int(r["rev_gross_cents"] or 0) for r in per_cust_rows)
+    return customers, total_orders, query_db.cents_to_net_cad(rev_gross)
+
+
 def fetch_lifetime_value(conn) -> dict:
     """Lifetime revenue + contribution per "mature" customer.
 
-    Mature = first placed order is older than LTV_COHORT_DAYS (90). Customers
+    Mature = first placed order is older than LTV_COHORT_DAYS (180). Customers
     inside the window are excluded so the average isn't dragged down by new
     customers who haven't had time to re-order.
 
@@ -282,39 +320,69 @@ def fetch_lifetime_value(conn) -> dict:
     on captured base_charge payments (tips excluded). Contribution applies
     LTV_CONTRIBUTION_MARGIN, the plat_rev/net_rev ratio from the monthly close
     sheet (accounts for WashPro labour, Stripe fees, refunds, and WP bonuses).
+
+    Also returns a cohort_breakdown (per-month-since-first-order slice for the
+    drill-down chart) and a sensitivity sweep across cutoff windows so the user
+    can see how the headline number reacts to the cutoff choice.
     """
-    cur = conn.cursor()
-    cur.execute(f"""
-        SELECT
-            COUNT(DISTINCT o.user_id) AS customers,
-            COUNT(DISTINCT p.order_id) AS total_orders,
-            COALESCE(SUM(od.actual_amount), 0) AS revenue_gross_cents
-        FROM payments p
-        JOIN orders o ON o.id = p.order_id
-        LEFT JOIN order_details od ON od.order_id = o.id
-        WHERE p.transaction_type = 'base_charge'
-          AND p.status = 'captured'
-          AND o.status != 'cancelled'
-          AND o.user_id IN (
-            SELECT first_orders.user_id FROM (
-                SELECT o2.user_id, MIN(ot2.timestamp) AS first_placed_utc
-                FROM payments p2
-                JOIN orders o2 ON o2.id = p2.order_id
-                JOIN order_timelines ot2 ON ot2.order_id = o2.id AND ot2.type = 'placed'
-                WHERE p2.transaction_type = 'base_charge'
-                  AND p2.status = 'captured'
-                  AND o2.status != 'cancelled'
-                GROUP BY o2.user_id
-                HAVING MIN(ot2.timestamp) < UTC_TIMESTAMP() - INTERVAL {LTV_COHORT_DAYS} DAY
-            ) first_orders
-          )
-    """)
-    row = cur.fetchone()
-    cur.close()
-    customers = int(row["customers"] or 0)
-    total_orders = int(row["total_orders"] or 0)
-    revenue_net = query_db.cents_to_net_cad(row["revenue_gross_cents"])
+    rows = _per_customer_lifetime_rows(conn)
+    if not rows:
+        return {
+            "customers": 0, "total_orders": 0, "total_revenue_cad": 0.0,
+            "ltv_cad": 0.0, "orders_per_customer": 0.0,
+            "contribution_per_customer_cad": 0.0,
+            "contribution_margin": LTV_CONTRIBUTION_MARGIN,
+            "cohort_days": LTV_COHORT_DAYS,
+            "cohort_breakdown": [],
+            "sensitivity": [],
+        }
+
+    now_utc = datetime.now(UTC).replace(tzinfo=None)
+    for r in rows:
+        first = r["first_placed_utc"]
+        delta_days = (now_utc - first).days if first else 0
+        r["_days_since_first"] = delta_days
+        r["_months_since_first"] = delta_days // 30
+
+    # Headline aggregate at the configured cutoff.
+    mature = [r for r in rows if r["_days_since_first"] >= LTV_COHORT_DAYS]
+    customers, total_orders, revenue_net = _aggregate(mature)
     ltv_cad = round(revenue_net / customers, 2) if customers else 0.0
+
+    # Cohort breakdown: bucket by months-since-first-order.
+    by_month: dict[int, list[dict]] = {}
+    for r in rows:
+        by_month.setdefault(r["_months_since_first"], []).append(r)
+    cohort_breakdown = []
+    for months_ago in sorted(by_month.keys()):
+        bucket = by_month[months_ago]
+        b_cust, b_orders, b_rev = _aggregate(bucket)
+        if not b_cust:
+            continue
+        cohort_breakdown.append({
+            "months_since_first_order": months_ago,
+            "customers": b_cust,
+            "total_orders": b_orders,
+            "orders_per_customer": round(b_orders / b_cust, 2),
+            "revenue_per_customer_cad": round(b_rev / b_cust, 2),
+            "ltv_per_customer_cad": round(b_rev / b_cust * LTV_CONTRIBUTION_MARGIN, 2),
+        })
+
+    # Sensitivity sweep across candidate cutoffs.
+    sensitivity = []
+    for cutoff in LTV_SENSITIVITY_CUTOFFS:
+        subset = rows if cutoff == 0 else [r for r in rows if r["_days_since_first"] >= cutoff]
+        s_cust, s_orders, s_rev = _aggregate(subset)
+        s_rev_pc = round(s_rev / s_cust, 2) if s_cust else 0.0
+        sensitivity.append({
+            "cohort_days": cutoff,
+            "customers": s_cust,
+            "total_orders": s_orders,
+            "orders_per_customer": round(s_orders / s_cust, 2) if s_cust else 0.0,
+            "revenue_per_customer_cad": s_rev_pc,
+            "ltv_per_customer_cad": round(s_rev_pc * LTV_CONTRIBUTION_MARGIN, 2),
+        })
+
     return {
         "customers": customers,
         "total_orders": total_orders,
@@ -324,6 +392,8 @@ def fetch_lifetime_value(conn) -> dict:
         "contribution_per_customer_cad": round(ltv_cad * LTV_CONTRIBUTION_MARGIN, 2),
         "contribution_margin": LTV_CONTRIBUTION_MARGIN,
         "cohort_days": LTV_COHORT_DAYS,
+        "cohort_breakdown": cohort_breakdown,
+        "sensitivity": sensitivity,
     }
 
 

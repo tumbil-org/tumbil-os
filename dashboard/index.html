@@ -261,6 +261,42 @@
     transform: translateY(-1px);
   }
 
+  .ltv-table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .ltv-table-wrap th,
+  .ltv-table-wrap td {
+    padding: 6px 8px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ltv-table-wrap th:first-child,
+  .ltv-table-wrap td:first-child {
+    text-align: left;
+  }
+
+  .ltv-table-wrap th {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .ltv-table-wrap tr.excluded td {
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  .ltv-table-wrap tr.headline td {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
   .kpi .label {
     color: var(--text-muted);
     font-size: 12px;
@@ -913,12 +949,12 @@
           <div class="value" id="order-value">-</div>
           <div class="sub" id="aov-sub">-</div>
         </div>
-        <div class="panel kpi">
+        <div class="panel kpi clickable" data-ltv-card="revenue">
           <div class="label">Revenue / Customer</div>
           <div class="value green" id="ltv-value">-</div>
           <div class="sub" id="ltv-sub">-</div>
         </div>
-        <div class="panel kpi">
+        <div class="panel kpi clickable" data-ltv-card="ltv">
           <div class="label">LTV / Customer</div>
           <div class="value green" id="contribution-value">-</div>
           <div class="sub" id="contribution-sub">-</div>
@@ -1020,6 +1056,37 @@
         <div class="customer-list" id="service-list" style="margin-top: 14px;"></div>
       </div>
     </section>
+
+    <section id="ltv-detail-view" class="view">
+      <div class="customer-toolbar">
+        <button class="ghost-btn" id="ltv-back-btn">Back to Overview</button>
+        <div class="summary" id="ltv-screen-title">LTV detail</div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Cohort method</div>
+        <div class="customer-summary" id="ltv-method-summary">Loading...</div>
+      </div>
+      <div class="panel" style="margin-top: 14px;">
+        <div class="panel-title">Orders per customer by cohort age</div>
+        <div id="ltv-cohort-chart" style="height: 280px;"></div>
+        <div class="customer-summary" style="margin-top: 10px;">
+          Each bar groups customers by months since their first order. Bars to the left of the dashed line are excluded from the headline number (they haven't been around long enough to demonstrate their ordering pattern).
+        </div>
+      </div>
+      <div class="grid two" style="margin-top: 14px;">
+        <div class="panel">
+          <div class="panel-title">Cohort breakdown</div>
+          <div id="ltv-cohort-table" class="ltv-table-wrap"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Sensitivity to cutoff window</div>
+          <div id="ltv-sensitivity-table" class="ltv-table-wrap"></div>
+          <div class="customer-summary" style="margin-top: 10px;">
+            How the headline number moves if you change the cutoff. Stays near the asymptote between 180-270 days; falls apart at 365 days because Tumbil is too young to have many qualifying customers.
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <dialog id="task-dialog">
@@ -1119,6 +1186,7 @@ const validViewIds = new Set([
   'health-view',
   'customer-detail-view',
   'service-detail-view',
+  'ltv-detail-view',
 ]);
 const validCustomerTypes = new Set(['brand_new', 'second_order', 'regular']);
 const validServiceTypes = new Set(['tips', 'ratings']);
@@ -1132,6 +1200,7 @@ function screenForViewId(viewId) {
     'health-view': 'health',
     'customer-detail-view': 'customer',
     'service-detail-view': 'service',
+    'ltv-detail-view': 'ltv',
   }[viewId] || 'today';
 }
 
@@ -1144,11 +1213,12 @@ function viewIdForScreen(screen) {
     health: 'health-view',
     customer: 'customer-detail-view',
     service: 'service-detail-view',
+    ltv: 'ltv-detail-view',
   }[screen] || 'today-view';
 }
 
 function activeTabViewFor(viewId) {
-  return viewId === 'customer-detail-view' || viewId === 'service-detail-view'
+  return viewId === 'customer-detail-view' || viewId === 'service-detail-view' || viewId === 'ltv-detail-view'
     ? null
     : viewId;
 }
@@ -1621,6 +1691,7 @@ function render() {
   renderHealth();
   renderCustomerDetail();
   renderServiceDetail();
+  renderLtvDetail();
 }
 
 function renderHeader() {
@@ -1670,6 +1741,157 @@ function renderLtv() {
     contribSubEl.textContent =
       `${marginPct}% margin after WP pay, Stripe fees, refunds, bonuses · ${cohortNote}`;
   }
+}
+
+function renderLtvDetail() {
+  const ltv = (state.live || {}).lifetime_value;
+  const methodEl = document.getElementById('ltv-method-summary');
+  const chartEl = document.getElementById('ltv-cohort-chart');
+  const tableEl = document.getElementById('ltv-cohort-table');
+  const sensEl = document.getElementById('ltv-sensitivity-table');
+  if (!methodEl || !chartEl || !tableEl || !sensEl) return;
+
+  if (!ltv || !ltv.customers) {
+    methodEl.textContent = 'No LTV data available yet.';
+    chartEl.innerHTML = '';
+    tableEl.innerHTML = '';
+    sensEl.innerHTML = '';
+    return;
+  }
+
+  const cohortDays = ltv.cohort_days || 180;
+  const cohortMonths = Math.round(cohortDays / 30);
+  const marginPct = ltv.contribution_margin ? (ltv.contribution_margin * 100).toFixed(1) : '-';
+
+  methodEl.innerHTML = `
+    <strong>${money(ltv.ltv_cad)}</strong> revenue / customer and <strong>${money(ltv.contribution_per_customer_cad)}</strong> LTV / customer,
+    averaged over <strong>${number(ltv.customers)}</strong> customers whose first order was placed more than ${cohortDays} days ago
+    (${cohortMonths}-month cohort).
+    LTV applies a ${marginPct}% contribution margin to revenue - the trailing 3-month plat_rev ratio from the monthly close sheet,
+    which accounts for WashPro labour, Stripe fees, refunds, and WP bonuses.
+    Revenue is net of HST and excludes tips.
+  `;
+
+  renderLtvCohortChart(chartEl, ltv.cohort_breakdown || [], cohortMonths);
+  renderLtvCohortTable(tableEl, ltv.cohort_breakdown || [], cohortMonths);
+  renderLtvSensitivityTable(sensEl, ltv.sensitivity || [], cohortDays);
+}
+
+function renderLtvCohortChart(el, cohorts, cutoffMonths) {
+  if (!cohorts.length) {
+    el.innerHTML = '<div class="empty">No cohort data.</div>';
+    return;
+  }
+  const w = el.clientWidth || 720;
+  const h = 280;
+  const pad = { t: 16, r: 40, b: 36, l: 8 };
+  const chartW = w - pad.l - pad.r;
+  const chartH = h - pad.t - pad.b;
+  const yMaxRaw = Math.max(1, ...cohorts.map(c => Number(c.orders_per_customer || 0)));
+  const yMax = Math.ceil(yMaxRaw + 0.5);
+  const n = cohorts.length;
+  const barW = (chartW / n) * 0.74;
+  const gap = (chartW / n) - barW;
+  const toX = i => pad.l + (chartW / n) * i + gap / 2;
+  const toY = v => pad.t + chartH * (1 - v / yMax);
+
+  let svg = `<svg viewBox="0 0 ${w} ${h}" width="100%" height="100%" preserveAspectRatio="none">`;
+  // gridlines
+  for (let i = 0; i <= 5; i++) {
+    const v = yMax * (1 - i / 5);
+    const y = pad.t + (chartH / 5) * i;
+    svg += `<line x1="${pad.l}" y1="${y}" x2="${w - pad.r}" y2="${y}" stroke="#2b333a"/>`;
+    svg += `<text x="${w - pad.r + 5}" y="${y + 4}" fill="#75818a" font-size="10">${v.toFixed(1)}</text>`;
+  }
+  // bars
+  cohorts.forEach((c, i) => {
+    const v = Number(c.orders_per_customer || 0);
+    const x = toX(i);
+    const y = toY(v);
+    const barH = pad.t + chartH - y;
+    const excluded = c.months_since_first_order < cutoffMonths;
+    const fill = excluded ? '#3b4851' : '#00a3e7';
+    svg += `<rect x="${x}" y="${y}" width="${barW}" height="${barH}" fill="${fill}" rx="2"/>`;
+    svg += `<text x="${x + barW / 2}" y="${y - 4}" fill="#cbd1d6" font-size="10" text-anchor="middle">${v.toFixed(2)}</text>`;
+    svg += `<text x="${x + barW / 2}" y="${h - 18}" fill="#75818a" font-size="10" text-anchor="middle">${c.months_since_first_order}m</text>`;
+    svg += `<text x="${x + barW / 2}" y="${h - 6}" fill="#5b6770" font-size="9" text-anchor="middle">n=${c.customers}</text>`;
+  });
+  // cutoff line: between bar (cutoffMonths - 1) and bar (cutoffMonths)
+  const cutoffIdx = cohorts.findIndex(c => c.months_since_first_order >= cutoffMonths);
+  if (cutoffIdx > 0) {
+    const cutoffX = pad.l + (chartW / n) * cutoffIdx;
+    svg += `<line x1="${cutoffX}" y1="${pad.t}" x2="${cutoffX}" y2="${pad.t + chartH}" stroke="#e8b34b" stroke-width="2" stroke-dasharray="5 4"/>`;
+    svg += `<text x="${cutoffX + 4}" y="${pad.t + 12}" fill="#e8b34b" font-size="10">${cutoffMonths}mo cutoff</text>`;
+  }
+  svg += '</svg>';
+  el.innerHTML = svg;
+}
+
+function renderLtvCohortTable(el, cohorts, cutoffMonths) {
+  if (!cohorts.length) {
+    el.innerHTML = '<div class="empty">No cohort data.</div>';
+    return;
+  }
+  const rows = cohorts.map(c => {
+    const excluded = c.months_since_first_order < cutoffMonths;
+    return `
+      <tr class="${excluded ? 'excluded' : ''}">
+        <td>${c.months_since_first_order}m ago</td>
+        <td>${number(c.customers)}</td>
+        <td>${Number(c.orders_per_customer || 0).toFixed(2)}</td>
+        <td>${money(c.revenue_per_customer_cad)}</td>
+        <td>${money(c.ltv_per_customer_cad)}</td>
+      </tr>
+    `;
+  }).join('');
+  el.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>First order</th>
+          <th>Customers</th>
+          <th>Orders/cust</th>
+          <th>Rev/cust</th>
+          <th>LTV/cust</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function renderLtvSensitivityTable(el, sensitivity, currentCutoffDays) {
+  if (!sensitivity.length) {
+    el.innerHTML = '<div class="empty">No sensitivity data.</div>';
+    return;
+  }
+  const rows = sensitivity.map(s => {
+    const isCurrent = s.cohort_days === currentCutoffDays;
+    const label = s.cohort_days === 0 ? 'No cutoff (naive)' : `${s.cohort_days} days`;
+    return `
+      <tr class="${isCurrent ? 'headline' : ''}">
+        <td>${label}${isCurrent ? ' (current)' : ''}</td>
+        <td>${number(s.customers)}</td>
+        <td>${Number(s.orders_per_customer || 0).toFixed(2)}</td>
+        <td>${money(s.revenue_per_customer_cad)}</td>
+        <td>${money(s.ltv_per_customer_cad)}</td>
+      </tr>
+    `;
+  }).join('');
+  el.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Cutoff</th>
+          <th>Customers</th>
+          <th>Orders/cust</th>
+          <th>Rev/cust</th>
+          <th>LTV/cust</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
 }
 
 function renderToday() {
@@ -2647,6 +2869,13 @@ function openServiceDetail(kind) {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
+function openLtvDetail() {
+  navigate({
+    activeView: 'ltv-detail-view',
+  });
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
 function toast(message) {
   const el = document.getElementById('toast');
   el.textContent = message;
@@ -2678,12 +2907,20 @@ document.querySelectorAll('[data-customer-type]').forEach(card => {
 document.querySelectorAll('[data-service-type]').forEach(card => {
   card.addEventListener('click', () => openServiceDetail(card.dataset.serviceType));
 });
+document.querySelectorAll('[data-ltv-card]').forEach(card => {
+  card.addEventListener('click', () => openLtvDetail());
+});
 document.getElementById('customer-back-btn').addEventListener('click', () => {
   navigate({
     activeView: 'today-view',
   });
 });
 document.getElementById('service-back-btn').addEventListener('click', () => {
+  navigate({
+    activeView: 'today-view',
+  });
+});
+document.getElementById('ltv-back-btn').addEventListener('click', () => {
   navigate({
     activeView: 'today-view',
   });
