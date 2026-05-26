@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-05-26T06:15:29.786527-04:00",
+  "generated_at": "2026-05-26T08:50:37.022735-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -17007,7 +17007,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "open",
+            "status": "accepted",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-26 08:00 PM",
             "delivery_by_et": "2026-05-27 08:00 PM",
@@ -17188,7 +17188,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "open",
+            "status": "accepted",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-26 08:00 PM",
             "delivery_by_et": "2026-05-27 08:00 PM",
@@ -17314,7 +17314,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 22.0,
             "order_value_cad": 38.0,
             "prior_completed_orders": 17
           },
@@ -17343,7 +17343,7 @@
               "large": 0,
               "oversize": 2
             },
-            "weight_lbs": 28.0,
+            "weight_lbs": 15.4,
             "order_value_cad": 62.0,
             "prior_completed_orders": 3
           },
@@ -17546,7 +17546,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 15.1,
             "order_value_cad": 38.0,
             "prior_completed_orders": 32
           }
@@ -17556,12 +17556,42 @@
     {
       "date": "2026-05-26",
       "counts": {
-        "brand_new": 1,
+        "brand_new": 2,
         "second_order": 0,
-        "regular": 1
+        "regular": 3
       },
       "customers_by_type": {
         "brand_new": [
+          {
+            "customer_id": 5086,
+            "order_id": 5781,
+            "name": "Blake Mizerany",
+            "email": "wg9sr2jgmn@privaterelay.appleid.com",
+            "mobile": "4159710007",
+            "placed_at_et": "2026-05-26 08:07 AM",
+            "signup_at_et": "2026-05-26 08:04 AM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "No GA4 attribution match for this user in the retained event window. AppsFlyer is not joined into this dashboard yet.",
+              "match_quality": "unmatched"
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-26 08:00 PM",
+            "delivery_by_et": "2026-05-27 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 0
+          },
           {
             "customer_id": 1823,
             "order_id": 1535,
@@ -17579,7 +17609,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "open",
+            "status": "accepted",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-26 08:00 PM",
             "delivery_by_et": "2026-05-27 08:00 PM",
@@ -17597,6 +17627,64 @@
         "second_order": [],
         "regular": [
           {
+            "customer_id": 3043,
+            "order_id": 5782,
+            "name": "Kimia Veisi",
+            "email": "7vmqjtn5z4@privaterelay.appleid.com",
+            "mobile": "6477870119",
+            "placed_at_et": "2026-05-26 08:15 AM",
+            "signup_at_et": "2026-01-19 11:05 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-26 08:00 PM",
+            "delivery_by_et": "2026-05-27 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 24
+          },
+          {
+            "customer_id": 4874,
+            "order_id": 5779,
+            "name": "Claudia Machiella",
+            "email": "claudia@claudiamachiella.com",
+            "mobile": "4162099327",
+            "placed_at_et": "2026-05-26 07:10 AM",
+            "signup_at_et": "2026-05-11 03:30 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-05-26 08:00 PM",
+            "delivery_by_et": "2026-05-27 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 2,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 28.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 2
+          },
+          {
             "customer_id": 4044,
             "order_id": 5778,
             "name": "Aria Laser",
@@ -17611,7 +17699,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "open",
+            "status": "accepted",
             "delivery_type": "standard",
             "pickup_by_et": "2026-05-26 08:00 PM",
             "delivery_by_et": "2026-05-27 08:00 PM",

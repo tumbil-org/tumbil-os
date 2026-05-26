@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-05-26T06:15:30.367153-04:00",
+  "generated_at": "2026-05-26T08:50:37.638731-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10435,16 +10435,54 @@
     {
       "date": "2026-05-26",
       "tips": {
-        "tip_count": 0,
-        "total_tips_cad": 0,
-        "rows": []
+        "tip_count": 1,
+        "total_tips_cad": 5.0,
+        "rows": [
+          {
+            "order_id": 5704,
+            "customer_id": 3991,
+            "washpro_id": 4012,
+            "customer_name": "Caitlyn Veiga",
+            "washpro_name": "Chris Anttila",
+            "tip_cad": 5.0,
+            "captured_at_et": "2026-05-26 06:35 AM",
+            "status": "completed",
+            "delivery_type": "standard"
+          }
+        ]
       },
       "ratings": {
-        "rating_count": 1,
+        "rating_count": 3,
         "avg_rating": 5.0,
-        "five_star_count": 1,
+        "five_star_count": 3,
         "low_rating_count": 0,
         "rows": [
+          {
+            "order_id": 5698,
+            "customer_id": 3043,
+            "washpro_id": 4729,
+            "customer_name": "Kimia Veisi",
+            "washpro_name": "Mellisa Samuels",
+            "rating": 5,
+            "submitted_at_et": "2026-05-26 08:14 AM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
+          {
+            "order_id": 5704,
+            "customer_id": 3991,
+            "washpro_id": 4012,
+            "customer_name": "Caitlyn Veiga",
+            "washpro_name": "Chris Anttila",
+            "rating": 5,
+            "submitted_at_et": "2026-05-26 06:35 AM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 5682,
             "customer_id": 4044,
