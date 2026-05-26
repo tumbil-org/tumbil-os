@@ -263,6 +263,43 @@ def fetch_deliveries_today(conn, start_utc: str, end_utc: str) -> dict:
     }
 
 
+def fetch_lifetime_value(conn) -> dict:
+    """Average net revenue per customer across all delivered orders to date.
+
+    Uses the same "delivered" definition as fetch_deliveries_today (base_charge
+    + captured + not cancelled, revenue from order_details.actual_amount net of
+    HST). Customers without any delivered order are excluded, so this is the
+    realised LTV among customers who have actually completed at least one
+    order. New customers drag this down as they age in, so read it as a
+    conservative floor.
+    """
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT
+            COUNT(DISTINCT o.user_id) AS customers,
+            COUNT(DISTINCT p.order_id) AS total_orders,
+            COALESCE(SUM(od.actual_amount), 0) AS revenue_gross_cents
+        FROM payments p
+        JOIN orders o ON o.id = p.order_id
+        LEFT JOIN order_details od ON od.order_id = o.id
+        WHERE p.transaction_type = 'base_charge'
+          AND p.status = 'captured'
+          AND o.status != 'cancelled'
+    """)
+    row = cur.fetchone()
+    cur.close()
+    customers = int(row["customers"] or 0)
+    total_orders = int(row["total_orders"] or 0)
+    revenue_net = query_db.cents_to_net_cad(row["revenue_gross_cents"])
+    return {
+        "customers": customers,
+        "total_orders": total_orders,
+        "total_revenue_cad": revenue_net,
+        "ltv_cad": round(revenue_net / customers, 2) if customers else 0.0,
+        "orders_per_customer": round(total_orders / customers, 2) if customers else 0.0,
+    }
+
+
 def bq_table_suffixes(now_et: datetime) -> list[str]:
     day = now_et.strftime("%Y%m%d")
     return [day, f"intraday_{day}"]
@@ -696,7 +733,8 @@ def _fetch_db_sections(conn_factory, now_et, start_utc, now_utc, tz_offset):
             same_time = fetch_same_time_7d(conn, now_et)
             referrals = fetch_referral_summary(conn, now_et)
             deliveries = fetch_deliveries_today(conn, start_utc, now_utc)
-            return today_orders, same_time, referrals, deliveries
+            ltv = fetch_lifetime_value(conn)
+            return today_orders, same_time, referrals, deliveries, ltv
         except query_db.pymysql.err.OperationalError as exc:
             last_err = exc
             sys.stderr.write(
@@ -717,7 +755,7 @@ def build_live_payload(conn_factory, now_et: datetime | None = None) -> dict:
     tz_offset = query_db.tz_offset_for(start_et.strftime("%Y-%m-%d"))
 
     # --- All MySQL queries first, while the connection is fresh. ---
-    today_orders, same_time, referrals, deliveries = _fetch_db_sections(
+    today_orders, same_time, referrals, deliveries, ltv = _fetch_db_sections(
         conn_factory, now_et, start_utc, now_utc, tz_offset
     )
     today = aggregate_orders(today_orders)
@@ -752,6 +790,7 @@ def build_live_payload(conn_factory, now_et: datetime | None = None) -> dict:
         "same_time_7d_samples": same_time["samples"],
         "acquisition": build_acquisition(new_orders, ga4_rows, ga4_status, appsflyer),
         "referrals": referrals,
+        "lifetime_value": ltv,
         "data_health": {
             "db": {"status": "ok", "as_of_et": now_et.isoformat()},
             "ga4_attribution": ga4_status,

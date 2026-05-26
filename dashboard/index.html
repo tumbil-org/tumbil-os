@@ -179,6 +179,12 @@
     border-bottom-color: var(--accent);
   }
 
+  .tab-external {
+    text-decoration: none;
+    margin-left: auto;
+    font-size: inherit;
+  }
+
   main {
     padding: 22px;
   }
@@ -856,6 +862,7 @@
     <button class="tab" data-view="brief-view">Analyst Brief</button>
     <button class="tab" data-view="priorities-view">Priorities</button>
     <button class="tab" data-view="health-view">Data Health</button>
+    <a class="tab tab-external" href="https://yoygurt-thinkpad-x1-carbon-gen-10.taile8fb27.ts.net/qa/bugs" target="_blank" rel="noopener">Bug Tracker ↗</a>
   </nav>
 
   <main>
@@ -906,11 +913,11 @@
           <div class="value" id="order-value">-</div>
           <div class="sub" id="aov-sub">-</div>
         </div>
-        <a class="panel kpi" id="bug-tracker-tile" href="https://yoygurt-thinkpad-x1-carbon-gen-10.taile8fb27.ts.net/qa/bugs" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;cursor:pointer;">
-          <div class="label">Bug Tracker</div>
-          <div class="value accent" id="bug-tracker-value">View →</div>
-          <div class="sub">Rapid-order /triage heartbeat</div>
-        </a>
+        <div class="panel kpi">
+          <div class="label">Lifetime Value / Customer</div>
+          <div class="value green" id="ltv-value">-</div>
+          <div class="sub" id="ltv-sub">-</div>
+        </div>
       </div>
 
       <div class="grid two" style="margin-top: 14px;">
@@ -1633,7 +1640,23 @@ function renderHeader() {
   }
 }
 
+function renderLtv() {
+  const ltv = (state.live || {}).lifetime_value;
+  const valueEl = document.getElementById('ltv-value');
+  const subEl = document.getElementById('ltv-sub');
+  if (!valueEl || !subEl) return;
+  if (!ltv || !ltv.customers) {
+    valueEl.textContent = '-';
+    subEl.textContent = 'No completed orders yet';
+    return;
+  }
+  valueEl.textContent = money(ltv.ltv_cad);
+  subEl.textContent =
+    `${Number(ltv.orders_per_customer || 0).toFixed(2)} orders/customer · ${number(ltv.customers)} customers, ex. HST`;
+}
+
 function renderToday() {
+  renderLtv();
   const daily = state.daily;
   const context = selectedDayContext();
   if (!context.today) {
@@ -2620,7 +2643,7 @@ function logout() {
   location.reload();
 }
 
-document.querySelectorAll('.tab').forEach(button => {
+document.querySelectorAll('.tab[data-view]').forEach(button => {
   button.addEventListener('click', () => {
     const nextView = button.dataset.view;
     navigate({
