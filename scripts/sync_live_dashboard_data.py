@@ -263,7 +263,7 @@ def fetch_deliveries_today(conn, start_utc: str, end_utc: str) -> dict:
     }
 
 
-LTV_COHORT_DAYS = 90
+LTV_COHORT_DAYS = 180
 # Trailing 3-month plat_rev / net_rev_ex_HST from Tumbil Monthly Revenue sheet,
 # 'Summary (Official)' tab columns Q and J. Last refreshed 2026-05-26 (Feb-Apr 2026).
 # Re-derive after each month close: run finance/month_close.py, then average Q/J

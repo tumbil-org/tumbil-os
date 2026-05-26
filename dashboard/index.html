@@ -1659,8 +1659,8 @@ function renderLtv() {
     if (contribSubEl) contribSubEl.textContent = '';
     return;
   }
-  const cohortDays = ltv.cohort_days || 90;
-  const cohortNote = `excludes customers from last ${cohortDays} days`;
+  const cohortDays = ltv.cohort_days || 180;
+  const cohortNote = `${cohortDays}-day cohort`;
   valueEl.textContent = money(ltv.ltv_cad);
   subEl.textContent =
     `${Number(ltv.orders_per_customer || 0).toFixed(2)} orders/customer · ${number(ltv.customers)} customers · ex. HST · ${cohortNote}`;
