@@ -77,6 +77,12 @@
     align-items: baseline;
     gap: 12px;
     min-width: 0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .brand:hover h1 {
+    opacity: 0.85;
   }
 
   .brand h1 {
@@ -879,7 +885,7 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand">
+    <div class="brand" id="brand-home" role="button" tabindex="0" aria-label="Back to Overview">
       <h1>Tumbil<span>OS</span></h1>
       <small>Company dashboard</small>
     </div>
@@ -2925,6 +2931,19 @@ document.getElementById('ltv-back-btn').addEventListener('click', () => {
     activeView: 'today-view',
   });
 });
+
+(function wireBrandHome() {
+  const brand = document.getElementById('brand-home');
+  if (!brand) return;
+  const goHome = () => navigate({
+    activeView: 'today-view',
+    selectedDate: currentBusinessDate() || availableDates()[availableDates().length - 1] || null,
+  });
+  brand.addEventListener('click', goHome);
+  brand.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goHome(); }
+  });
+})();
 document.getElementById('task-form').addEventListener('submit', saveTask);
 document.getElementById('delete-task').addEventListener('click', archiveTask);
 
