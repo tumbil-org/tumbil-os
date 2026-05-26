@@ -914,9 +914,14 @@
           <div class="sub" id="aov-sub">-</div>
         </div>
         <div class="panel kpi">
-          <div class="label">Lifetime Value / Customer</div>
+          <div class="label">Revenue / Customer</div>
           <div class="value green" id="ltv-value">-</div>
           <div class="sub" id="ltv-sub">-</div>
+        </div>
+        <div class="panel kpi">
+          <div class="label">Contribution / Customer</div>
+          <div class="value green" id="contribution-value">-</div>
+          <div class="sub" id="contribution-sub">-</div>
         </div>
       </div>
 
@@ -1644,15 +1649,27 @@ function renderLtv() {
   const ltv = (state.live || {}).lifetime_value;
   const valueEl = document.getElementById('ltv-value');
   const subEl = document.getElementById('ltv-sub');
+  const contribValueEl = document.getElementById('contribution-value');
+  const contribSubEl = document.getElementById('contribution-sub');
   if (!valueEl || !subEl) return;
   if (!ltv || !ltv.customers) {
     valueEl.textContent = '-';
     subEl.textContent = 'No completed orders yet';
+    if (contribValueEl) contribValueEl.textContent = '-';
+    if (contribSubEl) contribSubEl.textContent = '';
     return;
   }
+  const cohortDays = ltv.cohort_days || 90;
+  const cohortNote = `excludes customers from last ${cohortDays} days`;
   valueEl.textContent = money(ltv.ltv_cad);
   subEl.textContent =
-    `${Number(ltv.orders_per_customer || 0).toFixed(2)} orders/customer · ${number(ltv.customers)} customers, ex. HST`;
+    `${Number(ltv.orders_per_customer || 0).toFixed(2)} orders/customer · ${number(ltv.customers)} customers · ex. HST · ${cohortNote}`;
+  if (contribValueEl && contribSubEl) {
+    contribValueEl.textContent = money(ltv.contribution_per_customer_cad || 0);
+    const marginPct = ltv.contribution_margin ? (ltv.contribution_margin * 100).toFixed(1) : '-';
+    contribSubEl.textContent =
+      `${marginPct}% margin after WP pay, Stripe fees, refunds, bonuses · ${cohortNote}`;
+  }
 }
 
 function renderToday() {

@@ -263,18 +263,28 @@ def fetch_deliveries_today(conn, start_utc: str, end_utc: str) -> dict:
     }
 
 
-def fetch_lifetime_value(conn) -> dict:
-    """Average net revenue per customer across all delivered orders to date.
+LTV_COHORT_DAYS = 90
+# Trailing 3-month plat_rev / net_rev_ex_HST from Tumbil Monthly Revenue sheet,
+# 'Summary (Official)' tab columns Q and J. Last refreshed 2026-05-26 (Feb-Apr 2026).
+# Re-derive after each month close: run finance/month_close.py, then average Q/J
+# across the latest 3 closed months. The ratio has held ~22-23% since 2025-08.
+LTV_CONTRIBUTION_MARGIN = 0.225
 
-    Uses the same "delivered" definition as fetch_deliveries_today (base_charge
-    + captured + not cancelled, revenue from order_details.actual_amount net of
-    HST). Customers without any delivered order are excluded, so this is the
-    realised LTV among customers who have actually completed at least one
-    order. New customers drag this down as they age in, so read it as a
-    conservative floor.
+
+def fetch_lifetime_value(conn) -> dict:
+    """Lifetime revenue + contribution per "mature" customer.
+
+    Mature = first placed order is older than LTV_COHORT_DAYS (90). Customers
+    inside the window are excluded so the average isn't dragged down by new
+    customers who haven't had time to re-order.
+
+    Revenue is net of HST and cancellations, from order_details.actual_amount
+    on captured base_charge payments (tips excluded). Contribution applies
+    LTV_CONTRIBUTION_MARGIN, the plat_rev/net_rev ratio from the monthly close
+    sheet (accounts for WashPro labour, Stripe fees, refunds, and WP bonuses).
     """
     cur = conn.cursor()
-    cur.execute("""
+    cur.execute(f"""
         SELECT
             COUNT(DISTINCT o.user_id) AS customers,
             COUNT(DISTINCT p.order_id) AS total_orders,
@@ -285,18 +295,35 @@ def fetch_lifetime_value(conn) -> dict:
         WHERE p.transaction_type = 'base_charge'
           AND p.status = 'captured'
           AND o.status != 'cancelled'
+          AND o.user_id IN (
+            SELECT first_orders.user_id FROM (
+                SELECT o2.user_id, MIN(ot2.timestamp) AS first_placed_utc
+                FROM payments p2
+                JOIN orders o2 ON o2.id = p2.order_id
+                JOIN order_timelines ot2 ON ot2.order_id = o2.id AND ot2.type = 'placed'
+                WHERE p2.transaction_type = 'base_charge'
+                  AND p2.status = 'captured'
+                  AND o2.status != 'cancelled'
+                GROUP BY o2.user_id
+                HAVING MIN(ot2.timestamp) < UTC_TIMESTAMP() - INTERVAL {LTV_COHORT_DAYS} DAY
+            ) first_orders
+          )
     """)
     row = cur.fetchone()
     cur.close()
     customers = int(row["customers"] or 0)
     total_orders = int(row["total_orders"] or 0)
     revenue_net = query_db.cents_to_net_cad(row["revenue_gross_cents"])
+    ltv_cad = round(revenue_net / customers, 2) if customers else 0.0
     return {
         "customers": customers,
         "total_orders": total_orders,
         "total_revenue_cad": revenue_net,
-        "ltv_cad": round(revenue_net / customers, 2) if customers else 0.0,
+        "ltv_cad": ltv_cad,
         "orders_per_customer": round(total_orders / customers, 2) if customers else 0.0,
+        "contribution_per_customer_cad": round(ltv_cad * LTV_CONTRIBUTION_MARGIN, 2),
+        "contribution_margin": LTV_CONTRIBUTION_MARGIN,
+        "cohort_days": LTV_COHORT_DAYS,
     }
 
 
