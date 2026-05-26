@@ -9,12 +9,12 @@ The founder/company dashboard for Cliff and Matt. Live order pace, customer mix,
 
 Different from `admin.tumbil.com` (that's the order operations console for ops staff).
 
-URL: https://tumbil-org.github.io/tumbil-os/ (password gated)
+URL: https://os.tumbil.com (primary, Render). Old GitHub Pages bundle at https://tumbil-org.github.io/tumbil-os/ still updated in parallel as backup.
 
 ## Architecture
 
-- **Repo:** `tumbil-org/tumbil-os` (public). Source on `main`, encrypted static bundle published to `gh-pages`.
-- **Hosted by:** GitHub Pages from `gh-pages` branch.
+- **Primary host:** Render Web Service (Express) at `tumbil-org/tumbilos-service` repo (private). Serves dashboard HTML + acts as data API. ThinkPad POSTs fresh JSON every 7 min to `POST /api/upload/:filename` with bearer token. Data held in memory, served instantly. No build step on data updates. Custom domain `os.tumbil.com`. Cookie-based auth (30-day lifetime).
+- **Legacy/backup host:** GitHub Pages from `gh-pages` branch of `tumbil-org/tumbil-os` (public). Encrypted with staticrypt. Still updated in parallel by the same ThinkPad timer for failover. Subject to ~10 builds/hour limit.
 - **Source split:** TumbilOS = dashboard + sync + deploy. TGE (`~/tumbil/tge/`) = the daily analyst brief that TumbilOS consumes from `tge/reports/*-analysis.json`.
 
 ## Where everything lives
@@ -23,14 +23,15 @@ URL: https://tumbil-org.github.io/tumbil-os/ (password gated)
 |------|---------|
 | `dashboard/index.html` | Static dashboard (HTML + inline JS). |
 | `dashboard/data.json` | Daily analyst brief payload. |
-| `dashboard/live.json` | Today-to-date live metrics (refreshed every 5 min). |
+| `dashboard/live.json` | Today-to-date live metrics (refreshed every 7 min). |
 | `dashboard/customers.json` | Rolling customer drill-down. |
 | `dashboard/service-details.json` | Rolling tips/ratings drill-down. |
 | `dashboard/priorities.json` | Priority-board snapshot (mutable via priority API). |
 | `dashboard/priorities-audit.jsonl` | Append-only priority edit log. |
 | `dashboard-deploy/` | Shallow clone of `gh-pages` for publishing. Gitignored. |
 | `scripts/deploy.sh` | Full daily deploy. |
-| `scripts/deploy_live.sh` | 5-minute live deploy. |
+| `scripts/deploy_live.sh` | 7-minute live deploy. Pushes to Render (primary) and gh-pages (backup). |
+| `scripts/upload_to_render.sh` | POSTs JSON files to the Render `tumbilos-service` (called from deploy_live.sh). |
 | `scripts/sync_data.py` | Reads latest TGE analysis -> `dashboard/data.json`. |
 | `scripts/sync_live_dashboard_data.py` | DB + GA4 + AppsFlyer -> `dashboard/live.json`. |
 | `scripts/sync_customer_details.py` | DB + GA4 -> `dashboard/customers.json`. |
