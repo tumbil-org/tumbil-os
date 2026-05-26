@@ -34,6 +34,11 @@ SYNC_PYTHON="$TUMBILOS_DIR/.venv/bin/python3"
 "$SYNC_PYTHON" "$TUMBILOS_DIR/scripts/sync_customer_details.py"
 "$SYNC_PYTHON" "$TUMBILOS_DIR/scripts/sync_service_details.py"
 
+# Upload to Render service (the new fast-update host)
+if [ -n "${TUMBILOS_RENDER_URL:-}" ] && [ -n "${TUMBILOS_RENDER_UPLOAD_TOKEN:-}" ]; then
+    "$TUMBILOS_DIR/scripts/upload_to_render.sh" || echo "[TumbilOS Live] WARN: Render upload failed"
+fi
+
 if [ ! -d "$DEPLOY_REPO/.git" ]; then
     echo "[TumbilOS Live] Deploy repo missing; run full deploy first."
     exit 1
