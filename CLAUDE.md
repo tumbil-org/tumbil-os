@@ -9,12 +9,12 @@ The founder/company dashboard for Cliff and Matt. Live order pace, customer mix,
 
 Different from `admin.tumbil.com` (that's the order operations console for ops staff).
 
-URL: https://os.tumbil.com (primary, Render). Old GitHub Pages bundle at https://tumbil-org.github.io/tumbil-os/ still updated in parallel as backup.
+URL: https://os.tumbil.com (Render). The old GitHub Pages bundle was retired on 2026-05-26 once Render proved stable.
 
 ## Architecture
 
-- **Primary host:** Render Web Service (Express) at `tumbil-org/tumbilos-service` repo (private). Serves dashboard HTML + acts as data API. ThinkPad POSTs fresh JSON every 7 min to `POST /api/upload/:filename` with bearer token. Data held in memory, served instantly. No build step on data updates. Custom domain `os.tumbil.com`. Cookie-based auth (30-day lifetime).
-- **Legacy/backup host:** GitHub Pages from `gh-pages` branch of `tumbil-org/tumbil-os` (public). Encrypted with staticrypt. Still updated in parallel by the same ThinkPad timer for failover. Subject to ~10 builds/hour limit.
+- **Host:** Render Web Service (Express) at `tumbil-org/tumbilos-service` repo (private). Serves dashboard HTML + acts as data API. ThinkPad POSTs fresh JSON every 5-7 min to `POST /api/upload/:filename` with bearer token. Data held in memory, served instantly. No build step on data updates. Custom domain `os.tumbil.com`. Cookie-based auth (30-day lifetime).
+- **Dashboard HTML lives in `tumbilos-service/public/index.html`** - that's the only copy that gets served. `tumbil-os/dashboard/index.html` is a working copy kept for the regression suite and the sync scripts to reference; if you change one, mirror to the other.
 - **Source split:** TumbilOS = dashboard + sync + deploy. TGE (`~/tumbil/tge/`) = the daily analyst brief that TumbilOS consumes from `tge/reports/*-analysis.json`.
 
 ## Where everything lives
@@ -28,15 +28,13 @@ URL: https://os.tumbil.com (primary, Render). Old GitHub Pages bundle at https:/
 | `dashboard/service-details.json` | Rolling tips/ratings drill-down. |
 | `dashboard/priorities.json` | Priority-board snapshot (mutable via priority API). |
 | `dashboard/priorities-audit.jsonl` | Append-only priority edit log. |
-| `dashboard-deploy/` | Shallow clone of `gh-pages` for publishing. Gitignored. |
-| `scripts/deploy.sh` | Full daily deploy. |
-| `scripts/deploy_live.sh` | 7-minute live deploy. Pushes to Render (primary) and gh-pages (backup). |
-| `scripts/upload_to_render.sh` | POSTs JSON files to the Render `tumbilos-service` (called from deploy_live.sh). |
+| `scripts/deploy.sh` | Full daily deploy (sync + tests + Render upload + commit refreshed payloads to main). |
+| `scripts/deploy_live.sh` | 5-minute live deploy (sync + Render upload). |
+| `scripts/upload_to_render.sh` | POSTs JSON files to the Render `tumbilos-service`. |
 | `scripts/sync_data.py` | Reads latest TGE analysis -> `dashboard/data.json`. |
 | `scripts/sync_live_dashboard_data.py` | DB + GA4 + AppsFlyer -> `dashboard/live.json`. |
 | `scripts/sync_customer_details.py` | DB + GA4 -> `dashboard/customers.json`. |
 | `scripts/sync_service_details.py` | DB -> `dashboard/service-details.json`. |
-| `scripts/encrypt_dashboard_payloads.js` | staticrypt-compatible payload encryption. |
 | `scripts/tumbilos_priority_api.py` | Token-authenticated priority write API (always-on systemd service). |
 | `scripts/test_tumbilos.sh` | Playwright regression gate. |
 | `scripts/systemd/` | systemd units installed on ThinkPad. |
@@ -62,12 +60,13 @@ Mac launchd plist `infrastructure/mac/LaunchAgents/com.tumbil.os-deploy.plist` e
 
 All secrets read from `~/.config/tge/tge-env`:
 - `TGE_DB_PASSWORD` - DB readonly
-- `TUMBILOS_DASHBOARD_PASSWORD` - staticrypt password (gates the dashboard)
+- `TUMBILOS_RENDER_URL` - base URL of the Render upload API
+- `TUMBILOS_RENDER_UPLOAD_TOKEN` - bearer token for `/api/upload/:filename`
 - `TUMBILOS_PRIORITY_TOKEN` - bearer token for the priority API
 
 ## Regression gate
 
-`scripts/deploy.sh` runs the full Playwright suite after sync and before encryption/push. Set `TUMBILOS_SKIP_TESTS=1` only for emergency manual deploys. Every user-found dashboard regression should become a named test in `tests/tumbilos_playwright.spec.js`.
+`scripts/deploy.sh` runs the full Playwright suite after sync and before pushing the refreshed payloads. Set `TUMBILOS_SKIP_TESTS=1` only for emergency manual deploys. Every user-found dashboard regression should become a named test in `tests/tumbilos_playwright.spec.js`.
 
 ## Data rules
 

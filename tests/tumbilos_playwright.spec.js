@@ -188,7 +188,7 @@ test('@critical detail back buttons return to the live overview without breaking
   await page.goto(route(`?screen=customer&date=${latestCustomerDate}&customerType=brand_new`));
   await expect(page.locator('#customer-screen-title')).toContainText('New Customers');
   await expectDateNavState(page, '#customer-date-nav', { back: true, forward: false, today: latestCustomerDate !== dates.liveDate });
-  await page.getByRole('button', { name: 'Back to Overview' }).click();
+  await page.locator('#customer-back-btn').click();
   await expect(page).toHaveURL(/screen=today/);
   await expect(page.locator('#today-view')).toHaveClass(/active/);
 
@@ -199,7 +199,7 @@ test('@critical detail back buttons return to the live overview without breaking
   await page.goto(route(`?screen=service&date=${latestServiceDate}&serviceType=ratings`));
   await expect(page.locator('#service-screen-title')).toContainText('Star Ratings');
   await expectDateNavState(page, '#service-date-nav', { back: true, forward: false, today: latestServiceDate !== dates.liveDate });
-  await page.getByRole('button', { name: 'Back to Overview' }).click();
+  await page.locator('#service-back-btn').click();
   await expect(page).toHaveURL(/screen=today/);
   await expect(page.locator('#today-view')).toHaveClass(/active/);
 });

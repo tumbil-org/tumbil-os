@@ -1,5 +1,7 @@
 #!/bin/bash
-# TumbilOS Live Deploy - refreshes live.json/priorities.json for GitHub Pages.
+# TumbilOS Live Deploy - refreshes live.json/priorities.json and POSTs them
+# to the Render service (os.tumbil.com). Render serves the dashboard HTML
+# directly, no encryption layer required.
 
 set -e
 
@@ -14,16 +16,17 @@ if [ -f "$HOME/.config/tge/tge-env" ]; then
         TGE_DB_PASSWORD_LINE=$(grep '^TGE_DB_PASSWORD=' "$HOME/.config/tge/tge-env" || true)
         export TGE_DB_PASSWORD="${TGE_DB_PASSWORD_LINE#TGE_DB_PASSWORD=}"
     fi
-    if [ -z "${TUMBILOS_DASHBOARD_PASSWORD:-}" ]; then
-        TUMBILOS_PW_LINE=$(grep '^TUMBILOS_DASHBOARD_PASSWORD=' "$HOME/.config/tge/tge-env" || true)
-        export TUMBILOS_DASHBOARD_PASSWORD="${TUMBILOS_PW_LINE#TUMBILOS_DASHBOARD_PASSWORD=}"
+    if [ -z "${TUMBILOS_RENDER_URL:-}" ]; then
+        TUMBILOS_RENDER_URL_LINE=$(grep '^TUMBILOS_RENDER_URL=' "$HOME/.config/tge/tge-env" || true)
+        export TUMBILOS_RENDER_URL="${TUMBILOS_RENDER_URL_LINE#TUMBILOS_RENDER_URL=}"
+    fi
+    if [ -z "${TUMBILOS_RENDER_UPLOAD_TOKEN:-}" ]; then
+        TUMBILOS_RENDER_TOKEN_LINE=$(grep '^TUMBILOS_RENDER_UPLOAD_TOKEN=' "$HOME/.config/tge/tge-env" || true)
+        export TUMBILOS_RENDER_UPLOAD_TOKEN="${TUMBILOS_RENDER_TOKEN_LINE#TUMBILOS_RENDER_UPLOAD_TOKEN=}"
     fi
 fi
 
 TUMBILOS_DIR="$HOME/tumbil/tumbil-os"
-DASHBOARD_DIR="$TUMBILOS_DIR/dashboard"
-DEPLOY_REPO="$TUMBILOS_DIR/dashboard-deploy"
-: "${TUMBILOS_DASHBOARD_PASSWORD:?TUMBILOS_DASHBOARD_PASSWORD must be set (in env or ~/.config/tge/tge-env)}"
 
 echo "[TumbilOS Live] Starting deploy at $(date)"
 
@@ -34,34 +37,11 @@ SYNC_PYTHON="$TUMBILOS_DIR/.venv/bin/python3"
 "$SYNC_PYTHON" "$TUMBILOS_DIR/scripts/sync_customer_details.py"
 "$SYNC_PYTHON" "$TUMBILOS_DIR/scripts/sync_service_details.py"
 
-# Upload to Render service (the new fast-update host)
 if [ -n "${TUMBILOS_RENDER_URL:-}" ] && [ -n "${TUMBILOS_RENDER_UPLOAD_TOKEN:-}" ]; then
-    "$TUMBILOS_DIR/scripts/upload_to_render.sh" || echo "[TumbilOS Live] WARN: Render upload failed"
-fi
-
-if [ ! -d "$DEPLOY_REPO/.git" ]; then
-    echo "[TumbilOS Live] Deploy repo missing; run full deploy first."
-    exit 1
-fi
-
-cd "$DEPLOY_REPO"
-git pull --rebase origin gh-pages 2>/dev/null || true
-
-TMPDIR=$(mktemp -d)
-STATICRYPT_PASSWORD="$TUMBILOS_DASHBOARD_PASSWORD" node "$TUMBILOS_DIR/scripts/encrypt_dashboard_payloads.js" "$TMPDIR" live.json priorities.json customers.json service-details.json
-cp "$TMPDIR/live.json" "$DEPLOY_REPO/"
-cp "$TMPDIR/priorities.json" "$DEPLOY_REPO/"
-cp "$TMPDIR/customers.json" "$DEPLOY_REPO/"
-cp "$TMPDIR/service-details.json" "$DEPLOY_REPO/"
-rm -rf "$TMPDIR"
-
-if git diff --quiet live.json priorities.json customers.json service-details.json 2>/dev/null; then
-    echo "[TumbilOS Live] No changes to deploy."
-else
-    git add live.json priorities.json customers.json service-details.json
-    git commit -m "Update live dashboard data $(date +%Y-%m-%dT%H:%M)"
-    git push origin gh-pages
+    "$TUMBILOS_DIR/scripts/upload_to_render.sh"
     echo "[TumbilOS Live] Deployed successfully."
+else
+    echo "[TumbilOS Live] WARN: Render credentials missing; data refreshed locally but not uploaded." >&2
 fi
 
 echo "[TumbilOS Live] Done at $(date)"

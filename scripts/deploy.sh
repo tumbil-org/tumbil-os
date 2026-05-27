@@ -1,11 +1,13 @@
 #!/bin/bash
-# TumbilOS Deploy - Syncs analyst brief + live data and pushes to GitHub Pages.
-# Reads the daily analyst brief from ~/tumbil/tge/reports/ (TGE writes, TumbilOS reads).
-# Uses a shallow clone of tumbil-org/tumbil-os gh-pages for publishing.
+# TumbilOS Deploy - Syncs the analyst brief + live data and ships them to the
+# Render service (os.tumbil.com). Reads the daily analyst brief from
+# ~/tumbil/tge/reports/ (TGE writes, TumbilOS reads). Render serves the
+# dashboard HTML directly from the tumbilos-service repo, so this script only
+# refreshes the JSON payloads here.
 
 set -e
 
-# Ensure node/npx available on ThinkPad
+# Ensure node available on ThinkPad (still needed for the regression suite).
 if [ "$(uname)" != "Darwin" ]; then
     export PATH="$HOME/.nvm/versions/node/v22.22.0/bin:$PATH"
     export PYTHONPATH="$HOME/.local/lib/python3.12/site-packages:/usr/lib/python3/dist-packages:${PYTHONPATH:-}"
@@ -17,16 +19,17 @@ if [ -f "$HOME/.config/tge/tge-env" ]; then
         TGE_DB_PASSWORD_LINE=$(grep '^TGE_DB_PASSWORD=' "$HOME/.config/tge/tge-env" || true)
         export TGE_DB_PASSWORD="${TGE_DB_PASSWORD_LINE#TGE_DB_PASSWORD=}"
     fi
-    if [ -z "${TUMBILOS_DASHBOARD_PASSWORD:-}" ]; then
-        TUMBILOS_PW_LINE=$(grep '^TUMBILOS_DASHBOARD_PASSWORD=' "$HOME/.config/tge/tge-env" || true)
-        export TUMBILOS_DASHBOARD_PASSWORD="${TUMBILOS_PW_LINE#TUMBILOS_DASHBOARD_PASSWORD=}"
+    if [ -z "${TUMBILOS_RENDER_URL:-}" ]; then
+        TUMBILOS_RENDER_URL_LINE=$(grep '^TUMBILOS_RENDER_URL=' "$HOME/.config/tge/tge-env" || true)
+        export TUMBILOS_RENDER_URL="${TUMBILOS_RENDER_URL_LINE#TUMBILOS_RENDER_URL=}"
+    fi
+    if [ -z "${TUMBILOS_RENDER_UPLOAD_TOKEN:-}" ]; then
+        TUMBILOS_RENDER_TOKEN_LINE=$(grep '^TUMBILOS_RENDER_UPLOAD_TOKEN=' "$HOME/.config/tge/tge-env" || true)
+        export TUMBILOS_RENDER_UPLOAD_TOKEN="${TUMBILOS_RENDER_TOKEN_LINE#TUMBILOS_RENDER_UPLOAD_TOKEN=}"
     fi
 fi
 
 TUMBILOS_DIR="$HOME/tumbil/tumbil-os"
-DASHBOARD_DIR="$TUMBILOS_DIR/dashboard"
-DEPLOY_REPO="$TUMBILOS_DIR/dashboard-deploy"
-PASSWORD="${TUMBILOS_DASHBOARD_PASSWORD:?TUMBILOS_DASHBOARD_PASSWORD must be set (in env or ~/.config/tge/tge-env)}"
 
 echo "[TumbilOS] Starting deploy at $(date)"
 
@@ -40,7 +43,7 @@ $SYNC_PYTHON "$TUMBILOS_DIR/scripts/sync_live_dashboard_data.py"
 $SYNC_PYTHON "$TUMBILOS_DIR/scripts/sync_customer_details.py"
 $SYNC_PYTHON "$TUMBILOS_DIR/scripts/sync_service_details.py"
 
-# Step 1.5: Browser-level regression gate before publishing
+# Step 2: Browser-level regression gate before shipping the new payloads.
 if [ "${TUMBILOS_SKIP_TESTS:-0}" = "1" ]; then
     echo "[TumbilOS] Skipping regression tests because TUMBILOS_SKIP_TESTS=1"
 else
@@ -48,54 +51,19 @@ else
     "$TUMBILOS_DIR/scripts/test_tumbilos.sh" full
 fi
 
-# Step 2: Encrypt the dashboard HTML with password
-echo "[TumbilOS] Encrypting dashboard..."
-TMPDIR=$(mktemp -d)
-npx --yes staticrypt "$DASHBOARD_DIR/index.html" -p "$PASSWORD" -d "$TMPDIR" --remember 30 --title "TumbilOS" -t "$DASHBOARD_DIR/password_template.html" --template-button "UNLOCK" --template-instructions "Enter the dashboard password." --short 2>/dev/null
-cp "$DASHBOARD_DIR/data.json" "$TMPDIR/"
-STATICRYPT_PASSWORD="$PASSWORD" node "$TUMBILOS_DIR/scripts/encrypt_dashboard_payloads.js" "$TMPDIR" live.json priorities.json customers.json service-details.json
-
-# Step 3: Ensure deploy repo exists (shallow clone, gh-pages only)
-if [ ! -d "$DEPLOY_REPO/.git" ]; then
-    echo "[TumbilOS] Cloning deploy repo..."
-    rm -rf "$DEPLOY_REPO"
-    git clone --single-branch --branch gh-pages --depth 1 \
-        git@github-tumbil-os:tumbil-org/tumbil-os.git "$DEPLOY_REPO"
-    cd "$DEPLOY_REPO"
-    git config user.email "cliffpeskin@gmail.com"
-    git config user.name "Cliff Peskin"
+# Step 3: Upload fresh JSON payloads to Render.
+if [ -n "${TUMBILOS_RENDER_URL:-}" ] && [ -n "${TUMBILOS_RENDER_UPLOAD_TOKEN:-}" ]; then
+    "$TUMBILOS_DIR/scripts/upload_to_render.sh"
+    echo "[TumbilOS] Deployed to Render."
 else
-    cd "$DEPLOY_REPO"
-    git pull --rebase origin gh-pages 2>/dev/null || true
+    echo "[TumbilOS] WARN: Render credentials missing; payloads refreshed locally but not uploaded." >&2
 fi
 
-# Step 4: Update files and push
-cp "$TMPDIR/index.html" "$DEPLOY_REPO/"
-cp "$TMPDIR/data.json" "$DEPLOY_REPO/"
-cp "$TMPDIR/live.json" "$DEPLOY_REPO/"
-cp "$TMPDIR/priorities.json" "$DEPLOY_REPO/"
-cp "$TMPDIR/customers.json" "$DEPLOY_REPO/"
-cp "$TMPDIR/service-details.json" "$DEPLOY_REPO/"
-cp -R "$DASHBOARD_DIR/fonts" "$DEPLOY_REPO/"
-cp "$DASHBOARD_DIR/favicon.svg" "$DEPLOY_REPO/"
-rm -rf "$TMPDIR"
-
-cd "$DEPLOY_REPO"
-if git diff --quiet index.html data.json live.json priorities.json customers.json service-details.json fonts favicon.svg 2>/dev/null; then
-    echo "[TumbilOS] No changes to deploy."
-else
-    git add index.html data.json live.json priorities.json customers.json service-details.json fonts favicon.svg
-    git commit -m "Update dashboard data $(date +%Y-%m-%d)"
-    git push origin gh-pages
-    echo "[TumbilOS] Deployed successfully."
-fi
-
-# Step 5: Commit fresh dashboard payload plaintexts back to main so other
-# consumers of the tumbil-os repo see the same content that the encrypted
-# bundle on gh-pages was built from. Without this step, the periodic git
-# pull on ThinkPad wipes the freshly-generated files and Mac's auto-sync
-# pushes a stale dashboard/data.json that lives on forever in main while
-# gh-pages drifts ahead.
+# Step 4: Commit fresh dashboard payload plaintexts back to main so other
+# consumers of the tumbil-os repo see the same content that Render is serving.
+# Without this, the periodic git pull on ThinkPad wipes the freshly-generated
+# files and Mac's auto-sync pushes a stale dashboard/data.json that lives on
+# forever in main.
 cd "$TUMBILOS_DIR"
 if git diff --quiet dashboard/data.json dashboard/live.json dashboard/customers.json dashboard/service-details.json 2>/dev/null; then
     echo "[TumbilOS] Dashboard payloads already match main; nothing to commit."
@@ -108,8 +76,5 @@ else
         echo "[TumbilOS] WARN: dashboard payloads commit landed locally but push to main failed; will retry next deploy."
     fi
 fi
-
-# Executor runs on ThinkPad (X1 Carbon) via systemd cron, not here.
-# It fetches data.json from GitHub Pages after this deploy publishes it.
 
 echo "[TumbilOS] Done at $(date)"
