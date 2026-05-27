@@ -940,6 +940,11 @@
           <div class="value accent" id="delivered-count">-</div>
           <div class="sub" id="delivered-sub">-</div>
         </div>
+        <div class="panel kpi clickable" data-deliveries-card="monthly">
+          <div class="label">Avg Deliveries / Day MTD</div>
+          <div class="value accent" id="deliveries-mtd-avg">-</div>
+          <div class="sub" id="deliveries-mtd-sub">-</div>
+        </div>
         <div class="panel kpi clickable" data-service-type="tips">
           <div class="label">Tips Received</div>
           <div class="value green" id="tips-total">-</div>
@@ -1093,6 +1098,28 @@
         </div>
       </div>
     </section>
+
+    <section id="deliveries-detail-view" class="view">
+      <div class="customer-toolbar">
+        <button class="ghost-btn" id="deliveries-back-btn">Back to Overview</button>
+        <div class="summary" id="deliveries-screen-title">Avg deliveries / day</div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Definition</div>
+        <div class="customer-summary" id="deliveries-method-summary">Loading...</div>
+      </div>
+      <div class="panel" style="margin-top: 14px;">
+        <div class="panel-title">Avg deliveries / day by month</div>
+        <div id="deliveries-monthly-chart" style="height: 280px;"></div>
+        <div class="customer-summary" style="margin-top: 10px;">
+          Past months divide total deliveries by full calendar days. The current month divides by days elapsed (MTD).
+        </div>
+      </div>
+      <div class="panel" style="margin-top: 14px;">
+        <div class="panel-title">Monthly breakdown</div>
+        <div id="deliveries-monthly-table" class="ltv-table-wrap"></div>
+      </div>
+    </section>
   </main>
 
   <dialog id="task-dialog">
@@ -1193,6 +1220,7 @@ const validViewIds = new Set([
   'customer-detail-view',
   'service-detail-view',
   'ltv-detail-view',
+  'deliveries-detail-view',
 ]);
 const validCustomerTypes = new Set(['brand_new', 'second_order', 'regular']);
 const validServiceTypes = new Set(['tips', 'ratings']);
@@ -1207,6 +1235,7 @@ function screenForViewId(viewId) {
     'customer-detail-view': 'customer',
     'service-detail-view': 'service',
     'ltv-detail-view': 'ltv',
+    'deliveries-detail-view': 'deliveries',
   }[viewId] || 'today';
 }
 
@@ -1220,11 +1249,12 @@ function viewIdForScreen(screen) {
     customer: 'customer-detail-view',
     service: 'service-detail-view',
     ltv: 'ltv-detail-view',
+    deliveries: 'deliveries-detail-view',
   }[screen] || 'today-view';
 }
 
 function activeTabViewFor(viewId) {
-  return viewId === 'customer-detail-view' || viewId === 'service-detail-view' || viewId === 'ltv-detail-view'
+  return ['customer-detail-view', 'service-detail-view', 'ltv-detail-view', 'deliveries-detail-view'].includes(viewId)
     ? null
     : viewId;
 }
@@ -1698,6 +1728,8 @@ function render() {
   renderCustomerDetail();
   renderServiceDetail();
   renderLtvDetail();
+  renderDeliveriesMonthly();
+  renderDeliveriesDetail();
 }
 
 function renderHeader() {
@@ -1893,6 +1925,132 @@ function renderLtvSensitivityTable(el, sensitivity, currentCutoffDays) {
           <th>Orders/cust</th>
           <th>Rev/cust</th>
           <th>LTV/cust</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function monthLabelShort(yearMonth) {
+  if (!yearMonth) return '';
+  const [y, m] = yearMonth.split('-').map(Number);
+  const names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  if (!names[m - 1]) return yearMonth;
+  return `${names[m - 1]} ${String(y).slice(2)}`;
+}
+
+function monthLabelLong(yearMonth) {
+  if (!yearMonth) return '';
+  const [y, m] = yearMonth.split('-').map(Number);
+  const names = ['January', 'February', 'March', 'April', 'May', 'June',
+                 'July', 'August', 'September', 'October', 'November', 'December'];
+  if (!names[m - 1]) return yearMonth;
+  return `${names[m - 1]} ${y}`;
+}
+
+function renderDeliveriesMonthly() {
+  const dm = (state.live || {}).deliveries_monthly;
+  const valueEl = document.getElementById('deliveries-mtd-avg');
+  const subEl = document.getElementById('deliveries-mtd-sub');
+  if (!valueEl || !subEl) return;
+  if (!dm || !dm.monthly_history || !dm.monthly_history.length) {
+    valueEl.textContent = '-';
+    subEl.textContent = 'No delivery history yet';
+    return;
+  }
+  valueEl.textContent = Number(dm.mtd_avg_per_day || 0).toFixed(2);
+  const monthName = monthLabelLong(dm.current_month);
+  subEl.textContent =
+    `${number(dm.mtd_total_deliveries)} deliveries over ${number(dm.mtd_days_elapsed)} days · ${monthName}`;
+}
+
+function renderDeliveriesDetail() {
+  const dm = (state.live || {}).deliveries_monthly;
+  const methodEl = document.getElementById('deliveries-method-summary');
+  const chartEl = document.getElementById('deliveries-monthly-chart');
+  const tableEl = document.getElementById('deliveries-monthly-table');
+  if (!methodEl || !chartEl || !tableEl) return;
+  if (!dm || !dm.monthly_history || !dm.monthly_history.length) {
+    methodEl.textContent = 'No delivery history available yet.';
+    chartEl.innerHTML = '';
+    tableEl.innerHTML = '';
+    return;
+  }
+  const monthName = monthLabelLong(dm.current_month);
+  methodEl.innerHTML = `
+    <strong>${Number(dm.mtd_avg_per_day || 0).toFixed(2)}</strong> avg deliveries / day
+    in ${monthName} so far (${number(dm.mtd_total_deliveries)} delivered over
+    ${number(dm.mtd_days_elapsed)} days). A "delivery" is a captured base-charge
+    payment on a non-cancelled order, same definition as the Overview card and
+    the TGE daily brief.
+  `;
+  renderDeliveriesMonthlyChart(chartEl, dm.monthly_history);
+  renderDeliveriesMonthlyTable(tableEl, dm.monthly_history);
+}
+
+function renderDeliveriesMonthlyChart(el, months) {
+  if (!months.length) {
+    el.innerHTML = '<div class="empty">No monthly data.</div>';
+    return;
+  }
+  const w = el.clientWidth || 720;
+  const h = 280;
+  const pad = { t: 16, r: 40, b: 36, l: 8 };
+  const chartW = w - pad.l - pad.r;
+  const chartH = h - pad.t - pad.b;
+  const yMaxRaw = Math.max(1, ...months.map(m => Number(m.avg_per_day || 0)));
+  const yMax = Math.ceil(yMaxRaw + 1);
+  const n = months.length;
+  const barW = (chartW / n) * 0.74;
+  const gap = (chartW / n) - barW;
+  const toX = i => pad.l + (chartW / n) * i + gap / 2;
+  const toY = v => pad.t + chartH * (1 - v / yMax);
+
+  let svg = `<svg viewBox="0 0 ${w} ${h}" width="100%" height="100%" preserveAspectRatio="none">`;
+  for (let i = 0; i <= 5; i++) {
+    const v = yMax * (1 - i / 5);
+    const y = pad.t + (chartH / 5) * i;
+    svg += `<line x1="${pad.l}" y1="${y}" x2="${w - pad.r}" y2="${y}" stroke="#2b333a"/>`;
+    svg += `<text x="${w - pad.r + 5}" y="${y + 4}" fill="#75818a" font-size="10">${v.toFixed(1)}</text>`;
+  }
+  months.forEach((m, i) => {
+    const v = Number(m.avg_per_day || 0);
+    const x = toX(i);
+    const y = toY(v);
+    const barH = pad.t + chartH - y;
+    const fill = m.is_current_month ? '#e8b34b' : '#00a3e7';
+    svg += `<rect x="${x}" y="${y}" width="${barW}" height="${barH}" fill="${fill}" rx="2"/>`;
+    svg += `<text x="${x + barW / 2}" y="${y - 4}" fill="#cbd1d6" font-size="10" text-anchor="middle">${v.toFixed(2)}</text>`;
+    svg += `<text x="${x + barW / 2}" y="${h - 18}" fill="#75818a" font-size="10" text-anchor="middle">${escapeHtml(monthLabelShort(m.year_month))}</text>`;
+    const dayNote = m.is_current_month ? `MTD ${m.days}d` : `${m.days}d`;
+    svg += `<text x="${x + barW / 2}" y="${h - 6}" fill="#5b6770" font-size="9" text-anchor="middle">${dayNote}</text>`;
+  });
+  svg += '</svg>';
+  el.innerHTML = svg;
+}
+
+function renderDeliveriesMonthlyTable(el, months) {
+  if (!months.length) {
+    el.innerHTML = '<div class="empty">No monthly data.</div>';
+    return;
+  }
+  const rows = months.slice().reverse().map(m => `
+    <tr class="${m.is_current_month ? 'headline' : ''}">
+      <td>${escapeHtml(monthLabelLong(m.year_month))}${m.is_current_month ? ' (MTD)' : ''}</td>
+      <td>${number(m.deliveries)}</td>
+      <td>${number(m.days)}</td>
+      <td>${Number(m.avg_per_day || 0).toFixed(2)}</td>
+    </tr>
+  `).join('');
+  el.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Deliveries</th>
+          <th>Days</th>
+          <th>Avg / day</th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
@@ -2882,6 +3040,13 @@ function openLtvDetail() {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
+function openDeliveriesDetail() {
+  navigate({
+    activeView: 'deliveries-detail-view',
+  });
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
 function toast(message) {
   const el = document.getElementById('toast');
   el.textContent = message;
@@ -2916,6 +3081,9 @@ document.querySelectorAll('[data-service-type]').forEach(card => {
 document.querySelectorAll('[data-ltv-card]').forEach(card => {
   card.addEventListener('click', () => openLtvDetail());
 });
+document.querySelectorAll('[data-deliveries-card]').forEach(card => {
+  card.addEventListener('click', () => openDeliveriesDetail());
+});
 document.getElementById('customer-back-btn').addEventListener('click', () => {
   navigate({
     activeView: 'today-view',
@@ -2927,6 +3095,11 @@ document.getElementById('service-back-btn').addEventListener('click', () => {
   });
 });
 document.getElementById('ltv-back-btn').addEventListener('click', () => {
+  navigate({
+    activeView: 'today-view',
+  });
+});
+document.getElementById('deliveries-back-btn').addEventListener('click', () => {
   navigate({
     activeView: 'today-view',
   });

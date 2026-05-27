@@ -263,6 +263,75 @@ def fetch_deliveries_today(conn, start_utc: str, end_utc: str) -> dict:
     }
 
 
+def _add_months_et(dt: datetime, n: int) -> datetime:
+    """Shift an ET-aware datetime by n calendar months, preserving day-of-month."""
+    months_total = dt.year * 12 + (dt.month - 1) + n
+    new_year, new_month_idx = divmod(months_total, 12)
+    return dt.replace(year=new_year, month=new_month_idx + 1)
+
+
+DELIVERIES_HISTORY_MONTHS = 13
+
+
+def fetch_deliveries_monthly_history(conn, now_et: datetime,
+                                     months_back: int = DELIVERIES_HISTORY_MONTHS) -> dict:
+    """Avg delivered orders/day per ET calendar month, with current MTD headline.
+
+    Same "delivered" definition as fetch_deliveries_today (base_charge captured
+    payment, excluding cancelled orders), so the headline never disagrees with
+    the today card or the TGE brief. Past months divide by the full calendar
+    month; the current month divides by days elapsed (1..today's day-of-month).
+    """
+    import calendar
+
+    first_of_current = now_et.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    months = []
+    for offset in range(-(months_back - 1), 1):
+        month_start_et = _add_months_et(first_of_current, offset)
+        next_month_start_et = _add_months_et(month_start_et, 1)
+        is_current = (offset == 0)
+        window_end_et = now_et if is_current else next_month_start_et
+
+        start_utc = month_start_et.astimezone(UTC).strftime("%Y-%m-%d %H:%M:%S")
+        end_utc = window_end_et.astimezone(UTC).strftime("%Y-%m-%d %H:%M:%S")
+
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT COUNT(DISTINCT p.order_id) AS deliveries
+            FROM payments p
+            JOIN orders o ON o.id = p.order_id
+            WHERE p.transaction_type = 'base_charge'
+              AND p.status = 'captured'
+              AND o.status != 'cancelled'
+              AND p.captured_at >= %s AND p.captured_at < %s
+        """, (start_utc, end_utc))
+        row = cur.fetchone()
+        cur.close()
+
+        deliveries = int(row["deliveries"] or 0)
+        if is_current:
+            days_in_window = now_et.day
+        else:
+            _, days_in_window = calendar.monthrange(month_start_et.year, month_start_et.month)
+        avg = round(deliveries / days_in_window, 2) if days_in_window else 0.0
+        months.append({
+            "year_month": month_start_et.strftime("%Y-%m"),
+            "deliveries": deliveries,
+            "days": days_in_window,
+            "avg_per_day": avg,
+            "is_current_month": is_current,
+        })
+
+    current = months[-1] if months else None
+    return {
+        "current_month": first_of_current.strftime("%Y-%m"),
+        "mtd_total_deliveries": current["deliveries"] if current else 0,
+        "mtd_days_elapsed": current["days"] if current else 0,
+        "mtd_avg_per_day": current["avg_per_day"] if current else 0.0,
+        "monthly_history": months,
+    }
+
+
 LTV_COHORT_DAYS = 180
 # Trailing 3-month plat_rev / net_rev_ex_HST from Tumbil Monthly Revenue sheet,
 # 'Summary (Official)' tab columns Q and J. Last refreshed 2026-05-26 (Feb-Apr 2026).
@@ -830,8 +899,9 @@ def _fetch_db_sections(conn_factory, now_et, start_utc, now_utc, tz_offset):
             same_time = fetch_same_time_7d(conn, now_et)
             referrals = fetch_referral_summary(conn, now_et)
             deliveries = fetch_deliveries_today(conn, start_utc, now_utc)
+            deliveries_monthly = fetch_deliveries_monthly_history(conn, now_et)
             ltv = fetch_lifetime_value(conn)
-            return today_orders, same_time, referrals, deliveries, ltv
+            return today_orders, same_time, referrals, deliveries, deliveries_monthly, ltv
         except query_db.pymysql.err.OperationalError as exc:
             last_err = exc
             sys.stderr.write(
@@ -852,7 +922,7 @@ def build_live_payload(conn_factory, now_et: datetime | None = None) -> dict:
     tz_offset = query_db.tz_offset_for(start_et.strftime("%Y-%m-%d"))
 
     # --- All MySQL queries first, while the connection is fresh. ---
-    today_orders, same_time, referrals, deliveries, ltv = _fetch_db_sections(
+    today_orders, same_time, referrals, deliveries, deliveries_monthly, ltv = _fetch_db_sections(
         conn_factory, now_et, start_utc, now_utc, tz_offset
     )
     today = aggregate_orders(today_orders)
@@ -887,6 +957,7 @@ def build_live_payload(conn_factory, now_et: datetime | None = None) -> dict:
         "same_time_7d_samples": same_time["samples"],
         "acquisition": build_acquisition(new_orders, ga4_rows, ga4_status, appsflyer),
         "referrals": referrals,
+        "deliveries_monthly": deliveries_monthly,
         "lifetime_value": ltv,
         "data_health": {
             "db": {"status": "ok", "as_of_et": now_et.isoformat()},
@@ -950,6 +1021,9 @@ def main() -> None:
     print(f"  New customers: {payload['today']['customer_mix']['brand_new']}")
     print(f"  Deliveries: {payload['today']['deliveries']['count']} "
           f"(${payload['today']['deliveries']['revenue_cad']} ex. HST)")
+    print(f"  MTD avg deliveries/day: {payload['deliveries_monthly']['mtd_avg_per_day']} "
+          f"({payload['deliveries_monthly']['mtd_total_deliveries']} over "
+          f"{payload['deliveries_monthly']['mtd_days_elapsed']} days)")
     print(f"  GA4 attribution: {payload['data_health']['ga4_attribution']['status']}")
     print(f"  AppsFlyer aggregate: {payload['data_health']['appsflyer']['status']}")
 
