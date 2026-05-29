@@ -66,6 +66,16 @@ Read `~/tumbil/dispatch/task-screenshots/TO-NNN.png`. Answer literally what is h
 #### 2a. Wrong product -> auto-re-file (do NOT park)
 If the screenshot clearly belongs to a DIFFERENT product than the TumbilOS Company Dashboard - the rapid-order chat/checkout, the marketing site, the WashPro/customer/admin app, or the backend - re-file it instead of parking. Map to the prefix (`~/tumbil/dispatch/lib/repo-registry.mjs`): RO=rapid-order, MS=marketing-site, CA=customer app, WP=washpro, AD=admin, BE=backend, IN=infra. Then: create `~/tumbil/dispatch/tasks/<P>-M.md` (next number for `<P>`) with the same title + `## Description` + `## What the reporter is pointing at`, `repo:` = target, **`department:` blank**, `state: Triage`, `related: [TO-NNN]`, plus a `## Re-filed` note; copy the screenshot to `<P>-M.png`; `rm -f` the TO-NNN task file + screenshot; `node $WORKSPACE/dispatch/lib/reconcile-queue.mjs`; commit + push the workspace. Report `re-filed TO-NNN -> <P>-M` and RETURN.
 
+### 2b. Claim the task: move to Patching
+Before investigating, mark the ticket in-flight. This is the concurrency lock (a concurrent heartbeat run SKIPS tasks already in Patching) and shows the ticket as "working" on the dashboard.
+```bash
+# edit ~/tumbil/dispatch/tasks/TO-NNN.md -> state: Patching (add patching_started: <timestamp>)
+node "$WORKSPACE/dispatch/lib/reconcile-queue.mjs"   # moves the queue row Triage/Reopened -> Patching
+(cd "$WORKSPACE" && git add dispatch/tasks/TO-NNN.md dispatch/task-queue.md \
+  && git commit -m "TO-NNN moved to Patching" \
+  && (git push origin main 2>/dev/null || (git pull --rebase origin main && git push origin main)))
+```
+
 ### 3. Investigate
 The dashboard is one static file: `dashboard/index.html` (HTML + inline JS + inline CSS). Layout / UX / copy / card-grouping bugs live there. Read it plus `DASHBOARD.md` for structure. The sibling JSON files are sync-script output, not where UI bugs live. Fill in `## Reproduction` and `## Root cause` in the task body. If you cannot find a confident root cause, park - do NOT guess on the live founder dashboard.
 
