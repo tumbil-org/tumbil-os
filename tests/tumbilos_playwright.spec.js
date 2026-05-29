@@ -309,6 +309,91 @@ test('stale old-schema local priority draft does not override priority snapshot'
   await expect(page.getByText('test', { exact: true })).toHaveCount(0);
 });
 
+test('@critical Overview KPI cards are grouped into daily / monthly / long-horizon families', async ({ page }) => {
+  // Regression for TO-002: the Overview previously rendered every KPI inside a
+  // single flat grid, mixing today-to-date cards with month-to-date (Avg
+  // Deliveries / Day MTD) and 180-day cohort cards (Revenue / Customer, LTV /
+  // Customer). The fix split the grid into three time-horizon groups with their
+  // own headings. This test pins the symptom: each card must live inside the
+  // correct family wrapper.
+
+  await page.locator('.tab', { hasText: 'Overview' }).click();
+  await expect(page.locator('#today-view')).toHaveClass(/active/);
+
+  // Locate the three family headings inside the Overview view. The fix can use
+  // any wording for daily / monthly / long-horizon as long as the three groups
+  // are visually distinct, so match each with a case-insensitive regex.
+  const overview = page.locator('#today-view');
+  const dailyHeading = overview.getByText(/daily/i).first();
+  const monthlyHeading = overview.getByText(/monthly/i).first();
+  const longHorizonHeading = overview.getByText(/long[-\s]?horizon/i).first();
+
+  await expect(dailyHeading, 'Overview must show a Daily group heading').toBeVisible();
+  await expect(monthlyHeading, 'Overview must show a Monthly group heading').toBeVisible();
+  await expect(longHorizonHeading, 'Overview must show a Long-horizon group heading').toBeVisible();
+
+  // For each heading, walk up the DOM to find the nearest ancestor that contains
+  // that heading plus at least one KPI card. That ancestor is the "family
+  // wrapper" - the visual grouping the user sees.
+  async function familyWrapperFor(headingLocator) {
+    return headingLocator.evaluateHandle(node => {
+      let el = node;
+      while (el && el.parentElement) {
+        const parent = el.parentElement;
+        // Look for an ancestor that holds both the heading and a card-like child.
+        const hasCard = parent.querySelector('.card, .kpi, [class*="kpi"]');
+        if (hasCard && parent !== document.body) {
+          return parent;
+        }
+        el = parent;
+      }
+      return node.parentElement;
+    });
+  }
+
+  async function cardTextsIn(wrapperHandle) {
+    return wrapperHandle.evaluate(node => {
+      // Grab the visible text from each KPI card inside this wrapper, where a
+      // "card" is any descendant carrying the .card class or a class that looks
+      // like a KPI tile. Trim to the card's title so substring matches are clean.
+      const candidates = Array.from(node.querySelectorAll('.card, .kpi, [class*="kpi"]'));
+      return candidates.map(el => (el.textContent || '').replace(/\s+/g, ' ').trim());
+    });
+  }
+
+  const dailyWrapper = await familyWrapperFor(dailyHeading);
+  const monthlyWrapper = await familyWrapperFor(monthlyHeading);
+  const longHorizonWrapper = await familyWrapperFor(longHorizonHeading);
+
+  const dailyTexts = (await cardTextsIn(dailyWrapper)).join(' || ');
+  const monthlyTexts = (await cardTextsIn(monthlyWrapper)).join(' || ');
+  const longHorizonTexts = (await cardTextsIn(longHorizonWrapper)).join(' || ');
+
+  // The three wrappers must be distinct DOM nodes - otherwise the cards aren't
+  // actually grouped, they're all still in one flat grid with three labels.
+  const wrapperIdentity = await page.evaluate(([d, m, l]) => {
+    return d !== m && m !== l && d !== l;
+  }, [dailyWrapper, monthlyWrapper, longHorizonWrapper]);
+  expect(wrapperIdentity, 'Daily, Monthly, and Long-horizon families must be distinct DOM containers').toBe(true);
+
+  // Avg Deliveries / Day MTD belongs in the Monthly family, NOT Daily.
+  expect(monthlyTexts, 'Avg Deliveries / Day MTD must live inside the Monthly group').toMatch(/Avg Deliveries\s*\/\s*Day MTD/i);
+  expect(dailyTexts, 'Avg Deliveries / Day MTD must NOT be wedged inside the Daily group').not.toMatch(/Avg Deliveries\s*\/\s*Day MTD/i);
+
+  // Revenue / Customer and LTV / Customer are 180-day cohort metrics - must be
+  // in the Long-horizon family, not the Daily strip.
+  expect(longHorizonTexts, 'Revenue / Customer must live inside the Long-horizon group').toMatch(/Revenue\s*\/\s*Customer/i);
+  expect(longHorizonTexts, 'LTV / Customer must live inside the Long-horizon group').toMatch(/LTV\s*\/\s*Customer/i);
+  expect(dailyTexts, 'Revenue / Customer must NOT sit flush against the Daily cards').not.toMatch(/Revenue\s*\/\s*Customer/i);
+  expect(dailyTexts, 'LTV / Customer must NOT sit flush against the Daily cards').not.toMatch(/LTV\s*\/\s*Customer/i);
+
+  // Sanity-check that known today-to-date metrics are still inside the Daily
+  // family - otherwise the fix would have moved the wrong cards.
+  for (const dailyLabel of ['Placed Today', 'New Customers', 'Delivered', 'Order Value']) {
+    expect(dailyTexts, `${dailyLabel} must live inside the Daily group`).toMatch(new RegExp(dailyLabel.replace(/\s+/g, '\\s*'), 'i'));
+  }
+});
+
 test('@critical priority board fits mobile viewport without page-level horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(route());
