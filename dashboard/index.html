@@ -223,6 +223,19 @@
     grid-template-columns: repeat(5, minmax(150px, 1fr));
   }
 
+  .kpi-group + .kpi-group {
+    margin-top: 14px;
+  }
+
+  .kpi-group-title {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
   .grid.two {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
@@ -913,62 +926,77 @@
       <div class="band">
         <div class="summary" id="today-summary">Loading...</div>
       </div>
-      <div class="grid kpis">
-        <div class="panel kpi">
-          <div class="label">Placed Today</div>
-          <div class="value accent" id="placed-today">-</div>
-          <div class="sub" id="placed-sub">-</div>
-          <div class="progress"><span id="target-progress"></span></div>
+      <div class="kpi-group" data-kpi-family="daily">
+        <div class="kpi-group-title">Daily (today-to-date)</div>
+        <div class="grid kpis">
+          <div class="panel kpi">
+            <div class="label">Placed Today</div>
+            <div class="value accent" id="placed-today">-</div>
+            <div class="sub" id="placed-sub">-</div>
+            <div class="progress"><span id="target-progress"></span></div>
+          </div>
+          <div class="panel kpi clickable" data-customer-type="brand_new">
+            <div class="label">New Customers</div>
+            <div class="value green" id="brand-new">-</div>
+            <div class="sub" id="brand-new-sub">-</div>
+          </div>
+          <div class="panel kpi clickable" data-customer-type="second_order">
+            <div class="label">Second-Order Customers</div>
+            <div class="value amber" id="second-order">-</div>
+            <div class="sub" id="second-order-sub">-</div>
+          </div>
+          <div class="panel kpi clickable" data-customer-type="regular">
+            <div class="label">Habitual Customers</div>
+            <div class="value" id="habitual-customers">-</div>
+            <div class="sub" id="habitual-sub">-</div>
+          </div>
+          <div class="panel kpi">
+            <div class="label">Delivered</div>
+            <div class="value accent" id="delivered-count">-</div>
+            <div class="sub" id="delivered-sub">-</div>
+          </div>
+          <div class="panel kpi clickable" data-service-type="tips">
+            <div class="label">Tips Received</div>
+            <div class="value green" id="tips-total">-</div>
+            <div class="sub" id="tips-sub">-</div>
+          </div>
+          <div class="panel kpi clickable" data-service-type="ratings">
+            <div class="label">Star Ratings</div>
+            <div class="value amber" id="ratings-value">-</div>
+            <div class="sub" id="ratings-sub">-</div>
+          </div>
+          <div class="panel kpi">
+            <div class="label">Order Value</div>
+            <div class="value" id="order-value">-</div>
+            <div class="sub" id="aov-sub">-</div>
+          </div>
         </div>
-        <div class="panel kpi clickable" data-customer-type="brand_new">
-          <div class="label">New Customers</div>
-          <div class="value green" id="brand-new">-</div>
-          <div class="sub" id="brand-new-sub">-</div>
+      </div>
+
+      <div class="kpi-group" data-kpi-family="monthly">
+        <div class="kpi-group-title">Monthly (month-to-date)</div>
+        <div class="grid kpis">
+          <div class="panel kpi clickable" data-deliveries-card="monthly">
+            <div class="label">Avg Deliveries / Day MTD</div>
+            <div class="value accent" id="deliveries-mtd-avg">-</div>
+            <div class="sub" id="deliveries-mtd-sub">-</div>
+          </div>
         </div>
-        <div class="panel kpi clickable" data-customer-type="second_order">
-          <div class="label">Second-Order Customers</div>
-          <div class="value amber" id="second-order">-</div>
-          <div class="sub" id="second-order-sub">-</div>
-        </div>
-        <div class="panel kpi clickable" data-customer-type="regular">
-          <div class="label">Habitual Customers</div>
-          <div class="value" id="habitual-customers">-</div>
-          <div class="sub" id="habitual-sub">-</div>
-        </div>
-        <div class="panel kpi">
-          <div class="label">Delivered</div>
-          <div class="value accent" id="delivered-count">-</div>
-          <div class="sub" id="delivered-sub">-</div>
-        </div>
-        <div class="panel kpi clickable" data-deliveries-card="monthly">
-          <div class="label">Avg Deliveries / Day MTD</div>
-          <div class="value accent" id="deliveries-mtd-avg">-</div>
-          <div class="sub" id="deliveries-mtd-sub">-</div>
-        </div>
-        <div class="panel kpi clickable" data-service-type="tips">
-          <div class="label">Tips Received</div>
-          <div class="value green" id="tips-total">-</div>
-          <div class="sub" id="tips-sub">-</div>
-        </div>
-        <div class="panel kpi clickable" data-service-type="ratings">
-          <div class="label">Star Ratings</div>
-          <div class="value amber" id="ratings-value">-</div>
-          <div class="sub" id="ratings-sub">-</div>
-        </div>
-        <div class="panel kpi">
-          <div class="label">Order Value</div>
-          <div class="value" id="order-value">-</div>
-          <div class="sub" id="aov-sub">-</div>
-        </div>
-        <div class="panel kpi clickable" data-ltv-card="revenue">
-          <div class="label">Revenue / Customer</div>
-          <div class="value green" id="ltv-value">-</div>
-          <div class="sub" id="ltv-sub">-</div>
-        </div>
-        <div class="panel kpi clickable" data-ltv-card="ltv">
-          <div class="label">LTV / Customer</div>
-          <div class="value green" id="contribution-value">-</div>
-          <div class="sub" id="contribution-sub">-</div>
+      </div>
+
+      <div class="kpi-group" data-kpi-family="long-horizon">
+        <div class="kpi-group-title">Long-horizon (180-day cohort)</div>
+        <div class="grid kpis">
+          <div class="panel kpi clickable" data-ltv-card="revenue">
+            <div class="label">Revenue / Customer</div>
+            <div class="value green" id="ltv-value">-</div>
+            <div class="sub" id="ltv-sub">-</div>
+          </div>
+          <div class="panel kpi clickable" data-ltv-card="ltv">
+            <div class="label">LTV / Customer</div>
+            <div class="value green" id="contribution-value">-</div>
+            <div class="sub" id="contribution-sub">-</div>
+          </div>
         </div>
       </div>
 
