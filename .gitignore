@@ -1,5 +1,3 @@
-.env
-.env.*
 .DS_Store
 __pycache__/
 *.pyc
@@ -9,3 +7,4 @@ node_modules/
 playwright-report/
 test-results/
 .claude/settings.local.json
+config.bat
