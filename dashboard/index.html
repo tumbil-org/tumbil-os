@@ -381,6 +381,45 @@
     color: var(--text);
   }
 
+
+.monitor-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 86px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.monitor-pill.ok { color: var(--accent-2); border-color: rgba(67, 209, 123, 0.45); }
+.monitor-pill.degraded { color: var(--amber); border-color: rgba(232, 179, 75, 0.45); }
+.monitor-pill.down { color: var(--red); border-color: rgba(240, 93, 94, 0.5); }
+.monitor-pill.unknown { color: var(--text-muted); }
+
+.monitor-checks {
+  display: grid;
+  gap: 10px;
+}
+
+.monitor-check {
+  display: grid;
+  grid-template-columns: minmax(170px, 1.1fr) 90px 96px minmax(180px, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.monitor-check:last-child { border-bottom: 0; }
+.monitor-check strong { color: var(--text); }
+.monitor-check small { color: var(--text-muted); display: block; margin-top: 2px; }
+
   .source-section-title {
     color: var(--text-muted);
     font-size: 11px;
@@ -916,6 +955,7 @@
     <button class="tab" data-view="acquisition-view">Acquisition</button>
     <button class="tab" data-view="brief-view">Analyst Brief</button>
     <button class="tab" data-view="priorities-view">Priorities</button>
+    <button class="tab" data-view="app-monitor-view">App Monitor</button>
     <button class="tab" data-view="health-view">Data Health</button>
     <a class="tab tab-external" href="https://yoygurt-thinkpad-x1-carbon-gen-10.taile8fb27.ts.net/dispatch" target="_blank" rel="noopener">Dispatch ↗</a>
   </nav>
@@ -1052,6 +1092,44 @@
       </div>
       <div class="board" id="priority-board"></div>
     </section>
+
+<section id="app-monitor-view" class="view">
+  <div class="band">
+    <div class="summary" id="app-monitor-summary">Loading app monitor...</div>
+  </div>
+  <div class="grid kpis">
+    <div class="panel kpi">
+      <div class="label">Current Status</div>
+      <div class="value accent" id="app-monitor-status">-</div>
+      <div class="sub" id="app-monitor-status-sub">-</div>
+    </div>
+    <div class="panel kpi">
+      <div class="label">Last Probe</div>
+      <div class="value" id="app-monitor-age">-</div>
+      <div class="sub" id="app-monitor-checked-at">-</div>
+    </div>
+    <div class="panel kpi">
+      <div class="label">Incident</div>
+      <div class="value amber" id="app-monitor-incident">-</div>
+      <div class="sub" id="app-monitor-incident-sub">-</div>
+    </div>
+    <div class="panel kpi">
+      <div class="label">Support Email</div>
+      <div class="value" id="app-monitor-alert">-</div>
+      <div class="sub" id="app-monitor-alert-sub">-</div>
+    </div>
+  </div>
+  <div class="grid two" style="margin-top: 14px;">
+    <div class="panel">
+      <div class="panel-title">Live Probes</div>
+      <div id="app-monitor-checks" class="monitor-checks"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Recent State Changes</div>
+      <div id="app-monitor-history"></div>
+    </div>
+  </div>
+</section>
 
     <section id="health-view" class="view">
       <div class="grid two">
@@ -1219,6 +1297,7 @@ const state = {
   live: null,
   customers: null,
   serviceDetails: null,
+  appMonitor: null,
   priorities: null,
   editingTask: null,
   draggedTaskId: null,
@@ -1244,6 +1323,7 @@ const validViewIds = new Set([
   'acquisition-view',
   'brief-view',
   'priorities-view',
+  'app-monitor-view',
   'health-view',
   'customer-detail-view',
   'service-detail-view',
@@ -1259,6 +1339,7 @@ function screenForViewId(viewId) {
     'acquisition-view': 'acquisition',
     'brief-view': 'brief',
     'priorities-view': 'priorities',
+    'app-monitor-view': 'app-monitor',
     'health-view': 'health',
     'customer-detail-view': 'customer',
     'service-detail-view': 'service',
@@ -1273,6 +1354,7 @@ function viewIdForScreen(screen) {
     acquisition: 'acquisition-view',
     brief: 'brief-view',
     priorities: 'priorities-view',
+    'app-monitor': 'app-monitor-view',
     health: 'health-view',
     customer: 'customer-detail-view',
     service: 'service-detail-view',
@@ -1675,17 +1757,24 @@ async function fetchJson(path) {
 }
 
 async function loadAll() {
-  const [daily, live, customers, serviceDetails, priorities] = await Promise.allSettled([
+  const [daily, live, customers, serviceDetails, appMonitor, priorities] = await Promise.allSettled([
     fetchJson('data.json'),
     fetchJson('live.json'),
     fetchJson('customers.json'),
     fetchJson('service-details.json'),
+    fetchJson('app-monitor.json').catch(error => ({
+      overall_status: 'unknown',
+      summary: error.message,
+      checks: [],
+      history: [],
+    })),
     loadPriorities(),
   ]);
   if (daily.status === 'fulfilled') state.daily = daily.value;
   if (live.status === 'fulfilled') state.live = live.value;
   if (customers.status === 'fulfilled') state.customers = customers.value;
   if (serviceDetails.status === 'fulfilled') state.serviceDetails = serviceDetails.value;
+  if (appMonitor.status === 'fulfilled') state.appMonitor = appMonitor.value;
   if (priorities.status === 'fulfilled') state.priorities = priorities.value;
   applyRouteFromUrl();
   syncUrlFromState(true);
@@ -1752,6 +1841,7 @@ function render() {
   renderAcquisition();
   renderBrief();
   renderPriorities();
+  renderAppMonitor();
   renderHealth();
   renderCustomerDetail();
   renderServiceDetail();
@@ -2675,6 +2765,95 @@ function getDropBeforeCard(container, y) {
     if (offset < 0 && offset > closest.offset) return { offset, element: child };
     return closest;
   }, { offset: Number.NEGATIVE_INFINITY, element: null }).element;
+}
+
+
+function monitorStatusClass(status) {
+  const normalized = String(status || 'unknown').toLowerCase();
+  return ['ok', 'degraded', 'down'].includes(normalized) ? normalized : 'unknown';
+}
+
+function monitorStatusLabel(status) {
+  return {
+    ok: 'Operational',
+    degraded: 'Degraded',
+    down: 'Down',
+    unknown: 'Unknown',
+  }[monitorStatusClass(status)];
+}
+
+function shortAge(iso) {
+  const mins = minutesOld(iso);
+  if (!Number.isFinite(mins)) return '-';
+  if (mins < 1) return '<1m';
+  if (mins < 60) return `${mins}m`;
+  const hours = Math.floor(mins / 60);
+  const rem = mins % 60;
+  return rem ? `${hours}h ${rem}m` : `${hours}h`;
+}
+
+function formatMonitorTime(iso) {
+  if (!iso) return 'Never';
+  const parsed = new Date(iso);
+  if (Number.isNaN(parsed.getTime())) return 'Invalid timestamp';
+  return parsed.toLocaleString(undefined, {
+    month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+  });
+}
+
+function renderAppMonitor() {
+  const monitor = state.appMonitor || {};
+  const status = monitorStatusClass(monitor.overall_status);
+  const statusEl = document.getElementById('app-monitor-status');
+  const checks = monitor.checks || [];
+  const failed = checks.filter(check => !check.ok);
+  const checkedAt = monitor.checked_at || monitor.last_check_utc;
+  statusEl.textContent = monitorStatusLabel(status);
+  statusEl.className = `value ${status === 'ok' ? 'green' : status === 'down' ? 'red' : status === 'degraded' ? 'amber' : ''}`;
+  document.getElementById('app-monitor-status-sub').textContent = monitor.summary || 'No monitor payload loaded.';
+  document.getElementById('app-monitor-age').textContent = shortAge(checkedAt);
+  document.getElementById('app-monitor-checked-at').textContent = `Checked ${formatMonitorTime(checkedAt)}`;
+
+  const incident = monitor.incident || {};
+  document.getElementById('app-monitor-incident').textContent = incident.active ? 'Active' : 'Clear';
+  document.getElementById('app-monitor-incident').className = `value ${incident.active ? 'red' : 'green'}`;
+  document.getElementById('app-monitor-incident-sub').textContent = incident.active
+    ? `Started ${formatMonitorTime(incident.started_at)} · ${number(monitor.consecutive_down_runs || 0)} failed runs`
+    : (incident.last_recovered_at ? `Last recovered ${formatMonitorTime(incident.last_recovered_at)}` : 'No active incident');
+
+  const alert = monitor.alert || {};
+  document.getElementById('app-monitor-alert').textContent = alert.last_error ? 'Failed' : alert.last_sent_at ? 'Sent' : 'Ready';
+  document.getElementById('app-monitor-alert').className = `value ${alert.last_error ? 'red' : alert.last_sent_at ? 'amber' : 'green'}`;
+  document.getElementById('app-monitor-alert-sub').textContent = alert.last_error
+    ? alert.last_error
+    : alert.last_sent_at
+    ? `Last sent ${formatMonitorTime(alert.last_sent_at)} to ${alert.recipient || 'support@tumbil.com'}`
+    : `Will alert ${alert.recipient || 'support@tumbil.com'} after confirmed outage`;
+
+  document.getElementById('app-monitor-summary').innerHTML = `
+    <strong>${escapeHtml(monitorStatusLabel(status))}</strong> · ${escapeHtml(monitor.summary || 'No monitor summary available.')}
+    ${monitor.public_ip ? ` · Monitor IP ${escapeHtml(monitor.public_ip)}` : ''}
+  `;
+
+  document.getElementById('app-monitor-checks').innerHTML = checks.length ? checks.map(check => {
+    const cls = check.ok ? 'ok' : 'down';
+    return `
+      <div class="monitor-check">
+        <div><strong>${escapeHtml(check.label || check.name)}</strong><small>${escapeHtml(check.method || 'GET')} ${escapeHtml(check.url || '')}</small></div>
+        <span class="monitor-pill ${cls}">${check.ok ? 'OK' : 'Fail'}</span>
+        <div>${check.status_code ? 'HTTP ' + escapeHtml(check.status_code) : 'No HTTP'}<small>${number(check.latency_ms || 0)}ms</small></div>
+        <div>${escapeHtml(check.detail || '')}${check.critical ? '<small>critical</small>' : '<small>informational</small>'}</div>
+      </div>
+    `;
+  }).join('') : '<div class="empty">No probe results available.</div>';
+
+  document.getElementById('app-monitor-history').innerHTML = (monitor.history || []).slice(-8).reverse().map(item => `
+    <div class="health-row">
+      <span>${escapeHtml(formatMonitorTime(item.at))}</span>
+      <strong><span class="monitor-pill ${monitorStatusClass(item.status)}">${escapeHtml(item.status || 'unknown')}</span></strong>
+    </div>
+    <div class="summary" style="padding: 0 0 9px; border-bottom: 1px solid var(--border);">${escapeHtml(item.summary || '')}</div>
+  `).join('') || '<div class="empty">No state changes recorded yet.</div>';
 }
 
 function renderHealth() {
