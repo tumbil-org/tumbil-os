@@ -1,0 +1,98 @@
+{
+  "alert": {
+    "last_error": null,
+    "last_incident_started_at": null,
+    "last_sent_at": null,
+    "recipient": "support@tumbil.com"
+  },
+  "checked_at": "2026-06-05T20:35:00Z",
+  "checks": [
+    {
+      "critical": true,
+      "detail": "ok",
+      "label": "Customer app shell",
+      "latency_ms": 42,
+      "method": "GET",
+      "name": "app_shell",
+      "ok": true,
+      "status_code": 200,
+      "url": "https://app.tumbil.com/"
+    },
+    {
+      "critical": true,
+      "detail": "ok",
+      "label": "App auth redirect helper",
+      "latency_ms": 77,
+      "method": "GET",
+      "name": "app_auth_handler",
+      "ok": true,
+      "status_code": 200,
+      "url": "https://app.tumbil.com/__/auth/handler"
+    },
+    {
+      "critical": true,
+      "detail": "ok",
+      "label": "Customer app ping",
+      "latency_ms": 39,
+      "method": "GET",
+      "name": "app_ping",
+      "ok": true,
+      "status_code": 200,
+      "url": "https://app.tumbil.com/ping"
+    },
+    {
+      "critical": true,
+      "detail": "ok",
+      "label": "Backend API root",
+      "latency_ms": 63,
+      "method": "GET",
+      "name": "api_root",
+      "ok": true,
+      "status_code": 200,
+      "url": "https://api.tumbil.com/"
+    },
+    {
+      "critical": true,
+      "detail": "ok",
+      "label": "Synthetic login path",
+      "latency_ms": 88,
+      "method": "POST",
+      "name": "auth_bad_login",
+      "ok": true,
+      "status_code": 422,
+      "url": "https://api.tumbil.com/api/auth/login"
+    },
+    {
+      "critical": false,
+      "detail": "ok",
+      "label": "Admin app shell",
+      "latency_ms": 31,
+      "method": "GET",
+      "name": "admin_shell",
+      "ok": true,
+      "status_code": 200,
+      "url": "https://admin.tumbil.com/"
+    }
+  ],
+  "consecutive_down_runs": 0,
+  "generated_at": "2026-06-05T20:35:00Z",
+  "history": [
+    {
+      "at": "2026-06-05T20:35:00Z",
+      "status": "ok",
+      "summary": "All customer app, auth, and API checks passed."
+    }
+  ],
+  "incident": {
+    "active": false,
+    "last_detected_at": null,
+    "last_recovered_at": "2026-06-05T19:34:00Z",
+    "last_summary": null,
+    "started_at": null
+  },
+  "last_check_utc": "2026-06-05T20:35:00Z",
+  "overall_status": "ok",
+  "public_ip": "174.91.118.195",
+  "summary": "All customer app, auth, and API checks passed.",
+  "version": 1
+}

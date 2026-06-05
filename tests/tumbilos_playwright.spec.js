@@ -109,13 +109,23 @@ test('@critical all primary dashboard views render without uncaught errors', asy
   await expect(page.getByText('Brand New')).toHaveCount(0);
   await expect(page.getByText('Returning / Regular')).toHaveCount(0);
 
-  const tabs = ['Overview', 'Acquisition', 'Analyst Brief', 'Priorities', 'Data Health'];
+  const tabs = ['Overview', 'Acquisition', 'Analyst Brief', 'Priorities', 'App Monitor', 'Data Health'];
   for (const tab of tabs) {
     await page.locator('.tab', { hasText: tab }).click();
     await expect(page.locator('.view.active')).toBeVisible();
   }
 
   expect(errors).toEqual([]);
+});
+
+
+test('@critical app monitor tab renders live app/API probes', async ({ page }) => {
+  await page.locator('.tab', { hasText: 'App Monitor' }).click();
+  await expect(page.locator('#app-monitor-view')).toHaveClass(/active/);
+  await expect(page.locator('#app-monitor-status')).not.toHaveText('-');
+  await expect(page.locator('#app-monitor-summary')).toContainText(/Operational|Degraded|Down|Unknown/);
+  await expect(page.locator('#app-monitor-checks .monitor-check')).toHaveCount(6);
+  await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic login path');
 });
 
 test('@critical date navigation buttons remain correct across dashboard and drilldown views', async ({ page }) => {
