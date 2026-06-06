@@ -124,9 +124,11 @@ test('@critical app monitor tab renders live app/API probes', async ({ page }) =
   await expect(page.locator('#app-monitor-view')).toHaveClass(/active/);
   await expect(page.locator('#app-monitor-status')).not.toHaveText('-');
   await expect(page.locator('#app-monitor-summary')).toContainText(/Operational|Degraded|Down|Unknown/);
-  await expect(page.locator('#app-monitor-checks .monitor-check')).toHaveCount(10);
+  await expect(page.locator('#app-monitor-checks .monitor-check')).toHaveCount(12);
   await expect(page.locator('#app-monitor-checks')).toContainText('Customer app Firebase config');
   await expect(page.locator('#app-monitor-checks')).toContainText('Firebase auth SDK');
+  await expect(page.locator('#app-monitor-checks')).toContainText('Mobile Google OAuth account selection');
+  await expect(page.locator('#app-monitor-checks')).toContainText('External app ping vantage (CA/US)');
   await expect(page.locator('#app-monitor-checks')).toContainText('Server-side app ping vantage');
   await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic login path');
   await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic Google login request validation');
