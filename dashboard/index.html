@@ -2771,7 +2771,7 @@ function getDropBeforeCard(container, y) {
 
 function monitorStatusClass(status) {
   const normalized = String(status || 'unknown').toLowerCase();
-  return ['ok', 'degraded', 'down'].includes(normalized) ? normalized : 'unknown';
+  return ['ok', 'degraded', 'down', 'resolved'].includes(normalized) ? normalized : 'unknown';
 }
 
 function monitorStatusLabel(status) {

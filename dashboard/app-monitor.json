@@ -78,6 +78,16 @@
   "generated_at": "2026-06-05T20:35:00Z",
   "history": [
     {
+      "at": "2026-06-05T19:33:00Z",
+      "status": "down",
+      "summary": "Critical app/login checks failing: Backend API root, Synthetic login path"
+    },
+    {
+      "at": "2026-06-05T19:34:00Z",
+      "status": "ok",
+      "summary": "All customer app, auth, and API checks passed."
+    },
+    {
       "at": "2026-06-05T20:35:00Z",
       "status": "ok",
       "summary": "All customer app, auth, and API checks passed."
@@ -85,9 +95,9 @@
   ],
   "incident": {
     "active": false,
-    "last_detected_at": null,
+    "last_detected_at": "2026-06-05T19:33:00Z",
     "last_recovered_at": "2026-06-05T19:34:00Z",
-    "last_summary": null,
+    "last_summary": "Critical app/login checks failing: Backend API root, Synthetic login path",
     "started_at": null
   },
   "last_check_utc": "2026-06-05T20:35:00Z",
