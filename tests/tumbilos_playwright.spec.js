@@ -126,6 +126,9 @@ test('@critical app monitor tab renders live app/API probes', async ({ page }) =
   await expect(page.locator('#app-monitor-summary')).toContainText(/Operational|Degraded|Down|Unknown/);
   await expect(page.locator('#app-monitor-checks .monitor-check')).toHaveCount(6);
   await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic login path');
+  await expect(page.locator('#app-monitor-incident-sub')).toContainText(/Was down .* Back up/);
+  await expect(page.locator('#app-monitor-history')).toContainText('Resolved');
+  await expect(page.locator('#app-monitor-history')).toContainText(/Down .* Back up/);
 });
 
 test('@critical date navigation buttons remain correct across dashboard and drilldown views', async ({ page }) => {
