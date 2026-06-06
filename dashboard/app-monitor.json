@@ -5,13 +5,14 @@
     "last_sent_at": null,
     "recipient": "support@tumbil.com"
   },
-  "checked_at": "2026-06-05T20:35:00Z",
+  "checked_at": "2026-06-06T17:57:30Z",
   "checks": [
     {
       "critical": true,
       "detail": "ok",
+      "diagnostic": false,
       "label": "Customer app shell",
-      "latency_ms": 42,
+      "latency_ms": 50,
       "method": "GET",
       "name": "app_shell",
       "ok": true,
@@ -21,8 +22,33 @@
     {
       "critical": true,
       "detail": "ok",
+      "diagnostic": false,
+      "label": "Customer app Firebase config",
+      "latency_ms": 29,
+      "method": "GET",
+      "name": "app_firebase_config",
+      "ok": true,
+      "status_code": 200,
+      "url": "https://app.tumbil.com/"
+    },
+    {
+      "critical": true,
+      "detail": "ok",
+      "diagnostic": false,
+      "label": "Firebase auth SDK",
+      "latency_ms": 85,
+      "method": "GET",
+      "name": "firebase_auth_sdk",
+      "ok": true,
+      "status_code": 200,
+      "url": "https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"
+    },
+    {
+      "critical": true,
+      "detail": "ok",
+      "diagnostic": false,
       "label": "App auth redirect helper",
-      "latency_ms": 77,
+      "latency_ms": 60,
       "method": "GET",
       "name": "app_auth_handler",
       "ok": true,
@@ -32,8 +58,9 @@
     {
       "critical": true,
       "detail": "ok",
+      "diagnostic": false,
       "label": "Customer app ping",
-      "latency_ms": 39,
+      "latency_ms": 35,
       "method": "GET",
       "name": "app_ping",
       "ok": true,
@@ -41,10 +68,23 @@
       "url": "https://app.tumbil.com/ping"
     },
     {
+      "critical": false,
+      "detail": "ok",
+      "diagnostic": true,
+      "label": "Server-side app ping vantage",
+      "latency_ms": 943,
+      "method": "SSH GET",
+      "name": "server_vantage_app_ping",
+      "ok": true,
+      "status_code": 200,
+      "url": "https://app.tumbil.com/ping"
+    },
+    {
       "critical": true,
       "detail": "ok",
+      "diagnostic": false,
       "label": "Backend API root",
-      "latency_ms": 63,
+      "latency_ms": 64,
       "method": "GET",
       "name": "api_root",
       "ok": true,
@@ -54,8 +94,9 @@
     {
       "critical": true,
       "detail": "ok",
+      "diagnostic": false,
       "label": "Synthetic login path",
-      "latency_ms": 88,
+      "latency_ms": 55,
       "method": "POST",
       "name": "auth_bad_login",
       "ok": true,
@@ -63,10 +104,23 @@
       "url": "https://api.tumbil.com/api/auth/login"
     },
     {
+      "critical": true,
+      "detail": "ok",
+      "diagnostic": false,
+      "label": "Synthetic Google login validator",
+      "latency_ms": 104,
+      "method": "POST",
+      "name": "auth_google_bad_token",
+      "ok": true,
+      "status_code": 400,
+      "url": "https://api.tumbil.com/api/auth/login"
+    },
+    {
       "critical": false,
       "detail": "ok",
+      "diagnostic": false,
       "label": "Admin app shell",
-      "latency_ms": 31,
+      "latency_ms": 34,
       "method": "GET",
       "name": "admin_shell",
       "ok": true,
@@ -75,34 +129,39 @@
     }
   ],
   "consecutive_down_runs": 0,
-  "generated_at": "2026-06-05T20:35:00Z",
+  "generated_at": "2026-06-06T17:57:32Z",
   "history": [
     {
-      "at": "2026-06-05T19:33:00Z",
-      "status": "down",
-      "summary": "Critical app/login checks failing: Backend API root, Synthetic login path"
-    },
-    {
-      "at": "2026-06-05T19:34:00Z",
+      "at": "2026-06-05T20:42:12Z",
       "status": "ok",
       "summary": "All customer app, auth, and API checks passed."
     },
     {
-      "at": "2026-06-05T20:35:00Z",
+      "at": "2026-06-06T06:11:09Z",
+      "status": "down",
+      "summary": "Critical app/login checks failing: Backend API root, Synthetic login path"
+    },
+    {
+      "at": "2026-06-06T06:12:13Z",
       "status": "ok",
       "summary": "All customer app, auth, and API checks passed."
     }
   ],
   "incident": {
     "active": false,
-    "last_detected_at": "2026-06-05T19:33:00Z",
-    "last_recovered_at": "2026-06-05T19:34:00Z",
+    "last_detected_at": "2026-06-06T06:11:09Z",
+    "last_recovered_at": "2026-06-06T06:12:13Z",
     "last_summary": "Critical app/login checks failing: Backend API root, Synthetic login path",
-    "started_at": null
+    "started_at": "2026-06-06T06:11:09Z"
   },
-  "last_check_utc": "2026-06-05T20:35:00Z",
+  "last_check_utc": "2026-06-06T17:57:30Z",
   "overall_status": "ok",
   "public_ip": "174.91.118.195",
+  "render_upload": {
+    "detail": "{\"ok\":true,\"filename\":\"app-monitor.json\",\"size\":3065,\"updated_at\":\"2026-06-06T17:57:32.215Z\"}",
+    "status": "ok",
+    "uploaded_at": "2026-06-06T17:57:32Z"
+  },
   "summary": "All customer app, auth, and API checks passed.",
   "version": 1
 }
