@@ -398,6 +398,7 @@
 .monitor-pill.ok { color: var(--accent-2); border-color: rgba(67, 209, 123, 0.45); }
 .monitor-pill.degraded { color: var(--amber); border-color: rgba(232, 179, 75, 0.45); }
 .monitor-pill.down { color: var(--red); border-color: rgba(240, 93, 94, 0.5); }
+.monitor-pill.resolved { color: var(--accent); border-color: rgba(0, 163, 231, 0.5); }
 .monitor-pill.unknown { color: var(--text-muted); }
 
 .monitor-checks {
@@ -2778,6 +2779,7 @@ function monitorStatusLabel(status) {
     ok: 'Operational',
     degraded: 'Degraded',
     down: 'Down',
+    resolved: 'Resolved',
     unknown: 'Unknown',
   }[monitorStatusClass(status)];
 }
@@ -2801,6 +2803,54 @@ function formatMonitorTime(iso) {
   });
 }
 
+function monitorDuration(startIso, endIso) {
+  const start = Date.parse(startIso || '');
+  const end = Date.parse(endIso || '');
+  if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return '';
+  const mins = Math.max(1, Math.round((end - start) / 60000));
+  if (mins < 60) return `${mins}m`;
+  const hours = Math.floor(mins / 60);
+  const rem = mins % 60;
+  return rem ? `${hours}h ${rem}m` : `${hours}h`;
+}
+
+function resolvedIncidentSummary(incident) {
+  if (!incident || incident.active || !incident.last_detected_at || !incident.last_recovered_at) return '';
+  const duration = monitorDuration(incident.last_detected_at, incident.last_recovered_at);
+  return `Was down ${formatMonitorTime(incident.last_detected_at)} · Back up ${formatMonitorTime(incident.last_recovered_at)}${duration ? ` · ${duration}` : ''}`;
+}
+
+function monitorHistoryEvents(history) {
+  const items = [...(history || [])].sort((a, b) => Date.parse(a.at || '') - Date.parse(b.at || ''));
+  return items.reduce((events, item, index) => {
+    const status = monitorStatusClass(item.status);
+    const previous = index > 0 ? items[index - 1] : null;
+    const previousStatus = previous ? monitorStatusClass(previous.status) : null;
+    const next = index < items.length - 1 ? items[index + 1] : null;
+    const nextStatus = next ? monitorStatusClass(next.status) : null;
+
+    if (status === 'down' && next && nextStatus !== 'down') return events;
+    if (status !== 'down' && previousStatus === 'down') {
+      events.push({
+        status: 'resolved',
+        at: item.at,
+        downAt: previous.at,
+        recoveredAt: item.at,
+        summary: previous.summary || 'Monitor detected an outage.',
+        recoverySummary: item.summary || 'Monitor recovered.',
+      });
+      return events;
+    }
+
+    events.push({
+      status,
+      at: item.at,
+      summary: item.summary || '',
+    });
+    return events;
+  }, []);
+}
+
 function renderAppMonitor() {
   const monitor = state.appMonitor || {};
   const status = monitorStatusClass(monitor.overall_status);
@@ -2815,11 +2865,12 @@ function renderAppMonitor() {
   document.getElementById('app-monitor-checked-at').textContent = `Checked ${formatMonitorTime(checkedAt)}`;
 
   const incident = monitor.incident || {};
-  document.getElementById('app-monitor-incident').textContent = incident.active ? 'Active' : 'Clear';
+  const resolvedSummary = resolvedIncidentSummary(incident);
+  document.getElementById('app-monitor-incident').textContent = incident.active ? 'Active' : resolvedSummary ? 'Recovered' : 'Clear';
   document.getElementById('app-monitor-incident').className = `value ${incident.active ? 'red' : 'green'}`;
   document.getElementById('app-monitor-incident-sub').textContent = incident.active
     ? `Started ${formatMonitorTime(incident.started_at)} · ${number(monitor.consecutive_down_runs || 0)} failed runs`
-    : (incident.last_recovered_at ? `Last recovered ${formatMonitorTime(incident.last_recovered_at)}` : 'No active incident');
+    : (resolvedSummary || 'No active incident');
 
   const alert = monitor.alert || {};
   document.getElementById('app-monitor-alert').textContent = alert.last_error ? 'Failed' : alert.last_sent_at ? 'Sent' : 'Ready';
@@ -2831,7 +2882,7 @@ function renderAppMonitor() {
     : `Will alert ${alert.recipient || 'support@tumbil.com'} after confirmed outage`;
 
   document.getElementById('app-monitor-summary').innerHTML = `
-    <strong>${escapeHtml(monitorStatusLabel(status))}</strong> · ${escapeHtml(monitor.summary || 'No monitor summary available.')}
+    <strong>${escapeHtml(status === 'ok' && resolvedSummary ? 'Operational now' : monitorStatusLabel(status))}</strong> · ${escapeHtml(resolvedSummary || monitor.summary || 'No monitor summary available.')}
     ${monitor.public_ip ? ` · Monitor IP ${escapeHtml(monitor.public_ip)}` : ''}
   `;
 
@@ -2847,13 +2898,25 @@ function renderAppMonitor() {
     `;
   }).join('') : '<div class="empty">No probe results available.</div>';
 
-  document.getElementById('app-monitor-history').innerHTML = (monitor.history || []).slice(-8).reverse().map(item => `
-    <div class="health-row">
-      <span>${escapeHtml(formatMonitorTime(item.at))}</span>
-      <strong><span class="monitor-pill ${monitorStatusClass(item.status)}">${escapeHtml(item.status || 'unknown')}</span></strong>
-    </div>
-    <div class="summary" style="padding: 0 0 9px; border-bottom: 1px solid var(--border);">${escapeHtml(item.summary || '')}</div>
-  `).join('') || '<div class="empty">No state changes recorded yet.</div>';
+  document.getElementById('app-monitor-history').innerHTML = monitorHistoryEvents(monitor.history).slice(-8).reverse().map(item => {
+    if (item.status === 'resolved') {
+      const duration = monitorDuration(item.downAt, item.recoveredAt);
+      return `
+        <div class="health-row">
+          <span>Down ${escapeHtml(formatMonitorTime(item.downAt))} · Back up ${escapeHtml(formatMonitorTime(item.recoveredAt))}${duration ? ` · ${escapeHtml(duration)}` : ''}</span>
+          <strong><span class="monitor-pill resolved">Resolved</span></strong>
+        </div>
+        <div class="summary" style="padding: 0 0 9px; border-bottom: 1px solid var(--border);">${escapeHtml(item.summary || '')}</div>
+      `;
+    }
+    return `
+      <div class="health-row">
+        <span>${escapeHtml(formatMonitorTime(item.at))}</span>
+        <strong><span class="monitor-pill ${monitorStatusClass(item.status)}">${escapeHtml(item.status || 'unknown')}</span></strong>
+      </div>
+      <div class="summary" style="padding: 0 0 9px; border-bottom: 1px solid var(--border);">${escapeHtml(item.summary || '')}</div>
+    `;
+  }).join('') || '<div class="empty">No state changes recorded yet.</div>';
 }
 
 function renderHealth() {
