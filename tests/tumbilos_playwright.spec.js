@@ -124,7 +124,7 @@ test('@critical app monitor tab renders live app/API probes', async ({ page }) =
   await expect(page.locator('#app-monitor-view')).toHaveClass(/active/);
   await expect(page.locator('#app-monitor-status')).not.toHaveText('-');
   await expect(page.locator('#app-monitor-summary')).toContainText(/Operational|Degraded|Down|Unknown/);
-  await expect(page.locator('#app-monitor-checks .monitor-check')).toHaveCount(12);
+  await expect(page.locator('#app-monitor-checks .monitor-check')).toHaveCount(14);
   await expect(page.locator('#app-monitor-checks')).toContainText('Customer app Firebase config');
   await expect(page.locator('#app-monitor-checks')).toContainText('Firebase auth SDK');
   await expect(page.locator('#app-monitor-checks')).toContainText('Mobile Google OAuth account selection');
@@ -132,6 +132,8 @@ test('@critical app monitor tab renders live app/API probes', async ({ page }) =
   await expect(page.locator('#app-monitor-checks')).toContainText('Server-side app ping vantage');
   await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic login path');
   await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic Google login request validation');
+  await expect(page.locator('#app-monitor-checks')).toContainText('Authenticated customer API canary');
+  await expect(page.locator('#app-monitor-checks')).toContainText('Authenticated customer app canary');
   await expect(page.locator('#app-monitor-incident-sub')).toContainText(/Was down .* Back up/);
   await expect(page.locator('#app-monitor-history')).toContainText('Resolved');
   await expect(page.locator('#app-monitor-history')).toContainText(/Down .* Back up/);
