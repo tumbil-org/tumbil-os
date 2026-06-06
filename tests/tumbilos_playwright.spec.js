@@ -129,7 +129,7 @@ test('@critical app monitor tab renders live app/API probes', async ({ page }) =
   await expect(page.locator('#app-monitor-checks')).toContainText('Firebase auth SDK');
   await expect(page.locator('#app-monitor-checks')).toContainText('Server-side app ping vantage');
   await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic login path');
-  await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic Google login validator');
+  await expect(page.locator('#app-monitor-checks')).toContainText('Synthetic Google login request validation');
   await expect(page.locator('#app-monitor-incident-sub')).toContainText(/Was down .* Back up/);
   await expect(page.locator('#app-monitor-history')).toContainText('Resolved');
   await expect(page.locator('#app-monitor-history')).toContainText(/Down .* Back up/);
