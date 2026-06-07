@@ -50,6 +50,13 @@ function latestArchivedWindow(dates, liveDate) {
   return { previous, current, next };
 }
 
+function previousCalendarDate(dateString) {
+  const [year, month, day] = dateString.split('-').map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  date.setUTCDate(date.getUTCDate() - 1);
+  return date.toISOString().slice(0, 10);
+}
+
 async function dateSets(page) {
   const [daily, live, customers, serviceDetails] = await Promise.all([
     readJson(page, 'data.json'),
@@ -187,6 +194,10 @@ test('@critical today-date-nav Back is enabled at the live date even with a non-
   expect(dashboardDates.length, 'need at least two dashboard dates to exercise Back at live').toBeGreaterThanOrEqual(2);
   expect(dashboardDates[dashboardDates.length - 1]).toBe(liveDate);
   const previousDate = dashboardDates[dashboardDates.length - 2];
+  expect(
+    previousDate,
+    `Back from live date ${liveDate} must land on the prior business date`,
+  ).toBe(previousCalendarDate(liveDate));
 
   await page.goto(route(`?screen=today&date=${liveDate}`));
   await waitForDashboard(page);

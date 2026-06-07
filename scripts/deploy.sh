@@ -43,6 +43,11 @@ $SYNC_PYTHON "$TUMBILOS_DIR/scripts/sync_live_dashboard_data.py"
 $SYNC_PYTHON "$TUMBILOS_DIR/scripts/sync_customer_details.py"
 $SYNC_PYTHON "$TUMBILOS_DIR/scripts/sync_service_details.py"
 
+# Guard the payload contract before browser tests or Render upload. If a late
+# TGE repair landed after the first sync, this retries the sync once.
+$SYNC_PYTHON "$TUMBILOS_DIR/scripts/check_dashboard_data_contract.py" \
+    --repair --sync-python "$SYNC_PYTHON"
+
 # Step 2: Browser-level regression gate before shipping the new payloads.
 if [ "${TUMBILOS_SKIP_TESTS:-0}" = "1" ]; then
     echo "[TumbilOS] Skipping regression tests because TUMBILOS_SKIP_TESTS=1"

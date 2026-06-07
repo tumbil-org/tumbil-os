@@ -13,6 +13,12 @@ SCOPE="${1:-quick}"
 
 cd "$TUMBILOS_DIR"
 
+CHECK_PYTHON="$TUMBILOS_DIR/.venv/bin/python3"
+[ ! -f "$CHECK_PYTHON" ] && CHECK_PYTHON="$HOME/tumbil/tge/.venv/bin/python3"
+[ ! -f "$CHECK_PYTHON" ] && CHECK_PYTHON="python3"
+
+"$CHECK_PYTHON" "$TUMBILOS_DIR/scripts/check_dashboard_data_contract.py"
+
 if [ ! -d node_modules/@playwright/test ]; then
     echo "[TumbilOS QA] Installing npm dependencies..."
     npm ci
