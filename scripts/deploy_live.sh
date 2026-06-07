@@ -37,6 +37,11 @@ SYNC_PYTHON="$TUMBILOS_DIR/.venv/bin/python3"
 "$SYNC_PYTHON" "$TUMBILOS_DIR/scripts/sync_customer_details.py"
 "$SYNC_PYTHON" "$TUMBILOS_DIR/scripts/sync_service_details.py"
 
+# The live deploy also uploads data.json, so it must not publish a new live
+# date unless the prior business day exists in dashboard history.
+"$SYNC_PYTHON" "$TUMBILOS_DIR/scripts/check_dashboard_data_contract.py" \
+    --repair --sync-python "$SYNC_PYTHON"
+
 if [ -n "${TUMBILOS_RENDER_URL:-}" ] && [ -n "${TUMBILOS_RENDER_UPLOAD_TOKEN:-}" ]; then
     "$TUMBILOS_DIR/scripts/upload_to_render.sh"
     echo "[TumbilOS Live] Deployed successfully."
