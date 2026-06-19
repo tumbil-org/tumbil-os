@@ -17,6 +17,8 @@ from zoneinfo import ZoneInfo
 TGE_REPORTS = Path.home() / "tumbil" / "tge" / "reports"
 DASHBOARD_DIR = Path.home() / "tumbil" / "tumbil-os" / "dashboard"
 OUTPUT_FILE = DASHBOARD_DIR / "data.json"
+CUSTOMERS_FILE = DASHBOARD_DIR / "customers.json"
+SERVICE_DETAILS_FILE = DASHBOARD_DIR / "service-details.json"
 LOCAL_TZ = ZoneInfo("America/Toronto")
 
 
@@ -149,9 +151,100 @@ def historical_day_from_report(briefing_date: str, analysis: dict, raw_data: dic
     }
 
 
+def historical_day_from_detail_payload(customer_day: dict, service_day: dict | None = None) -> dict | None:
+    """Build a history row from customer/service detail payloads.
+
+    After a host rebuild, old TGE analysis reports may be absent while the
+    DB-derived customer and service detail payloads still cover the rolling
+    dashboard window. This keeps date navigation useful without inventing an
+    analyst brief for those dates.
+    """
+    if not isinstance(customer_day, dict):
+        return None
+    date = customer_day.get("date")
+    if not date:
+        return None
+
+    customers_by_type = customer_day.get("customers_by_type", {})
+    if not isinstance(customers_by_type, dict):
+        customers_by_type = {}
+    counts = customer_day.get("counts", {})
+    if not isinstance(counts, dict):
+        counts = {}
+
+    rows = []
+    for bucket in ("brand_new", "second_order", "regular"):
+        bucket_rows = customers_by_type.get(bucket, [])
+        if isinstance(bucket_rows, list):
+            rows.extend(bucket_rows)
+
+    placed_orders = len(rows) or sum(int(counts.get(bucket, 0) or 0) for bucket in ("brand_new", "second_order", "regular"))
+    order_value = round(sum(float(row.get("order_value_cad") or 0) for row in rows), 2)
+    aov = round(order_value / placed_orders, 2) if placed_orders else 0
+
+    service_day = service_day if isinstance(service_day, dict) else {}
+    tips = service_day.get("tips", {}) if isinstance(service_day.get("tips"), dict) else {}
+    ratings = service_day.get("ratings", {}) if isinstance(service_day.get("ratings"), dict) else {}
+    delivered_count = max(
+        len(tips.get("rows", []) if isinstance(tips.get("rows"), list) else []),
+        len(ratings.get("rows", []) if isinstance(ratings.get("rows"), list) else []),
+    )
+
+    return {
+        "date": date,
+        "briefing_date": None,
+        "placed_orders": placed_orders,
+        "order_value_cad": order_value,
+        "aov_cad": aov,
+        "customer_mix": {
+            "brand_new": int(counts.get("brand_new", 0) or 0),
+            "second_order": int(counts.get("second_order", 0) or 0),
+            "regular": int(counts.get("regular", 0) or 0),
+            "returning_regular_total": int(counts.get("second_order", 0) or 0) + int(counts.get("regular", 0) or 0),
+        },
+        "same_time_7d_avg_orders": 0,
+        "same_time_delta_orders": 0,
+        "target_placed_orders": 20,
+        "pace_to_target_pct": round(placed_orders / 20 * 100, 1),
+        "deliveries": {
+            "count": delivered_count,
+            "revenue_cad": 0,
+            "aov_cad": 0,
+        },
+        "acquisition": {
+            "new_customer_orders": int(counts.get("brand_new", 0) or 0),
+            "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports.",
+        },
+        "executive_summary": "",
+        "analyst_brief": "",
+        "scorecard": [],
+    }
+
+
+def fallback_historical_days_from_detail_payloads() -> list[dict]:
+    customers = load_json(CUSTOMERS_FILE) or {}
+    services = load_json(SERVICE_DETAILS_FILE) or {}
+    customer_days = customers.get("days", []) if isinstance(customers.get("days"), list) else []
+    service_days = {
+        day.get("date"): day
+        for day in (services.get("days", []) if isinstance(services.get("days"), list) else [])
+        if isinstance(day, dict) and day.get("date")
+    }
+
+    days = []
+    for customer_day in customer_days:
+        day = historical_day_from_detail_payload(customer_day, service_days.get(customer_day.get("date")))
+        if day:
+            days.append(day)
+    return sorted(days, key=lambda row: row["date"])
+
+
 def build_historical_days(anchor_date: datetime | None = None, max_days: int = 44) -> list[dict]:
     anchor_date = anchor_date or datetime.now()
-    days = []
+    days_by_date = {
+        row["date"]: row
+        for row in fallback_historical_days_from_detail_payloads()
+    }
     for days_back in range(max_days):
         briefing_date = (anchor_date - timedelta(days=days_back)).strftime("%Y-%m-%d")
         analysis = parse_analysis(load_json(TGE_REPORTS / f"{briefing_date}-analysis.json"))
@@ -160,8 +253,8 @@ def build_historical_days(anchor_date: datetime | None = None, max_days: int = 4
         raw_data = load_json(TGE_REPORTS / f"{briefing_date}-data.json")
         day = historical_day_from_report(briefing_date, analysis, raw_data)
         if day:
-            days.append(day)
-    return sorted(days, key=lambda row: row["date"])
+            days_by_date[day["date"]] = day
+    return sorted(days_by_date.values(), key=lambda row: row["date"])
 
 
 def source_status(raw_data: dict | None) -> dict:
