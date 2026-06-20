@@ -6,6 +6,9 @@ set -euo pipefail
 
 if [ "$(uname)" != "Darwin" ]; then
     export PATH="$HOME/.nvm/versions/node/v22.22.0/bin:$PATH"
+    # Playwright does not yet label Ubuntu 26.04 as supported, but the
+    # Ubuntu 24.04 Chromium build runs cleanly on the rebuilt ThinkPad.
+    export PLAYWRIGHT_HOST_PLATFORM_OVERRIDE="${PLAYWRIGHT_HOST_PLATFORM_OVERRIDE:-ubuntu24.04-x64}"
 fi
 
 TUMBILOS_DIR="${TUMBILOS_DIR:-$HOME/tumbil/tumbil-os}"
