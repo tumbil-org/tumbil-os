@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-20T11:39:26.019049-04:00",
+  "generated_at": "2026-06-20T11:42:39.353667-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 7,
@@ -13,7 +13,7 @@
       "returning_regular_total": 5
     },
     "business_date": "2026-06-20",
-    "as_of_et": "2026-06-20T11:39:19.472285-04:00",
+    "as_of_et": "2026-06-20T11:42:32.929699-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 35.0,
     "same_time_7d_avg_orders": 4.6,
@@ -116,6 +116,11 @@
     "ga4_status": {
       "status": "ok",
       "primary": "ga4_data_api",
+      "ok_sources": [
+        "ga4_data_api",
+        "bigquery"
+      ],
+      "rows": 2,
       "ga4_data_api": {
         "status": "ok",
         "source": "ga4_data_api",
@@ -129,16 +134,15 @@
       "bigquery": {
         "status": "ok",
         "rows": 2,
-        "method": "rest"
-      },
-      "rows": 2
+        "method": "bq"
+      }
     },
     "appsflyer": {
       "status": "ok",
       "date": "2026-06-20",
       "timezone": "America/Toronto",
       "fetched_at": "2026-06-20T11:39:19.472285-04:00",
-      "cache_status": "miss",
+      "cache_status": "hit",
       "apps": [
         {
           "status": "ok",
@@ -508,11 +512,16 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-06-20T11:39:19.472285-04:00"
+      "as_of_et": "2026-06-20T11:42:32.929699-04:00"
     },
     "ga4_attribution": {
       "status": "ok",
       "primary": "ga4_data_api",
+      "ok_sources": [
+        "ga4_data_api",
+        "bigquery"
+      ],
+      "rows": 2,
       "ga4_data_api": {
         "status": "ok",
         "source": "ga4_data_api",
@@ -526,14 +535,13 @@
       "bigquery": {
         "status": "ok",
         "rows": 2,
-        "method": "rest"
-      },
-      "rows": 2
+        "method": "bq"
+      }
     },
     "ga4_bigquery": {
       "status": "ok",
       "rows": 2,
-      "method": "rest"
+      "method": "bq"
     },
     "appsflyer": {
       "status": "ok",

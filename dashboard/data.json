@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-06-20T06:15:03.468159",
+  "generated_at": "2026-06-20T11:42:32.663856",
   "latest_briefing_date": "2026-06-20",
   "data_date": "2026-06-19",
   "timezone": "America/Toronto",
@@ -1496,26 +1496,26 @@
       {
         "date": "2026-06-20",
         "briefing_date": null,
-        "placed_orders": 1,
-        "order_value_cad": 38.0,
-        "aov_cad": 38.0,
+        "placed_orders": 7,
+        "order_value_cad": 318.5,
+        "aov_cad": 45.5,
         "customer_mix": {
-          "brand_new": 0,
-          "second_order": 0,
-          "regular": 1,
-          "returning_regular_total": 1
+          "brand_new": 2,
+          "second_order": 1,
+          "regular": 4,
+          "returning_regular_total": 5
         },
         "same_time_7d_avg_orders": 0,
         "same_time_delta_orders": 0,
         "target_placed_orders": 20,
-        "pace_to_target_pct": 5.0,
+        "pace_to_target_pct": 35.0,
         "deliveries": {
-          "count": 0,
+          "count": 4,
           "revenue_cad": 0,
           "aov_cad": 0
         },
         "acquisition": {
-          "new_customer_orders": 0,
+          "new_customer_orders": 2,
           "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
         },
         "executive_summary": "",

@@ -1,12 +1,16 @@
 {
   "version": 1,
-  "generated_at": "2026-06-20T11:39:30.753296-04:00",
+  "generated_at": "2026-06-20T11:42:44.911919-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
   "ga4_source_status": {
     "status": "ok",
     "primary": "ga4_data_api",
+    "ok_sources": [
+      "ga4_data_api",
+      "bigquery"
+    ],
     "rows": 39,
     "ga4_data_api": {
       "status": "ok",
@@ -21,7 +25,7 @@
     "bigquery": {
       "status": "ok",
       "rows": 29,
-      "method": "rest"
+      "method": "bq"
     }
   },
   "days": [
