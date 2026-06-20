@@ -1,8 +1,8 @@
 {
   "status": "ok",
-  "date": "2026-05-16",
+  "date": "2026-06-20",
   "timezone": "America/Toronto",
-  "fetched_at": "2026-05-16T20:41:40.109310-04:00",
+  "fetched_at": "2026-06-20T11:39:19.472285-04:00",
   "cache_status": "miss",
   "apps": [
     {
@@ -21,16 +21,16 @@
   "totals": {
     "purchase_events": 1,
     "unique_users": 1,
-    "sales_cad": 67.07
+    "sales_cad": 77.72
   },
   "google_ads_purchase_events": 1,
   "media_sources": [
     {
       "media_source": "googleadwords_int",
-      "campaign": "22497318368",
+      "campaign": "22849921825",
       "purchase_events": 1,
       "unique_users": 1,
-      "sales_cad": 67.07,
+      "sales_cad": 77.72,
       "apps": [
         "id6738962991"
       ]
