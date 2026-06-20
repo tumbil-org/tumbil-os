@@ -7,7 +7,7 @@ Wants=network-online.target
 Type=simple
 ExecStart=/usr/bin/python3 %h/tumbil/tumbil-os/scripts/tumbilos_priority_api.py
 WorkingDirectory=%h/tumbil/tumbil-os
-Environment=PATH=/home/yoygurt/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
 EnvironmentFile=%h/.config/tge/tge-env
 Restart=on-failure
 RestartSec=5
