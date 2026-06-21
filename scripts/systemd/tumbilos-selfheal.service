@@ -1,0 +1,11 @@
+[Unit]
+Description=TumbilOS Self-Heal Sensor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/tumbil/tumbil-os/scripts/tumbilos_selfheal.py
+WorkingDirectory=%h/tumbil/tumbil-os
+Environment=PATH=%h/.local/bin:/snap/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=-%h/.config/tge/tge-env
