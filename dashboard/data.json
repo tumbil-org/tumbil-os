@@ -1,114 +1,111 @@
 {
   "version": 2,
-  "generated_at": "2026-06-20T11:42:32.663856",
-  "latest_briefing_date": "2026-06-20",
-  "data_date": "2026-06-19",
+  "generated_at": "2026-06-21T14:01:29.886742",
+  "latest_briefing_date": "2026-06-21",
+  "data_date": "2026-06-20",
   "timezone": "America/Toronto",
-  "executive_summary": "Data blackout Friday: the production database, Search Console and GA4 all failed, so there are zero order, revenue or customer numbers today. Google Ads was the only working source \u2014 $92.95 spent on 65 clicks and 1,010 impressions, below the $103.32 daily 7-day average.",
-  "analyst_brief": "**The one thing today is a broken pipeline, not a growth call.** Almost every data source failed this morning. The production database didn't load because a required library (pymysql) isn't installed on the machine, Search Console failed on a missing Google module, and GA4/Stripe/Intercom aren't wired in. That means we have no orders, no revenue, no new-customer count, no ratings, no cancellations \u2014 nothing to base a recommendation on. Please get pymysql installed and the Search Console module fixed before tomorrow's 6 AM run, otherwise we lose another day blind. Without the database I genuinely can't tell you whether yesterday was a good day or a bad one.\n\nHere's what the one working source \u2014 Google Ads \u2014 actually showed, kept separate because it can't be tied back to real orders:\n\n- We spent **$92.95** on Friday, a bit under the **$103.32** average daily spend over the last 7 days. That bought 65 clicks and 1,010 impressions.\n- Google reported **7 \"conversions,\"** but remember these count sign-ups, not paid orders. Without the database we can't turn that into a real cost per new customer, so treat the 7 as a soft signal only.\n- The GTA-wide click campaign ate roughly half the budget ($45.69) for 36 clicks and 2 sign-ups. Hamilton was efficient \u2014 $11.68 for 1 sign-up, and the search \"laundry service hamilton\" both got clicked and converted.\n- One thing worth watching, **as an observation only**: a big chunk of spend went to \"laundromat near me\" and similar searches \u2014 at least four separate clicks totalling around $12 \u2014 with zero sign-ups. These are people hunting for a physical laundromat to walk into, not our pickup-and-delivery service, so the click rarely fits what we offer. I am **not** recommending any keyword changes here \u2014 that needs your manual review, and our past negative-keyword changes have blocked good searches. Just flagging it for a human to look at when there's time.\n- Richmond Hill showed 28 impressions but got 0 clicks and spent nothing \u2014 effectively dormant.\n\nThat's the whole picture today. The honest summary: one day of partial ad data, no business numbers, and an infrastructure fix that needs to happen before we can advise on anything. Once the database is back, tomorrow's brief can actually answer \"what's the highest-leverage move.\"",
+  "executive_summary": "Saturday was a strong delivery day \u2014 17 orders delivered for $838.12 ex. HST (+42.8% vs avg) \u2014 but acquisition was expensive: $141.90 of ad spend (the week's highest) bought only 2 new customers, a cost of $70.95 each, nearly 3x the $25 ceiling. Placed orders normal at 11.",
+  "analyst_brief": "**The one thing today: ad spend went up and new customers didn't.** Yesterday we spent $141.90 on Google Ads \u2014 the most in any single day this week, up about a third from the weekly average. That money brought in 2 new customers. That works out to $70.95 to land each new customer, against our ceiling of $25. Even the steadier 7-day figure is $49.85, roughly double the ceiling. This isn't a one-bad-day blip; the cost of getting a new customer has been running high all week. Spending *more* on a day that already wasn't converting well is the wrong direction.\n\nTo be clear on the math: don't be tempted to spread that $141.90 across all 11 placed orders to make it look cheaper. Eight of yesterday's eleven orders came from regulars who didn't cost us a dime in ads \u2014 they were already coming back. The ad budget's job is to find new people, and yesterday it found two of them at $70.95 apiece. That's the number that matters.\n\n**The good news is the business underneath the ads is healthy.** Saturday delivered 17 orders worth $838.12 ex. HST \u2014 about 43% above a normal day. Regulars showed up in force (8 of 11 placed orders). Ratings stayed excellent at 4.93, with 13 of 14 reviews at five stars and no low scores. Cancellations are running 3.6% over the last week, well under the 30-day baseline of 6.6%. The three \"failed payments\" total 82 cents \u2014 a rounding error, not a problem. The engine runs fine; it's the fuel cost of new customers that's off.\n\n**One thing worth watching: second-time customers were thin.** Only 1 person placed their second order yesterday, against a normal of about 2. One slow day means nothing on its own, but the rate at which new people come back for a second order has been soft for weeks \u2014 the groups of new customers from early May onward are reordering at 7\u201320%, down from the 30\u201340% we saw in April. If we're paying $50\u201370 to acquire someone and only a fifth of them come back, the economics get tight fast. The April iOS attribution fix helped us *see* orders better, but it didn't fix whether people return. That's the deeper lever \u2014 getting more of the expensive new customers to come back is worth more than squeezing the ad cost.\n\n**A small SEO note, not urgent:** the blog post \"How to Fold a Fitted Sheet\" still isn't showing up in Google \u2014 it's been found but not indexed. Everything else (homepage, all 24 city pages, the other blogs) is indexed and healthy. If someone has 10 minutes, requesting indexing for that one page in Search Console would close the gap.\n\nMy recommendation: before adding any more ad budget, look at where yesterday's extra spend went. The GTA Click campaign took $59.78 for 2 registrations; Hamilton and Calgary each took ~$20 for zero. The cost-per-customer problem is fixable by tightening where the money goes \u2014 but that's an operator decision to review, not a knob I'd turn automatically.",
   "scorecard": [
     {
       "metric": "Orders Placed",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "11",
+      "seven_day_avg": "11.9",
+      "change": "-7.6%",
+      "status": "green"
     },
     {
       "metric": "Orders Delivered",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "17",
+      "seven_day_avg": "11.4",
+      "change": "+49.1%",
+      "status": "green"
     },
     {
-      "metric": "Order Value (placed, ex. HST)",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "metric": "Order Value, placed, ex. HST",
+      "yesterday": "$536.76",
+      "seven_day_avg": "$604.05",
+      "change": "-11.1%",
+      "status": "green"
     },
     {
-      "metric": "Revenue (delivered, ex. HST)",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "metric": "Revenue, delivered, ex. HST",
+      "yesterday": "$838.12",
+      "seven_day_avg": "$586.97",
+      "change": "+42.8%",
+      "status": "green"
     },
     {
-      "metric": "AOV (placed, ex. HST)",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "metric": "AOV, placed, ex. HST",
+      "yesterday": "$48.80",
+      "seven_day_avg": "$50.94",
+      "change": "-4.2%",
+      "status": "green"
     },
     {
       "metric": "Ad Spend",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "$141.90",
+      "seven_day_avg": "$106.82",
+      "change": "+32.8%",
+      "status": "yellow"
     },
     {
       "metric": "Cost per New Customer",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "$70.95",
+      "seven_day_avg": "$49.85",
+      "change": "+42.3%",
+      "status": "red"
     },
     {
       "metric": "New Customers",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "2",
+      "seven_day_avg": "2.1",
+      "change": "-4.8%",
+      "status": "green"
     },
     {
       "metric": "Second-Order Customers",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "1",
+      "seven_day_avg": "1.9",
+      "change": "-47.4%",
+      "status": "red"
     },
     {
       "metric": "Habitual Customers",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "8",
+      "seven_day_avg": "7.9",
+      "change": "+1.3%",
+      "status": "green"
     },
     {
       "metric": "Avg In-App Rating",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "4.93",
+      "seven_day_avg": "4.88",
+      "change": "+1.0%",
+      "status": "green"
     },
     {
       "metric": "Cancellations 7d",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "3.6%",
+      "seven_day_avg": "6.6%",
+      "change": "+0.2pp",
+      "status": "green"
     },
     {
       "metric": "Failed Payments 7d",
-      "yesterday": "n/a",
-      "seven_day_avg": "n/a",
-      "change": "n/a",
-      "status": "n/a"
+      "yesterday": "3",
+      "seven_day_avg": "0.7",
+      "change": "+1",
+      "status": "yellow"
     }
   ],
-  "validation_notes": "No DB cross-check possible: the production database failed to load (pymysql not installed), so there are no order or revenue figures to validate against Stripe. Search Console, GA4, Stripe and Intercom were also unavailable. Only Google Ads reported.",
+  "validation_notes": "DB self-consistent: placed 11 \u00d7 $48.80 = $536.80 \u2248 $536.76 ex. HST; delivered 17 \u00d7 $49.30 = $838.10 \u2248 $838.12 ex. HST. Both check out. Stripe, GA4, ClickUp, Intercom not in pipeline \u2014 no external cross-check on payments today.",
   "data_footnotes": [
-    "Production DB: UNAVAILABLE \u2014 query-db.py failed, pymysql not installed. No orders, revenue, customers, ratings, cancellations, or failed payments available.",
-    "Google Ads: account 972-828-9560, available. Friday 2026-06-19 spend $92.95 CAD, 7d total $723.25, 7d avg daily $103.32. 'Conversions' count registrations, not purchases.",
-    "Search Console: UNAVAILABLE \u2014 'No module named google'. Indexing health for 42 monitored pages could not be assessed.",
-    "GA4: UNAVAILABLE (Phase 2, not yet integrated).",
-    "Stripe: UNAVAILABLE (no API key) \u2014 DB-vs-Stripe cross-check not possible.",
-    "ClickUp / Intercom: UNAVAILABLE (Phase 2 / no API key).",
-    "computed{} block was empty this run \u2014 no 7-day averages, percentage changes, or CPA were pre-computed, so all scorecard rows are marked n/a rather than fabricated.",
-    "Revenue methodology (when available): all monetary values net of 13% HST, tips excluded."
+    "DB: tumbil_production_db, reference date 2026-06-20, timezone America/Toronto. Placed = order_timelines (type='placed'), payment verified/captured; delivered = payments.captured_at.",
+    "Google Ads: account 972-828-9560, yesterday spend $141.90 CAD, 7d spend $747.77. Conversions count registrations, not purchases \u2014 true cost per new customer uses DB new customers.",
+    "GSC: sc-domain:tumbil.com, query/page data 2026-06-13 to 2026-06-20; indexing via URL Inspection API (41/42 indexed; 'fitted sheet' blog discovered-not-indexed).",
+    "Revenue methodology: all monetary values net of 13% HST (ex. HST), tips excluded.",
+    "Unavailable this run: Stripe (no API key), GA4 (Phase 2), ClickUp (Phase 2), Intercom (no API key)."
   ],
   "trends": {
     "daily_orders": [
@@ -1502,15 +1499,137 @@
         "customer_mix": {
           "brand_new": 2,
           "second_order": 1,
-          "regular": 4,
+          "regular": 8,
+          "returning_regular_total": 9
+        },
+        "same_time_7d_avg_orders": 11.9,
+        "same_time_delta_orders": -0.9,
+        "target_placed_orders": 20,
+        "pace_to_target_pct": 55.0,
+        "acquisition": {
+          "new_customer_orders": 2,
+          "ad_spend_cad": 141.9,
+          "ad_clicks": 84,
+          "ad_impressions": 1312,
+          "ad_conversions_registrations": 5.0,
+          "cost_per_new_customer_cad": 70.95,
+          "cost_per_new_customer_7d_avg_cad": 49.85,
+          "source_note": "Historical source mix is limited to TGE daily acquisition metrics. Live same-day source labels use best-effort GA4/BigQuery joins."
+        },
+        "executive_summary": "Saturday was a strong delivery day \u2014 17 orders delivered for $838.12 ex. HST (+42.8% vs avg) \u2014 but acquisition was expensive: $141.90 of ad spend (the week's highest) bought only 2 new customers, a cost of $70.95 each, nearly 3x the $25 ceiling. Placed orders normal at 11.",
+        "analyst_brief": "**The one thing today: ad spend went up and new customers didn't.** Yesterday we spent $141.90 on Google Ads \u2014 the most in any single day this week, up about a third from the weekly average. That money brought in 2 new customers. That works out to $70.95 to land each new customer, against our ceiling of $25. Even the steadier 7-day figure is $49.85, roughly double the ceiling. This isn't a one-bad-day blip; the cost of getting a new customer has been running high all week. Spending *more* on a day that already wasn't converting well is the wrong direction.\n\nTo be clear on the math: don't be tempted to spread that $141.90 across all 11 placed orders to make it look cheaper. Eight of yesterday's eleven orders came from regulars who didn't cost us a dime in ads \u2014 they were already coming back. The ad budget's job is to find new people, and yesterday it found two of them at $70.95 apiece. That's the number that matters.\n\n**The good news is the business underneath the ads is healthy.** Saturday delivered 17 orders worth $838.12 ex. HST \u2014 about 43% above a normal day. Regulars showed up in force (8 of 11 placed orders). Ratings stayed excellent at 4.93, with 13 of 14 reviews at five stars and no low scores. Cancellations are running 3.6% over the last week, well under the 30-day baseline of 6.6%. The three \"failed payments\" total 82 cents \u2014 a rounding error, not a problem. The engine runs fine; it's the fuel cost of new customers that's off.\n\n**One thing worth watching: second-time customers were thin.** Only 1 person placed their second order yesterday, against a normal of about 2. One slow day means nothing on its own, but the rate at which new people come back for a second order has been soft for weeks \u2014 the groups of new customers from early May onward are reordering at 7\u201320%, down from the 30\u201340% we saw in April. If we're paying $50\u201370 to acquire someone and only a fifth of them come back, the economics get tight fast. The April iOS attribution fix helped us *see* orders better, but it didn't fix whether people return. That's the deeper lever \u2014 getting more of the expensive new customers to come back is worth more than squeezing the ad cost.\n\n**A small SEO note, not urgent:** the blog post \"How to Fold a Fitted Sheet\" still isn't showing up in Google \u2014 it's been found but not indexed. Everything else (homepage, all 24 city pages, the other blogs) is indexed and healthy. If someone has 10 minutes, requesting indexing for that one page in Search Console would close the gap.\n\nMy recommendation: before adding any more ad budget, look at where yesterday's extra spend went. The GTA Click campaign took $59.78 for 2 registrations; Hamilton and Calgary each took ~$20 for zero. The cost-per-customer problem is fixable by tightening where the money goes \u2014 but that's an operator decision to review, not a knob I'd turn automatically.",
+        "scorecard": [
+          {
+            "metric": "Orders Placed",
+            "yesterday": "11",
+            "seven_day_avg": "11.9",
+            "change": "-7.6%",
+            "status": "green"
+          },
+          {
+            "metric": "Orders Delivered",
+            "yesterday": "17",
+            "seven_day_avg": "11.4",
+            "change": "+49.1%",
+            "status": "green"
+          },
+          {
+            "metric": "Order Value, placed, ex. HST",
+            "yesterday": "$536.76",
+            "seven_day_avg": "$604.05",
+            "change": "-11.1%",
+            "status": "green"
+          },
+          {
+            "metric": "Revenue, delivered, ex. HST",
+            "yesterday": "$838.12",
+            "seven_day_avg": "$586.97",
+            "change": "+42.8%",
+            "status": "green"
+          },
+          {
+            "metric": "AOV, placed, ex. HST",
+            "yesterday": "$48.80",
+            "seven_day_avg": "$50.94",
+            "change": "-4.2%",
+            "status": "green"
+          },
+          {
+            "metric": "Ad Spend",
+            "yesterday": "$141.90",
+            "seven_day_avg": "$106.82",
+            "change": "+32.8%",
+            "status": "yellow"
+          },
+          {
+            "metric": "Cost per New Customer",
+            "yesterday": "$70.95",
+            "seven_day_avg": "$49.85",
+            "change": "+42.3%",
+            "status": "red"
+          },
+          {
+            "metric": "New Customers",
+            "yesterday": "2",
+            "seven_day_avg": "2.1",
+            "change": "-4.8%",
+            "status": "green"
+          },
+          {
+            "metric": "Second-Order Customers",
+            "yesterday": "1",
+            "seven_day_avg": "1.9",
+            "change": "-47.4%",
+            "status": "red"
+          },
+          {
+            "metric": "Habitual Customers",
+            "yesterday": "8",
+            "seven_day_avg": "7.9",
+            "change": "+1.3%",
+            "status": "green"
+          },
+          {
+            "metric": "Avg In-App Rating",
+            "yesterday": "4.93",
+            "seven_day_avg": "4.88",
+            "change": "+1.0%",
+            "status": "green"
+          },
+          {
+            "metric": "Cancellations 7d",
+            "yesterday": "3.6%",
+            "seven_day_avg": "6.6%",
+            "change": "+0.2pp",
+            "status": "green"
+          },
+          {
+            "metric": "Failed Payments 7d",
+            "yesterday": "3",
+            "seven_day_avg": "0.7",
+            "change": "+1",
+            "status": "yellow"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-21",
+        "briefing_date": null,
+        "placed_orders": 5,
+        "order_value_cad": 238.75,
+        "aov_cad": 47.75,
+        "customer_mix": {
+          "brand_new": 0,
+          "second_order": 0,
+          "regular": 5,
           "returning_regular_total": 5
         },
         "same_time_7d_avg_orders": 0,
         "same_time_delta_orders": 0,
         "target_placed_orders": 20,
-        "pace_to_target_pct": 35.0,
+        "pace_to_target_pct": 25.0,
         "deliveries": {
-          "count": 4,
+          "count": 5,
           "revenue_cad": 0,
           "aov_cad": 0
         },
