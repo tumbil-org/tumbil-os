@@ -817,6 +817,7 @@ def is_appsflyer_cache_fresh(cached: dict, now_et: datetime) -> bool:
 
 def write_appsflyer_cache(result: dict) -> None:
     try:
+        APPSFLYER_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
         APPSFLYER_CACHE_FILE.write_text(json.dumps(result, indent=2))
     except Exception as exc:
         sys.stderr.write(f"  AppsFlyer cache write failed: {exc}\n")
