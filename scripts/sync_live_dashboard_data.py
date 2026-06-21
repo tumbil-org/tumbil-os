@@ -27,7 +27,7 @@ DASHBOARD_DIR = PROJECT_DIR / "dashboard"
 OUTPUT_FILE = DASHBOARD_DIR / "live.json"
 PRIORITIES_FILE = DASHBOARD_DIR / "priorities.json"
 APPSFLYER_CREDENTIALS_FILE = Path.home() / ".config" / "appsflyer" / "credentials.json"
-APPSFLYER_CACHE_FILE = DASHBOARD_DIR / "appsflyer-aggregate-cache.json"
+APPSFLYER_CACHE_FILE = Path.home() / ".cache" / "tumbilos" / "appsflyer-aggregate-cache.json"
 APPSFLYER_CACHE_TTL_MINUTES = 30
 
 LOCAL_TZ = ZoneInfo("America/Toronto")
