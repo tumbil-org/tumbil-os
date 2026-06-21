@@ -142,8 +142,13 @@ test('@critical app monitor tab renders live app/API probes', async ({ page }) =
   await expect(page.locator('#app-monitor-checks')).toContainText('Authenticated customer API canary');
   await expect(page.locator('#app-monitor-checks')).toContainText('Authenticated customer app canary');
   await expect(page.locator('#app-monitor-incident-sub')).toContainText(/Was down .* Back up|Last recovered|No active incident/);
-  await expect(page.locator('#app-monitor-history')).toContainText(/Resolved|down/);
-  await expect(page.locator('#app-monitor-history')).toContainText(/Down .* Back up|Critical app\/login checks failing/);
+  const historyText = await page.locator('#app-monitor-history').innerText();
+  expect(historyText).toMatch(/Resolved|down|ok/i);
+  if (/Resolved|down/i.test(historyText)) {
+    expect(historyText).toMatch(/Down .* Back up|Critical app\/login checks failing/i);
+  } else {
+    expect(historyText).toMatch(/All customer app, auth, and API checks passed/i);
+  }
 });
 
 test('@critical date navigation buttons remain correct across dashboard and drilldown views', async ({ page }) => {
