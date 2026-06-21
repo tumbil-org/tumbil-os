@@ -30,6 +30,14 @@ if [ -f "$HOME/.config/tge/tge-env" ]; then
 fi
 
 TUMBILOS_DIR="$HOME/tumbil/tumbil-os"
+DASHBOARD_PAYLOADS=(
+    dashboard/live.json
+    dashboard/app-monitor.json
+    dashboard/customers.json
+    dashboard/service-details.json
+    dashboard/priorities.json
+    dashboard/data.json
+)
 
 echo "[TumbilOS] Starting deploy at $(date)"
 
@@ -70,10 +78,10 @@ fi
 # files and Mac's auto-sync pushes a stale dashboard/data.json that lives on
 # forever in main.
 cd "$TUMBILOS_DIR"
-if git diff --quiet dashboard/data.json dashboard/live.json dashboard/customers.json dashboard/service-details.json 2>/dev/null; then
+if git diff --quiet "${DASHBOARD_PAYLOADS[@]}" 2>/dev/null; then
     echo "[TumbilOS] Dashboard payloads already match main; nothing to commit."
 else
-    git add dashboard/data.json dashboard/live.json dashboard/customers.json dashboard/service-details.json
+    git add "${DASHBOARD_PAYLOADS[@]}"
     git commit -m "Refresh dashboard payloads $(date +%Y-%m-%d)" --no-gpg-sign
     if git push origin main 2>&1; then
         echo "[TumbilOS] Dashboard payloads pushed to main."
