@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "generated_at": "2026-06-21T10:09:10.131099",
-  "latest_briefing_date": "2026-06-21",
-  "data_date": "2026-06-20",
+  "generated_at": "2026-06-20T11:42:32.663856",
+  "latest_briefing_date": "2026-06-20",
+  "data_date": "2026-06-19",
   "timezone": "America/Toronto",
-  "executive_summary": "Data pipeline mostly failed Saturday: production DB, GA4, Search Console, and Stripe were all down, so there are no order, revenue, or customer numbers. Google Ads was the only live source \u2014 it spent $141.90, the highest day in the last week.",
-  "analyst_brief": "**The story today is the pipeline, not the business.** Almost every data source failed overnight, so I can't tell you how many orders came in, what they were worth, or how many new customers we paid to acquire. The scorecard is blank on purpose \u2014 those are missing readings, not real zeros. Please don't read this as a bad day; read it as a blind day.\n\nHere's what actually broke and why it matters:\n\n- **Production database is down** with a clear, fixable cause: the error says `pymysql not installed`. That's a missing software package on the machine that runs the morning job, not a problem with the database itself. A one-line install (`pip3 install pymysql`) on the ThinkPad should bring orders, revenue, customers, ratings, cancellations, and failed payments back. **This is the one thing to fix today.** Without it, every number that decides priorities is gone.\n- **Search Console and GA4 also failed** with a similar \"module not found\" / not-yet-integrated message, which suggests the same environment got wiped or rebuilt and lost its installed packages. Worth checking all of them together rather than one at a time.\n- **Stripe and Intercom are down for a simpler reason** \u2014 no API keys are configured. That's a setup gap, not a crash.\n\n**The only thing I can actually see is Google Ads, and it raises a flag.** We spent $141.90 yesterday \u2014 the most of any day in the last week (the daily average was about $106.82, and the full week ran $747.77). On its own that's not alarming, but here's the risk: the system kept spending ad money while we had no ability to measure what that money produced. The 84 clicks and 1,312 impressions are real, but the \"4 conversions\" Google reports are registrations, not paying orders \u2014 and with the database down, we can't confirm a single one turned into an order. So we have a day where money went out the door and we're flying blind on what came back. If the database stays down for several more days, I'd seriously consider holding ad spend flat or pausing the higher-spend campaigns until we can see results again \u2014 spending more while measuring nothing is the worst combination.\n\nOne small observation for the manual-review pile, not an action: the paid search terms yesterday were almost all generic \"laundromat near me\" / \"coin laundry near me\" types that didn't convert, while the one term that did convert was simply \"laundry.\" Nothing to do about it today \u2014 just noting it so we can look properly once the data is trustworthy again.\n\nBottom line: get the database package reinstalled, re-run today's data gather, and confirm orders and revenue are flowing before trusting tomorrow's brief. Until then, hold ad spend steady rather than letting it climb further unmeasured.",
+  "executive_summary": "Data blackout Friday: the production database, Search Console and GA4 all failed, so there are zero order, revenue or customer numbers today. Google Ads was the only working source \u2014 $92.95 spent on 65 clicks and 1,010 impressions, below the $103.32 daily 7-day average.",
+  "analyst_brief": "**The one thing today is a broken pipeline, not a growth call.** Almost every data source failed this morning. The production database didn't load because a required library (pymysql) isn't installed on the machine, Search Console failed on a missing Google module, and GA4/Stripe/Intercom aren't wired in. That means we have no orders, no revenue, no new-customer count, no ratings, no cancellations \u2014 nothing to base a recommendation on. Please get pymysql installed and the Search Console module fixed before tomorrow's 6 AM run, otherwise we lose another day blind. Without the database I genuinely can't tell you whether yesterday was a good day or a bad one.\n\nHere's what the one working source \u2014 Google Ads \u2014 actually showed, kept separate because it can't be tied back to real orders:\n\n- We spent **$92.95** on Friday, a bit under the **$103.32** average daily spend over the last 7 days. That bought 65 clicks and 1,010 impressions.\n- Google reported **7 \"conversions,\"** but remember these count sign-ups, not paid orders. Without the database we can't turn that into a real cost per new customer, so treat the 7 as a soft signal only.\n- The GTA-wide click campaign ate roughly half the budget ($45.69) for 36 clicks and 2 sign-ups. Hamilton was efficient \u2014 $11.68 for 1 sign-up, and the search \"laundry service hamilton\" both got clicked and converted.\n- One thing worth watching, **as an observation only**: a big chunk of spend went to \"laundromat near me\" and similar searches \u2014 at least four separate clicks totalling around $12 \u2014 with zero sign-ups. These are people hunting for a physical laundromat to walk into, not our pickup-and-delivery service, so the click rarely fits what we offer. I am **not** recommending any keyword changes here \u2014 that needs your manual review, and our past negative-keyword changes have blocked good searches. Just flagging it for a human to look at when there's time.\n- Richmond Hill showed 28 impressions but got 0 clicks and spent nothing \u2014 effectively dormant.\n\nThat's the whole picture today. The honest summary: one day of partial ad data, no business numbers, and an infrastructure fix that needs to happen before we can advise on anything. Once the database is back, tomorrow's brief can actually answer \"what's the highest-leverage move.\"",
   "scorecard": [
     {
       "metric": "Orders Placed",
@@ -99,16 +99,16 @@
       "status": "n/a"
     }
   ],
-  "validation_notes": "No cross-check possible: production DB and Stripe were both down, so DB-vs-Stripe order reconciliation could not run. Search Console, GA4, ClickUp, and Intercom were also unavailable. Google Ads was the only source returning data. Treat today's scorecard as empty, not as zeros.",
+  "validation_notes": "No DB cross-check possible: the production database failed to load (pymysql not installed), so there are no order or revenue figures to validate against Stripe. Search Console, GA4, Stripe and Intercom were also unavailable. Only Google Ads reported.",
   "data_footnotes": [
-    "Production DB: UNAVAILABLE \u2014 query failed with 'pymysql not installed'. No orders, revenue, AOV, customer-type, ratings, cancellations, or failed-payment data for 2026-06-20.",
-    "Computed metrics block was empty \u2014 no 7-day averages, percentage changes, or cost-per-new-customer values were available to populate the scorecard.",
-    "Google Ads: account 972-828-9560, only working source. Yesterday spend $141.90, 1,312 impressions, 84 clicks, 4 reported 'conversions' (registrations, not purchases \u2014 cannot verify as orders with DB down). 7-day spend $747.77, avg daily $106.82.",
-    "Search Console: UNAVAILABLE ('No module named google'). Indexing health for all 42 monitored pages could not be assessed.",
-    "GA4: UNAVAILABLE (Phase 2, not integrated).",
-    "Stripe: UNAVAILABLE (no API key) \u2014 DB-vs-Stripe order cross-check could not run.",
+    "Production DB: UNAVAILABLE \u2014 query-db.py failed, pymysql not installed. No orders, revenue, customers, ratings, cancellations, or failed payments available.",
+    "Google Ads: account 972-828-9560, available. Friday 2026-06-19 spend $92.95 CAD, 7d total $723.25, 7d avg daily $103.32. 'Conversions' count registrations, not purchases.",
+    "Search Console: UNAVAILABLE \u2014 'No module named google'. Indexing health for 42 monitored pages could not be assessed.",
+    "GA4: UNAVAILABLE (Phase 2, not yet integrated).",
+    "Stripe: UNAVAILABLE (no API key) \u2014 DB-vs-Stripe cross-check not possible.",
     "ClickUp / Intercom: UNAVAILABLE (Phase 2 / no API key).",
-    "Revenue methodology (when data returns): all monetary values net of 13% HST, tips excluded."
+    "computed{} block was empty this run \u2014 no 7-day averages, percentage changes, or CPA were pre-computed, so all scorecard rows are marked n/a rather than fabricated.",
+    "Revenue methodology (when available): all monetary values net of 13% HST, tips excluded."
   ],
   "trends": {
     "daily_orders": [
@@ -124,6 +124,35 @@
   },
   "history": {
     "days": [
+      {
+        "date": "2026-05-07",
+        "briefing_date": null,
+        "placed_orders": 10,
+        "order_value_cad": 611.25,
+        "aov_cad": 61.12,
+        "customer_mix": {
+          "brand_new": 1,
+          "second_order": 2,
+          "regular": 7,
+          "returning_regular_total": 9
+        },
+        "same_time_7d_avg_orders": 0,
+        "same_time_delta_orders": 0,
+        "target_placed_orders": 20,
+        "pace_to_target_pct": 50.0,
+        "deliveries": {
+          "count": 10,
+          "revenue_cad": 0,
+          "aov_cad": 0
+        },
+        "acquisition": {
+          "new_customer_orders": 1,
+          "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
+        },
+        "executive_summary": "",
+        "analyst_brief": "",
+        "scorecard": []
+      },
       {
         "date": "2026-05-08",
         "briefing_date": null,
@@ -1466,149 +1495,27 @@
       },
       {
         "date": "2026-06-20",
-        "briefing_date": "2026-06-21",
-        "placed_orders": 11,
-        "order_value_cad": 536.76,
-        "aov_cad": 48.8,
+        "briefing_date": null,
+        "placed_orders": 7,
+        "order_value_cad": 318.5,
+        "aov_cad": 45.5,
         "customer_mix": {
           "brand_new": 2,
           "second_order": 1,
-          "regular": 8,
-          "returning_regular_total": 9
-        },
-        "same_time_7d_avg_orders": 11.9,
-        "same_time_delta_orders": -0.9,
-        "target_placed_orders": 20,
-        "pace_to_target_pct": 55.0,
-        "acquisition": {
-          "new_customer_orders": 2,
-          "ad_spend_cad": 141.9,
-          "ad_clicks": 84,
-          "ad_impressions": 1312,
-          "ad_conversions_registrations": 4.0,
-          "cost_per_new_customer_cad": 70.95,
-          "cost_per_new_customer_7d_avg_cad": 49.85,
-          "source_note": "Historical source mix is limited to TGE daily acquisition metrics. Live same-day source labels use best-effort GA4/BigQuery joins."
-        },
-        "executive_summary": "Data pipeline mostly failed Saturday: production DB, GA4, Search Console, and Stripe were all down, so there are no order, revenue, or customer numbers. Google Ads was the only live source \u2014 it spent $141.90, the highest day in the last week.",
-        "analyst_brief": "**The story today is the pipeline, not the business.** Almost every data source failed overnight, so I can't tell you how many orders came in, what they were worth, or how many new customers we paid to acquire. The scorecard is blank on purpose \u2014 those are missing readings, not real zeros. Please don't read this as a bad day; read it as a blind day.\n\nHere's what actually broke and why it matters:\n\n- **Production database is down** with a clear, fixable cause: the error says `pymysql not installed`. That's a missing software package on the machine that runs the morning job, not a problem with the database itself. A one-line install (`pip3 install pymysql`) on the ThinkPad should bring orders, revenue, customers, ratings, cancellations, and failed payments back. **This is the one thing to fix today.** Without it, every number that decides priorities is gone.\n- **Search Console and GA4 also failed** with a similar \"module not found\" / not-yet-integrated message, which suggests the same environment got wiped or rebuilt and lost its installed packages. Worth checking all of them together rather than one at a time.\n- **Stripe and Intercom are down for a simpler reason** \u2014 no API keys are configured. That's a setup gap, not a crash.\n\n**The only thing I can actually see is Google Ads, and it raises a flag.** We spent $141.90 yesterday \u2014 the most of any day in the last week (the daily average was about $106.82, and the full week ran $747.77). On its own that's not alarming, but here's the risk: the system kept spending ad money while we had no ability to measure what that money produced. The 84 clicks and 1,312 impressions are real, but the \"4 conversions\" Google reports are registrations, not paying orders \u2014 and with the database down, we can't confirm a single one turned into an order. So we have a day where money went out the door and we're flying blind on what came back. If the database stays down for several more days, I'd seriously consider holding ad spend flat or pausing the higher-spend campaigns until we can see results again \u2014 spending more while measuring nothing is the worst combination.\n\nOne small observation for the manual-review pile, not an action: the paid search terms yesterday were almost all generic \"laundromat near me\" / \"coin laundry near me\" types that didn't convert, while the one term that did convert was simply \"laundry.\" Nothing to do about it today \u2014 just noting it so we can look properly once the data is trustworthy again.\n\nBottom line: get the database package reinstalled, re-run today's data gather, and confirm orders and revenue are flowing before trusting tomorrow's brief. Until then, hold ad spend steady rather than letting it climb further unmeasured.",
-        "scorecard": [
-          {
-            "metric": "Orders Placed",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Orders Delivered",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Order Value (placed, ex. HST)",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Revenue (delivered, ex. HST)",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "AOV (placed, ex. HST)",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Ad Spend",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Cost per New Customer",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "New Customers",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Second-Order Customers",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Habitual Customers",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Avg In-App Rating",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Cancellations 7d",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          },
-          {
-            "metric": "Failed Payments 7d",
-            "yesterday": "n/a",
-            "seven_day_avg": "n/a",
-            "change": "n/a",
-            "status": "n/a"
-          }
-        ]
-      },
-      {
-        "date": "2026-06-21",
-        "briefing_date": null,
-        "placed_orders": 1,
-        "order_value_cad": 50.5,
-        "aov_cad": 50.5,
-        "customer_mix": {
-          "brand_new": 0,
-          "second_order": 0,
-          "regular": 1,
-          "returning_regular_total": 1
+          "regular": 4,
+          "returning_regular_total": 5
         },
         "same_time_7d_avg_orders": 0,
         "same_time_delta_orders": 0,
         "target_placed_orders": 20,
-        "pace_to_target_pct": 5.0,
+        "pace_to_target_pct": 35.0,
         "deliveries": {
-          "count": 2,
+          "count": 4,
           "revenue_cad": 0,
           "aov_cad": 0
         },
         "acquisition": {
-          "new_customer_orders": 0,
+          "new_customer_orders": 2,
           "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
         },
         "executive_summary": "",
@@ -1620,7 +1527,7 @@
   "data_health": {
     "db": {
       "label": "Production DB",
-      "status": "ok"
+      "status": "unavailable"
     },
     "google_ads": {
       "label": "Google Ads",
@@ -1628,7 +1535,7 @@
     },
     "search_console": {
       "label": "Search Console",
-      "status": "ok"
+      "status": "unavailable"
     },
     "tge_analysis": {
       "label": "TGE Analyst Brief",
