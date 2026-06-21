@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-06-21T14:01:29.886742",
+  "generated_at": "2026-06-21T14:34:08.350442",
   "latest_briefing_date": "2026-06-21",
   "data_date": "2026-06-20",
   "timezone": "America/Toronto",
@@ -1586,19 +1586,19 @@
       {
         "date": "2026-06-21",
         "briefing_date": null,
-        "placed_orders": 5,
-        "order_value_cad": 238.75,
-        "aov_cad": 47.75,
+        "placed_orders": 6,
+        "order_value_cad": 364.25,
+        "aov_cad": 60.71,
         "customer_mix": {
           "brand_new": 0,
           "second_order": 0,
-          "regular": 5,
-          "returning_regular_total": 5
+          "regular": 6,
+          "returning_regular_total": 6
         },
         "same_time_7d_avg_orders": 0,
         "same_time_delta_orders": 0,
         "target_placed_orders": 20,
-        "pace_to_target_pct": 25.0,
+        "pace_to_target_pct": 30.0,
         "deliveries": {
           "count": 5,
           "revenue_cad": 0,
