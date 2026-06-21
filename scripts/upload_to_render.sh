@@ -36,5 +36,5 @@ upload_file() {
 }
 
 for f in live.json app-monitor.json customers.json service-details.json priorities.json data.json; do
-  upload_file "$f" || true
+  upload_file "$f"
 done
