@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-21T10:09:17.861775-04:00",
+  "generated_at": "2026-06-21T14:01:38.347715-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16957,7 +16957,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-18 08:00 PM",
             "delivery_by_et": "2026-06-19 08:00 PM",
@@ -16967,7 +16967,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 126.0,
+            "weight_lbs": 86.1,
             "order_value_cad": 160.5,
             "prior_completed_orders": 4
           },
@@ -17070,7 +17070,7 @@
               "large": 0,
               "oversize": 1
             },
-            "weight_lbs": 14.0,
+            "weight_lbs": 21.1,
             "order_value_cad": 50.0,
             "prior_completed_orders": 0
           },
@@ -17361,7 +17361,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-20 08:00 PM",
             "delivery_by_et": "2026-06-21 08:00 PM",
@@ -17371,7 +17371,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 26.0,
             "order_value_cad": 38.0,
             "prior_completed_orders": 12
           },
@@ -17400,7 +17400,7 @@
               "large": 0,
               "oversize": 1
             },
-            "weight_lbs": 42.0,
+            "weight_lbs": 37.6,
             "order_value_cad": 67.5,
             "prior_completed_orders": 10
           },
@@ -17601,15 +17601,15 @@
             "placed_at_et": "2026-06-20 11:12 AM",
             "signup_at_et": "2026-06-20 11:10 AM",
             "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "bucket": "Google Ads",
+              "confidence": "high",
+              "detail": "GA4 purchase matched tumbil_id with Google Ads campaign City Target (GTA) Click.",
+              "match_quality": "ga4_purchase_tumbil_id",
+              "campaign": "City Target (GTA) Click"
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-20 08:00 PM",
             "delivery_by_et": "2026-06-21 08:00 PM",
@@ -17619,7 +17619,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 21.3,
             "order_value_cad": 38.0,
             "prior_completed_orders": 0
           }
@@ -17650,7 +17650,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 14.0,
+            "weight_lbs": 12.0,
             "order_value_cad": 38.0,
             "prior_completed_orders": 1
           }
@@ -17855,7 +17855,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 56.0,
+            "weight_lbs": 35.4,
             "order_value_cad": 73.0,
             "prior_completed_orders": 44
           },
@@ -17884,7 +17884,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 28.0,
+            "weight_lbs": 10.4,
             "order_value_cad": 38.0,
             "prior_completed_orders": 4
           }
@@ -17896,12 +17896,128 @@
       "counts": {
         "brand_new": 0,
         "second_order": 0,
-        "regular": 1
+        "regular": 5
       },
       "customers_by_type": {
         "brand_new": [],
         "second_order": [],
         "regular": [
+          {
+            "customer_id": 3404,
+            "order_id": 6339,
+            "name": "Lynda Hill",
+            "email": "mslyndahill@gmail.com",
+            "mobile": "4165246261",
+            "placed_at_et": "2026-06-21 01:25 PM",
+            "signup_at_et": "2026-02-09 04:23 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-21 08:00 PM",
+            "delivery_by_et": "2026-06-22 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 6
+          },
+          {
+            "customer_id": 4032,
+            "order_id": 6287,
+            "name": "Kalle MacLennan",
+            "email": "kallemaclennan@gmail.com",
+            "mobile": "9059324697",
+            "placed_at_et": "2026-06-21 12:28 PM",
+            "signup_at_et": "2026-03-16 09:57 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-21 08:00 PM",
+            "delivery_by_et": "2026-06-22 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 3,
+              "oversize": 0
+            },
+            "weight_lbs": 57.0,
+            "order_value_cad": 74.25,
+            "prior_completed_orders": 6
+          },
+          {
+            "customer_id": 1490,
+            "order_id": 6337,
+            "name": "Lori Luechtefeld",
+            "email": "loriluechtefeld@gmail.com",
+            "mobile": "3102104757",
+            "placed_at_et": "2026-06-21 12:14 PM",
+            "signup_at_et": "2025-09-22 03:39 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-21 08:00 PM",
+            "delivery_by_et": "2026-06-22 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 49
+          },
+          {
+            "customer_id": 742,
+            "order_id": 6335,
+            "name": "Lisa",
+            "email": "lisaques@yahoo.ca",
+            "mobile": null,
+            "placed_at_et": "2026-06-21 11:12 AM",
+            "signup_at_et": "2025-07-01 02:15 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-21 08:00 PM",
+            "delivery_by_et": "2026-06-22 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 2,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 28.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 23
+          },
           {
             "customer_id": 4044,
             "order_id": 6329,
