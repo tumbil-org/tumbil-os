@@ -77,69 +77,17 @@
     }
   ],
   "acquisition": {
-    "new_customer_orders": 2,
-    "sources": [
-      {
-        "bucket": "Direct / Unknown",
-        "orders": 1,
-        "confidence": "low"
-      },
-      {
-        "bucket": "Other",
-        "orders": 1,
-        "confidence": "low"
-      }
-    ],
-    "classified_orders": [
-      {
-        "order_id": 6319,
-        "bucket": "Direct / Unknown",
-        "confidence": "low",
-        "reason": "No GA4 match",
-        "match_quality": "unmatched",
-        "campaign": null,
-        "referral_code": null,
-        "referral_owner_name": null
-      },
-      {
-        "order_id": 6318,
-        "bucket": "Other",
-        "confidence": "low",
-        "reason": "GA4 source did not match a standard bucket.",
-        "match_quality": "ga4_other_source",
-        "campaign": null,
-        "referral_code": null,
-        "referral_owner_name": null
-      }
-    ],
-    "unknown_orders": 1,
+    "new_customer_orders": 0,
+    "sources": [],
+    "classified_orders": [],
+    "unknown_orders": 0,
     "ga4_status": {
-      "status": "ok",
-      "primary": "ga4_data_api",
-      "ok_sources": [
-        "ga4_data_api",
-        "bigquery"
-      ],
-      "rows": 2,
-      "ga4_data_api": {
-        "status": "ok",
-        "source": "ga4_data_api",
-        "rows": 0,
-        "row_count": 0,
-        "date_start": "2026-06-20",
-        "date_end": "2026-06-20",
-        "auth": "service_account",
-        "credentials": "/home/yoygurt2/.config/ga4-mcp/credentials.json"
-      },
-      "bigquery": {
-        "status": "ok",
-        "rows": 2,
-        "method": "bq"
-      }
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-06-20",
+      "date": "2026-06-21",
       "timezone": "America/Toronto",
       "fetched_at": "2026-06-21T14:01:30.681184-04:00",
       "cache_status": "miss",
@@ -147,7 +95,7 @@
         {
           "status": "ok",
           "app_id": "id6738962991",
-          "rows": 1,
+          "rows": 0,
           "platform": "ios"
         },
         {
@@ -158,23 +106,12 @@
         }
       ],
       "totals": {
-        "purchase_events": 1,
-        "unique_users": 1,
-        "sales_cad": 77.72
+        "purchase_events": 0,
+        "unique_users": 0,
+        "sales_cad": 0.0
       },
-      "google_ads_purchase_events": 1,
-      "media_sources": [
-        {
-          "media_source": "googleadwords_int",
-          "campaign": "22849921825",
-          "purchase_events": 1,
-          "unique_users": 1,
-          "sales_cad": 77.72,
-          "apps": [
-            "id6738962991"
-          ]
-        }
-      ],
+      "google_ads_purchase_events": 0,
+      "media_sources": [],
       "note": "AppsFlyer aggregate app purchase events by media source. These are not joined to DB orders or customers."
     },
     "caveat": "Order counts and customer status come from DB. Source labels are GA4 attribution-only, with GA4 Data API purchase/tumbil_id matches preferred over BigQuery raw-event fallback. AppsFlyer is included as aggregate app purchase attribution and is not joined to individual customers. Referral promo codes are tracked separately."
@@ -312,12 +249,12 @@
     ]
   },
   "lifetime_value": {
-    "customers": 438,
-    "total_orders": 1771,
-    "total_revenue_cad": 96202.9,
-    "ltv_cad": 219.64,
-    "orders_per_customer": 4.04,
-    "contribution_per_customer_cad": 49.42,
+    "customers": 446,
+    "total_orders": 1789,
+    "total_revenue_cad": 97284.53,
+    "ltv_cad": 218.13,
+    "orders_per_customer": 4.01,
+    "contribution_per_customer_cad": 49.08,
     "contribution_margin": 0.225,
     "cohort_days": 180,
     "cohort_breakdown": [
@@ -427,19 +364,19 @@
       },
       {
         "months_since_first_order": 13,
-        "customers": 12,
-        "total_orders": 55,
-        "orders_per_customer": 4.58,
-        "revenue_per_customer_cad": 206.64,
-        "ltv_per_customer_cad": 46.49
+        "customers": 13,
+        "total_orders": 57,
+        "orders_per_customer": 4.38,
+        "revenue_per_customer_cad": 194.52,
+        "ltv_per_customer_cad": 43.77
       },
       {
         "months_since_first_order": 14,
-        "customers": 2,
-        "total_orders": 6,
+        "customers": 3,
+        "total_orders": 9,
         "orders_per_customer": 3.0,
-        "revenue_per_customer_cad": 116.0,
-        "ltv_per_customer_cad": 26.1
+        "revenue_per_customer_cad": 134.38,
+        "ltv_per_customer_cad": 30.23
       }
     ],
     "sensitivity": [
@@ -485,11 +422,11 @@
       },
       {
         "cohort_days": 180,
-        "customers": 438,
-        "total_orders": 1771,
-        "orders_per_customer": 4.04,
-        "revenue_per_customer_cad": 219.64,
-        "ltv_per_customer_cad": 49.42
+        "customers": 446,
+        "total_orders": 1789,
+        "orders_per_customer": 4.01,
+        "revenue_per_customer_cad": 218.13,
+        "ltv_per_customer_cad": 49.08
       },
       {
         "cohort_days": 270,
@@ -515,42 +452,21 @@
       "as_of_et": "2026-06-21T14:01:30.681184-04:00"
     },
     "ga4_attribution": {
-      "status": "ok",
-      "primary": "ga4_data_api",
-      "ok_sources": [
-        "ga4_data_api",
-        "bigquery"
-      ],
-      "rows": 2,
-      "ga4_data_api": {
-        "status": "ok",
-        "source": "ga4_data_api",
-        "rows": 0,
-        "row_count": 0,
-        "date_start": "2026-06-20",
-        "date_end": "2026-06-20",
-        "auth": "service_account",
-        "credentials": "/home/yoygurt2/.config/ga4-mcp/credentials.json"
-      },
-      "bigquery": {
-        "status": "ok",
-        "rows": 2,
-        "method": "bq"
-      }
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "ga4_bigquery": {
-      "status": "ok",
-      "rows": 2,
-      "method": "bq"
+      "status": "skipped",
+      "reason": "No brand-new orders today"
     },
     "appsflyer": {
       "status": "ok",
-      "date": "2026-06-20",
+      "date": "2026-06-21",
       "apps": [
         {
           "status": "ok",
           "app_id": "id6738962991",
-          "rows": 1,
+          "rows": 0,
           "platform": "ios"
         },
         {
@@ -563,7 +479,7 @@
     },
     "priorities": {
       "status": "ok",
-      "updated_at": "2026-05-13T11:35:13.462694-04:00",
+      "updated_at": "2026-06-20T16:55:20.520921-04:00",
       "item_count": 122
     }
   }

@@ -122,35 +122,6 @@
   "history": {
     "days": [
       {
-        "date": "2026-05-07",
-        "briefing_date": null,
-        "placed_orders": 10,
-        "order_value_cad": 611.25,
-        "aov_cad": 61.12,
-        "customer_mix": {
-          "brand_new": 1,
-          "second_order": 2,
-          "regular": 7,
-          "returning_regular_total": 9
-        },
-        "same_time_7d_avg_orders": 0,
-        "same_time_delta_orders": 0,
-        "target_placed_orders": 20,
-        "pace_to_target_pct": 50.0,
-        "deliveries": {
-          "count": 10,
-          "revenue_cad": 0,
-          "aov_cad": 0
-        },
-        "acquisition": {
-          "new_customer_orders": 1,
-          "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
-        },
-        "executive_summary": "",
-        "analyst_brief": "",
-        "scorecard": []
-      },
-      {
         "date": "2026-05-08",
         "briefing_date": null,
         "placed_orders": 9,
@@ -1492,10 +1463,10 @@
       },
       {
         "date": "2026-06-20",
-        "briefing_date": null,
-        "placed_orders": 7,
-        "order_value_cad": 318.5,
-        "aov_cad": 45.5,
+        "briefing_date": "2026-06-21",
+        "placed_orders": 11,
+        "order_value_cad": 536.76,
+        "aov_cad": 48.8,
         "customer_mix": {
           "brand_new": 2,
           "second_order": 1,
@@ -1634,7 +1605,7 @@
           "aov_cad": 0
         },
         "acquisition": {
-          "new_customer_orders": 2,
+          "new_customer_orders": 0,
           "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
         },
         "executive_summary": "",
@@ -1646,7 +1617,7 @@
   "data_health": {
     "db": {
       "label": "Production DB",
-      "status": "unavailable"
+      "status": "ok"
     },
     "google_ads": {
       "label": "Google Ads",
@@ -1654,7 +1625,7 @@
     },
     "search_console": {
       "label": "Search Console",
-      "status": "unavailable"
+      "status": "ok"
     },
     "tge_analysis": {
       "label": "TGE Analyst Brief",
