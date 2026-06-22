@@ -255,6 +255,31 @@ def slack_notify(msg: str) -> None:
         log(f"slack notify failed (non-fatal): {e}")
 
 
+INCIDENT_AGENT = PROJECT_DIR / "scripts" / "tumbilos_incident_agent.py"
+
+
+def escalate_to_incident_agent(diagnosis: str) -> bool:
+    """Hand the incident to the general-intelligence agent (background, gated).
+
+    This is the Boris loop's agent step: a full-tool headless Claude session that
+    reasons from live state, with a deterministic verifier (gate + /health) deciding
+    whether its fix ships. Returns True if launched; False if unavailable (caller
+    falls back to Foreman)."""
+    if not INCIDENT_AGENT.exists():
+        return False
+    nvm_claude = Path.home() / ".nvm" / "versions" / "node" / "v22.22.0" / "bin" / "claude"
+    if not shutil.which("claude") and not nvm_claude.exists():
+        log("claude CLI unavailable; cannot launch incident agent")
+        return False
+    log("handing off to autonomous incident agent (background)")
+    subprocess.Popen(
+        ["python3", str(INCIDENT_AGENT), diagnosis],
+        stdout=open("/tmp/tumbilos-incident-agent.out", "a"),
+        stderr=subprocess.STDOUT, start_new_session=True,
+    )
+    return True
+
+
 def escalate_to_foreman(diagnosis: str) -> None:
     if FOREMAN_LOCK.exists():
         try:
@@ -342,13 +367,19 @@ def main() -> int:
         return 0
 
     log(f"STILL BROKEN after deterministic heal. actions tried: {actions}")
+    # Escalate to the general-intelligence incident agent first; Foreman is the
+    # fallback only if the agent can't run. The agent posts its own resolution
+    # (auto-fixed / parked-a-diff), so self-heal's note is just the handoff.
+    launched = escalate_to_incident_agent(diagnosis)
+    target = "autonomous incident agent" if launched else "Foreman (project=infra)"
     if should_alert(diagnosis):
         slack_notify(f":rotating_light: TumbilOS dashboard still broken after self-heal.\n"
                      f"Diagnosis: {diagnosis}\nTried: {', '.join(actions) or 'n/a'}\n"
-                     f"Handing to Foreman (project=infra).")
+                     f"Handing to {target}.")
     else:
         log("Slack alert suppressed (same diagnosis within cooldown)")
-    escalate_to_foreman(diagnosis)
+    if not launched:
+        escalate_to_foreman(diagnosis)
     return 1
 
 
