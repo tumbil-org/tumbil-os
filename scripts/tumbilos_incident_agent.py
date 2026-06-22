@@ -61,6 +61,10 @@ ALLOW_GLOBS = [
 ]
 # Never let the agent rewrite its own controllers.
 DENY = {"scripts/tumbilos_selfheal.py", "scripts/tumbilos_incident_agent.py"}
+# Generated data artifacts the live-deploy timer churns every ~5 min. These are
+# NOT the agent's fix - ignore them when grading the diff, or normal payload churn
+# would make every confinement check fail. The fix lives in source (scripts/, html).
+IGNORE_CHANGES = ["dashboard/*.json", "dashboard/*.jsonl"]
 
 AUTOPUSH = os.environ.get("TUMBILOS_INCIDENT_AUTOPUSH", "1") != "0"
 _DRY = False  # set by main(); when True, never notify/push - verification only
@@ -155,11 +159,15 @@ def run_agent(prompt: str) -> int:
 # ---- deterministic verifier --------------------------------------------------
 
 def changed_files() -> list[str]:
+    """Source files the agent changed. Ignores generated data payloads churned by
+    the live-deploy timer so normal background churn isn't mistaken for the fix."""
     out = git("status", "--porcelain").stdout
     files = []
     for line in out.splitlines():
         if len(line) > 3:
-            files.append(line[3:].strip().strip('"'))
+            f = line[3:].strip().strip('"')
+            if not any(fnmatch.fnmatch(f, g) for g in IGNORE_CHANGES):
+                files.append(f)
     return files
 
 
