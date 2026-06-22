@@ -22,6 +22,10 @@ CHECK_PYTHON="$TUMBILOS_DIR/.venv/bin/python3"
 
 "$CHECK_PYTHON" "$TUMBILOS_DIR/scripts/check_dashboard_data_contract.py"
 
+# Offline guard: the drill-down builders must cover the live date even on a
+# zero-activity day (the 2026-06-22 midnight-rollover freeze). No DB/network.
+"$CHECK_PYTHON" "$TUMBILOS_DIR/scripts/check_payload_coverage.py"
+
 if [ ! -d node_modules/@playwright/test ]; then
     echo "[TumbilOS QA] Installing npm dependencies..."
     npm ci
