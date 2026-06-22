@@ -213,6 +213,35 @@ def run_deploy_live() -> tuple[bool, str | None]:
 
 # ---- escalation --------------------------------------------------------------
 
+def should_alert(diagnosis: str) -> bool:
+    """Throttle Slack: post only when the diagnosis changes or the cooldown has
+    elapsed. Stops the every-10-min :rotating_light: spam for one stuck incident
+    (Foreman is already cooldown-locked; Slack was not)."""
+    import hashlib
+
+    digest = hashlib.sha1(diagnosis.encode()).hexdigest()
+    now = time.time()
+    try:
+        prev = json.loads(ALERT_STATE.read_text())
+        if prev.get("hash") == digest and (now - prev.get("ts", 0)) < ALERT_COOLDOWN_SEC:
+            return False
+    except (OSError, ValueError):
+        pass
+    try:
+        ALERT_STATE.write_text(json.dumps({"hash": digest, "ts": now}))
+    except OSError:
+        pass
+    return True
+
+
+def clear_alert_state() -> None:
+    """Reset throttle on recovery so the NEXT distinct incident pages immediately."""
+    try:
+        ALERT_STATE.unlink(missing_ok=True)
+    except OSError:
+        pass
+
+
 def slack_notify(msg: str) -> None:
     try:
         res = run([gcloud(), "secrets", "versions", "access", "latest",
@@ -239,7 +268,8 @@ def escalate_to_foreman(diagnosis: str) -> None:
     task = (f"TumbilOS dashboard (os.tumbil.com) is still broken after automated "
             f"self-heal. Diagnosis: {diagnosis}. Investigate and fix on the ThinkPad; "
             f"verify os.tumbil.com/health shows live.json fresh (<10 min). "
-            f"See memory tumbilos-no-data-render-creds for the known runbook.")
+            f"Known runbooks: memory tumbilos-no-data-render-creds (creds) and "
+            f"tumbilos-stale-contract-blocks-upload (deploy blocked by data contract).")
     if not FOREMAN.exists():
         log("Foreman not found; relying on Slack escalation only")
         return
@@ -261,6 +291,7 @@ def main() -> int:
 
     healthy = health.get("reachable") and not health.get("stale") and not miss and not down
     if healthy:
+        clear_alert_state()
         log(f"healthy (live.json {health['age_min']:.1f} min old, "
             f"{len(health.get('files', []))} files, units up)")
         return 0
@@ -283,8 +314,14 @@ def main() -> int:
     for unit in down:
         actions.append(ensure_unit(unit))
     if miss or (health.get("reachable") and health.get("stale")):
-        if run_deploy_live():
+        ok, deploy_finding = run_deploy_live()
+        if ok:
             actions.append("ran deploy_live.sh")
+        elif deploy_finding:
+            # Surface the real cause (e.g. contract blocked the upload) into the
+            # diagnosis so Foreman + Slack get something actionable, not "stale".
+            diag.append(deploy_finding)
+            diagnosis = "; ".join(diag)
 
     # verify: re-check every signal until fully healthy (or give up)
     recovered = False
@@ -299,14 +336,18 @@ def main() -> int:
 
     if recovered:
         # Success is exactly when a human is NOT needed -> journal only, no Slack noise.
+        clear_alert_state()
         log(f"SELF-HEALED. actions: {actions}; live.json now "
             f"{health['age_min']:.1f} min old")
         return 0
 
     log(f"STILL BROKEN after deterministic heal. actions tried: {actions}")
-    slack_notify(f":rotating_light: TumbilOS dashboard still broken after self-heal.\n"
-                 f"Diagnosis: {diagnosis}\nTried: {', '.join(actions) or 'n/a'}\n"
-                 f"Handing to Foreman (project=infra).")
+    if should_alert(diagnosis):
+        slack_notify(f":rotating_light: TumbilOS dashboard still broken after self-heal.\n"
+                     f"Diagnosis: {diagnosis}\nTried: {', '.join(actions) or 'n/a'}\n"
+                     f"Handing to Foreman (project=infra).")
+    else:
+        log("Slack alert suppressed (same diagnosis within cooldown)")
     escalate_to_foreman(diagnosis)
     return 1
 
