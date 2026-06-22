@@ -37,6 +37,10 @@ URL: https://os.tumbil.com (Render). The old GitHub Pages bundle was retired on 
 | `scripts/sync_service_details.py` | DB -> `dashboard/service-details.json`. |
 | `scripts/tumbilos_priority_api.py` | Token-authenticated priority write API (always-on systemd service). |
 | `scripts/test_tumbilos.sh` | Playwright regression gate. |
+| `scripts/check_dashboard_data_contract.py` | Date-contract gate run before upload (live date needs prior history + drill-down coverage). |
+| `scripts/check_payload_coverage.py` | Offline guard: drill-down builders must cover the live date on zero-activity days (wired into the regression gate; skips where DB libs absent). |
+| `scripts/tumbilos_selfheal.py` | ThinkPad self-heal sensor (every 10 min): deterministic recovery of stale/no-data outages; surfaces the contract finding + throttles Slack; escalates if it can't fix. |
+| `scripts/tumbilos_incident_agent.py` | Autonomous incident solver: on self-heal failure, a gated full-tool Claude session fixes + ships only if diff confined + gate-green + /health fresh, else parks a diff. `TUMBILOS_INCIDENT_AUTOPUSH=0` forces park-only. |
 | `scripts/systemd/` | systemd units installed on ThinkPad. |
 | `tests/tumbilos_playwright.spec.js` | Browser-level regression tests. |
 
