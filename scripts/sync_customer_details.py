@@ -372,9 +372,16 @@ def build_payload(conn_factory, now_et: datetime | None = None) -> dict:
     for row in rows:
         grouped[row["date"]][row["customer_type"]].append({k: v for k, v in row.items() if k not in {"date", "customer_type"}})
 
+    # Emit a row for every day in the rolling window (zero-filled when no
+    # orders were placed), mirroring sync_service_details.py. This guarantees
+    # the live date is always covered even on a zero-activity day, so the
+    # dashboard data contract (which requires the live date in customers.json)
+    # passes and the live deploy uploads instead of dying before upload_to_render.
     days = []
-    for date in sorted(grouped.keys()):
-        bucket = grouped[date]
+    cursor = start_et
+    while cursor.date() <= now_et.date():
+        date = cursor.strftime("%Y-%m-%d")
+        bucket = grouped.get(date, {})
         customers_by_type = {
             "brand_new": bucket.get("brand_new", []),
             "second_order": bucket.get("second_order", []),
@@ -385,6 +392,7 @@ def build_payload(conn_factory, now_et: datetime | None = None) -> dict:
             "counts": {key: len(val) for key, val in customers_by_type.items()},
             "customers_by_type": customers_by_type,
         })
+        cursor += timedelta(days=1)
 
     return {
         "version": 1,
