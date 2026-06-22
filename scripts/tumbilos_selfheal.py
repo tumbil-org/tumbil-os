@@ -47,6 +47,8 @@ SYSTEMD_SRC = PROJECT_DIR / "scripts" / "systemd"
 FOREMAN = Path.home() / "tumbil" / "foreman" / "foreman.py"
 FOREMAN_LOCK = Path("/tmp/tumbilos-selfheal-foreman.lock")
 FOREMAN_COOLDOWN_SEC = 3600
+ALERT_STATE = Path("/tmp/tumbilos-selfheal-alert.json")
+ALERT_COOLDOWN_SEC = 3600  # don't re-post the same diagnosis to Slack more than hourly
 SLACK_LIB = Path.home() / "tumbil" / "infrastructure" / "libs" / "tumbil-slack"
 C0_SECRET = "c0-credentials"
 
@@ -178,13 +180,35 @@ def ensure_unit(unit: str) -> str:
     return f"{unit}: {', '.join(actions)}"
 
 
-def run_deploy_live() -> bool:
+def extract_contract_finding(output: str) -> str | None:
+    """Pull the specific failure out of deploy_live output so the escalation says
+    WHAT broke (e.g. customers.json missing the live date) instead of just
+    'data stale'. deploy_live already prints the contract findings; we were
+    throwing them away. Returns None if no actionable finding is present."""
+    highs = []
+    for line in output.splitlines():
+        if "[HIGH]" in line:
+            cleaned = line.strip()
+            if cleaned not in highs:
+                highs.append(cleaned)
+    if highs:
+        return "deploy_live blocked before upload: " + "; ".join(highs[:3])
+    if "data contract: DEGRADED" in output or "contract failed" in output:
+        return "deploy_live blocked before upload: data contract DEGRADED (see journal)"
+    return None
+
+
+def run_deploy_live() -> tuple[bool, str | None]:
     log("running deploy_live.sh to push fresh data ...")
     res = run(["bash", str(DEPLOY_LIVE)], timeout=300)
-    ok = res.returncode == 0 and "render-upload" in (res.stdout + res.stderr)
-    tail = (res.stdout + res.stderr).strip().splitlines()[-3:]
+    out = res.stdout + res.stderr
+    ok = res.returncode == 0 and "render-upload" in out
+    tail = out.strip().splitlines()[-3:]
     log("deploy_live tail: " + " | ".join(tail))
-    return ok
+    finding = None if ok else extract_contract_finding(out)
+    if finding:
+        log(f"deploy_live actionable finding: {finding}")
+    return ok, finding
 
 
 # ---- escalation --------------------------------------------------------------
