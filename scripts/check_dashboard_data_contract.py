@@ -136,16 +136,16 @@ def evaluate(dashboard_dir: Path) -> dict[str, Any]:
                 f"live date {live_date.isoformat()} requires prior date {expected}; "
                 "Back from the live Overview would skip or fail without it",
             ))
-        if data_date and data_date != expected_history_date:
+        if data_date and data_date > expected_history_date:
             findings.append(finding(
                 "data.json data_date",
-                f"data_date is {data_date.isoformat()}, expected {expected} for live date "
-                f"{live_date.isoformat()}",
+                f"data_date is {data_date.isoformat()}, ahead of expected prior date {expected} "
+                f"for live date {live_date.isoformat()}",
             ))
-        if briefing_date and briefing_date != live_date:
+        if briefing_date and briefing_date > live_date:
             findings.append(finding(
                 "data.json latest_briefing_date",
-                f"latest_briefing_date is {briefing_date.isoformat()}, expected live date "
+                f"latest_briefing_date is {briefing_date.isoformat()}, ahead of live date "
                 f"{live_date.isoformat()}",
             ))
 

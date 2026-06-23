@@ -340,9 +340,8 @@ def main() -> int:
         actions.append(ensure_unit(unit))
     if miss or (health.get("reachable") and health.get("stale")):
         ok, deploy_finding = run_deploy_live()
-        if ok:
-            actions.append("ran deploy_live.sh")
-        elif deploy_finding:
+        actions.append("ran deploy_live.sh")
+        if not ok and deploy_finding:
             # Surface the real cause (e.g. contract blocked the upload) into the
             # diagnosis so Foreman + Slack get something actionable, not "stale".
             diag.append(deploy_finding)

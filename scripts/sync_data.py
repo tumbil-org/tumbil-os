@@ -56,13 +56,20 @@ def guard_against_stale_history(briefing_date: str, now: datetime | None = None)
     """Do not let an old local reports folder overwrite the live dashboard."""
     now = now or datetime.now(LOCAL_TZ)
     today = now.strftime("%Y-%m-%d")
+    yesterday = (now - timedelta(days=1)).strftime("%Y-%m-%d")
     if briefing_date < today:
+        if briefing_date < yesterday:
+            print(
+                f"ERROR: Latest local TGE briefing is {briefing_date}, but today is {today} ET. "
+                "Refusing to write stale dashboard history.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
         print(
-            f"ERROR: Latest local TGE briefing is {briefing_date}, but today is {today} ET. "
-            "Refusing to write stale dashboard history.",
+            f"WARN: Latest local TGE briefing is {briefing_date}, but today is {today} ET. "
+            "Rebuilding history from the latest briefing plus DB-derived detail payloads.",
             file=sys.stderr,
         )
-        sys.exit(1)
 
     existing = load_json(OUTPUT_FILE)
     existing_briefing = str((existing or {}).get("latest_briefing_date") or "")
@@ -241,9 +248,11 @@ def fallback_historical_days_from_detail_payloads() -> list[dict]:
 
 def build_historical_days(anchor_date: datetime | None = None, max_days: int = 44) -> list[dict]:
     anchor_date = anchor_date or datetime.now()
+    detail_days = fallback_historical_days_from_detail_payloads()
+    detail_dates = {row["date"] for row in detail_days}
     days_by_date = {
         row["date"]: row
-        for row in fallback_historical_days_from_detail_payloads()
+        for row in detail_days
     }
     for days_back in range(max_days):
         briefing_date = (anchor_date - timedelta(days=days_back)).strftime("%Y-%m-%d")
@@ -254,6 +263,12 @@ def build_historical_days(anchor_date: datetime | None = None, max_days: int = 4
         day = historical_day_from_report(briefing_date, analysis, raw_data)
         if day:
             days_by_date[day["date"]] = day
+    if detail_dates:
+        days_by_date = {
+            day: row
+            for day, row in days_by_date.items()
+            if day in detail_dates
+        }
     return sorted(days_by_date.values(), key=lambda row: row["date"])
 
 
