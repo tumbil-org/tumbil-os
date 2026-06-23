@@ -21,6 +21,7 @@ CHECK_PYTHON="$TUMBILOS_DIR/.venv/bin/python3"
 [ ! -f "$CHECK_PYTHON" ] && CHECK_PYTHON="python3"
 
 "$CHECK_PYTHON" "$TUMBILOS_DIR/scripts/check_dashboard_data_contract.py"
+"$CHECK_PYTHON" "$TUMBILOS_DIR/scripts/check_dashboard_incident_regressions.py"
 
 # Offline guard: the drill-down builders must cover the live date even on a
 # zero-activity day (the 2026-06-22 midnight-rollover freeze). No DB/network.
