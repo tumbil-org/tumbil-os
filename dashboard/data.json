@@ -1,113 +1,112 @@
 {
   "version": 2,
-  "generated_at": "2026-06-23T06:15:03.483845",
-  "latest_briefing_date": "2026-06-23",
-  "data_date": "2026-06-22",
+  "generated_at": "2026-06-24T06:15:03.462207",
+  "latest_briefing_date": "2026-06-24",
+  "data_date": "2026-06-23",
   "timezone": "America/Toronto",
-  "executive_summary": "Quiet Monday: 10 orders placed (vs 12.1 avg, -17.4%) and only 8 delivered (vs 11.7, -31.6%), so delivered revenue dropped to $397.88 ex. HST (-35.7%). Bright spots \u2014 average order size rose to $60.63 (+13.8%) and 3 new customers showed up. Cost per new customer was $33.50, over the $25 ceiling but well below the $52.79 7-day rolling figure.",
-  "analyst_brief": "Monday was a slow day, but mostly in a way you'd expect after a strong weekend (Fri 17 delivered, Sat 15). Eight deliveries pulled revenue down hard on paper (-35.7%), yet the orders that did come in were bigger \u2014 average order size hit $60.63, the top of the recent range. Nothing in the day looks broken: no cancellations, ratings fine at 4.6, spend roughly flat. Don't over-read the red on delivered revenue; it's a low-count day, not a trend break.\n\nThe genuinely good news is on acquisition cost. Three new customers came in at $33.50 each. That's over the $25 ceiling for the day, but the 7-day rolling cost per new customer is $52.79 \u2014 so yesterday was actually the cheapest acquisition day in the last week by a wide margin, and three new customers beats the typical two. The trajectory here is improving, not deteriorating. I would not touch ad spend on the back of one quiet Monday.\n\nThe thing I'd actually focus on is whether new customers come back. The numbers tell a clear, uncomfortable story: of the people who first ordered in April, 28-41% placed a second order within three weeks. For the groups from May, that's collapsed to 6.7%, 19%, 18.8%, and 16.7%. We're paying real money to acquire people who increasingly don't return. Yesterday's zero second-order customers is noise on a 10-order day, but the multi-week reorder slide is signal. This is the highest-leverage problem in the whole report \u2014 it's worth more than any keyword or city page. If those May groups reordered at April's rate, we'd have roughly double the repeat volume we're seeing now. I'd spend an hour this week figuring out what changed between April and May customers: pricing, the first-order experience, the follow-up nudge, delivery timing \u2014 something shifted. Worth pulling a handful of those one-and-done May customers and looking at their orders by hand.\n\nTwo smaller things. Failed payments sit at 3 in the rolling week versus a baseline under 1 \u2014 small absolute numbers ($70.57 total), but it's been creeping, so worth a glance to make sure it's not a card-update or retry issue. And on search: Hamilton, Kitchener, and Ottawa city pages are each getting 400+ views in Google search but essentially no clicks (Hamilton 417 views \u2192 1 click, Kitchener 479 \u2192 1, Ottawa 453 \u2192 1). Google is showing these pages to lots of people who don't click. Remember the title/description is a shared template across all 24 city pages, so this isn't a one-page tweak \u2014 but the high-impression, low-click pattern suggests the shared snippet isn't compelling, and that's a lever sitting in front of a lot of free traffic. Lastly, the \"how to fold a fitted sheet\" blog post is still sitting un-indexed (Google found it but hasn't added it) \u2014 minor, but a manual re-submit in Search Console would fix it.",
+  "executive_summary": "Tuesday placed 10 orders (vs 11.9 avg, -16%), an unremarkable day carried by regulars (7 of 10). Delivered side was strong: $743.15 ex. HST, +11.6%, on bigger-than-usual orders. Cost per new customer was $33.69 \u2014 over the $25 ceiling, but on 3 new customers (above the 2.4 norm), and the 7-day figure is easing to $45.24.",
+  "analyst_brief": "Tuesday was a quiet, ordinary day on the front end \u2014 10 orders placed, a touch below your normal \u2014 but the money that actually landed was healthy. The 12 orders you delivered brought in $743 (ex. HST), up about 12%, because the orders that closed out were larger than usual ($61.93 each delivered vs a $54.86 average). Nothing broke; this was a normal slow Tuesday, not an alarm.\n\nThe one thing worth your attention is the come-back rate, and it's been creeping up on us. Yesterday, again, **zero second-order customers** \u2014 nobody placing their second-ever order. One quiet day doesn't matter, but look at the trend: of the people who first tried us in late May, only about 1 in 6 came back within three weeks, and the early-June group is sitting at zero so far (small group, only 4 people, so not conclusive). Back in April we were getting 30\u201340% of new customers to return. Something changed between April and now in how well a first-time customer's experience converts into a habit. That's the lever that decides whether your ad spend compounds or leaks. I'd dig into what the April first-timers experienced that the May/June ones didn't \u2014 turnaround time, a follow-up nudge, a promo that's since lapsed. This is more valuable than anything in the ad account right now.\n\nOn acquisition cost: yesterday's spend bought 3 new customers at **$33.69 each \u2014 over your $25 ceiling**. Don't dress that up; it's above target. But two things soften it. You got 3 new customers on a day you'd normally expect 2.4, and the steadier 7-day figure ($45.24 per new customer) is actually trending down toward the ceiling, not away from it. The fix here isn't cheaper clicks \u2014 it's the come-back problem above. If those new customers came back at April's rate, $33 to acquire one is a bargain.\n\nTwo small housekeeping notes. Failed payments are at 3 in the last 7 days ($70.57) against a baseline of under 1 \u2014 still tiny numbers, but worth a 5-minute glance to make sure it's not a recurring card or a checkout glitch. And one blog post, the \"how to fold a fitted sheet\" guide, has been found by Google but never actually crawled or indexed \u2014 it's been sitting in limbo. If you want it earning traffic, request indexing for it in Search Console; otherwise it's dead weight.\n\nRatings remain excellent (4.86, no low scores yesterday), cancellations are calm and well below your 30-day norm, and your branded searches keep converting. The business is steady. The single highest-leverage question this week is: **why did our first-time customers stop coming back after April, and how do we get that back?**",
   "scorecard": [
     {
       "metric": "Orders Placed",
       "yesterday": "10",
-      "seven_day_avg": "12.1",
-      "change": "-17.4%",
+      "seven_day_avg": "11.9",
+      "change": "-16.0%",
       "status": "yellow"
     },
     {
       "metric": "Orders Delivered",
-      "yesterday": "8",
-      "seven_day_avg": "11.7",
-      "change": "-31.6%",
-      "status": "red"
-    },
-    {
-      "metric": "Order Value, placed, ex. HST",
-      "yesterday": "$606.27",
-      "seven_day_avg": "$646.94",
-      "change": "-6.3%",
+      "yesterday": "12",
+      "seven_day_avg": "12.1",
+      "change": "-0.8%",
       "status": "green"
     },
     {
+      "metric": "Order Value, placed, ex. HST",
+      "yesterday": "$526.27",
+      "seven_day_avg": "$616.80",
+      "change": "-14.7%",
+      "status": "yellow"
+    },
+    {
       "metric": "Revenue, delivered, ex. HST",
-      "yesterday": "$397.88",
-      "seven_day_avg": "$618.79",
-      "change": "-35.7%",
-      "status": "red"
+      "yesterday": "$743.15",
+      "seven_day_avg": "$666.19",
+      "change": "+11.6%",
+      "status": "green"
     },
     {
       "metric": "AOV, placed, ex. HST",
-      "yesterday": "$60.63",
-      "seven_day_avg": "$53.28",
-      "change": "+13.8%",
+      "yesterday": "$52.63",
+      "seven_day_avg": "$52.02",
+      "change": "+1.2%",
       "status": "green"
     },
     {
       "metric": "Ad Spend",
-      "yesterday": "$100.49",
-      "seven_day_avg": "$105.59",
-      "change": "-4.8%",
+      "yesterday": "$101.08",
+      "seven_day_avg": "$109.87",
+      "change": "-8.0%",
       "status": "green"
     },
     {
       "metric": "Cost per New Customer",
-      "yesterday": "$33.50",
-      "seven_day_avg": "$52.79",
-      "change": "-36.5%",
+      "yesterday": "$33.69",
+      "seven_day_avg": "$45.24",
+      "change": "-25.5%",
       "status": "red"
     },
     {
       "metric": "New Customers",
       "yesterday": "3",
-      "seven_day_avg": "2.0",
-      "change": "+50.0%",
+      "seven_day_avg": "2.4",
+      "change": "+25.0%",
       "status": "green"
     },
     {
       "metric": "Second-Order Customers",
       "yesterday": "0",
-      "seven_day_avg": "1.6",
+      "seven_day_avg": "1.1",
       "change": "-100.0%",
       "status": "red"
     },
     {
       "metric": "Habitual Customers",
       "yesterday": "7",
-      "seven_day_avg": "8.6",
-      "change": "-18.6%",
+      "seven_day_avg": "8.3",
+      "change": "-15.7%",
       "status": "yellow"
     },
     {
       "metric": "Avg In-App Rating",
-      "yesterday": "4.6",
-      "seven_day_avg": "4.86",
-      "change": "-5.3%",
+      "yesterday": "4.86",
+      "seven_day_avg": "4.85",
+      "change": "+0.2%",
       "status": "green"
     },
     {
-      "metric": "Cancellations (7d rate)",
+      "metric": "Cancellations 7d",
       "yesterday": "2.4%",
-      "seven_day_avg": "5.7%",
+      "seven_day_avg": "5.5%",
       "change": "0.0pp",
       "status": "green"
     },
     {
-      "metric": "Failed Payments (7d count)",
+      "metric": "Failed Payments 7d",
       "yesterday": "3",
       "seven_day_avg": "0.9",
       "change": "0",
       "status": "yellow"
     }
   ],
-  "validation_notes": "Cross-checks clean: placed 10 \u00d7 $60.63 = $606.30 \u2248 $606.27; delivered 8 \u00d7 $49.73 = $397.84 \u2248 $397.88. Cost per new customer = $100.49 spend \u00f7 3 new = $33.50. Stripe, GA4, ClickUp, Intercom unavailable (not in pipeline / no key), so no payment cross-check beyond DB.",
+  "validation_notes": "DB cross-checks tie out: 10 placed \u00d7 $52.63 = $526.30 \u2248 $526.27 order value; 12 delivered \u00d7 $61.93 = $743.16 \u2248 $743.15 revenue. All figures ex. HST. Stripe, GA4, ClickUp, Intercom unavailable (no key / Phase 2), so no external payment reconciliation today.",
   "data_footnotes": [
-    "DB: tumbil_production_db, reference date 2026-06-22, timezone America/Toronto. Placed = order_timelines.timestamp (type='placed'); delivered = payments.captured_at.",
-    "Revenue methodology: all monetary values net of 13% HST (ex. HST), tips excluded.",
-    "Cost per new customer = yesterday ad spend $100.49 \u00f7 3 new customers = $33.50; 7d rolling = $52.79 (stability proxy).",
-    "Cancellations/failed payments: Change column uses day-over-day delta of the rolling metric; 7-Day Avg column uses 30-day baseline (cancel 5.7%, failed payments 0.9 per 7d).",
-    "Google Ads: account 972-828-9560, last 7d spend pulled. Conversions count registrations, not purchases \u2014 DB used for orders.",
-    "GSC: sc-domain:tumbil.com, query/page data 2026-06-15 to 2026-06-22, indexing via URL Inspection API (41/42 indexed; Fitted Sheet blog not indexed).",
-    "Stripe, GA4, ClickUp, Intercom: unavailable (Phase 2 / no API key)."
+    "DB: tumbil_production_db, reference date 2026-06-23, timezone America/Toronto. Placed = order_timelines.timestamp (type='placed'), payment verified/captured; delivered = payments.captured_at, status=captured, not cancelled.",
+    "Cost per new customer = $101.08 ad spend / 3 new customers = $33.69; 7d rolling = $45.24. Not divided across all placed orders.",
+    "Google Ads: account 972-828-9560, yesterday spend $101.08, 7d spend $769.12. Conversions count registrations, not purchases \u2014 DB used for true orders.",
+    "GSC: sc-domain:tumbil.com, queries/pages 2026-06-16 to 2026-06-23, indexing via URL Inspection API (41/42 indexed; 'fitted sheet' blog post discovered, not indexed).",
+    "Revenue methodology: all monetary values net of 13% HST, tips excluded.",
+    "Unavailable today: Stripe (no API key), GA4 / ClickUp / Intercom (Phase 2)."
   ],
   "trends": {
     "daily_orders": [
@@ -134,40 +133,19 @@
         "order_value_cad": 490.76,
         "revenue_cad": 863.51,
         "aov_placed_cad": 54.53
+      },
+      {
+        "date": "2026-06-22",
+        "placed": 10,
+        "delivered": 8,
+        "order_value_cad": 606.27,
+        "revenue_cad": 397.88,
+        "aov_placed_cad": 60.63
       }
     ]
   },
   "history": {
     "days": [
-      {
-        "date": "2026-05-10",
-        "briefing_date": null,
-        "placed_orders": 14,
-        "order_value_cad": 771.0,
-        "aov_cad": 55.07,
-        "customer_mix": {
-          "brand_new": 2,
-          "second_order": 2,
-          "regular": 10,
-          "returning_regular_total": 12
-        },
-        "same_time_7d_avg_orders": 0,
-        "same_time_delta_orders": 0,
-        "target_placed_orders": 20,
-        "pace_to_target_pct": 70.0,
-        "deliveries": {
-          "count": 15,
-          "revenue_cad": 0,
-          "aov_cad": 0
-        },
-        "acquisition": {
-          "new_customer_orders": 2,
-          "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
-        },
-        "executive_summary": "",
-        "analyst_brief": "",
-        "scorecard": []
-      },
       {
         "date": "2026-05-11",
         "briefing_date": null,
@@ -1789,6 +1767,128 @@
       },
       {
         "date": "2026-06-23",
+        "briefing_date": "2026-06-24",
+        "placed_orders": 10,
+        "order_value_cad": 526.27,
+        "aov_cad": 52.63,
+        "customer_mix": {
+          "brand_new": 3,
+          "second_order": 0,
+          "regular": 7,
+          "returning_regular_total": 7
+        },
+        "same_time_7d_avg_orders": 11.9,
+        "same_time_delta_orders": -1.9,
+        "target_placed_orders": 20,
+        "pace_to_target_pct": 50.0,
+        "acquisition": {
+          "new_customer_orders": 3,
+          "ad_spend_cad": 101.08,
+          "ad_clicks": 68,
+          "ad_impressions": 1116,
+          "ad_conversions_registrations": 2.0,
+          "cost_per_new_customer_cad": 33.69,
+          "cost_per_new_customer_7d_avg_cad": 45.24,
+          "source_note": "Historical source mix is limited to TGE daily acquisition metrics. Live same-day source labels use best-effort GA4/BigQuery joins."
+        },
+        "executive_summary": "Tuesday placed 10 orders (vs 11.9 avg, -16%), an unremarkable day carried by regulars (7 of 10). Delivered side was strong: $743.15 ex. HST, +11.6%, on bigger-than-usual orders. Cost per new customer was $33.69 \u2014 over the $25 ceiling, but on 3 new customers (above the 2.4 norm), and the 7-day figure is easing to $45.24.",
+        "analyst_brief": "Tuesday was a quiet, ordinary day on the front end \u2014 10 orders placed, a touch below your normal \u2014 but the money that actually landed was healthy. The 12 orders you delivered brought in $743 (ex. HST), up about 12%, because the orders that closed out were larger than usual ($61.93 each delivered vs a $54.86 average). Nothing broke; this was a normal slow Tuesday, not an alarm.\n\nThe one thing worth your attention is the come-back rate, and it's been creeping up on us. Yesterday, again, **zero second-order customers** \u2014 nobody placing their second-ever order. One quiet day doesn't matter, but look at the trend: of the people who first tried us in late May, only about 1 in 6 came back within three weeks, and the early-June group is sitting at zero so far (small group, only 4 people, so not conclusive). Back in April we were getting 30\u201340% of new customers to return. Something changed between April and now in how well a first-time customer's experience converts into a habit. That's the lever that decides whether your ad spend compounds or leaks. I'd dig into what the April first-timers experienced that the May/June ones didn't \u2014 turnaround time, a follow-up nudge, a promo that's since lapsed. This is more valuable than anything in the ad account right now.\n\nOn acquisition cost: yesterday's spend bought 3 new customers at **$33.69 each \u2014 over your $25 ceiling**. Don't dress that up; it's above target. But two things soften it. You got 3 new customers on a day you'd normally expect 2.4, and the steadier 7-day figure ($45.24 per new customer) is actually trending down toward the ceiling, not away from it. The fix here isn't cheaper clicks \u2014 it's the come-back problem above. If those new customers came back at April's rate, $33 to acquire one is a bargain.\n\nTwo small housekeeping notes. Failed payments are at 3 in the last 7 days ($70.57) against a baseline of under 1 \u2014 still tiny numbers, but worth a 5-minute glance to make sure it's not a recurring card or a checkout glitch. And one blog post, the \"how to fold a fitted sheet\" guide, has been found by Google but never actually crawled or indexed \u2014 it's been sitting in limbo. If you want it earning traffic, request indexing for it in Search Console; otherwise it's dead weight.\n\nRatings remain excellent (4.86, no low scores yesterday), cancellations are calm and well below your 30-day norm, and your branded searches keep converting. The business is steady. The single highest-leverage question this week is: **why did our first-time customers stop coming back after April, and how do we get that back?**",
+        "scorecard": [
+          {
+            "metric": "Orders Placed",
+            "yesterday": "10",
+            "seven_day_avg": "11.9",
+            "change": "-16.0%",
+            "status": "yellow"
+          },
+          {
+            "metric": "Orders Delivered",
+            "yesterday": "12",
+            "seven_day_avg": "12.1",
+            "change": "-0.8%",
+            "status": "green"
+          },
+          {
+            "metric": "Order Value, placed, ex. HST",
+            "yesterday": "$526.27",
+            "seven_day_avg": "$616.80",
+            "change": "-14.7%",
+            "status": "yellow"
+          },
+          {
+            "metric": "Revenue, delivered, ex. HST",
+            "yesterday": "$743.15",
+            "seven_day_avg": "$666.19",
+            "change": "+11.6%",
+            "status": "green"
+          },
+          {
+            "metric": "AOV, placed, ex. HST",
+            "yesterday": "$52.63",
+            "seven_day_avg": "$52.02",
+            "change": "+1.2%",
+            "status": "green"
+          },
+          {
+            "metric": "Ad Spend",
+            "yesterday": "$101.08",
+            "seven_day_avg": "$109.87",
+            "change": "-8.0%",
+            "status": "green"
+          },
+          {
+            "metric": "Cost per New Customer",
+            "yesterday": "$33.69",
+            "seven_day_avg": "$45.24",
+            "change": "-25.5%",
+            "status": "red"
+          },
+          {
+            "metric": "New Customers",
+            "yesterday": "3",
+            "seven_day_avg": "2.4",
+            "change": "+25.0%",
+            "status": "green"
+          },
+          {
+            "metric": "Second-Order Customers",
+            "yesterday": "0",
+            "seven_day_avg": "1.1",
+            "change": "-100.0%",
+            "status": "red"
+          },
+          {
+            "metric": "Habitual Customers",
+            "yesterday": "7",
+            "seven_day_avg": "8.3",
+            "change": "-15.7%",
+            "status": "yellow"
+          },
+          {
+            "metric": "Avg In-App Rating",
+            "yesterday": "4.86",
+            "seven_day_avg": "4.85",
+            "change": "+0.2%",
+            "status": "green"
+          },
+          {
+            "metric": "Cancellations 7d",
+            "yesterday": "2.4%",
+            "seven_day_avg": "5.5%",
+            "change": "0.0pp",
+            "status": "green"
+          },
+          {
+            "metric": "Failed Payments 7d",
+            "yesterday": "3",
+            "seven_day_avg": "0.9",
+            "change": "0",
+            "status": "yellow"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-24",
         "briefing_date": null,
         "placed_orders": 0,
         "order_value_cad": 0,
