@@ -151,6 +151,46 @@ def check_history_trimmed_to_detail_window() -> list[str]:
     return failures
 
 
+def check_sync_data_no_tge_report_fallback() -> list[str]:
+    failures: list[str] = []
+    original_fallback = sync_data.fallback_historical_days_from_detail_payloads
+    original_load = sync_data.load_json
+    try:
+        sync_data.fallback_historical_days_from_detail_payloads = lambda: [
+            {
+                "date": "2026-06-27",
+                "placed_orders": 7,
+                "order_value_cad": 322.5,
+                "aov_cad": 46.07,
+                "deliveries": {"count": 5, "revenue_cad": 250.0},
+            },
+            {
+                "date": "2026-06-28",
+                "placed_orders": 2,
+                "order_value_cad": 99.0,
+                "aov_cad": 49.5,
+                "deliveries": {"count": 1, "revenue_cad": 55.0},
+            },
+        ]
+        sync_data.load_json = lambda _path: None
+
+        now = datetime(2026, 6, 28, 14, 0, tzinfo=ZoneInfo("America/Toronto"))
+        data = sync_data.build_fallback_dashboard_data(now)
+        dates = [row["date"] for row in data["history"]["days"]]
+        if dates != ["2026-06-27", "2026-06-28"]:
+            failures.append(f"no-report fallback should preserve detail dates, got {dates}")
+        if data["data_date"] != "2026-06-27":
+            failures.append(f"no-report fallback should use prior ET date, got {data['data_date']}")
+        if data["data_health"]["tge_analysis"]["status"] != "missing":
+            failures.append("no-report fallback must mark TGE analysis missing")
+        if not data["trends"]["daily_orders"]:
+            failures.append("no-report fallback should build chart trends from history")
+    finally:
+        sync_data.fallback_historical_days_from_detail_payloads = original_fallback
+        sync_data.load_json = original_load
+    return failures
+
+
 def check_selfheal_failed_deploy_reports_attempt() -> list[str]:
     failures: list[str] = []
     slack_messages: list[str] = []
@@ -193,6 +233,7 @@ def main() -> int:
     failures += check_contract_prebriefing_window()
     failures += check_sync_data_stale_briefing_guard()
     failures += check_history_trimmed_to_detail_window()
+    failures += check_sync_data_no_tge_report_fallback()
     failures += check_selfheal_failed_deploy_reports_attempt()
 
     if failures:

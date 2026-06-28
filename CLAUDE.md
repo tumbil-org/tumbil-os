@@ -60,6 +60,8 @@ All TumbilOS deploys run on the ThinkPad via systemd user units:
 
 Mac launchd plist `infrastructure/mac/LaunchAgents/com.tumbil.os-deploy.plist` exists as a fallback but is currently disabled.
 
+Temporary incident fallback: `~/Library/LaunchAgents/com.tumbil.os-live-deploy-fallback.plist` was enabled on the Mac on 2026-06-28 after Render lost in-memory payloads while the ThinkPad was offline in Tailscale. It runs `scripts/deploy_live.sh` every 5 minutes and logs to `dashboard/mac-live-fallback.log` / `dashboard/mac-live-fallback-error.log`. Unload it only after `runtime_audit.py` verifies the ThinkPad `tumbilos-live-deploy.timer` and `tumbilos-selfheal.timer` are healthy again.
+
 ## Secrets
 
 All secrets read from `~/.config/tge/tge-env`:
