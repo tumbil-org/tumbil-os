@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-28T15:41:06.506300-04:00",
+  "generated_at": "2026-06-28T15:46:21.287051-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 7,
@@ -13,7 +13,7 @@
       "returning_regular_total": 7
     },
     "business_date": "2026-06-28",
-    "as_of_et": "2026-06-28T15:41:03.918248-04:00",
+    "as_of_et": "2026-06-28T15:46:18.629272-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 35.0,
     "same_time_7d_avg_orders": 9.3,
@@ -433,7 +433,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-06-28T15:41:03.918248-04:00"
+      "as_of_et": "2026-06-28T15:46:18.629272-04:00"
     },
     "ga4_attribution": {
       "status": "skipped",
