@@ -1,16 +1,12 @@
 {
   "version": 1,
-  "generated_at": "2026-06-28T14:56:38.362936-04:00",
+  "generated_at": "2026-06-28T15:25:26.861958-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
   "ga4_source_status": {
     "status": "ok",
     "primary": "ga4_data_api",
-    "ok_sources": [
-      "ga4_data_api",
-      "bigquery"
-    ],
     "rows": 33,
     "ga4_data_api": {
       "status": "ok",
@@ -25,7 +21,7 @@
     "bigquery": {
       "status": "ok",
       "rows": 23,
-      "method": "bq"
+      "method": "rest"
     }
   },
   "days": [
@@ -17120,7 +17116,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-27 08:00 PM",
             "delivery_by_et": "2026-06-28 08:00 PM",
@@ -17130,7 +17126,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 28.0,
+            "weight_lbs": 46.0,
             "order_value_cad": 38.0,
             "prior_completed_orders": 0
           }
@@ -17458,7 +17454,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "open",
+            "status": "accepted",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-28 08:00 PM",
             "delivery_by_et": "2026-06-29 08:00 PM",
