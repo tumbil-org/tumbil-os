@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-28T14:53:39.948160-04:00",
+  "generated_at": "2026-06-28T14:56:38.362936-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -17377,12 +17377,41 @@
       "date": "2026-06-28",
       "counts": {
         "brand_new": 0,
-        "second_order": 1,
+        "second_order": 2,
         "regular": 5
       },
       "customers_by_type": {
         "brand_new": [],
         "second_order": [
+          {
+            "customer_id": 4146,
+            "order_id": 6470,
+            "name": "Kate Fenton",
+            "email": "katefenton1111@gmail.com",
+            "mobile": "6478985283",
+            "placed_at_et": "2026-06-28 02:55 PM",
+            "signup_at_et": "2026-03-24 09:30 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-28 08:00 PM",
+            "delivery_by_et": "2026-06-29 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 1
+          },
           {
             "customer_id": 3222,
             "order_id": 4043,

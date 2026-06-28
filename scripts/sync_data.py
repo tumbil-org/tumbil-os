@@ -37,7 +37,7 @@ def parse_analysis(raw: dict | None) -> dict | None:
     return raw.get("structured_output", raw)
 
 
-def latest_report(max_days_back: int = 90) -> tuple[str, dict, dict | None]:
+def latest_report(max_days_back: int = 90, *, required: bool = True) -> tuple[str, dict, dict | None] | None:
     """Return (briefing_date, analysis, raw_data) for the newest valid report."""
     today = datetime.now(LOCAL_TZ)
     for days_back in range(max_days_back):
@@ -48,8 +48,10 @@ def latest_report(max_days_back: int = 90) -> tuple[str, dict, dict | None]:
         data = load_json(TGE_REPORTS / f"{date_str}-data.json")
         return date_str, analysis, data
 
-    print(f"ERROR: No TGE analysis found in last {max_days_back} days", file=sys.stderr)
-    sys.exit(1)
+    if required:
+        print(f"ERROR: No TGE analysis found in last {max_days_back} days", file=sys.stderr)
+        sys.exit(1)
+    return None
 
 
 def guard_against_stale_history(briefing_date: str, now: datetime | None = None) -> None:
@@ -290,6 +292,27 @@ def source_status(raw_data: dict | None) -> dict:
     return statuses
 
 
+def fallback_source_status(has_history: bool) -> dict:
+    return {
+        "db": {
+            "label": "Production DB",
+            "status": "ok" if has_history else "missing",
+        },
+        "google_ads": {
+            "label": "Google Ads",
+            "status": "missing",
+        },
+        "search_console": {
+            "label": "Search Console",
+            "status": "missing",
+        },
+        "tge_analysis": {
+            "label": "TGE Analyst Brief",
+            "status": "missing",
+        },
+    }
+
+
 def sanitize_scorecard(scorecard: list[dict]) -> list[dict]:
     """Normalize legacy scorecard labels for the company dashboard."""
     rows = []
@@ -305,8 +328,64 @@ def sanitize_scorecard(scorecard: list[dict]) -> list[dict]:
     return rows
 
 
+def daily_trends_from_history(days: list[dict]) -> list[dict]:
+    """Build the chart payload from fallback history rows."""
+    rows = []
+    for day in days[-30:]:
+        deliveries = day.get("deliveries", {}) if isinstance(day.get("deliveries"), dict) else {}
+        rows.append({
+            "date": day.get("date"),
+            "placed": day.get("placed_orders", 0),
+            "delivered": deliveries.get("count", 0),
+            "order_value_cad": day.get("order_value_cad", 0),
+            "revenue_cad": deliveries.get("revenue_cad", 0),
+            "aov_placed_cad": day.get("aov_cad", 0),
+        })
+    return rows
+
+
+def build_fallback_dashboard_data(now: datetime | None = None) -> dict:
+    """Build a safe dashboard payload when archived TGE analysis is unavailable."""
+    now = now or datetime.now(LOCAL_TZ)
+    days = build_historical_days(now)
+    data_date = (now - timedelta(days=1)).strftime("%Y-%m-%d")
+    return {
+        "version": 2,
+        "generated_at": datetime.now().isoformat(),
+        "latest_briefing_date": data_date,
+        "data_date": data_date,
+        "timezone": "America/Toronto",
+        "executive_summary": (
+            "No recent TGE analyst brief is available. Live metrics and historical "
+            "navigation were rebuilt from DB-derived dashboard detail payloads."
+        ),
+        "analyst_brief": "",
+        "scorecard": [],
+        "validation_notes": (
+            "Fallback mode: no recent reports/*-analysis.json file was available, "
+            "so data.json history was rebuilt from customers.json and "
+            "service-details.json. Acquisition and Search Console history require "
+            "the TGE daily briefing pipeline to recover."
+        ),
+        "data_footnotes": [
+            "Analyst brief unavailable; live and drill-down metrics are DB-derived.",
+        ],
+        "trends": {
+            "daily_orders": daily_trends_from_history(days),
+        },
+        "history": {
+            "days": days,
+        },
+        "data_health": fallback_source_status(bool(days)),
+    }
+
+
 def build_dashboard_data() -> dict:
-    briefing_date, analysis, raw_data = latest_report()
+    report = latest_report(required=False)
+    if report is None:
+        return build_fallback_dashboard_data()
+
+    briefing_date, analysis, raw_data = report
     guard_against_stale_history(briefing_date)
     briefing_dt = datetime.strptime(briefing_date, "%Y-%m-%d")
     data_date = (briefing_dt - timedelta(days=1)).strftime("%Y-%m-%d")
