@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-28T15:46:29.445539-04:00",
+  "generated_at": "2026-06-28T19:19:15.771941-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10369,9 +10369,20 @@
     {
       "date": "2026-06-28",
       "tips": {
-        "tip_count": 2,
-        "total_tips_cad": 14.0,
+        "tip_count": 3,
+        "total_tips_cad": 34.0,
         "rows": [
+          {
+            "order_id": 6441,
+            "customer_id": 4244,
+            "washpro_id": 2323,
+            "customer_name": "Dennis Labutte",
+            "washpro_name": "Javardo Cooper",
+            "tip_cad": 20.0,
+            "captured_at_et": "2026-06-28 07:01 PM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
           {
             "order_id": 6447,
             "customer_id": 4759,
@@ -10397,11 +10408,37 @@
         ]
       },
       "ratings": {
-        "rating_count": 3,
+        "rating_count": 5,
         "avg_rating": 5.0,
-        "five_star_count": 3,
+        "five_star_count": 5,
         "low_rating_count": 0,
         "rows": [
+          {
+            "order_id": 6441,
+            "customer_id": 4244,
+            "washpro_id": 2323,
+            "customer_name": "Dennis Labutte",
+            "washpro_name": "Javardo Cooper",
+            "rating": 5,
+            "submitted_at_et": "2026-06-28 07:01 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
+          {
+            "order_id": 6442,
+            "customer_id": 3991,
+            "washpro_id": 4012,
+            "customer_name": "Caitlyn Veiga",
+            "washpro_name": "Chris Anttila",
+            "rating": 5,
+            "submitted_at_et": "2026-06-28 04:04 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6447,
             "customer_id": 4759,
