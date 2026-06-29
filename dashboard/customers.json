@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T15:32:02.834829-04:00",
+  "generated_at": "2026-06-29T16:57:00.433073-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -17164,7 +17164,7 @@
       "counts": {
         "brand_new": 2,
         "second_order": 3,
-        "regular": 14
+        "regular": 15
       },
       "customers_by_type": {
         "brand_new": [
@@ -17245,7 +17245,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "open",
+            "status": "cancelled",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -17320,6 +17320,35 @@
         ],
         "regular": [
           {
+            "customer_id": 1490,
+            "order_id": 6501,
+            "name": "Lori Luechtefeld",
+            "email": "loriluechtefeld@gmail.com",
+            "mobile": "3102104757",
+            "placed_at_et": "2026-06-29 04:22 PM",
+            "signup_at_et": "2025-09-22 03:39 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 50
+          },
+          {
             "customer_id": 4125,
             "order_id": 6495,
             "name": "Fernando Martinez",
@@ -17334,7 +17363,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -17479,7 +17508,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -17489,7 +17518,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 28.0,
+            "weight_lbs": 23.0,
             "order_value_cad": 38.0,
             "prior_completed_orders": 8
           },
@@ -17653,7 +17682,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "rapid",
             "pickup_by_et": "2026-06-29 02:00 PM",
             "delivery_by_et": "2026-06-29 08:00 PM",
@@ -17663,7 +17692,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 15.0,
             "order_value_cad": 68.0,
             "prior_completed_orders": 8
           },
