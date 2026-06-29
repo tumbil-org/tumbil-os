@@ -1,29 +1,29 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T10:40:26.342098-04:00",
+  "generated_at": "2026-06-29T15:26:42.973454-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 9,
-    "order_value_cad": 520.75,
-    "aov_cad": 57.86,
+    "placed_orders": 19,
+    "order_value_cad": 955.75,
+    "aov_cad": 50.3,
     "customer_mix": {
-      "brand_new": 0,
-      "second_order": 2,
-      "regular": 7,
-      "returning_regular_total": 9
+      "brand_new": 2,
+      "second_order": 3,
+      "regular": 14,
+      "returning_regular_total": 17
     },
     "business_date": "2026-06-29",
-    "as_of_et": "2026-06-29T10:40:24.099378-04:00",
+    "as_of_et": "2026-06-29T15:26:36.220774-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 45.0,
-    "same_time_7d_avg_orders": 3.7,
-    "same_time_delta_orders": 5.3,
-    "same_time_7d_avg_order_value_cad": 196.79,
-    "same_time_7d_avg_new_customers": 0.3,
+    "pace_to_target_pct": 95.0,
+    "same_time_7d_avg_orders": 9.3,
+    "same_time_delta_orders": 9.7,
+    "same_time_7d_avg_order_value_cad": 513.18,
+    "same_time_7d_avg_new_customers": 1.4,
     "deliveries": {
-      "count": 2,
-      "revenue_cad": 96.25,
-      "aov_cad": 48.12
+      "count": 5,
+      "revenue_cad": 210.25,
+      "aov_cad": 42.05
     }
   },
   "customer_type_labels": {
@@ -35,55 +35,103 @@
   "same_time_7d_samples": [
     {
       "date": "2026-06-28",
-      "placed_orders": 3,
-      "order_value_cad": 134.0,
+      "placed_orders": 7,
+      "order_value_cad": 303.5,
       "new_customers": 0
     },
     {
       "date": "2026-06-27",
-      "placed_orders": 2,
-      "order_value_cad": 100.5,
-      "new_customers": 0
+      "placed_orders": 10,
+      "order_value_cad": 566.5,
+      "new_customers": 2
     },
     {
       "date": "2026-06-26",
-      "placed_orders": 7,
-      "order_value_cad": 283.5,
+      "placed_orders": 13,
+      "order_value_cad": 594.75,
       "new_customers": 1
     },
     {
       "date": "2026-06-25",
-      "placed_orders": 3,
-      "order_value_cad": 209.0,
-      "new_customers": 0
+      "placed_orders": 8,
+      "order_value_cad": 426.5,
+      "new_customers": 1
     },
     {
       "date": "2026-06-24",
-      "placed_orders": 4,
-      "order_value_cad": 164.5,
-      "new_customers": 0
+      "placed_orders": 12,
+      "order_value_cad": 826.0,
+      "new_customers": 3
     },
     {
       "date": "2026-06-23",
-      "placed_orders": 2,
-      "order_value_cad": 112.25,
-      "new_customers": 0
+      "placed_orders": 6,
+      "order_value_cad": 336.75,
+      "new_customers": 1
     },
     {
       "date": "2026-06-22",
-      "placed_orders": 5,
-      "order_value_cad": 373.75,
-      "new_customers": 1
+      "placed_orders": 9,
+      "order_value_cad": 538.25,
+      "new_customers": 2
     }
   ],
   "acquisition": {
-    "new_customer_orders": 0,
-    "sources": [],
-    "classified_orders": [],
-    "unknown_orders": 0,
+    "new_customer_orders": 2,
+    "sources": [
+      {
+        "bucket": "Other",
+        "orders": 1,
+        "confidence": "low"
+      },
+      {
+        "bucket": "Direct / Unknown",
+        "orders": 1,
+        "confidence": "low"
+      }
+    ],
+    "classified_orders": [
+      {
+        "order_id": 6128,
+        "bucket": "Other",
+        "confidence": "low",
+        "reason": "GA4 source did not match a standard bucket.",
+        "match_quality": "ga4_other_source",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
+      },
+      {
+        "order_id": 6497,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "No GA4 match",
+        "match_quality": "unmatched",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
+      }
+    ],
+    "unknown_orders": 1,
     "ga4_status": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "primary": "ga4_data_api",
+      "ga4_data_api": {
+        "status": "ok",
+        "source": "ga4_data_api",
+        "rows": 0,
+        "row_count": 0,
+        "date_start": "2026-06-29",
+        "date_end": "2026-06-29",
+        "auth": "service_account",
+        "credentials": "/Users/cliffpeskin/.config/ga4-mcp/credentials.json"
+      },
+      "bigquery": {
+        "status": "ok",
+        "rows": 1,
+        "method": "rest"
+      },
+      "rows": 1
     },
     "appsflyer": {
       "status": "unavailable",
@@ -127,9 +175,9 @@
   },
   "deliveries_monthly": {
     "current_month": "2026-06",
-    "mtd_total_deliveries": 329,
+    "mtd_total_deliveries": 332,
     "mtd_days_elapsed": 29,
-    "mtd_avg_per_day": 11.34,
+    "mtd_avg_per_day": 11.45,
     "monthly_history": [
       {
         "year_month": "2025-06",
@@ -217,118 +265,118 @@
       },
       {
         "year_month": "2026-06",
-        "deliveries": 329,
+        "deliveries": 332,
         "days": 29,
-        "avg_per_day": 11.34,
+        "avg_per_day": 11.45,
         "is_current_month": true
       }
     ]
   },
   "lifetime_value": {
-    "customers": 459,
-    "total_orders": 1861,
-    "total_revenue_cad": 101941.84,
-    "ltv_cad": 222.1,
+    "customers": 460,
+    "total_orders": 1864,
+    "total_revenue_cad": 102055.84,
+    "ltv_cad": 221.86,
     "orders_per_customer": 4.05,
-    "contribution_per_customer_cad": 49.97,
+    "contribution_per_customer_cad": 49.92,
     "contribution_margin": 0.225,
     "cohort_days": 180,
     "cohort_breakdown": [
       {
         "months_since_first_order": 0,
-        "customers": 60,
-        "total_orders": 68,
-        "orders_per_customer": 1.13,
-        "revenue_per_customer_cad": 71.8,
-        "ltv_per_customer_cad": 16.15
+        "customers": 59,
+        "total_orders": 66,
+        "orders_per_customer": 1.12,
+        "revenue_per_customer_cad": 68.47,
+        "ltv_per_customer_cad": 15.41
       },
       {
         "months_since_first_order": 1,
         "customers": 79,
-        "total_orders": 127,
-        "orders_per_customer": 1.61,
-        "revenue_per_customer_cad": 99.69,
-        "ltv_per_customer_cad": 22.43
+        "total_orders": 125,
+        "orders_per_customer": 1.58,
+        "revenue_per_customer_cad": 100.64,
+        "ltv_per_customer_cad": 22.64
       },
       {
         "months_since_first_order": 2,
-        "customers": 78,
-        "total_orders": 203,
-        "orders_per_customer": 2.6,
-        "revenue_per_customer_cad": 160.11,
-        "ltv_per_customer_cad": 36.02
+        "customers": 79,
+        "total_orders": 208,
+        "orders_per_customer": 2.63,
+        "revenue_per_customer_cad": 161.07,
+        "ltv_per_customer_cad": 36.24
       },
       {
         "months_since_first_order": 3,
-        "customers": 99,
-        "total_orders": 272,
-        "orders_per_customer": 2.75,
-        "revenue_per_customer_cad": 147.85,
-        "ltv_per_customer_cad": 33.27
+        "customers": 98,
+        "total_orders": 271,
+        "orders_per_customer": 2.77,
+        "revenue_per_customer_cad": 146.59,
+        "ltv_per_customer_cad": 32.98
       },
       {
         "months_since_first_order": 4,
         "customers": 106,
         "total_orders": 326,
         "orders_per_customer": 3.08,
-        "revenue_per_customer_cad": 163.71,
-        "ltv_per_customer_cad": 36.83
+        "revenue_per_customer_cad": 165.56,
+        "ltv_per_customer_cad": 37.25
       },
       {
         "months_since_first_order": 5,
-        "customers": 101,
+        "customers": 102,
         "total_orders": 339,
-        "orders_per_customer": 3.36,
-        "revenue_per_customer_cad": 175.99,
-        "ltv_per_customer_cad": 39.6
+        "orders_per_customer": 3.32,
+        "revenue_per_customer_cad": 174.57,
+        "ltv_per_customer_cad": 39.28
       },
       {
         "months_since_first_order": 6,
-        "customers": 92,
-        "total_orders": 282,
-        "orders_per_customer": 3.07,
-        "revenue_per_customer_cad": 164.95,
-        "ltv_per_customer_cad": 37.11
+        "customers": 93,
+        "total_orders": 285,
+        "orders_per_customer": 3.06,
+        "revenue_per_customer_cad": 164.4,
+        "ltv_per_customer_cad": 36.99
       },
       {
         "months_since_first_order": 7,
-        "customers": 73,
-        "total_orders": 309,
-        "orders_per_customer": 4.23,
-        "revenue_per_customer_cad": 230.46,
-        "ltv_per_customer_cad": 51.85
+        "customers": 72,
+        "total_orders": 308,
+        "orders_per_customer": 4.28,
+        "revenue_per_customer_cad": 232.11,
+        "ltv_per_customer_cad": 52.23
       },
       {
         "months_since_first_order": 8,
-        "customers": 54,
-        "total_orders": 229,
-        "orders_per_customer": 4.24,
-        "revenue_per_customer_cad": 218.65,
-        "ltv_per_customer_cad": 49.2
+        "customers": 55,
+        "total_orders": 230,
+        "orders_per_customer": 4.18,
+        "revenue_per_customer_cad": 216.71,
+        "ltv_per_customer_cad": 48.76
       },
       {
         "months_since_first_order": 9,
-        "customers": 70,
-        "total_orders": 360,
-        "orders_per_customer": 5.14,
-        "revenue_per_customer_cad": 288.35,
-        "ltv_per_customer_cad": 64.88
+        "customers": 68,
+        "total_orders": 357,
+        "orders_per_customer": 5.25,
+        "revenue_per_customer_cad": 293.4,
+        "ltv_per_customer_cad": 66.01
       },
       {
         "months_since_first_order": 10,
-        "customers": 71,
-        "total_orders": 205,
-        "orders_per_customer": 2.89,
-        "revenue_per_customer_cad": 199.17,
-        "ltv_per_customer_cad": 44.81
+        "customers": 72,
+        "total_orders": 207,
+        "orders_per_customer": 2.88,
+        "revenue_per_customer_cad": 197.72,
+        "ltv_per_customer_cad": 44.49
       },
       {
         "months_since_first_order": 11,
-        "customers": 43,
-        "total_orders": 198,
-        "orders_per_customer": 4.6,
-        "revenue_per_customer_cad": 238.93,
-        "ltv_per_customer_cad": 53.76
+        "customers": 44,
+        "total_orders": 199,
+        "orders_per_customer": 4.52,
+        "revenue_per_customer_cad": 236.65,
+        "ltv_per_customer_cad": 53.25
       },
       {
         "months_since_first_order": 12,
@@ -366,51 +414,51 @@
     "sensitivity": [
       {
         "cohort_days": 0,
-        "customers": 982,
-        "total_orders": 3196,
+        "customers": 983,
+        "total_orders": 3199,
         "orders_per_customer": 3.25,
-        "revenue_per_customer_cad": 179.61,
-        "ltv_per_customer_cad": 40.41
+        "revenue_per_customer_cad": 179.55,
+        "ltv_per_customer_cad": 40.4
       },
       {
         "cohort_days": 30,
-        "customers": 922,
-        "total_orders": 3128,
+        "customers": 924,
+        "total_orders": 3133,
         "orders_per_customer": 3.39,
-        "revenue_per_customer_cad": 186.63,
+        "revenue_per_customer_cad": 186.64,
         "ltv_per_customer_cad": 41.99
       },
       {
         "cohort_days": 60,
-        "customers": 843,
-        "total_orders": 3001,
+        "customers": 845,
+        "total_orders": 3008,
         "orders_per_customer": 3.56,
-        "revenue_per_customer_cad": 194.78,
-        "ltv_per_customer_cad": 43.83
+        "revenue_per_customer_cad": 194.68,
+        "ltv_per_customer_cad": 43.8
       },
       {
         "cohort_days": 90,
-        "customers": 765,
-        "total_orders": 2798,
+        "customers": 766,
+        "total_orders": 2800,
         "orders_per_customer": 3.66,
-        "revenue_per_customer_cad": 198.31,
-        "ltv_per_customer_cad": 44.62
+        "revenue_per_customer_cad": 198.14,
+        "ltv_per_customer_cad": 44.58
       },
       {
         "cohort_days": 120,
-        "customers": 666,
-        "total_orders": 2526,
+        "customers": 668,
+        "total_orders": 2529,
         "orders_per_customer": 3.79,
-        "revenue_per_customer_cad": 205.81,
-        "ltv_per_customer_cad": 46.31
+        "revenue_per_customer_cad": 205.71,
+        "ltv_per_customer_cad": 46.28
       },
       {
         "cohort_days": 180,
-        "customers": 459,
-        "total_orders": 1861,
+        "customers": 460,
+        "total_orders": 1864,
         "orders_per_customer": 4.05,
-        "revenue_per_customer_cad": 222.1,
-        "ltv_per_customer_cad": 49.97
+        "revenue_per_customer_cad": 221.86,
+        "ltv_per_customer_cad": 49.92
       },
       {
         "cohort_days": 270,
@@ -422,26 +470,43 @@
       },
       {
         "cohort_days": 365,
-        "customers": 49,
-        "total_orders": 210,
-        "orders_per_customer": 4.29,
-        "revenue_per_customer_cad": 207.58,
-        "ltv_per_customer_cad": 46.71
+        "customers": 50,
+        "total_orders": 234,
+        "orders_per_customer": 4.68,
+        "revenue_per_customer_cad": 225.24,
+        "ltv_per_customer_cad": 50.68
       }
     ]
   },
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-06-29T10:40:24.099378-04:00"
+      "as_of_et": "2026-06-29T15:26:36.220774-04:00"
     },
     "ga4_attribution": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "primary": "ga4_data_api",
+      "ga4_data_api": {
+        "status": "ok",
+        "source": "ga4_data_api",
+        "rows": 0,
+        "row_count": 0,
+        "date_start": "2026-06-29",
+        "date_end": "2026-06-29",
+        "auth": "service_account",
+        "credentials": "/Users/cliffpeskin/.config/ga4-mcp/credentials.json"
+      },
+      "bigquery": {
+        "status": "ok",
+        "rows": 1,
+        "method": "rest"
+      },
+      "rows": 1
     },
     "ga4_bigquery": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "rows": 1,
+      "method": "rest"
     },
     "appsflyer": {
       "status": "unavailable",
