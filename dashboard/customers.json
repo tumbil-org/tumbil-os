@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T10:09:15.885024-04:00",
+  "generated_at": "2026-06-29T10:35:18.436291-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -17026,7 +17026,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-28 08:00 PM",
             "delivery_by_et": "2026-06-29 08:00 PM",
@@ -17065,7 +17065,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 28.0,
+            "weight_lbs": 27.8,
             "order_value_cad": 38.0,
             "prior_completed_orders": 9
           },
@@ -17163,12 +17163,41 @@
       "date": "2026-06-29",
       "counts": {
         "brand_new": 0,
-        "second_order": 1,
-        "regular": 5
+        "second_order": 2,
+        "regular": 7
       },
       "customers_by_type": {
         "brand_new": [],
         "second_order": [
+          {
+            "customer_id": 5265,
+            "order_id": 6046,
+            "name": "David Campbell",
+            "email": "D.campbell90@live.ca",
+            "mobile": "6479714790",
+            "placed_at_et": "2026-06-29 10:27 AM",
+            "signup_at_et": "2026-06-06 10:51 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-29 08:00 PM",
+            "delivery_by_et": "2026-06-30 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 3,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 42.0,
+            "order_value_cad": 55.5,
+            "prior_completed_orders": 1
+          },
           {
             "customer_id": 5399,
             "order_id": 6407,
@@ -17200,6 +17229,64 @@
           }
         ],
         "regular": [
+          {
+            "customer_id": 1913,
+            "order_id": 6486,
+            "name": "Matt Johnson",
+            "email": "ydcyds9wvk@privaterelay.appleid.com",
+            "mobile": "6478224104",
+            "placed_at_et": "2026-06-29 10:34 AM",
+            "signup_at_et": "2025-11-03 08:46 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-29 08:00 PM",
+            "delivery_by_et": "2026-06-30 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 17
+          },
+          {
+            "customer_id": 1450,
+            "order_id": 6485,
+            "name": "Jane Vatcher",
+            "email": "jivatcher@gmail.com",
+            "mobile": "7052419915",
+            "placed_at_et": "2026-06-29 10:25 AM",
+            "signup_at_et": "2025-09-18 04:10 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-29 08:00 PM",
+            "delivery_by_et": "2026-06-30 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 2,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 28.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 11
+          },
           {
             "customer_id": 1932,
             "order_id": 6482,
@@ -17273,7 +17360,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "rapid",
             "pickup_by_et": "2026-06-29 02:00 PM",
             "delivery_by_et": "2026-06-29 08:00 PM",
