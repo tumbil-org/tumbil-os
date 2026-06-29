@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T17:07:35.471668-04:00",
+  "generated_at": "2026-06-29T17:12:53.717888-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
   "ga4_source_status": {
     "status": "ok",
     "primary": "ga4_data_api",
-    "rows": 30,
+    "rows": 31,
     "ga4_data_api": {
       "status": "ok",
       "source": "ga4_data_api",
-      "rows": 9,
-      "row_count": 9,
+      "rows": 10,
+      "row_count": 10,
       "date_start": "2026-06-23",
       "date_end": "2026-06-29",
       "auth": "service_account",
@@ -17179,8 +17179,9 @@
             "source": {
               "bucket": "Direct / Unknown",
               "confidence": "low",
-              "detail": "No GA4 attribution match for this user in the retained event window. AppsFlyer is not joined into this dashboard yet.",
-              "match_quality": "unmatched"
+              "detail": "GA4 source was direct or empty.",
+              "match_quality": "ga4_direct_or_empty",
+              "campaign": null
             },
             "referral_code": null,
             "referral": null,
