@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T17:12:47.355127-04:00",
+  "generated_at": "2026-06-29T17:18:06.664986-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 20,
@@ -13,7 +13,7 @@
       "returning_regular_total": 18
     },
     "business_date": "2026-06-29",
-    "as_of_et": "2026-06-29T17:12:40.774089-04:00",
+    "as_of_et": "2026-06-29T17:17:59.565784-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 100.0,
     "same_time_7d_avg_orders": 9.4,
@@ -308,19 +308,19 @@
       },
       {
         "months_since_first_order": 3,
-        "customers": 98,
-        "total_orders": 271,
-        "orders_per_customer": 2.77,
-        "revenue_per_customer_cad": 146.59,
-        "ltv_per_customer_cad": 32.98
+        "customers": 97,
+        "total_orders": 266,
+        "orders_per_customer": 2.74,
+        "revenue_per_customer_cad": 142.56,
+        "ltv_per_customer_cad": 32.08
       },
       {
         "months_since_first_order": 4,
-        "customers": 104,
-        "total_orders": 314,
-        "orders_per_customer": 3.02,
-        "revenue_per_customer_cad": 163.0,
-        "ltv_per_customer_cad": 36.68
+        "customers": 105,
+        "total_orders": 319,
+        "orders_per_customer": 3.04,
+        "revenue_per_customer_cad": 166.57,
+        "ltv_per_customer_cad": 37.48
       },
       {
         "months_since_first_order": 5,
@@ -446,11 +446,11 @@
       },
       {
         "cohort_days": 120,
-        "customers": 668,
-        "total_orders": 2530,
+        "customers": 669,
+        "total_orders": 2535,
         "orders_per_customer": 3.79,
-        "revenue_per_customer_cad": 205.81,
-        "ltv_per_customer_cad": 46.31
+        "revenue_per_customer_cad": 206.3,
+        "ltv_per_customer_cad": 46.42
       },
       {
         "cohort_days": 180,
@@ -481,7 +481,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-06-29T17:12:40.774089-04:00"
+      "as_of_et": "2026-06-29T17:17:59.565784-04:00"
     },
     "ga4_attribution": {
       "status": "ok",
