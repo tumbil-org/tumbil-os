@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T17:07:29.823670-04:00",
+  "generated_at": "2026-06-29T17:12:47.355127-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 20,
@@ -13,7 +13,7 @@
       "returning_regular_total": 18
     },
     "business_date": "2026-06-29",
-    "as_of_et": "2026-06-29T17:07:22.271242-04:00",
+    "as_of_et": "2026-06-29T17:12:40.774089-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 100.0,
     "same_time_7d_avg_orders": 9.4,
@@ -105,8 +105,8 @@
         "order_id": 6497,
         "bucket": "Direct / Unknown",
         "confidence": "low",
-        "reason": "No GA4 match",
-        "match_quality": "unmatched",
+        "reason": "GA4 source was direct or empty.",
+        "match_quality": "ga4_direct_or_empty",
         "campaign": null,
         "referral_code": null,
         "referral_owner_name": null
@@ -119,8 +119,8 @@
       "ga4_data_api": {
         "status": "ok",
         "source": "ga4_data_api",
-        "rows": 0,
-        "row_count": 0,
+        "rows": 1,
+        "row_count": 1,
         "date_start": "2026-06-29",
         "date_end": "2026-06-29",
         "auth": "service_account",
@@ -131,7 +131,7 @@
         "rows": 2,
         "method": "rest"
       },
-      "rows": 2
+      "rows": 3
     },
     "appsflyer": {
       "status": "unavailable",
@@ -481,7 +481,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-06-29T17:07:22.271242-04:00"
+      "as_of_et": "2026-06-29T17:12:40.774089-04:00"
     },
     "ga4_attribution": {
       "status": "ok",
@@ -489,8 +489,8 @@
       "ga4_data_api": {
         "status": "ok",
         "source": "ga4_data_api",
-        "rows": 0,
-        "row_count": 0,
+        "rows": 1,
+        "row_count": 1,
         "date_start": "2026-06-29",
         "date_end": "2026-06-29",
         "auth": "service_account",
@@ -501,7 +501,7 @@
         "rows": 2,
         "method": "rest"
       },
-      "rows": 2
+      "rows": 3
     },
     "ga4_bigquery": {
       "status": "ok",
