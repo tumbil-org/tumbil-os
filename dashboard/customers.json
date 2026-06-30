@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T12:04:30.560419-04:00",
+  "generated_at": "2026-06-30T12:14:59.927065-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16703,7 +16703,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "rapid",
             "pickup_by_et": "2026-06-30 02:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -17371,7 +17371,7 @@
       "counts": {
         "brand_new": 0,
         "second_order": 1,
-        "regular": 2
+        "regular": 3
       },
       "customers_by_type": {
         "brand_new": [],
@@ -17407,6 +17407,35 @@
           }
         ],
         "regular": [
+          {
+            "customer_id": 1824,
+            "order_id": 6227,
+            "name": "Adreece Akrouche",
+            "email": "ace.akrouche@gmail.com",
+            "mobile": "6137912648",
+            "placed_at_et": "2026-06-30 12:14 PM",
+            "signup_at_et": "2025-10-26 11:13 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 11
+          },
           {
             "customer_id": 1057,
             "order_id": 6508,
