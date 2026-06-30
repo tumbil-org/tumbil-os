@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T12:46:21.768347-04:00",
+  "generated_at": "2026-06-30T12:51:33.938988-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 5,
@@ -13,12 +13,12 @@
       "returning_regular_total": 5
     },
     "business_date": "2026-06-30",
-    "as_of_et": "2026-06-30T12:46:19.532115-04:00",
+    "as_of_et": "2026-06-30T12:51:31.302186-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 25.0,
-    "same_time_7d_avg_orders": 7.4,
-    "same_time_delta_orders": -2.4,
-    "same_time_7d_avg_order_value_cad": 378.14,
+    "same_time_7d_avg_orders": 7.6,
+    "same_time_delta_orders": -2.6,
+    "same_time_7d_avg_order_value_cad": 385.36,
     "same_time_7d_avg_new_customers": 1.0,
     "deliveries": {
       "count": 5,
@@ -47,8 +47,8 @@
     },
     {
       "date": "2026-06-27",
-      "placed_orders": 7,
-      "order_value_cad": 380.0,
+      "placed_orders": 8,
+      "order_value_cad": 430.5,
       "new_customers": 2
     },
     {
@@ -433,7 +433,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-06-30T12:46:19.532115-04:00"
+      "as_of_et": "2026-06-30T12:51:31.302186-04:00"
     },
     "ga4_attribution": {
       "status": "skipped",
