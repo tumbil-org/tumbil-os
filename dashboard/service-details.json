@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T17:02:55.616120-04:00",
+  "generated_at": "2026-06-30T18:32:15.792570-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10389,9 +10389,20 @@
     {
       "date": "2026-06-30",
       "tips": {
-        "tip_count": 5,
-        "total_tips_cad": 50.0,
+        "tip_count": 6,
+        "total_tips_cad": 55.0,
         "rows": [
+          {
+            "order_id": 6479,
+            "customer_id": 3043,
+            "washpro_id": 4529,
+            "customer_name": "Kimia Veisi",
+            "washpro_name": "Loic Rwakirenga",
+            "tip_cad": 5.0,
+            "captured_at_et": "2026-06-30 05:18 PM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
           {
             "order_id": 6487,
             "customer_id": 2826,
@@ -10450,11 +10461,24 @@
         ]
       },
       "ratings": {
-        "rating_count": 10,
-        "avg_rating": 4.2,
-        "five_star_count": 8,
+        "rating_count": 11,
+        "avg_rating": 4.27,
+        "five_star_count": 9,
         "low_rating_count": 2,
         "rows": [
+          {
+            "order_id": 6479,
+            "customer_id": 3043,
+            "washpro_id": 4529,
+            "customer_name": "Kimia Veisi",
+            "washpro_name": "Loic Rwakirenga",
+            "rating": 5,
+            "submitted_at_et": "2026-06-30 05:18 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6052,
             "customer_id": 3019,
