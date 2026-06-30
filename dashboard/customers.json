@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T16:52:23.997397-04:00",
+  "generated_at": "2026-06-30T16:57:38.118066-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
   "ga4_source_status": {
     "status": "ok",
     "primary": "ga4_data_api",
-    "rows": 28,
+    "rows": 29,
     "ga4_data_api": {
       "status": "ok",
       "source": "ga4_data_api",
-      "rows": 11,
-      "row_count": 11,
+      "rows": 12,
+      "row_count": 12,
       "date_start": "2026-06-24",
       "date_end": "2026-06-30",
       "auth": "service_account",
