@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T21:06:06.620656-04:00",
+  "generated_at": "2026-06-29T21:11:24.064683-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 24,
@@ -13,7 +13,7 @@
       "returning_regular_total": 19
     },
     "business_date": "2026-06-29",
-    "as_of_et": "2026-06-29T21:05:59.657941-04:00",
+    "as_of_et": "2026-06-29T21:11:17.535896-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 120.0,
     "same_time_7d_avg_orders": 10.9,
@@ -158,10 +158,10 @@
       },
       "bigquery": {
         "status": "ok",
-        "rows": 5,
+        "rows": 6,
         "method": "rest"
       },
-      "rows": 7
+      "rows": 8
     },
     "appsflyer": {
       "status": "unavailable",
@@ -362,19 +362,19 @@
       },
       {
         "months_since_first_order": 6,
-        "customers": 92,
-        "total_orders": 280,
-        "orders_per_customer": 3.04,
-        "revenue_per_customer_cad": 163.85,
-        "ltv_per_customer_cad": 36.87
+        "customers": 91,
+        "total_orders": 276,
+        "orders_per_customer": 3.03,
+        "revenue_per_customer_cad": 161.63,
+        "ltv_per_customer_cad": 36.37
       },
       {
         "months_since_first_order": 7,
-        "customers": 73,
-        "total_orders": 314,
+        "customers": 74,
+        "total_orders": 318,
         "orders_per_customer": 4.3,
-        "revenue_per_customer_cad": 232.4,
-        "ltv_per_customer_cad": 52.29
+        "revenue_per_customer_cad": 234.2,
+        "ltv_per_customer_cad": 52.7
       },
       {
         "months_since_first_order": 8,
@@ -511,7 +511,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-06-29T21:05:59.657941-04:00"
+      "as_of_et": "2026-06-29T21:11:17.535896-04:00"
     },
     "ga4_attribution": {
       "status": "ok",
@@ -528,14 +528,14 @@
       },
       "bigquery": {
         "status": "ok",
-        "rows": 5,
+        "rows": 6,
         "method": "rest"
       },
-      "rows": 7
+      "rows": 8
     },
     "ga4_bigquery": {
       "status": "ok",
-      "rows": 5,
+      "rows": 6,
       "method": "rest"
     },
     "appsflyer": {
