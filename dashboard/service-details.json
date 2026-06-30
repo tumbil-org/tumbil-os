@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T17:23:38.005966-04:00",
+  "generated_at": "2026-06-29T20:18:35.636312-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10308,9 +10308,42 @@
     {
       "date": "2026-06-29",
       "tips": {
-        "tip_count": 8,
-        "total_tips_cad": 78.0,
+        "tip_count": 11,
+        "total_tips_cad": 105.0,
         "rows": [
+          {
+            "order_id": 6465,
+            "customer_id": 1953,
+            "washpro_id": 1641,
+            "customer_name": "Riham Osman",
+            "washpro_name": "Maggie Kettlewell",
+            "tip_cad": 13.0,
+            "captured_at_et": "2026-06-29 07:54 PM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
+          {
+            "order_id": 6128,
+            "customer_id": 5318,
+            "washpro_id": 4304,
+            "customer_name": "Isabel Hinther",
+            "washpro_name": "Theresa Murray",
+            "tip_cad": 5.0,
+            "captured_at_et": "2026-06-29 06:29 PM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
+          {
+            "order_id": 6466,
+            "customer_id": 4231,
+            "washpro_id": 3976,
+            "customer_name": "Juliette Simard",
+            "washpro_name": "Diya Fattah",
+            "tip_cad": 9.0,
+            "captured_at_et": "2026-06-29 06:23 PM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
           {
             "order_id": 6481,
             "customer_id": 1638,
@@ -10402,11 +10435,50 @@
         ]
       },
       "ratings": {
-        "rating_count": 10,
-        "avg_rating": 4.9,
-        "five_star_count": 9,
+        "rating_count": 13,
+        "avg_rating": 4.92,
+        "five_star_count": 12,
         "low_rating_count": 0,
         "rows": [
+          {
+            "order_id": 6465,
+            "customer_id": 1953,
+            "washpro_id": 1641,
+            "customer_name": "Riham Osman",
+            "washpro_name": "Maggie Kettlewell",
+            "rating": 5,
+            "submitted_at_et": "2026-06-29 07:54 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
+          {
+            "order_id": 6128,
+            "customer_id": 5318,
+            "washpro_id": 4304,
+            "customer_name": "Isabel Hinther",
+            "washpro_name": "Theresa Murray",
+            "rating": 5,
+            "submitted_at_et": "2026-06-29 06:29 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
+          {
+            "order_id": 6466,
+            "customer_id": 4231,
+            "washpro_id": 3976,
+            "customer_name": "Juliette Simard",
+            "washpro_name": "Diya Fattah",
+            "rating": 5,
+            "submitted_at_et": "2026-06-29 06:23 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6481,
             "customer_id": 1638,

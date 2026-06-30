@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T17:23:36.605052-04:00",
+  "generated_at": "2026-06-29T20:18:34.438251-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
   "ga4_source_status": {
     "status": "ok",
     "primary": "ga4_data_api",
-    "rows": 31,
+    "rows": 32,
     "ga4_data_api": {
       "status": "ok",
       "source": "ga4_data_api",
-      "rows": 10,
-      "row_count": 10,
+      "rows": 11,
+      "row_count": 11,
       "date_start": "2026-06-23",
       "date_end": "2026-06-29",
       "auth": "service_account",
@@ -16966,7 +16966,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-28 08:00 PM",
             "delivery_by_et": "2026-06-29 08:00 PM",
@@ -16976,7 +16976,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 19.4,
             "order_value_cad": 38.0,
             "prior_completed_orders": 1
           }
@@ -17007,7 +17007,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 28.0,
+            "weight_lbs": 39.3,
             "order_value_cad": 38.0,
             "prior_completed_orders": 5
           },
@@ -17055,7 +17055,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-28 08:00 PM",
             "delivery_by_et": "2026-06-29 08:00 PM",
@@ -17113,7 +17113,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-28 08:00 PM",
             "delivery_by_et": "2026-06-29 08:00 PM",
@@ -17142,7 +17142,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-28 08:00 PM",
             "delivery_by_et": "2026-06-29 08:00 PM",
@@ -17152,7 +17152,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 28.0,
+            "weight_lbs": 19.0,
             "order_value_cad": 38.0,
             "prior_completed_orders": 6
           }
@@ -17162,12 +17162,103 @@
     {
       "date": "2026-06-29",
       "counts": {
-        "brand_new": 2,
+        "brand_new": 5,
         "second_order": 3,
         "regular": 15
       },
       "customers_by_type": {
         "brand_new": [
+          {
+            "customer_id": 5525,
+            "order_id": 6478,
+            "name": "Rattandeep kaur",
+            "email": "tanzkaur@gmail.com",
+            "mobile": "4372121418",
+            "placed_at_et": "2026-06-29 07:32 PM",
+            "signup_at_et": "2026-06-28 11:11 PM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "No GA4 attribution match for this user in the retained event window. AppsFlyer is not joined into this dashboard yet.",
+              "match_quality": "unmatched"
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 4,
+              "oversize": 0
+            },
+            "weight_lbs": 76.0,
+            "order_value_cad": 98.0,
+            "prior_completed_orders": 0
+          },
+          {
+            "customer_id": 4277,
+            "order_id": 4567,
+            "name": "Paige Kezima",
+            "email": "pkezima@gmail.com",
+            "mobile": "6138599907",
+            "placed_at_et": "2026-06-29 07:13 PM",
+            "signup_at_et": "2026-03-31 01:27 PM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "No GA4 attribution match for this user in the retained event window. AppsFlyer is not joined into this dashboard yet.",
+              "match_quality": "unmatched"
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 4,
+              "oversize": 0
+            },
+            "weight_lbs": 76.0,
+            "order_value_cad": 98.0,
+            "prior_completed_orders": 0
+          },
+          {
+            "customer_id": 5537,
+            "order_id": 6502,
+            "name": "Aleyna Anwer",
+            "email": "aleynaanwer@icloud.com",
+            "mobile": "9058069114",
+            "placed_at_et": "2026-06-29 05:43 PM",
+            "signup_at_et": "2026-06-29 05:38 PM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "GA4 source was direct or empty.",
+              "match_quality": "ga4_direct_or_empty",
+              "campaign": null
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "rapid",
+            "pickup_by_et": "2026-06-30 02:00 PM",
+            "delivery_by_et": "2026-06-30 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 68.0,
+            "prior_completed_orders": 0
+          },
           {
             "customer_id": 5533,
             "order_id": 6497,
@@ -17215,7 +17306,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -17225,7 +17316,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 12.2,
             "order_value_cad": 38.0,
             "prior_completed_orders": 0
           }
@@ -17275,7 +17366,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -17335,7 +17426,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-30 08:00 PM",
             "delivery_by_et": "2026-07-01 08:00 PM",
@@ -17577,7 +17668,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 14.0,
+            "weight_lbs": 32.6,
             "order_value_cad": 38.0,
             "prior_completed_orders": 17
           },
