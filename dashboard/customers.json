@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T15:23:27.471426-04:00",
+  "generated_at": "2026-06-30T16:15:42.774149-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -17370,12 +17370,41 @@
       "date": "2026-06-30",
       "counts": {
         "brand_new": 0,
-        "second_order": 1,
+        "second_order": 2,
         "regular": 4
       },
       "customers_by_type": {
         "brand_new": [],
         "second_order": [
+          {
+            "customer_id": 5463,
+            "order_id": 6463,
+            "name": "Natalie D'Souza",
+            "email": "nataliel.moussa@gmail.com",
+            "mobile": "6478022330",
+            "placed_at_et": "2026-06-30 03:28 PM",
+            "signup_at_et": "2026-06-23 08:13 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-07-01 08:00 PM",
+            "delivery_by_et": "2026-07-02 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 5,
+              "oversize": 0
+            },
+            "weight_lbs": 95.0,
+            "order_value_cad": 121.75,
+            "prior_completed_orders": 1
+          },
           {
             "customer_id": 5468,
             "order_id": 6451,
