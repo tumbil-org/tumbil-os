@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T15:07:48.788725-04:00",
+  "generated_at": "2026-06-30T15:23:28.554150-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10389,9 +10389,20 @@
     {
       "date": "2026-06-30",
       "tips": {
-        "tip_count": 4,
-        "total_tips_cad": 45.0,
+        "tip_count": 5,
+        "total_tips_cad": 50.0,
         "rows": [
+          {
+            "order_id": 6487,
+            "customer_id": 2826,
+            "washpro_id": 1762,
+            "customer_name": "Derek Morgan",
+            "washpro_name": "Lisa Hough",
+            "tip_cad": 5.0,
+            "captured_at_et": "2026-06-30 03:19 PM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
           {
             "order_id": 6482,
             "customer_id": 1932,
@@ -10439,11 +10450,24 @@
         ]
       },
       "ratings": {
-        "rating_count": 7,
-        "avg_rating": 3.86,
-        "five_star_count": 5,
+        "rating_count": 8,
+        "avg_rating": 4.0,
+        "five_star_count": 6,
         "low_rating_count": 2,
         "rows": [
+          {
+            "order_id": 6487,
+            "customer_id": 2826,
+            "washpro_id": 1762,
+            "customer_name": "Derek Morgan",
+            "washpro_name": "Lisa Hough",
+            "rating": 5,
+            "submitted_at_et": "2026-06-30 03:19 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6482,
             "customer_id": 1932,

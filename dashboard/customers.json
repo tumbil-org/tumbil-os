@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T15:07:47.718610-04:00",
+  "generated_at": "2026-06-30T15:23:27.471426-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -17011,7 +17011,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 14.0,
+            "weight_lbs": 18.8,
             "order_value_cad": 38.0,
             "prior_completed_orders": 2
           },
@@ -17146,7 +17146,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
