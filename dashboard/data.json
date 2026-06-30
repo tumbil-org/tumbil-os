@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "generated_at": "2026-06-29T08:19:44.087533",
-  "latest_briefing_date": "2026-06-28",
-  "data_date": "2026-06-28",
+  "generated_at": "2026-06-30T03:12:03.324249",
+  "latest_briefing_date": "2026-06-29",
+  "data_date": "2026-06-29",
   "timezone": "America/Toronto",
   "executive_summary": "No recent TGE analyst brief is available. Live metrics and historical navigation were rebuilt from DB-derived dashboard detail payloads.",
   "analyst_brief": "",
@@ -13,14 +13,6 @@
   ],
   "trends": {
     "daily_orders": [
-      {
-        "date": "2026-05-31",
-        "placed": 11,
-        "delivered": 19,
-        "order_value_cad": 685.0,
-        "revenue_cad": 0,
-        "aov_placed_cad": 62.27
-      },
       {
         "date": "2026-06-01",
         "placed": 18,
@@ -247,45 +239,24 @@
       },
       {
         "date": "2026-06-29",
-        "placed": 2,
-        "delivered": 1,
-        "order_value_cad": 112.25,
+        "placed": 25,
+        "delivered": 15,
+        "order_value_cad": 1333.75,
         "revenue_cad": 0,
-        "aov_placed_cad": 56.12
+        "aov_placed_cad": 53.35
+      },
+      {
+        "date": "2026-06-30",
+        "placed": 0,
+        "delivered": 0,
+        "order_value_cad": 0,
+        "revenue_cad": 0,
+        "aov_placed_cad": 0
       }
     ]
   },
   "history": {
     "days": [
-      {
-        "date": "2026-05-16",
-        "briefing_date": null,
-        "placed_orders": 18,
-        "order_value_cad": 1060.75,
-        "aov_cad": 58.93,
-        "customer_mix": {
-          "brand_new": 3,
-          "second_order": 4,
-          "regular": 11,
-          "returning_regular_total": 15
-        },
-        "same_time_7d_avg_orders": 0,
-        "same_time_delta_orders": 0,
-        "target_placed_orders": 20,
-        "pace_to_target_pct": 90.0,
-        "deliveries": {
-          "count": 13,
-          "revenue_cad": 0,
-          "aov_cad": 0
-        },
-        "acquisition": {
-          "new_customer_orders": 3,
-          "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
-        },
-        "executive_summary": "",
-        "analyst_brief": "",
-        "scorecard": []
-      },
       {
         "date": "2026-05-17",
         "briefing_date": null,
@@ -1536,21 +1507,50 @@
       {
         "date": "2026-06-29",
         "briefing_date": null,
-        "placed_orders": 2,
-        "order_value_cad": 112.25,
-        "aov_cad": 56.12,
+        "placed_orders": 25,
+        "order_value_cad": 1333.75,
+        "aov_cad": 53.35,
         "customer_mix": {
-          "brand_new": 0,
-          "second_order": 0,
-          "regular": 2,
-          "returning_regular_total": 2
+          "brand_new": 5,
+          "second_order": 3,
+          "regular": 17,
+          "returning_regular_total": 20
         },
         "same_time_7d_avg_orders": 0,
         "same_time_delta_orders": 0,
         "target_placed_orders": 20,
-        "pace_to_target_pct": 10.0,
+        "pace_to_target_pct": 125.0,
         "deliveries": {
-          "count": 1,
+          "count": 15,
+          "revenue_cad": 0,
+          "aov_cad": 0
+        },
+        "acquisition": {
+          "new_customer_orders": 5,
+          "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
+        },
+        "executive_summary": "",
+        "analyst_brief": "",
+        "scorecard": []
+      },
+      {
+        "date": "2026-06-30",
+        "briefing_date": null,
+        "placed_orders": 0,
+        "order_value_cad": 0,
+        "aov_cad": 0,
+        "customer_mix": {
+          "brand_new": 0,
+          "second_order": 0,
+          "regular": 0,
+          "returning_regular_total": 0
+        },
+        "same_time_7d_avg_orders": 0,
+        "same_time_delta_orders": 0,
+        "target_placed_orders": 20,
+        "pace_to_target_pct": 0.0,
+        "deliveries": {
+          "count": 0,
           "revenue_cad": 0,
           "aov_cad": 0
         },
