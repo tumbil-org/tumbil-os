@@ -52,7 +52,7 @@ Every user-found dashboard regression should become a named Playwright test in `
 - Customer type labels follow TGE: New Customers = 0 prior completed orders; Second-Order Customers = 1 prior completed order; Habitual Customers = 2+ prior completed orders.
 - GA4/BigQuery attribution is only a best-effort label for where new customers came from. It must not be used for order counts or revenue.
 - AppsFlyer Pull API attribution is aggregate app purchase attribution by media source/campaign. It is not joined to DB orders or customers without Data Locker/raw export access.
-- AppsFlyer credentials live at `~/.config/appsflyer/credentials.json` on the machine running `tumbilos-live-deploy.timer`.
+- AppsFlyer credentials live at `~/.config/appsflyer/credentials.json` on the machine running `tumbilos-live-deploy.timer`. See `scripts/appsflyer-credentials.example.json` for the schema (`api_token`, `ios_app_id`, `android_app_id`); the real file is never committed.
 - Referral promo counts come from `promo_code_usages` joined to `promo_codes.type='referral'`.
 - Monetary values are CAD ex. HST unless explicitly labeled otherwise.
 
