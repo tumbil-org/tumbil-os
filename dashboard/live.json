@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T12:35:59.057977-04:00",
+  "generated_at": "2026-06-30T12:41:10.482813-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 4,
@@ -13,13 +13,13 @@
       "returning_regular_total": 4
     },
     "business_date": "2026-06-30",
-    "as_of_et": "2026-06-30T12:35:56.912056-04:00",
+    "as_of_et": "2026-06-30T12:41:08.206161-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 20.0,
-    "same_time_7d_avg_orders": 7.0,
-    "same_time_delta_orders": -3.0,
-    "same_time_7d_avg_order_value_cad": 360.14,
-    "same_time_7d_avg_new_customers": 0.9,
+    "same_time_7d_avg_orders": 7.1,
+    "same_time_delta_orders": -3.1,
+    "same_time_7d_avg_order_value_cad": 367.29,
+    "same_time_7d_avg_new_customers": 1.0,
     "deliveries": {
       "count": 4,
       "revenue_cad": 157.75,
@@ -47,9 +47,9 @@
     },
     {
       "date": "2026-06-27",
-      "placed_orders": 5,
-      "order_value_cad": 292.0,
-      "new_customers": 1
+      "placed_orders": 6,
+      "order_value_cad": 342.0,
+      "new_customers": 2
     },
     {
       "date": "2026-06-26",
@@ -300,19 +300,19 @@
       },
       {
         "months_since_first_order": 8,
-        "customers": 53,
-        "total_orders": 228,
-        "orders_per_customer": 4.3,
-        "revenue_per_customer_cad": 223.67,
-        "ltv_per_customer_cad": 50.33
+        "customers": 52,
+        "total_orders": 227,
+        "orders_per_customer": 4.37,
+        "revenue_per_customer_cad": 227.43,
+        "ltv_per_customer_cad": 51.17
       },
       {
         "months_since_first_order": 9,
-        "customers": 68,
-        "total_orders": 358,
-        "orders_per_customer": 5.26,
-        "revenue_per_customer_cad": 293.75,
-        "ltv_per_customer_cad": 66.09
+        "customers": 69,
+        "total_orders": 359,
+        "orders_per_customer": 5.2,
+        "revenue_per_customer_cad": 289.9,
+        "ltv_per_customer_cad": 65.23
       },
       {
         "months_since_first_order": 10,
@@ -414,11 +414,11 @@
       },
       {
         "cohort_days": 270,
-        "customers": 242,
-        "total_orders": 1045,
-        "orders_per_customer": 4.32,
-        "revenue_per_customer_cad": 240.93,
-        "ltv_per_customer_cad": 54.21
+        "customers": 243,
+        "total_orders": 1046,
+        "orders_per_customer": 4.3,
+        "revenue_per_customer_cad": 240.06,
+        "ltv_per_customer_cad": 54.01
       },
       {
         "cohort_days": 365,
@@ -433,7 +433,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-06-30T12:35:56.912056-04:00"
+      "as_of_et": "2026-06-30T12:41:08.206161-04:00"
     },
     "ga4_attribution": {
       "status": "skipped",
