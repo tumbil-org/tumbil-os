@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T16:41:54.269703-04:00",
+  "generated_at": "2026-06-30T16:47:10.616291-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10450,11 +10450,24 @@
         ]
       },
       "ratings": {
-        "rating_count": 9,
-        "avg_rating": 4.11,
-        "five_star_count": 7,
+        "rating_count": 10,
+        "avg_rating": 4.2,
+        "five_star_count": 8,
         "low_rating_count": 2,
         "rows": [
+          {
+            "order_id": 6052,
+            "customer_id": 3019,
+            "washpro_id": 4529,
+            "customer_name": "leandro chagas",
+            "washpro_name": "Loic Rwakirenga",
+            "rating": 5,
+            "submitted_at_et": "2026-06-30 04:42 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6361,
             "customer_id": 2226,
