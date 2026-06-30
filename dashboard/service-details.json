@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T13:07:20.363895-04:00",
+  "generated_at": "2026-06-30T14:52:01.221254-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10389,9 +10389,20 @@
     {
       "date": "2026-06-30",
       "tips": {
-        "tip_count": 3,
-        "total_tips_cad": 21.0,
+        "tip_count": 4,
+        "total_tips_cad": 45.0,
         "rows": [
+          {
+            "order_id": 6482,
+            "customer_id": 1932,
+            "washpro_id": 3419,
+            "customer_name": "Angela Boddy",
+            "washpro_name": "Briannah Tiberio",
+            "tip_cad": 24.0,
+            "captured_at_et": "2026-06-30 02:41 PM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
           {
             "order_id": 6434,
             "customer_id": 742,
@@ -10428,11 +10439,50 @@
         ]
       },
       "ratings": {
-        "rating_count": 4,
-        "avg_rating": 4.0,
-        "five_star_count": 3,
-        "low_rating_count": 1,
+        "rating_count": 7,
+        "avg_rating": 3.86,
+        "five_star_count": 5,
+        "low_rating_count": 2,
         "rows": [
+          {
+            "order_id": 6482,
+            "customer_id": 1932,
+            "washpro_id": 3419,
+            "customer_name": "Angela Boddy",
+            "washpro_name": "Briannah Tiberio",
+            "rating": 5,
+            "submitted_at_et": "2026-06-30 02:41 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
+          {
+            "order_id": 6406,
+            "customer_id": 1919,
+            "washpro_id": 3419,
+            "customer_name": "Vicky D",
+            "washpro_name": "Briannah Tiberio",
+            "rating": 1,
+            "submitted_at_et": "2026-06-30 02:20 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": true,
+            "is_five_star": false
+          },
+          {
+            "order_id": 6141,
+            "customer_id": 4728,
+            "washpro_id": 2323,
+            "customer_name": "Jhoan Colon",
+            "washpro_name": "Javardo Cooper",
+            "rating": 5,
+            "submitted_at_et": "2026-06-30 01:41 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6434,
             "customer_id": 742,
