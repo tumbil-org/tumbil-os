@@ -46,7 +46,7 @@ URL: https://os.tumbil.com (Render). The old GitHub Pages bundle was retired on 
 
 ## Shared dependencies
 
-Sync scripts import from `~/tumbil/infrastructure/libs/` (the canonical home for shared Tumbil python modules):
+Sync scripts import from `~/tumbil/dev-ops/libs/` (the canonical home for shared Tumbil python modules):
 - `query_db` - DB connection + canonical query helpers
 - `ga4_attribution` - GA4 purchase attribution helpers
 - `tumbil_db` package - SQL fragments and timezone helpers
@@ -58,7 +58,7 @@ All TumbilOS deploys run on the ThinkPad via systemd user units:
 - `tumbilos-live-deploy.timer` - every 5 minutes live data
 - `tumbilos-priority-api.service` - always-on priority API
 
-Mac launchd plist `infrastructure/mac/LaunchAgents/com.tumbil.os-deploy.plist` exists as a fallback but is currently disabled.
+Mac launchd plist `dev-ops/mac/LaunchAgents/com.tumbil.os-deploy.plist` exists as a fallback but is currently disabled.
 
 Temporary incident fallback: `~/Library/LaunchAgents/com.tumbil.os-live-deploy-fallback.plist` is the Mac-side emergency live deploy fallback. It was enabled on 2026-06-28 after Render lost in-memory payloads while the ThinkPad was offline in Tailscale, then unloaded after `runtime_audit.py` verified `tumbilos-live-deploy.timer` and `tumbilos-selfheal.timer` healthy again. If re-enabled, it runs a KeepAlive loop around `scripts/deploy_live.sh` with a 5-minute sleep and logs to `dashboard/mac-live-fallback.log` / `dashboard/mac-live-fallback-error.log`.
 

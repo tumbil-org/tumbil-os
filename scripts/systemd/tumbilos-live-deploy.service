@@ -8,7 +8,7 @@ Type=oneshot
 ExecStart=%h/tumbil/tumbil-os/scripts/deploy_live.sh
 WorkingDirectory=%h/tumbil/tumbil-os
 Environment=PATH=/home/yoygurt/.local/bin:/home/yoygurt/.nvm/versions/node/v22.22.0/bin:/usr/local/bin:/usr/bin:/bin
-Environment=PYTHONPATH=/home/yoygurt/tumbil/infrastructure/libs:/home/yoygurt/.local/lib/python3.12/site-packages:/usr/lib/python3/dist-packages
+Environment=PYTHONPATH=/home/yoygurt/tumbil/dev-ops/libs:/home/yoygurt/.local/lib/python3.12/site-packages:/usr/lib/python3/dist-packages
 EnvironmentFile=%h/.config/tge/tge-env
 TimeoutStartSec=180
 
