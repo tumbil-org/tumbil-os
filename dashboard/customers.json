@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T11:32:56.361259-04:00",
+  "generated_at": "2026-06-30T11:54:02.164116-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16633,11 +16633,11 @@
             "placed_at_et": "2026-06-29 07:32 PM",
             "signup_at_et": "2026-06-28 11:11 PM",
             "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "bucket": "Organic Search",
+              "confidence": "medium",
+              "detail": "GA4 matched Google non-paid signal.",
+              "match_quality": "ga4_source_signal",
+              "campaign": "(organic)"
             },
             "referral_code": null,
             "referral": null,
@@ -16695,11 +16695,11 @@
             "placed_at_et": "2026-06-29 05:43 PM",
             "signup_at_et": "2026-06-29 05:38 PM",
             "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "bucket": "Google Ads",
+              "confidence": "high",
+              "detail": "GA4 purchase matched tumbil_id with Google Ads campaign City Target (GTA) Click.",
+              "match_quality": "ga4_purchase_tumbil_id",
+              "campaign": "City Target (GTA) Click"
             },
             "referral_code": null,
             "referral": null,
@@ -16726,11 +16726,11 @@
             "placed_at_et": "2026-06-29 03:21 PM",
             "signup_at_et": "2026-06-29 03:17 PM",
             "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "bucket": "Google Ads",
+              "confidence": "high",
+              "detail": "GA4 purchase matched tumbil_id with Google Ads campaign City Target (Barrie).",
+              "match_quality": "ga4_purchase_tumbil_id",
+              "campaign": "City Target (Barrie)"
             },
             "referral_code": null,
             "referral": null,
@@ -17349,7 +17349,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
