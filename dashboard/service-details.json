@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T12:30:52.643623-04:00",
+  "generated_at": "2026-06-30T12:36:04.648076-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10389,9 +10389,20 @@
     {
       "date": "2026-06-30",
       "tips": {
-        "tip_count": 2,
-        "total_tips_cad": 16.0,
+        "tip_count": 3,
+        "total_tips_cad": 21.0,
         "rows": [
+          {
+            "order_id": 6434,
+            "customer_id": 742,
+            "washpro_id": 5046,
+            "customer_name": "Lisa",
+            "washpro_name": "Stephanie Gabriel",
+            "tip_cad": 5.0,
+            "captured_at_et": "2026-06-30 12:33 PM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
           {
             "order_id": 6225,
             "customer_id": 3608,
@@ -10417,11 +10428,24 @@
         ]
       },
       "ratings": {
-        "rating_count": 3,
-        "avg_rating": 3.67,
-        "five_star_count": 2,
+        "rating_count": 4,
+        "avg_rating": 4.0,
+        "five_star_count": 3,
         "low_rating_count": 1,
         "rows": [
+          {
+            "order_id": 6434,
+            "customer_id": 742,
+            "washpro_id": 5046,
+            "customer_name": "Lisa",
+            "washpro_name": "Stephanie Gabriel",
+            "rating": 5,
+            "submitted_at_et": "2026-06-30 12:33 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6225,
             "customer_id": 3608,
