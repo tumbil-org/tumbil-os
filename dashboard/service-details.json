@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T08:53:45.380846-04:00",
+  "generated_at": "2026-06-30T11:17:12.680681-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10389,9 +10389,20 @@
     {
       "date": "2026-06-30",
       "tips": {
-        "tip_count": 1,
-        "total_tips_cad": 5.0,
+        "tip_count": 2,
+        "total_tips_cad": 16.0,
         "rows": [
+          {
+            "order_id": 6225,
+            "customer_id": 3608,
+            "washpro_id": 329,
+            "customer_name": "beverley obreckt",
+            "washpro_name": "sow adja",
+            "tip_cad": 11.0,
+            "captured_at_et": "2026-06-30 09:58 AM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
           {
             "order_id": 6495,
             "customer_id": 4125,
@@ -10406,11 +10417,24 @@
         ]
       },
       "ratings": {
-        "rating_count": 2,
-        "avg_rating": 3.0,
-        "five_star_count": 1,
+        "rating_count": 3,
+        "avg_rating": 3.67,
+        "five_star_count": 2,
         "low_rating_count": 1,
         "rows": [
+          {
+            "order_id": 6225,
+            "customer_id": 3608,
+            "washpro_id": 329,
+            "customer_name": "beverley obreckt",
+            "washpro_name": "sow adja",
+            "rating": 5,
+            "submitted_at_et": "2026-06-30 09:58 AM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6495,
             "customer_id": 4125,

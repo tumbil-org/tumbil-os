@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T08:53:43.343855-04:00",
+  "generated_at": "2026-06-30T11:17:11.560305-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16641,7 +16641,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-30 08:00 PM",
             "delivery_by_et": "2026-07-01 08:00 PM",
@@ -17069,7 +17069,7 @@
               "large": 2,
               "oversize": 0
             },
-            "weight_lbs": 38.0,
+            "weight_lbs": 45.3,
             "order_value_cad": 50.5,
             "prior_completed_orders": 22
           },
@@ -17359,7 +17359,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 23.4,
             "order_value_cad": 38.0,
             "prior_completed_orders": 30
           }
@@ -17370,13 +17370,102 @@
       "date": "2026-06-30",
       "counts": {
         "brand_new": 0,
-        "second_order": 0,
-        "regular": 0
+        "second_order": 1,
+        "regular": 2
       },
       "customers_by_type": {
         "brand_new": [],
-        "second_order": [],
-        "regular": []
+        "second_order": [
+          {
+            "customer_id": 5468,
+            "order_id": 6451,
+            "name": "Amy G",
+            "email": "commonthreadcollingwood@gmail.com",
+            "mobile": "7056060170",
+            "placed_at_et": "2026-06-30 08:53 AM",
+            "signup_at_et": "2026-06-23 08:28 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "picked_up",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 2,
+              "oversize": 0
+            },
+            "weight_lbs": 38.0,
+            "order_value_cad": 50.5,
+            "prior_completed_orders": 1
+          }
+        ],
+        "regular": [
+          {
+            "customer_id": 1057,
+            "order_id": 6508,
+            "name": "Andrea Dorman",
+            "email": "bodywisehr@gmail.com",
+            "mobile": "9055205028",
+            "placed_at_et": "2026-06-30 11:04 AM",
+            "signup_at_et": "2025-08-12 08:06 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 5,
+              "oversize": 0
+            },
+            "weight_lbs": 95.0,
+            "order_value_cad": 121.75,
+            "prior_completed_orders": 40
+          },
+          {
+            "customer_id": 3608,
+            "order_id": 6507,
+            "name": "beverley obreckt",
+            "email": "bevobreckt@gmail.com",
+            "mobile": "9023256682",
+            "placed_at_et": "2026-06-30 10:24 AM",
+            "signup_at_et": "2026-02-22 08:43 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 3,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 42.0,
+            "order_value_cad": 55.5,
+            "prior_completed_orders": 2
+          }
+        ]
       }
     }
   ]
