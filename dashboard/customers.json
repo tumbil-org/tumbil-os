@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T12:56:52.711800-04:00",
+  "generated_at": "2026-06-30T13:02:04.929967-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16672,7 +16672,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "cancelled",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-30 08:00 PM",
             "delivery_by_et": "2026-07-01 08:00 PM",
