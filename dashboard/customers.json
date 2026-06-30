@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T12:41:14.615835-04:00",
+  "generated_at": "2026-06-30T12:46:25.763110-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16854,7 +16854,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -17371,7 +17371,7 @@
       "counts": {
         "brand_new": 0,
         "second_order": 1,
-        "regular": 3
+        "regular": 4
       },
       "customers_by_type": {
         "brand_new": [],
@@ -17407,6 +17407,35 @@
           }
         ],
         "regular": [
+          {
+            "customer_id": 742,
+            "order_id": 6509,
+            "name": "Lisa",
+            "email": "lisaques@yahoo.ca",
+            "mobile": null,
+            "placed_at_et": "2026-06-30 12:43 PM",
+            "signup_at_et": "2025-07-01 02:15 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 3,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 42.0,
+            "order_value_cad": 55.5,
+            "prior_completed_orders": 26
+          },
           {
             "customer_id": 1824,
             "order_id": 6227,
