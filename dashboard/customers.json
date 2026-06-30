@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T20:18:34.438251-04:00",
+  "generated_at": "2026-06-29T21:00:54.221740-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -17164,7 +17164,7 @@
       "counts": {
         "brand_new": 5,
         "second_order": 3,
-        "regular": 15
+        "regular": 16
       },
       "customers_by_type": {
         "brand_new": [
@@ -17411,6 +17411,35 @@
           }
         ],
         "regular": [
+          {
+            "customer_id": 4131,
+            "order_id": 6504,
+            "name": "Li Conde",
+            "email": "x6gg4xtzcc@privaterelay.appleid.com",
+            "mobile": "6138547125",
+            "placed_at_et": "2026-06-29 08:30 PM",
+            "signup_at_et": "2026-03-22 10:04 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "open",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-06-30 08:00 PM",
+            "delivery_by_et": "2026-07-01 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 1,
+              "oversize": 0
+            },
+            "weight_lbs": 19.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 8
+          },
           {
             "customer_id": 1490,
             "order_id": 6501,

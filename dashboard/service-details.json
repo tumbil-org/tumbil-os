@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-29T20:18:35.636312-04:00",
+  "generated_at": "2026-06-29T21:00:55.404331-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -10435,11 +10435,24 @@
         ]
       },
       "ratings": {
-        "rating_count": 13,
-        "avg_rating": 4.92,
-        "five_star_count": 12,
+        "rating_count": 14,
+        "avg_rating": 4.93,
+        "five_star_count": 13,
         "low_rating_count": 0,
         "rows": [
+          {
+            "order_id": 6341,
+            "customer_id": 4131,
+            "washpro_id": 4304,
+            "customer_name": "Li Conde",
+            "washpro_name": "Theresa Murray",
+            "rating": 5,
+            "submitted_at_et": "2026-06-29 08:29 PM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
           {
             "order_id": 6465,
             "customer_id": 1953,
