@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-30T18:42:37.836262-04:00",
+  "generated_at": "2026-06-30T19:40:06.915628-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16825,7 +16825,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -16835,7 +16835,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 42.0,
+            "weight_lbs": 56.2,
             "order_value_cad": 55.5,
             "prior_completed_orders": 1
           },
@@ -17001,7 +17001,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-06-29 08:00 PM",
             "delivery_by_et": "2026-06-30 08:00 PM",
@@ -17371,7 +17371,7 @@
       "counts": {
         "brand_new": 0,
         "second_order": 2,
-        "regular": 6
+        "regular": 7
       },
       "customers_by_type": {
         "brand_new": [],
@@ -17437,6 +17437,35 @@
         ],
         "regular": [
           {
+            "customer_id": 4126,
+            "order_id": 6520,
+            "name": "Matthew Smith",
+            "email": "matthew.d.smith@live.ca",
+            "mobile": "6474086207",
+            "placed_at_et": "2026-06-30 07:19 PM",
+            "signup_at_et": "2026-03-22 12:58 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-07-01 08:00 PM",
+            "delivery_by_et": "2026-07-02 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 6
+          },
+          {
             "customer_id": 4447,
             "order_id": 6515,
             "name": "Kat N",
@@ -17480,7 +17509,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-07-01 08:00 PM",
             "delivery_by_et": "2026-07-02 08:00 PM",
