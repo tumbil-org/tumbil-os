@@ -24,7 +24,11 @@ RECENT_SOURCE_LOOKBACK_DAYS = 7
 BQ_CREDENTIALS = Path.home() / ".config/gcloud/tumbil-crashlytics-sa.json"
 
 _HOME = Path.home()
-for _libs in (_HOME / "tumbil" / "infrastructure" / "libs", _HOME / "infrastructure" / "libs"):
+for _libs in (
+    _HOME / "tumbil" / "dev-ops" / "libs",
+    _HOME / "tumbil" / "infrastructure" / "libs",
+    _HOME / "infrastructure" / "libs",
+):
     if _libs.is_dir() and str(_libs) not in sys.path:
         sys.path.insert(0, str(_libs))
         break

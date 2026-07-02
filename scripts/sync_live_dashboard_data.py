@@ -35,7 +35,11 @@ UTC = ZoneInfo("UTC")
 TARGET_PLACED_ORDERS = 20
 
 _HOME = Path.home()
-for _libs in (_HOME / "tumbil" / "infrastructure" / "libs", _HOME / "infrastructure" / "libs"):
+for _libs in (
+    _HOME / "tumbil" / "dev-ops" / "libs",
+    _HOME / "tumbil" / "infrastructure" / "libs",
+    _HOME / "infrastructure" / "libs",
+):
     if _libs.is_dir() and str(_libs) not in sys.path:
         sys.path.insert(0, str(_libs))
         break
