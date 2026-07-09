@@ -1,112 +1,113 @@
 {
   "version": 2,
-  "generated_at": "2026-07-08T06:15:16.412802",
-  "latest_briefing_date": "2026-07-08",
-  "data_date": "2026-07-07",
+  "generated_at": "2026-07-09T06:15:16.422975",
+  "latest_briefing_date": "2026-07-09",
+  "data_date": "2026-07-08",
   "timezone": "America/Toronto",
-  "executive_summary": "Tuesday placed orders held at 10, exactly the 10-a-day average. Deliveries were strong: 14 orders, $696.50 ex. HST (+18% vs avg). Three new customers came in at $30.78 each \u2014 over the $25 ceiling, but far below the ugly 7-day rolling cost of $52.32 per new customer, which is the real story.",
-  "analyst_brief": "A quiet, solid day on the surface \u2014 10 placed (dead on average), 14 delivered, ratings at 4.92 with no low scores. Nothing broke. But the number worth sitting with is what our ads are actually costing us to bring in a new customer.\n\n**The real problem is acquisition cost, not yesterday.** Yesterday looks fine in isolation: 3 new customers, $92 of spend, $30.78 each. But zoom out to the last 7 days and we spent $732 to get 14 new customers \u2014 that's $52.32 each, more than double the $25 ceiling. Yesterday was one of the *better* days. The ads are steadily burning ~$105/day and only converting about 2 new paying customers a day out of it. Google's own \"conversions\" (7 yesterday) count registrations, not orders, so the dashboard flatters us \u2014 the DB tells the truth. This is the one thing I'd focus on: the spend is producing volume of clicks (76 yesterday) but not enough of them turn into paying customers. Before adding budget anywhere, we need the cost per new customer to come down.\n\n**Where the money is going.** The GTA Click campaign took half the spend ($44) for 4 registrations; Calgary and Ottawa spent $23 combined for zero. The search terms are mostly generic \"laundromat near me\" / \"laundry near me\" queries \u2014 high intent to find a physical laundromat, not necessarily to hand their laundry to a pickup service. Worth a manual look at whether those broad terms are earning their keep, but I'm flagging it as an observation only \u2014 no keyword changes without your sign-off, given the past broad-match trouble.\n\n**Do people come back?** This is the other worry sitting under acquisition cost. If we pay $50 to get someone, they need to reorder for the math to work. The recent weekly reorder numbers are shaky: the group we got the week of June 1 has come back at 0% so far, though the June 8 group is at 26.7% and climbing. Only 1 second-order customer yesterday. We're spending hard to fill a bucket that's leaking at the top. Getting the reorder rate up is worth more than any single day's ad tweak.\n\n**Regulars are carrying us.** 6 of 10 orders yesterday were from regulars, and the 30-day repeat rate is a healthy 47.4%. That's the engine. The business is real; the leak is specifically in turning paid clicks into repeat customers.\n\n**SEO housekeeping, low urgency.** Two city pages get lots of eyeballs but almost no clicks: Hamilton (404 times shown, 1 click) and Toronto (407 shown, 1 click, ranking down at position 22 \u2014 page 2/3 of Google). Since the page title/description is one shared template across all 24 city pages, the fix for these is the per-city body text or just better rankings, not a one-page title edit. Also: one blog post, \"Kitchener-Waterloo is building the future,\" has been crawled but not indexed by Google since February \u2014 it's effectively invisible. Minor, but if we want KW traffic it's dead weight right now.",
+  "executive_summary": "Wed placed 12 orders (+8.1% vs avg), but 10 were regulars and only 2 were new \u2014 cost per new customer hit $53.97, more than double the $25 ceiling. Deliveries were soft at 8 (-20.8%), yet revenue held at $600.88 ex. HST (-2.7%) on unusually large $75.11 orders.",
+  "analyst_brief": "**The one thing worth your attention: we are paying too much to get new customers, and it isn't a one-day blip.** Yesterday $107.94 of ad spend bought exactly 2 new customers \u2014 $53.97 each, more than double the $25 ceiling. The 7-day rolling number is $50.17, so this is the steady state, not a bad Wednesday. Don't let the healthy-looking 12-order day hide it: 10 of those 12 orders came from regulars. Strip the regulars out and the front of the pipeline was thin \u2014 just 2 first-timers and, notably, zero second-time customers.\n\nThat zero is the part I'd stare at. Second-order customers have averaged ~1.7/day and yesterday was none. Pair that with the reorder history: of the new customers we got in early June, almost none came back within three weeks (the week of June 1 was 0 of 14). We are spending ~$50 to acquire people who then don't place a second order. The acquisition-cost problem and the come-back problem are the same problem \u2014 it's cheaper to fix retention than to keep buying strangers at 2x the ceiling. Worth a look at what the first-order experience feels like: delivery speed, first-order pricing, a nudge to reorder.\n\nOn the day itself: **the business was carried by regulars, and they carried it well.** Placed orders beat the average, and the reason average order size dropped to $45.46 (right at the $45 floor) is simply that the two new customers placed small first orders while the mix was heavy on regulars \u2014 it's not that anyone got cheaper. Deliveries were light (8 vs ~10 typical) but revenue barely moved (-2.7%) because the orders that did go out were big \u2014 $75.11 each. Nothing broken there; delivery counts bounce day to day.\n\nHealth signals are all good: ratings 4.9 with 9 of 10 five-star, cancellations ticking *down* (6.4% rolling, -0.7pp vs the prior day's reading, against a 4.9% 30-day baseline), and zero failed payments. No fires.\n\nTwo smaller notes:\n\n- **A blog post has quietly fallen out of Google.** \"Kitchener-Waterloo is building the future, you're still doing laundry\" (tumbil.com/post/kitchener-waterloo-is-building-the-future...) shows \"Crawled \u2013 currently not indexed\" and hasn't been crawled since Feb 27. Everything else (41 of 42 pages) is indexed. If that post matters for Kitchener, it's earning zero right now \u2014 worth a refresh-and-resubmit.\n- **Toronto's city page is buried.** It ranks around position 21 (page 3) despite 421 impressions \u2014 far worse than peers like Ottawa (pos 8) or Markham (pos 7). Toronto is your biggest market; that page underperforming its neighbours is the kind of thing worth 20 minutes to understand.\n\nI'm not recommending any Google Ads keyword changes \u2014 a few search terms look off (\"dry cleaner near me,\" some generic \"laundromat\" queries) but those need your manual eyes, not an automated negative. Flagging only, as an observation.",
   "scorecard": [
     {
       "metric": "Orders Placed",
-      "yesterday": "10",
-      "seven_day_avg": "10.0",
-      "change": "0.0%",
+      "yesterday": "12",
+      "seven_day_avg": "11.1",
+      "change": "+8.1%",
       "status": "green"
     },
     {
       "metric": "Orders Delivered",
-      "yesterday": "14",
+      "yesterday": "8",
       "seven_day_avg": "10.1",
-      "change": "+38.6%",
+      "change": "-20.8%",
+      "status": "yellow"
+    },
+    {
+      "metric": "Order Value (placed, ex. HST)",
+      "yesterday": "$545.52",
+      "seven_day_avg": "$646.62",
+      "change": "-15.6%",
+      "status": "yellow"
+    },
+    {
+      "metric": "Revenue (delivered, ex. HST)",
+      "yesterday": "$600.88",
+      "seven_day_avg": "$617.65",
+      "change": "-2.7%",
       "status": "green"
     },
     {
-      "metric": "Order Value, placed, ex. HST",
-      "yesterday": "$571.26",
-      "seven_day_avg": "$599.01",
-      "change": "-4.6%",
-      "status": "green"
-    },
-    {
-      "metric": "Revenue, delivered, ex. HST",
-      "yesterday": "$696.50",
-      "seven_day_avg": "$590.46",
-      "change": "+18.0%",
-      "status": "green"
-    },
-    {
-      "metric": "AOV, placed, ex. HST",
-      "yesterday": "$57.13",
-      "seven_day_avg": "$59.90",
-      "change": "-4.6%",
-      "status": "green"
+      "metric": "AOV (placed, ex. HST)",
+      "yesterday": "$45.46",
+      "seven_day_avg": "$58.03",
+      "change": "-21.7%",
+      "status": "yellow"
     },
     {
       "metric": "Ad Spend",
-      "yesterday": "$92.34",
-      "seven_day_avg": "$104.65",
-      "change": "-11.8%",
+      "yesterday": "$107.94",
+      "seven_day_avg": "$107.50",
+      "change": "+0.4%",
       "status": "green"
     },
     {
       "metric": "Cost per New Customer",
-      "yesterday": "$30.78",
-      "seven_day_avg": "$52.32",
-      "change": "-41.2%",
+      "yesterday": "$53.97",
+      "seven_day_avg": "$50.17",
+      "change": "+7.6%",
       "status": "red"
     },
     {
       "metric": "New Customers",
-      "yesterday": "3",
-      "seven_day_avg": "2.0",
-      "change": "+50.0%",
+      "yesterday": "2",
+      "seven_day_avg": "2.1",
+      "change": "-4.8%",
       "status": "green"
     },
     {
       "metric": "Second-Order Customers",
-      "yesterday": "1",
-      "seven_day_avg": "1.6",
-      "change": "-37.5%",
-      "status": "yellow"
+      "yesterday": "0",
+      "seven_day_avg": "1.7",
+      "change": "-100.0%",
+      "status": "red"
     },
     {
-      "metric": "Habitual Customers",
-      "yesterday": "6",
-      "seven_day_avg": "6.4",
-      "change": "-6.3%",
+      "metric": "Habitual (Regular) Customers",
+      "yesterday": "10",
+      "seven_day_avg": "7.3",
+      "change": "+37.0%",
       "status": "green"
     },
     {
       "metric": "Avg In-App Rating",
-      "yesterday": "4.92",
-      "seven_day_avg": "4.85",
-      "change": "+1.4%",
+      "yesterday": "4.9",
+      "seven_day_avg": "4.88",
+      "change": "+0.4%",
       "status": "green"
     },
     {
-      "metric": "Cancellations 7d",
-      "yesterday": "5.7%",
-      "seven_day_avg": "4.5%",
-      "change": "-1.1pp",
+      "metric": "Cancellations (7d rate)",
+      "yesterday": "6.4%",
+      "seven_day_avg": "4.9%",
+      "change": "-0.7pp DoD",
       "status": "green"
     },
     {
-      "metric": "Failed Payments 7d",
+      "metric": "Failed Payments (7d count)",
       "yesterday": "0",
       "seven_day_avg": "1.2",
-      "change": "-1",
+      "change": "0 DoD",
       "status": "green"
     }
   ],
-  "validation_notes": "DB cross-checks clean: placed 10 \u00d7 $57.13 = $571.30 \u2248 $571.26; delivered 14 \u00d7 $49.75 = $696.50, matches revenue exactly. Stripe not in pipeline, so no independent payment cross-check. GA4/ClickUp/Intercom unavailable (Phase 2).",
+  "validation_notes": "DB internally consistent: placed 12 \u00d7 $45.46 = $545.52 \u2713; delivered 8 \u00d7 $75.11 = $600.88 \u2713. Cost per new customer = $107.94 spend \u00f7 2 new. Stripe/GA4/ClickUp/Intercom unavailable (Phase 2 / no API key), so no external payment cross-check today; DB is the system of record.",
   "data_footnotes": [
-    "DB: tumbil_production_db, reference date 2026-07-07, timezone America/Toronto. Placed = order_timelines.timestamp (type='placed'); delivered = payments.captured_at (status=captured).",
-    "Revenue methodology: all monetary values net of 13% HST (ex. HST), tips excluded.",
-    "Google Ads: account 972-828-9560, spend/clicks last 7d. 'Conversions' count registrations, not purchases \u2014 true new-customer count from DB.",
-    "Cost per new customer = ad spend \u00f7 new customers (DB). Yesterday $92.34 \u00f7 3 = $30.78; 7-day rolling $52.32.",
-    "GSC: sc-domain:tumbil.com, 2026-06-30 to 2026-07-07; indexing via URL Inspection API (41/42 monitored pages indexed).",
-    "Stripe: unavailable (not in pipeline). GA4, ClickUp, Intercom: unavailable (Phase 2)."
+    "DB: tumbil_production_db, reference date 2026-07-08, timezone America/Toronto. Placed = order_timelines.timestamp (type='placed'), payment verified/captured; delivered = payments.captured_at, not cancelled.",
+    "Revenue methodology: all monetary values net of 13% HST (ex. HST); tips excluded. Placed value = estimated_amount/1.13, delivered revenue = actual_amount/1.13.",
+    "Cost per new customer = yesterday ad spend $107.94 \u00f7 2 new customers = $53.97; 7-day rolling $50.17 (vs $25 ceiling). Uses new-customer denominator per CPA policy, not total placed orders.",
+    "Google Ads: account 972-828-9560, 7d spend pulled; 'conversions' count registrations, not purchases \u2014 DB used for orders.",
+    "GSC: sc-domain:tumbil.com, query/page data 2026-07-01 to 2026-07-08; indexing via URL Inspection API (41/42 indexed, 1 blog post not indexed).",
+    "Cancellations/failed payments: Change column = day-over-day delta of rolling metric; 7-Day Avg column = 30-day baseline (cancel 4.9%, failed 1.2/7d).",
+    "Unavailable: Stripe (no API key), GA4/ClickUp (Phase 2), Intercom (no API key) \u2014 no external payment cross-check this run."
   ],
   "trends": {
     "daily_orders": [
@@ -253,40 +254,19 @@
         "order_value_cad": 684.76,
         "revenue_cad": 579.01,
         "aov_placed_cad": 57.06
+      },
+      {
+        "date": "2026-07-07",
+        "placed": 10,
+        "delivered": 14,
+        "order_value_cad": 571.26,
+        "revenue_cad": 696.5,
+        "aov_placed_cad": 57.13
       }
     ]
   },
   "history": {
     "days": [
-      {
-        "date": "2026-05-25",
-        "briefing_date": null,
-        "placed_orders": 19,
-        "order_value_cad": 1128.75,
-        "aov_cad": 59.41,
-        "customer_mix": {
-          "brand_new": 3,
-          "second_order": 3,
-          "regular": 13,
-          "returning_regular_total": 16
-        },
-        "same_time_7d_avg_orders": 0,
-        "same_time_delta_orders": 0,
-        "target_placed_orders": 20,
-        "pace_to_target_pct": 95.0,
-        "deliveries": {
-          "count": 10,
-          "revenue_cad": 0,
-          "aov_cad": 0
-        },
-        "acquisition": {
-          "new_customer_orders": 3,
-          "source_note": "Rebuilt from DB-derived customer detail payload after ThinkPad restore; historical ad-spend metrics require archived TGE reports."
-        },
-        "executive_summary": "",
-        "analyst_brief": "",
-        "scorecard": []
-      },
       {
         "date": "2026-05-26",
         "briefing_date": null,
@@ -3303,6 +3283,128 @@
       },
       {
         "date": "2026-07-08",
+        "briefing_date": "2026-07-09",
+        "placed_orders": 12,
+        "order_value_cad": 545.52,
+        "aov_cad": 45.46,
+        "customer_mix": {
+          "brand_new": 2,
+          "second_order": 0,
+          "regular": 10,
+          "returning_regular_total": 10
+        },
+        "same_time_7d_avg_orders": 11.1,
+        "same_time_delta_orders": 0.9,
+        "target_placed_orders": 20,
+        "pace_to_target_pct": 60.0,
+        "acquisition": {
+          "new_customer_orders": 2,
+          "ad_spend_cad": 107.94,
+          "ad_clicks": 79,
+          "ad_impressions": 1081,
+          "ad_conversions_registrations": 4.0,
+          "cost_per_new_customer_cad": 53.97,
+          "cost_per_new_customer_7d_avg_cad": 50.17,
+          "source_note": "Historical source mix is limited to TGE daily acquisition metrics. Live same-day source labels use best-effort GA4/BigQuery joins."
+        },
+        "executive_summary": "Wed placed 12 orders (+8.1% vs avg), but 10 were regulars and only 2 were new \u2014 cost per new customer hit $53.97, more than double the $25 ceiling. Deliveries were soft at 8 (-20.8%), yet revenue held at $600.88 ex. HST (-2.7%) on unusually large $75.11 orders.",
+        "analyst_brief": "**The one thing worth your attention: we are paying too much to get new customers, and it isn't a one-day blip.** Yesterday $107.94 of ad spend bought exactly 2 new customers \u2014 $53.97 each, more than double the $25 ceiling. The 7-day rolling number is $50.17, so this is the steady state, not a bad Wednesday. Don't let the healthy-looking 12-order day hide it: 10 of those 12 orders came from regulars. Strip the regulars out and the front of the pipeline was thin \u2014 just 2 first-timers and, notably, zero second-time customers.\n\nThat zero is the part I'd stare at. Second-order customers have averaged ~1.7/day and yesterday was none. Pair that with the reorder history: of the new customers we got in early June, almost none came back within three weeks (the week of June 1 was 0 of 14). We are spending ~$50 to acquire people who then don't place a second order. The acquisition-cost problem and the come-back problem are the same problem \u2014 it's cheaper to fix retention than to keep buying strangers at 2x the ceiling. Worth a look at what the first-order experience feels like: delivery speed, first-order pricing, a nudge to reorder.\n\nOn the day itself: **the business was carried by regulars, and they carried it well.** Placed orders beat the average, and the reason average order size dropped to $45.46 (right at the $45 floor) is simply that the two new customers placed small first orders while the mix was heavy on regulars \u2014 it's not that anyone got cheaper. Deliveries were light (8 vs ~10 typical) but revenue barely moved (-2.7%) because the orders that did go out were big \u2014 $75.11 each. Nothing broken there; delivery counts bounce day to day.\n\nHealth signals are all good: ratings 4.9 with 9 of 10 five-star, cancellations ticking *down* (6.4% rolling, -0.7pp vs the prior day's reading, against a 4.9% 30-day baseline), and zero failed payments. No fires.\n\nTwo smaller notes:\n\n- **A blog post has quietly fallen out of Google.** \"Kitchener-Waterloo is building the future, you're still doing laundry\" (tumbil.com/post/kitchener-waterloo-is-building-the-future...) shows \"Crawled \u2013 currently not indexed\" and hasn't been crawled since Feb 27. Everything else (41 of 42 pages) is indexed. If that post matters for Kitchener, it's earning zero right now \u2014 worth a refresh-and-resubmit.\n- **Toronto's city page is buried.** It ranks around position 21 (page 3) despite 421 impressions \u2014 far worse than peers like Ottawa (pos 8) or Markham (pos 7). Toronto is your biggest market; that page underperforming its neighbours is the kind of thing worth 20 minutes to understand.\n\nI'm not recommending any Google Ads keyword changes \u2014 a few search terms look off (\"dry cleaner near me,\" some generic \"laundromat\" queries) but those need your manual eyes, not an automated negative. Flagging only, as an observation.",
+        "scorecard": [
+          {
+            "metric": "Orders Placed",
+            "yesterday": "12",
+            "seven_day_avg": "11.1",
+            "change": "+8.1%",
+            "status": "green"
+          },
+          {
+            "metric": "Orders Delivered",
+            "yesterday": "8",
+            "seven_day_avg": "10.1",
+            "change": "-20.8%",
+            "status": "yellow"
+          },
+          {
+            "metric": "Order Value (placed, ex. HST)",
+            "yesterday": "$545.52",
+            "seven_day_avg": "$646.62",
+            "change": "-15.6%",
+            "status": "yellow"
+          },
+          {
+            "metric": "Revenue (delivered, ex. HST)",
+            "yesterday": "$600.88",
+            "seven_day_avg": "$617.65",
+            "change": "-2.7%",
+            "status": "green"
+          },
+          {
+            "metric": "AOV (placed, ex. HST)",
+            "yesterday": "$45.46",
+            "seven_day_avg": "$58.03",
+            "change": "-21.7%",
+            "status": "yellow"
+          },
+          {
+            "metric": "Ad Spend",
+            "yesterday": "$107.94",
+            "seven_day_avg": "$107.50",
+            "change": "+0.4%",
+            "status": "green"
+          },
+          {
+            "metric": "Cost per New Customer",
+            "yesterday": "$53.97",
+            "seven_day_avg": "$50.17",
+            "change": "+7.6%",
+            "status": "red"
+          },
+          {
+            "metric": "New Customers",
+            "yesterday": "2",
+            "seven_day_avg": "2.1",
+            "change": "-4.8%",
+            "status": "green"
+          },
+          {
+            "metric": "Second-Order Customers",
+            "yesterday": "0",
+            "seven_day_avg": "1.7",
+            "change": "-100.0%",
+            "status": "red"
+          },
+          {
+            "metric": "Habitual (Regular) Customers",
+            "yesterday": "10",
+            "seven_day_avg": "7.3",
+            "change": "+37.0%",
+            "status": "green"
+          },
+          {
+            "metric": "Avg In-App Rating",
+            "yesterday": "4.9",
+            "seven_day_avg": "4.88",
+            "change": "+0.4%",
+            "status": "green"
+          },
+          {
+            "metric": "Cancellations (7d rate)",
+            "yesterday": "6.4%",
+            "seven_day_avg": "4.9%",
+            "change": "-0.7pp DoD",
+            "status": "green"
+          },
+          {
+            "metric": "Failed Payments (7d count)",
+            "yesterday": "0",
+            "seven_day_avg": "1.2",
+            "change": "0 DoD",
+            "status": "green"
+          }
+        ]
+      },
+      {
+        "date": "2026-07-09",
         "briefing_date": null,
         "placed_orders": 0,
         "order_value_cad": 0,
@@ -3318,7 +3420,7 @@
         "target_placed_orders": 20,
         "pace_to_target_pct": 0.0,
         "deliveries": {
-          "count": 0,
+          "count": 1,
           "revenue_cad": 0,
           "aov_cad": 0
         },
