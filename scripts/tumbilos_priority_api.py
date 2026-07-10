@@ -118,7 +118,7 @@ def normalize_item(
     return {
         "id": existing.get("id") or raw.get("id") or uuid.uuid4().hex,
         "title": title,
-        "owner": str(raw.get("owner", existing.get("owner", "Cliff"))).strip() or "Cliff",
+        "owner": str(raw.get("owner", existing.get("owner", "Unassigned"))).strip() or "Unassigned",
         "area": area,
         "priority": priority,
         "status": status,
@@ -161,6 +161,8 @@ class Handler(BaseHTTPRequestHandler):
             self.json_response({"status": "ok", "time": now_iso()})
             return
         if path == "/v1/priorities":
+            if not self.authorized():
+                return
             self.json_response(read_payload())
             return
         self.error_response(HTTPStatus.NOT_FOUND, "Not found")

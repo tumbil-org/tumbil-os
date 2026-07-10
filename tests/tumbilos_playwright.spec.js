@@ -116,7 +116,8 @@ test('@critical all primary dashboard views render without uncaught errors', asy
   await expect(page.getByText('Brand New')).toHaveCount(0);
   await expect(page.getByText('Returning / Regular')).toHaveCount(0);
 
-  const tabs = ['Overview', 'Acquisition', 'Analyst Brief', 'Priorities', 'App Monitor', 'Data Health'];
+  // Priorities intentionally becomes a focused full-screen workspace, so visit it last.
+  const tabs = ['Overview', 'Acquisition', 'Analyst Brief', 'App Monitor', 'Data Health', 'Priorities'];
   for (const tab of tabs) {
     await page.locator('.tab', { hasText: tab }).click();
     await expect(page.locator('.view.active')).toBeVisible();
@@ -301,7 +302,9 @@ test('priority board supports rapid local card creation, edit, and drag', async 
   await page.getByRole('button', { name: 'Priorities' }).click();
   await expect(page.getByRole('button', { name: 'Sync' })).toHaveCount(0);
 
-  const nowInput = page.locator('.quick-add[data-status="IN PROGRESS"] input');
+  const quickAdd = page.locator('.quick-add[data-status="IN PROGRESS"]');
+  await quickAdd.getByRole('button', { name: 'Add a card' }).click();
+  const nowInput = quickAdd.locator('textarea');
   await nowInput.fill('QA quick card');
   await nowInput.press('Enter');
   await expect(page.getByText('QA quick card')).toBeVisible();
@@ -313,7 +316,14 @@ test('priority board supports rapid local card creation, edit, and drag', async 
   await expect(page.getByText('QA edited card')).toBeVisible();
 
   const nextLane = page.locator('.lane[data-status="NEW FOR DISCUSSION"]');
-  await page.locator('.task', { hasText: 'QA edited card' }).dragTo(nextLane);
+  await page.locator('.task', { hasText: 'QA edited card' }).evaluate(source => {
+    const target = document.querySelector('.lane[data-status="NEW FOR DISCUSSION"] .lane-cards');
+    const transfer = new DataTransfer();
+    source.dispatchEvent(new DragEvent('dragstart', { bubbles: true, dataTransfer: transfer }));
+    target.dispatchEvent(new DragEvent('dragover', { bubbles: true, cancelable: true, dataTransfer: transfer }));
+    target.dispatchEvent(new DragEvent('drop', { bubbles: true, cancelable: true, dataTransfer: transfer }));
+    source.dispatchEvent(new DragEvent('dragend', { bubbles: true, dataTransfer: transfer }));
+  });
   await expect(nextLane.locator('.task', { hasText: 'QA edited card' })).toBeVisible();
 });
 
@@ -342,8 +352,29 @@ test('stale old-schema local priority draft does not override priority snapshot'
   await page.getByRole('button', { name: 'Priorities' }).click();
   await expect(page.locator('.lane[data-status="BACKLOG"]')).toBeVisible();
   await expect(page.locator('.lane[data-status="Next"]')).toHaveCount(0);
-  await expect(page.locator('#priorities-summary')).toContainText(`${snapshotCount} items`);
+  await expect(page.locator('#priorities-summary')).toContainText(`${snapshotCount} cards`);
   await expect(page.getByText('test', { exact: true })).toHaveCount(0);
+});
+
+test('@critical priorities use a focused board workspace with search and a dashboard return path', async ({ page }) => {
+  await page.getByRole('button', { name: 'Priorities' }).click();
+
+  await expect(page.locator('body')).toHaveClass(/priorities-mode/);
+  await expect(page.locator('body > .topbar')).toBeHidden();
+  await expect(page.locator('body > .tabs')).toBeHidden();
+  await expect(page.getByRole('button', { name: 'Back to TumbilOS dashboard' })).toBeVisible();
+  await expect(page.locator('#priority-board')).toBeVisible();
+
+  const search = page.getByRole('searchbox', { name: 'Search cards' });
+  await search.fill('REVIEW CLAWBACKS AND BONUSES');
+  await expect(page.locator('#priorities-summary')).toContainText('1 of');
+  await expect(page.locator('.task')).toHaveCount(1);
+
+  await page.getByRole('button', { name: 'Back to TumbilOS dashboard' }).click();
+  await expect(page.locator('#today-view')).toHaveClass(/active/);
+  await expect(page.locator('body')).not.toHaveClass(/priorities-mode/);
+  await expect(page.locator('body > .topbar')).toBeVisible();
+  await expect(page.locator('body > .tabs')).toBeVisible();
 });
 
 test('@critical Overview KPI cards are grouped into daily / monthly / long-horizon families', async ({ page }) => {

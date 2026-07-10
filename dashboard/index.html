@@ -42,6 +42,18 @@
 
   * { box-sizing: border-box; }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   body {
     margin: 0;
     background: var(--bg);
@@ -532,50 +544,167 @@
 
   .priorities-toolbar {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 16px;
+    min-height: 64px;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(14, 18, 21, 0.86);
+    backdrop-filter: blur(18px);
   }
 
   #priorities-view {
     --priority-bg-image: none;
-    min-height: calc(100vh - 154px);
-    margin: -6px -8px 0;
-    padding: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: var(--radius);
+    min-height: 100dvh;
     background-color: #162125;
     background-image:
-      linear-gradient(180deg, rgba(8, 12, 15, 0.20), rgba(8, 12, 15, 0.42)),
+      linear-gradient(180deg, rgba(8, 12, 15, 0.14), rgba(8, 12, 15, 0.34)),
       var(--priority-bg-image);
     background-position: center;
     background-size: cover;
     overflow: hidden;
   }
 
-  #priorities-view .priorities-toolbar {
-    padding: 10px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: var(--radius);
-    background: rgba(9, 12, 10, 0.82);
-    backdrop-filter: blur(12px);
+  body.priorities-mode {
+    overflow: hidden;
+  }
+
+  body.priorities-mode > .topbar,
+  body.priorities-mode > .tabs {
+    display: none;
+  }
+
+  body.priorities-mode > main {
+    padding: 0;
+  }
+
+  .priority-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .priority-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+  }
+
+  .priority-home:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .priority-home-mark {
+    font-family: 'Oceanwide', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .priority-home-mark span {
+    color: var(--accent);
+  }
+
+  .priority-home-label {
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  .priority-title-wrap {
+    min-width: 0;
+  }
+
+  .priority-title-wrap h2 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  .priority-title-wrap .summary {
+    overflow: hidden;
+    max-width: 440px;
+    color: rgba(241, 245, 247, 0.68);
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .priority-actions {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
     gap: 8px;
+    min-width: 0;
+  }
+
+  .priority-refresh {
+    width: 36px;
+    min-height: 36px;
+    padding: 0;
+    font-size: 20px;
+  }
+
+  .board-search {
+    position: relative;
+    width: min(240px, 22vw);
+  }
+
+  .board-search::before {
+    content: '\2315';
+    position: absolute;
+    top: 50%;
+    left: 11px;
+    color: var(--text-muted);
+    font-size: 17px;
+    transform: translateY(-52%) rotate(-20deg);
+    pointer-events: none;
+  }
+
+  .board-search input {
+    width: 100%;
+    min-height: 36px;
+    padding: 7px 10px 7px 34px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 6px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+  }
+
+  .board-search input::placeholder {
+    color: rgba(241, 245, 247, 0.62);
+  }
+
+  .board-search input:focus {
+    border-color: var(--accent);
+    background: rgba(9, 12, 15, 0.76);
+    box-shadow: 0 0 0 2px rgba(0, 163, 231, 0.22);
   }
 
   .board-status {
-    min-width: 118px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 72px;
     color: var(--text-muted);
-    font-size: 12px;
-    text-align: right;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .board-status::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
   }
 
   .board-status.saving { color: var(--amber); }
@@ -584,61 +713,115 @@
   .board-status.error { color: var(--red); }
 
   .board {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(252px, 292px);
-    gap: 12px;
+    display: flex;
+    gap: 14px;
+    height: calc(100dvh - 64px);
     overflow-x: auto;
+    overflow-y: hidden;
     align-items: start;
-    padding: 2px 2px 10px;
+    padding: 14px 16px 18px;
+    scroll-snap-type: x proximity;
+    scrollbar-color: rgba(255, 255, 255, 0.42) rgba(0, 0, 0, 0.2);
+    scrollbar-width: thin;
+  }
+
+  .board::-webkit-scrollbar,
+  .lane-cards::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+  }
+
+  .board::-webkit-scrollbar-track,
+  .lane-cards::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 999px;
+  }
+
+  .board::-webkit-scrollbar-thumb,
+  .lane-cards::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.32);
+    border-radius: 999px;
+  }
+
+  .board::-webkit-scrollbar-thumb:hover,
+  .lane-cards::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .lane {
-    min-width: 220px;
-    max-height: calc(100vh - 260px);
-    background: rgba(8, 11, 7, 0.86);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: var(--radius);
-    padding: 12px;
+    flex: 0 0 286px;
+    max-height: 100%;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background: rgba(16, 20, 23, 0.94);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
     display: flex;
     flex-direction: column;
-    min-height: 460px;
+    scroll-snap-align: start;
     transition: border-color 0.12s ease, background 0.12s ease;
   }
 
   .lane.drag-over {
     border-color: var(--accent);
-    background: rgba(0, 163, 231, 0.08);
+    background: rgba(0, 163, 231, 0.10);
   }
 
   .lane-title {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    color: var(--text-muted);
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 10px;
+    gap: 12px;
+    min-height: 38px;
+    padding: 5px 8px 8px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .lane-title > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .lane-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-dim);
+    font-size: 11px;
+    font-weight: 600;
   }
 
   .lane-cards {
-    flex: 1;
-    min-height: 90px;
+    min-height: 4px;
     overflow-y: auto;
-    padding-right: 2px;
+    padding: 0 3px 0 0;
+    scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+    scrollbar-width: thin;
   }
 
   .task {
-    background: rgba(30, 32, 35, 0.96);
+    position: relative;
+    margin-bottom: 8px;
+    padding: 10px 11px;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius);
-    padding: 11px;
-    margin-bottom: 9px;
+    border-radius: 8px;
+    background: #22272b;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
     cursor: grab;
-    transition: border-color 0.12s ease, opacity 0.12s ease, transform 0.12s ease;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease, transform 0.12s ease;
   }
 
   .task:hover {
-    border-color: #3b4851;
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     transform: translateY(-1px);
   }
 
@@ -647,86 +830,193 @@
   }
 
   .task-title {
-    font-weight: 700;
+    padding-right: 24px;
+    color: #f1f3f4;
+    font-weight: 500;
     font-size: 13px;
-    margin-bottom: 8px;
+    line-height: 1.45;
   }
 
   .task-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
     color: var(--text-dim);
     font-size: 11px;
   }
 
   .pill {
-    border: 1px solid var(--border);
-    border-radius: 999px;
+    border: 0;
+    border-radius: 4px;
     padding: 2px 7px;
+    background: #3b444c;
+    color: #e8ebed;
+    font-size: 10px;
+    font-weight: 600;
   }
 
-  .pill.product { color: var(--accent); }
-  .pill.finance { color: var(--accent-2); }
-  .pill.eng { color: var(--amber); }
-  .pill.ai { color: var(--violet); }
+  .pill.product { background: #164b65; color: #9bdaf5; }
+  .pill.finance { background: #164b35; color: #a5e8c0; }
+  .pill.eng { background: #5a4218; color: #f6d78c; }
+  .pill.ai { background: #443466; color: #d7c5ff; }
+  .pill.priority-p0 { background: #67252a; color: #ffb8bc; }
+  .pill.priority-p1 { background: #694f16; color: #f8d77b; }
+  .pill.priority-p2 { background: #30455a; color: #b9d8f5; }
+  .pill.priority-p3 { background: #3b4147; color: #c5cbd0; }
+
+  .task-assignee {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 50%;
+    background: #35424b;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+
+  .task-target {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-dim);
+    font-size: 10px;
+  }
 
   .task-note {
-    color: var(--text-dim);
-    font-size: 12px;
+    display: -webkit-box;
+    overflow: hidden;
     margin-top: 8px;
-  }
-
-  .task-actions {
-    margin-top: 10px;
-    display: flex;
-    gap: 8px;
-  }
-
-  .task-actions button {
-    padding: 5px 8px;
-    min-height: 28px;
+    color: var(--text-dim);
     font-size: 11px;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .task-edit {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: rgba(34, 39, 43, 0.92);
+    color: var(--text-dim);
+    opacity: 0;
+    transition: background 0.12s ease, color 0.12s ease, opacity 0.12s ease;
+  }
+
+  .task:hover .task-edit,
+  .task:focus-within .task-edit {
+    opacity: 1;
+  }
+
+  .task-edit:hover {
+    background: #3b444c;
+    color: #fff;
   }
 
   .quick-add {
-    margin-top: 8px;
-    display: grid;
-    gap: 7px;
+    margin-top: 2px;
   }
 
-  .quick-add .quick-row {
-    display: grid;
-    grid-template-columns: 1fr 42px;
+  .quick-add-trigger {
+    display: flex;
+    align-items: center;
     gap: 7px;
-  }
-
-  .quick-add input {
     width: 100%;
     min-height: 36px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface-2);
+    padding: 7px 9px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text-dim);
+    text-align: left;
+  }
+
+  .quick-add-trigger:hover {
+    background: rgba(255, 255, 255, 0.08);
     color: var(--text);
-    padding: 8px 9px;
+  }
+
+  .quick-add-editor[hidden] {
+    display: none;
+  }
+
+  .quick-add textarea {
+    width: 100%;
+    min-height: 76px;
+    padding: 10px;
+    resize: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    outline: none;
+    background: #22272b;
+    color: var(--text);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  }
+
+  .quick-add textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .quick-add-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 7px;
+  }
+
+  .quick-add-cancel {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .quick-add-cancel:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
   }
 
   dialog {
-    width: min(680px, calc(100vw - 32px));
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
+    width: min(740px, calc(100vw - 32px));
+    max-height: calc(100dvh - 40px);
+    overflow: auto;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    background: #1b2024;
     color: var(--text);
     padding: 0;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.56);
   }
 
   dialog::backdrop {
-    background: rgba(0, 0, 0, 0.68);
+    background: rgba(4, 7, 9, 0.74);
+    backdrop-filter: blur(4px);
   }
 
   .modal-head,
   .modal-foot {
-    padding: 14px 16px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -740,8 +1030,20 @@
     justify-content: flex-end;
   }
 
+  .modal-head strong {
+    font-size: 17px;
+  }
+
+  .modal-close {
+    width: 34px;
+    min-height: 34px;
+    padding: 0;
+    border: 0;
+    font-size: 22px;
+  }
+
   .modal-body {
-    padding: 16px;
+    padding: 20px;
   }
 
   .form-grid {
@@ -773,8 +1075,9 @@
   .field textarea {
     width: 100%;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface-2);
+    border-radius: 7px;
+    outline: none;
+    background: #22272b;
     color: var(--text);
     padding: 9px 10px;
     min-height: 38px;
@@ -783,6 +1086,13 @@
   .field textarea {
     resize: vertical;
     min-height: 80px;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(0, 163, 231, 0.18);
   }
 
   .toast {
@@ -909,10 +1219,6 @@
       grid-template-columns: 1fr;
     }
 
-    .board {
-      grid-template-columns: repeat(5, 240px);
-    }
-
     .topbar {
       align-items: flex-start;
       flex-direction: column;
@@ -922,6 +1228,19 @@
       width: 100%;
       justify-content: space-between;
       text-align: left;
+    }
+
+    .priorities-toolbar {
+      gap: 8px;
+    }
+
+    .priority-title-wrap .summary,
+    .priority-home-label {
+      display: none;
+    }
+
+    .board-search {
+      width: 160px;
     }
   }
 
@@ -933,6 +1252,16 @@
     .kpi .value { font-size: 34px; }
     .date-label { min-width: 128px; }
     .customer-grid { grid-template-columns: 1fr; }
+
+    body.priorities-mode > main { padding: 0; }
+    .priorities-toolbar { padding: 10px 12px; }
+    .priority-title-wrap,
+    .board-search,
+    .board-status,
+    .priority-refresh { display: none; }
+    .priority-actions { margin-left: auto; }
+    .board { padding: 12px 12px 18px; }
+    .lane { flex-basis: min(286px, calc(100vw - 24px)); }
   }
 </style>
 </head>
@@ -1084,10 +1413,24 @@
 
     <section id="priorities-view" class="view">
       <div class="priorities-toolbar">
-        <div class="summary" id="priorities-summary">Loading...</div>
+        <div class="priority-heading">
+          <button class="priority-home" id="priority-home" type="button" aria-label="Back to TumbilOS dashboard">
+            <span aria-hidden="true">&#8592;</span>
+            <span class="priority-home-mark">Tumbil<span>OS</span></span>
+            <span class="priority-home-label">Dashboard</span>
+          </button>
+          <div class="priority-title-wrap">
+            <h2>Priorities</h2>
+            <div class="summary" id="priorities-summary">Loading...</div>
+          </div>
+        </div>
         <div class="priority-actions">
+          <label class="board-search">
+            <span class="sr-only">Search cards</span>
+            <input id="priority-search" type="search" autocomplete="off" placeholder="Search cards">
+          </label>
           <span class="board-status" id="priority-status">Loading...</span>
-          <button class="ghost-btn" onclick="refreshPriorities()">Refresh</button>
+          <button class="ghost-btn priority-refresh" onclick="refreshPriorities()" aria-label="Refresh priorities" title="Refresh">&#8635;</button>
           <button class="primary-btn" onclick="openTaskDialog()">Add Card</button>
         </div>
       </div>
@@ -1233,7 +1576,7 @@
     <form method="dialog" id="task-form">
       <div class="modal-head">
         <strong id="task-dialog-title">Priority</strong>
-        <button class="ghost-btn" value="cancel">Close</button>
+        <button class="ghost-btn modal-close" value="cancel" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
         <input type="hidden" id="task-id">
@@ -1243,8 +1586,8 @@
             <input id="task-title" required maxlength="160">
           </div>
           <div class="field">
-            <label for="task-owner">Owner</label>
-            <input id="task-owner" value="Cliff" maxlength="80">
+            <label for="task-owner">Assigned to</label>
+            <input id="task-owner" value="Unassigned" maxlength="80">
           </div>
           <div class="field">
             <label for="task-area">Area</label>
@@ -1265,11 +1608,11 @@
             <input id="task-target" type="date">
           </div>
           <div class="field">
-            <label for="task-updated-by">Updated By</label>
+            <label for="task-updated-by">Your name</label>
             <input id="task-updated-by" value="Cliff" maxlength="80">
           </div>
           <div class="field full">
-            <label for="task-why">Why</label>
+            <label for="task-why">Description</label>
             <textarea id="task-why"></textarea>
           </div>
           <div class="field full">
@@ -1304,6 +1647,7 @@ const state = {
   draggedTaskId: null,
   priorityMode: 'snapshot',
   prioritySaving: false,
+  priorityQuery: '',
   selectedDate: null,
   customerDrilldownType: 'brand_new',
   serviceDrilldownType: 'tips',
@@ -1784,6 +2128,18 @@ async function loadAll() {
 
 async function loadPriorities() {
   let snapshot = null;
+  const canUseSharedService = !['127.0.0.1', 'localhost', '::1'].includes(window.location.hostname);
+  if (canUseSharedService) {
+    try {
+      const resp = await fetch('/api/priorities', { cache: 'no-store' });
+      if (resp.ok) {
+        state.priorityMode = 'api';
+        return resp.json();
+      }
+    } catch (e) {
+      console.warn('Shared priority service unavailable, using snapshot', e);
+    }
+  }
   const base = localStorage.getItem('tumbilos_priority_api_base');
   if (base) {
     try {
@@ -2623,27 +2979,40 @@ function renderPriorities() {
   state.priorities = data;
   const items = data.items || [];
   const columns = data.columns || defaultColumns;
+  const query = String(state.priorityQuery || '').trim().toLowerCase();
+  const visibleItems = query ? items.filter(item => [
+    item.title,
+    item.why,
+    item.notes,
+    item.area,
+    item.owner,
+    item.priority,
+  ].some(value => String(value || '').toLowerCase().includes(query))) : items;
   applyPriorityBackground(data.background);
   document.getElementById('priorities-summary').textContent =
-    `${items.length} items · updated ${data.updated_at ? new Date(data.updated_at).toLocaleString() : 'unknown'}`;
+    `${query ? `${visibleItems.length} of ` : ''}${items.length} cards · Updated ${data.updated_at ? new Date(data.updated_at).toLocaleString() : 'unknown'}`;
   document.getElementById('task-area').innerHTML = (data.areas || defaultAreas).map(a => `<option>${escapeHtml(a)}</option>`).join('');
   document.getElementById('task-status').innerHTML = columns.map(c => `<option>${escapeHtml(c)}</option>`).join('');
   renderPriorityStatus();
 
   document.getElementById('priority-board').innerHTML = columns.map(column => {
-    const laneItems = items
+    const laneItems = visibleItems
       .filter(item => item.status === column)
       .sort((a, b) => (a.sort || 0) - (b.sort || 0));
     return `
       <div class="lane" data-status="${escapeHtml(column)}">
-        <div class="lane-title"><span>${escapeHtml(column)}</span><span>${laneItems.length}</span></div>
+        <div class="lane-title"><span>${escapeHtml(column)}</span><span class="lane-count">${laneItems.length}</span></div>
         <div class="lane-cards">
-          ${laneItems.length ? laneItems.map(renderTask).join('') : '<div class="empty">No cards</div>'}
+          ${laneItems.length ? laneItems.map(renderTask).join('') : `<div class="empty">${query ? 'No matches' : 'No cards yet'}</div>`}
         </div>
         <form class="quick-add" data-status="${escapeHtml(column)}">
-          <div class="quick-row">
-            <input autocomplete="off" maxlength="160" placeholder="Add a card...">
-            <button class="ghost-btn" type="submit">+</button>
+          <button class="quick-add-trigger" type="button"><span aria-hidden="true">+</span> Add a card</button>
+          <div class="quick-add-editor" hidden>
+            <textarea autocomplete="off" maxlength="160" placeholder="Enter a title for this card"></textarea>
+            <div class="quick-add-actions">
+              <button class="primary-btn" type="submit">Add card</button>
+              <button class="quick-add-cancel" type="button" aria-label="Cancel adding card">&times;</button>
+            </div>
           </div>
         </form>
       </div>
@@ -2654,17 +3023,19 @@ function renderPriorities() {
 
 function renderTask(item) {
   const areaClass = String(item.area || '').toLowerCase().replace('ai infra', 'ai');
+  const priorityClass = `priority-${String(item.priority || 'P1').toLowerCase()}`;
+  const owner = String(item.owner || 'Unassigned');
+  const initials = owner === 'Unassigned' ? '?' : owner.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase();
   return `
     <article class="task" draggable="true" data-id="${escapeHtml(item.id)}">
       <div class="task-title">${escapeHtml(item.title)}</div>
+      <button class="task-edit" type="button" data-edit="${escapeHtml(item.id)}" aria-label="Edit ${escapeHtml(item.title)}" title="Edit card">&#9998;</button>
+      ${item.why ? `<div class="task-note">${escapeHtml(item.why)}</div>` : ''}
       <div class="task-meta">
         <span class="pill ${escapeHtml(areaClass)}">${escapeHtml(item.area)}</span>
-        <span class="pill">${escapeHtml(item.priority)}</span>
-        <span class="pill">${escapeHtml(item.owner)}</span>
-      </div>
-      ${item.why ? `<div class="task-note">${escapeHtml(item.why)}</div>` : ''}
-      <div class="task-actions">
-        <button class="ghost-btn" type="button" data-edit="${escapeHtml(item.id)}">Edit</button>
+        <span class="pill ${escapeHtml(priorityClass)}">${escapeHtml(item.priority)}</span>
+        ${item.target_date ? `<span class="task-target" title="Target date">&#128197; ${escapeHtml(item.target_date)}</span>` : ''}
+        <span class="task-assignee" title="Owner: ${escapeHtml(owner)}" aria-label="Owner: ${escapeHtml(owner)}">${escapeHtml(initials)}</span>
       </div>
     </article>
   `;
@@ -2734,23 +3105,50 @@ function attachPriorityEvents() {
   });
 
   document.querySelectorAll('.lane').forEach(lane => {
-    lane.addEventListener('dragover', event => {
+    const handleDragOver = event => {
       event.preventDefault();
+      event.dataTransfer.dropEffect = 'move';
       lane.classList.add('drag-over');
-    });
-    lane.addEventListener('dragleave', event => {
-      if (!lane.contains(event.relatedTarget)) lane.classList.remove('drag-over');
-    });
-    lane.addEventListener('drop', event => {
+    };
+    const handleDrop = event => {
       event.preventDefault();
+      event.stopPropagation();
       lane.classList.remove('drag-over');
       const id = event.dataTransfer.getData('text/plain') || state.draggedTaskId;
       const before = getDropBeforeCard(lane.querySelector('.lane-cards'), event.clientY);
       movePriorityCard(id, lane.dataset.status, before ? before.dataset.id : null);
+    };
+    lane.addEventListener('dragenter', handleDragOver);
+    lane.addEventListener('dragover', handleDragOver);
+    lane.addEventListener('dragleave', event => {
+      if (!lane.contains(event.relatedTarget)) lane.classList.remove('drag-over');
     });
+    lane.addEventListener('drop', handleDrop);
+    lane.querySelector('.lane-cards').addEventListener('drop', handleDrop);
   });
 
   document.querySelectorAll('.quick-add').forEach(form => {
+    const trigger = form.querySelector('.quick-add-trigger');
+    const editor = form.querySelector('.quick-add-editor');
+    const textarea = form.querySelector('textarea');
+    const close = () => {
+      editor.hidden = true;
+      trigger.hidden = false;
+      textarea.value = '';
+    };
+    trigger.addEventListener('click', () => {
+      trigger.hidden = true;
+      editor.hidden = false;
+      textarea.focus();
+    });
+    form.querySelector('.quick-add-cancel').addEventListener('click', close);
+    textarea.addEventListener('keydown', event => {
+      if (event.key === 'Escape') close();
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    });
     form.addEventListener('submit', event => {
       event.preventDefault();
       quickAddPriority(form);
@@ -2979,7 +3377,8 @@ function renderChart(points, selected) {
 function priorityApiConfig() {
   const base = (localStorage.getItem('tumbilos_priority_api_base') || '').trim().replace(/\/$/, '');
   const token = localStorage.getItem('tumbilos_priority_api_token') || '';
-  return base && token ? { base, token } : null;
+  if (base && token) return { base, token, sameOrigin: false };
+  return state.priorityMode === 'api' ? { base: '', token: '', sameOrigin: true } : null;
 }
 
 function actorName() {
@@ -2993,7 +3392,7 @@ function localPriorityItem(raw, existing) {
   return {
     id: existing.id || raw.id || `local-${Date.now()}-${Math.random().toString(16).slice(2)}`,
     title: String(raw.title || existing.title || '').trim(),
-    owner: String(raw.owner || existing.owner || 'Cliff').trim() || 'Cliff',
+    owner: String(raw.owner || existing.owner || 'Unassigned').trim() || 'Unassigned',
     area: raw.area || existing.area || 'Product',
     priority: raw.priority || existing.priority || 'P1',
     status: raw.status || existing.status || 'Now',
@@ -3018,11 +3417,14 @@ function saveLocalPriorities() {
 async function priorityApiRequest(path, options = {}) {
   const api = priorityApiConfig();
   if (!api) throw new Error('Priority API is not configured.');
-  const resp = await fetch(api.base + path, {
+  const url = api.sameOrigin
+    ? path.replace(/^\/v1\/priorities/, '/api/priorities')
+    : api.base + path;
+  const resp = await fetch(url, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${api.token}`,
+      ...(api.token ? { 'Authorization': `Bearer ${api.token}` } : {}),
       ...(options.headers || {}),
     },
   });
@@ -3045,7 +3447,7 @@ async function refreshPriorities() {
 }
 
 async function quickAddPriority(form) {
-  const input = form.querySelector('input');
+  const input = form.querySelector('textarea');
   const title = input.value.trim();
   if (!title) return;
   input.disabled = true;
@@ -3057,7 +3459,7 @@ async function quickAddPriority(form) {
       status,
       area: 'Product',
       priority: 'P1',
-      owner: 'Cliff',
+      owner: 'Unassigned',
       updated_by: actorName(),
       sort: count + 1,
     });
@@ -3072,7 +3474,12 @@ async function quickAddPriority(form) {
 
 function focusQuickAdd(status) {
   const form = [...document.querySelectorAll('.quick-add')].find(el => el.dataset.status === status);
-  form?.querySelector('input')?.focus();
+  if (!form) return;
+  const trigger = form.querySelector('.quick-add-trigger');
+  const editor = form.querySelector('.quick-add-editor');
+  trigger.hidden = true;
+  editor.hidden = false;
+  form.querySelector('textarea')?.focus();
 }
 
 async function createPriority(payload) {
@@ -3201,16 +3608,19 @@ async function movePriorityCard(id, status, beforeId) {
 function openTaskDialog(id) {
   const data = state.priorities || { items: [] };
   const item = id ? data.items.find(t => t.id === id) : null;
+  const defaultStatus = (data.columns || defaultColumns).includes('NEW FOR DISCUSSION')
+    ? 'NEW FOR DISCUSSION'
+    : (data.columns || defaultColumns)[0];
   state.editingTask = item || null;
-  document.getElementById('task-dialog-title').textContent = item ? 'Edit Priority' : 'Add Priority';
+  document.getElementById('task-dialog-title').textContent = item ? 'Edit card' : 'Add card';
   document.getElementById('task-id').value = item ? item.id : '';
   document.getElementById('task-title').value = item ? item.title || '' : '';
-  document.getElementById('task-owner').value = item ? item.owner || 'Cliff' : 'Cliff';
+  document.getElementById('task-owner').value = item ? item.owner || 'Unassigned' : 'Unassigned';
   document.getElementById('task-area').value = item ? item.area || 'Product' : 'Product';
   document.getElementById('task-priority').value = item ? item.priority || 'P1' : 'P1';
-  document.getElementById('task-status').value = item ? item.status || 'Now' : 'Now';
+  document.getElementById('task-status').value = item ? item.status || defaultStatus : defaultStatus;
   document.getElementById('task-target').value = item ? item.target_date || '' : '';
-  document.getElementById('task-updated-by').value = item ? item.updated_by || 'Cliff' : 'Cliff';
+  document.getElementById('task-updated-by').value = item ? item.updated_by || actorName() : actorName();
   document.getElementById('task-why').value = item ? item.why || '' : '';
   document.getElementById('task-notes').value = item ? item.notes || '' : '';
   document.getElementById('task-links').value = item && item.links ? item.links.join(', ') : '';
@@ -3279,6 +3689,7 @@ async function archiveTask() {
 
 function activateView(viewId, activeTabViewId = viewId) {
   state.activeView = viewId;
+  document.body.classList.toggle('priorities-mode', viewId === 'priorities-view');
   document.querySelectorAll('.tab').forEach(button => {
     button.classList.toggle('active', button.dataset.view === activeTabViewId);
   });
@@ -3373,6 +3784,19 @@ document.getElementById('deliveries-back-btn').addEventListener('click', () => {
   navigate({
     activeView: 'today-view',
   });
+});
+document.getElementById('priority-home').addEventListener('click', () => {
+  navigate({
+    activeView: 'today-view',
+    selectedDate: currentBusinessDate() || availableDates()[availableDates().length - 1] || null,
+  });
+});
+document.getElementById('priority-search').addEventListener('input', event => {
+  state.priorityQuery = event.target.value;
+  renderPriorities();
+  const search = document.getElementById('priority-search');
+  search.value = state.priorityQuery;
+  search.focus();
 });
 
 (function wireBrandHome() {
