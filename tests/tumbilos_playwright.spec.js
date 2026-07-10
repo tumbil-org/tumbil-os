@@ -377,6 +377,21 @@ test('@critical priorities use a focused board workspace with search and a dashb
   await expect(page.locator('body > .tabs')).toBeVisible();
 });
 
+test('@critical card details use a focused Trello-style card back instead of an admin form', async ({ page }) => {
+  await page.getByRole('button', { name: 'Priorities' }).click();
+  await page.getByRole('button', { name: 'Edit REVIEW CLAWBACKS AND BONUSES' }).click();
+
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('textbox', { name: 'Title' })).toHaveValue('REVIEW CLAWBACKS AND BONUSES');
+  await expect(dialog.locator('#task-dialog-list')).toHaveText('BACKBURNER / ONGOING');
+  await expect(dialog.getByRole('heading', { name: 'Description' })).toBeVisible();
+  await expect(dialog.getByRole('heading', { name: 'Notes' })).toBeVisible();
+  await expect(dialog.getByRole('heading', { name: 'Links' })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Archive card' })).toBeVisible();
+  await expect(dialog.getByLabel('Your name')).toBeHidden();
+});
+
 test('@critical Overview KPI cards are grouped into daily / monthly / long-horizon families', async ({ page }) => {
   // Regression for TO-002: the Overview previously rendered every KPI inside a
   // single flat grid, mixing today-to-date cards with month-to-date (Avg

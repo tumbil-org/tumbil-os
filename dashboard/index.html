@@ -998,58 +998,189 @@
   }
 
   dialog {
-    width: min(740px, calc(100vw - 32px));
-    max-height: calc(100dvh - 40px);
-    overflow: auto;
+    width: min(880px, calc(100vw - 32px));
+    max-height: calc(100dvh - 32px);
+    overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 14px;
-    background: #1b2024;
+    border-radius: 12px;
+    background: #1f2428;
     color: var(--text);
     padding: 0;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.56);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.58);
   }
 
   dialog::backdrop {
-    background: rgba(4, 7, 9, 0.74);
+    background: rgba(4, 7, 9, 0.76);
     backdrop-filter: blur(4px);
   }
 
-  .modal-head,
-  .modal-foot {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
+  #task-form {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    max-height: calc(100dvh - 32px);
+    flex-direction: column;
   }
 
-  .modal-foot {
-    border-top: 1px solid var(--border);
-    border-bottom: 0;
-    justify-content: flex-end;
+  .card-detail-head {
+    position: relative;
+    padding: 22px 58px 14px 54px;
   }
 
-  .modal-head strong {
-    font-size: 17px;
+  .card-detail-icon {
+    position: absolute;
+    top: 27px;
+    left: 22px;
+    color: var(--text-dim);
+    font-size: 18px;
+  }
+
+  .card-title-input {
+    width: 100%;
+    min-height: 38px;
+    padding: 2px 6px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    outline: none;
+    background: transparent;
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .card-title-input:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .card-title-input:focus {
+    border-color: var(--accent);
+    background: #22272b;
+  }
+
+  .card-detail-context {
+    padding-left: 8px;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .card-detail-context strong {
+    color: var(--text-dim);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   .modal-close {
-    width: 34px;
-    min-height: 34px;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 38px;
+    min-height: 38px;
     padding: 0;
     border: 0;
-    font-size: 22px;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 24px;
   }
 
-  .modal-body {
-    padding: 20px;
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.08);
   }
 
-  .form-grid {
+  .card-detail-body {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    gap: 28px;
+    overflow-y: auto;
+    padding: 8px 24px 22px 54px;
+  }
+
+  .card-detail-main {
+    display: grid;
+    align-content: start;
+    gap: 24px;
+    min-width: 0;
+  }
+
+  .card-detail-section {
+    min-width: 0;
+  }
+
+  .card-detail-section-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 10px -32px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .card-detail-section-title span {
+    display: inline-flex;
+    width: 22px;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+
+  .card-label-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) minmax(100px, 0.7fr) minmax(130px, 0.9fr);
+    gap: 10px;
+  }
+
+  .card-detail-sidebar {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+  }
+
+  .sidebar-title {
+    margin: 0 0 2px;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .sidebar-field select,
+  .sidebar-field input {
+    background: #2d3338;
+  }
+
+  .card-advanced {
+    margin-top: 4px;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+  }
+
+  .card-advanced summary {
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .card-advanced .field {
+    margin-top: 10px;
+  }
+
+  .card-action-button {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .modal-foot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 24px;
+    border-top: 1px solid var(--border);
+    background: #1b2024;
   }
 
   .field {
@@ -1064,10 +1195,9 @@
 
   .field label {
     color: var(--text-muted);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
   }
 
   .field input,
@@ -1083,9 +1213,18 @@
     min-height: 38px;
   }
 
+  .field select {
+    padding-right: 32px;
+    text-overflow: ellipsis;
+  }
+
   .field textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 94px;
+  }
+
+  #task-why {
+    min-height: 132px;
   }
 
   .field input:focus,
@@ -1242,13 +1381,17 @@
     .board-search {
       width: 160px;
     }
+
+    .card-detail-body {
+      grid-template-columns: minmax(0, 1fr) 190px;
+      gap: 20px;
+    }
   }
 
   @media (max-width: 620px) {
     main { padding: 14px; }
     .topbar { padding: 14px; }
     .tabs { padding: 0 14px; }
-    .form-grid { grid-template-columns: 1fr; }
     .kpi .value { font-size: 34px; }
     .date-label { min-width: 128px; }
     .customer-grid { grid-template-columns: 1fr; }
@@ -1262,6 +1405,24 @@
     .priority-actions { margin-left: auto; }
     .board { padding: 12px 12px 18px; }
     .lane { flex-basis: min(286px, calc(100vw - 24px)); }
+
+    dialog {
+      width: calc(100vw - 16px);
+      max-height: calc(100dvh - 16px);
+    }
+    #task-form { max-height: calc(100dvh - 16px); }
+    .card-detail-head { padding: 16px 48px 10px 42px; }
+    .card-detail-icon { top: 21px; left: 14px; }
+    .card-title-input { font-size: 17px; }
+    .card-detail-body {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 8px 16px 20px 42px;
+    }
+    .card-label-row { grid-template-columns: 1fr 1fr; }
+    .card-label-row .field:last-child { grid-column: 1 / -1; }
+    .card-detail-sidebar { border-top: 1px solid var(--border); padding-top: 16px; }
+    .modal-foot { padding: 10px 16px; }
   }
 </style>
 </head>
@@ -1574,59 +1735,83 @@
 
   <dialog id="task-dialog">
     <form method="dialog" id="task-form">
-      <div class="modal-head">
-        <strong id="task-dialog-title">Priority</strong>
+      <div class="card-detail-head">
+        <span class="card-detail-icon" aria-hidden="true">&#9638;</span>
+        <span class="sr-only" id="task-dialog-title">Card details</span>
+        <label class="sr-only" for="task-title">Title</label>
+        <input class="card-title-input" id="task-title" required maxlength="160" placeholder="Card title">
+        <div class="card-detail-context">in list <strong id="task-dialog-list">New for Discussion</strong></div>
         <button class="ghost-btn modal-close" value="cancel" aria-label="Close">&times;</button>
       </div>
-      <div class="modal-body">
+      <div class="card-detail-body">
         <input type="hidden" id="task-id">
-        <div class="form-grid">
-          <div class="field full">
-            <label for="task-title">Title</label>
-            <input id="task-title" required maxlength="160">
+        <div class="card-detail-main">
+          <div class="card-label-row">
+            <div class="field">
+              <label for="task-area">Area</label>
+              <select id="task-area"></select>
+            </div>
+            <div class="field">
+              <label for="task-priority">Priority</label>
+              <select id="task-priority">
+                <option>P0</option><option selected>P1</option><option>P2</option><option>P3</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="task-target">Target date</label>
+              <input id="task-target" type="date">
+            </div>
           </div>
-          <div class="field">
+
+          <section class="card-detail-section">
+            <h3 class="card-detail-section-title"><span aria-hidden="true">&#8801;</span> Description</h3>
+            <div class="field">
+              <label class="sr-only" for="task-why">Description</label>
+              <textarea id="task-why" placeholder="Add a more detailed description..."></textarea>
+            </div>
+          </section>
+
+          <section class="card-detail-section">
+            <h3 class="card-detail-section-title"><span aria-hidden="true">&#9776;</span> Notes</h3>
+            <div class="field">
+              <label class="sr-only" for="task-notes">Notes</label>
+              <textarea id="task-notes" placeholder="Add notes or the latest update..."></textarea>
+            </div>
+          </section>
+
+          <section class="card-detail-section">
+            <h3 class="card-detail-section-title"><span aria-hidden="true">&#128279;</span> Links</h3>
+            <div class="field">
+              <label class="sr-only" for="task-links">Links</label>
+              <input id="task-links" placeholder="Paste a link...">
+            </div>
+          </section>
+        </div>
+
+        <aside class="card-detail-sidebar" aria-label="Card details">
+          <div class="sidebar-title">Card details</div>
+          <div class="field sidebar-field">
             <label for="task-owner">Assigned to</label>
             <input id="task-owner" value="Unassigned" maxlength="80">
           </div>
-          <div class="field">
-            <label for="task-area">Area</label>
-            <select id="task-area"></select>
-          </div>
-          <div class="field">
-            <label for="task-priority">Priority</label>
-            <select id="task-priority">
-              <option>P0</option><option selected>P1</option><option>P2</option><option>P3</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="task-status">Status</label>
+          <div class="field sidebar-field">
+            <label for="task-status">List</label>
             <select id="task-status"></select>
           </div>
-          <div class="field">
-            <label for="task-target">Target Date</label>
-            <input id="task-target" type="date">
-          </div>
-          <div class="field">
-            <label for="task-updated-by">Your name</label>
-            <input id="task-updated-by" value="Cliff" maxlength="80">
-          </div>
-          <div class="field full">
-            <label for="task-why">Description</label>
-            <textarea id="task-why"></textarea>
-          </div>
-          <div class="field full">
-            <label for="task-notes">Notes</label>
-            <textarea id="task-notes"></textarea>
-          </div>
-          <div class="field full">
-            <label for="task-links">Links</label>
-            <input id="task-links" placeholder="https://...">
-          </div>
-        </div>
+
+          <div class="sidebar-title" style="margin-top: 8px;">Actions</div>
+          <button class="ghost-btn card-action-button" type="button" id="delete-task">Archive card</button>
+
+          <details class="card-advanced">
+            <summary>More details</summary>
+            <div class="field">
+              <label for="task-updated-by">Your name</label>
+              <input id="task-updated-by" value="Cliff" maxlength="80">
+            </div>
+          </details>
+        </aside>
       </div>
       <div class="modal-foot">
-        <button class="ghost-btn" type="button" id="delete-task">Archive</button>
         <button class="ghost-btn" value="cancel">Cancel</button>
         <button class="primary-btn" id="save-task" value="default">Save</button>
       </div>
@@ -3619,6 +3804,7 @@ function openTaskDialog(id) {
   document.getElementById('task-area').value = item ? item.area || 'Product' : 'Product';
   document.getElementById('task-priority').value = item ? item.priority || 'P1' : 'P1';
   document.getElementById('task-status').value = item ? item.status || defaultStatus : defaultStatus;
+  document.getElementById('task-dialog-list').textContent = document.getElementById('task-status').value;
   document.getElementById('task-target').value = item ? item.target_date || '' : '';
   document.getElementById('task-updated-by').value = item ? item.updated_by || actorName() : actorName();
   document.getElementById('task-why').value = item ? item.why || '' : '';
@@ -3813,6 +3999,9 @@ document.getElementById('priority-search').addEventListener('input', event => {
 })();
 document.getElementById('task-form').addEventListener('submit', saveTask);
 document.getElementById('delete-task').addEventListener('click', archiveTask);
+document.getElementById('task-status').addEventListener('change', event => {
+  document.getElementById('task-dialog-list').textContent = event.target.value;
+});
 
 window.addEventListener('popstate', () => {
   applyRouteFromUrl();
