@@ -14,6 +14,7 @@ URL: https://os.tumbil.com (Render). The old GitHub Pages bundle was retired on 
 ## Architecture
 
 - **Host:** Render Web Service (Express) at `tumbil-org/tumbilos-service` repo (private). Serves dashboard HTML + acts as data API. ThinkPad POSTs fresh JSON every 5-7 min to `POST /api/upload/:filename` with bearer token. Data held in memory, served instantly. No build step on data updates. Custom domain `os.tumbil.com`. Cookie-based auth (30-day lifetime).
+- **Priority writes:** the authenticated browser uses same-origin `/api/priorities` routes on Render. Render proxies those requests to the ThinkPad priority API through the HTTPS Tailscale Funnel path `/tumbilos-priorities`. The browser never receives the bearer token. The public upstream requires bearer auth for reads and writes, persists to `dashboard/priorities.json`, and appends to `dashboard/priorities-audit.jsonl`.
 - **Dashboard HTML lives in `tumbilos-service/public/index.html`** - that's the only copy that gets served. `tumbil-os/dashboard/index.html` is a working copy kept for the regression suite and the sync scripts to reference; if you change one, mirror to the other.
 - **Source split:** TumbilOS = dashboard + sync + deploy. TGE (`~/tumbil/tge/`) = the daily analyst brief that TumbilOS consumes from `tge/reports/*-analysis.json`.
 
@@ -35,7 +36,7 @@ URL: https://os.tumbil.com (Render). The old GitHub Pages bundle was retired on 
 | `scripts/sync_live_dashboard_data.py` | DB + GA4 + AppsFlyer -> `dashboard/live.json`. |
 | `scripts/sync_customer_details.py` | DB + GA4 -> `dashboard/customers.json`. |
 | `scripts/sync_service_details.py` | DB -> `dashboard/service-details.json`. |
-| `scripts/tumbilos_priority_api.py` | Token-authenticated priority write API (always-on systemd service). |
+| `scripts/tumbilos_priority_api.py` | Token-authenticated priority read/write API (always-on systemd service; reached through the Render same-origin proxy). |
 | `scripts/test_tumbilos.sh` | Playwright regression gate. |
 | `scripts/check_dashboard_data_contract.py` | Date-contract gate run before upload (live date needs prior history + drill-down coverage). |
 | `scripts/check_payload_coverage.py` | Offline guard: drill-down builders must cover the live date on zero-activity days (wired into the regression gate; skips where DB libs absent). |
