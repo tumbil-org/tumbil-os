@@ -465,6 +465,89 @@
     width: 100%;
   }
 
+  .customer-trend-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .customer-trend-kpis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .customer-trend-kpi {
+    min-width: 150px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-2);
+    padding: 9px 11px;
+  }
+
+  .customer-trend-kpi span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .customer-trend-kpi strong {
+    display: block;
+    margin-top: 3px;
+    color: var(--text);
+    font-size: 17px;
+  }
+
+  .customer-trend-kpi strong.up { color: var(--accent-2); }
+  .customer-trend-kpi strong.down { color: var(--red); }
+  .customer-trend-kpi strong.flat { color: var(--amber); }
+
+  .customer-trend-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 14px;
+    color: var(--text-muted);
+    font-size: 11px;
+  }
+
+  .customer-trend-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .customer-trend-legend i {
+    display: inline-block;
+    width: 18px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  .customer-trend-legend i.daily {
+    height: 9px;
+    border-radius: 2px;
+    background: #3b4c57;
+  }
+
+  .customer-trend-chart {
+    width: 100%;
+    height: 250px;
+    margin-top: 4px;
+  }
+
+  .customer-trend-note {
+    margin-top: 7px;
+    color: var(--text-muted);
+    font-size: 11px;
+  }
+
   .scorecard {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
@@ -1395,6 +1478,9 @@
     .kpi .value { font-size: 34px; }
     .date-label { min-width: 128px; }
     .customer-grid { grid-template-columns: 1fr; }
+    .customer-trend-kpis { width: 100%; }
+    .customer-trend-kpi { flex: 1 1 130px; min-width: 0; }
+    .customer-trend-chart { height: 220px; }
 
     body.priorities-mode > main { padding: 0; }
     .priorities-toolbar { padding: 10px 12px; }
@@ -1659,7 +1745,31 @@
         <div class="summary" id="customer-screen-title">Customer detail</div>
       </div>
       <div class="date-nav" id="customer-date-nav"></div>
-      <div class="panel">
+      <div class="panel" id="customer-trend-panel">
+        <div class="customer-trend-head">
+          <div>
+            <div class="panel-title" id="customer-trend-title">Customer Trend</div>
+            <div class="customer-summary" id="customer-trend-summary">Loading...</div>
+          </div>
+          <div class="customer-trend-kpis">
+            <div class="customer-trend-kpi">
+              <span>Latest 7-day average</span>
+              <strong id="customer-trend-average-value">-</strong>
+            </div>
+            <div class="customer-trend-kpi">
+              <span>Vs. previous 7 days</span>
+              <strong id="customer-trend-change-value">-</strong>
+            </div>
+          </div>
+        </div>
+        <div class="customer-trend-legend" aria-hidden="true">
+          <span><i class="daily"></i>Daily count</span>
+          <span><i></i>7-day rolling average</span>
+        </div>
+        <div id="customer-trend-chart" class="customer-trend-chart" role="img" aria-label="Customer trend chart"></div>
+        <div class="customer-trend-note" id="customer-trend-note"></div>
+      </div>
+      <div class="panel" style="margin-top: 14px;">
         <div class="panel-title">Customer Detail</div>
         <div class="customer-summary" id="customer-screen-summary">Loading...</div>
         <div class="customer-list" id="customer-list" style="margin-top: 14px;"></div>
@@ -2823,6 +2933,7 @@ function renderCustomerDetail() {
   const titleEl = document.getElementById('customer-screen-title');
   const listEl = document.getElementById('customer-list');
   titleEl.textContent = `${label} - ${businessDateLabel(date)}`;
+  renderCustomerTrend(date);
 
   if (!date) {
     summaryEl.textContent = 'No customer detail available.';
@@ -2898,6 +3009,161 @@ function renderCustomerDetail() {
       </div>
     </article>
   `).join('') : '<div class="empty">No customers in this segment for the selected date.</div>';
+}
+
+function customerTrendDaysThrough(date) {
+  if (!date) return [];
+  const liveDate = currentBusinessDate();
+  const closedEndDate = date === liveDate
+    ? customerAvailableDates().filter(candidate => candidate < liveDate).pop()
+    : date;
+  if (!closedEndDate) return [];
+  return ((state.customers && state.customers.days) || [])
+    .filter(day => day.date <= closedEndDate)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+function customerTrendPoint(day) {
+  return {
+    date: day.date,
+    count: Number(((day.counts || {})[state.customerDrilldownType]) || 0),
+  };
+}
+
+function trailingAverage(points, endIndex, windowSize = 7) {
+  if (endIndex < windowSize - 1) return null;
+  const window = points.slice(endIndex - windowSize + 1, endIndex + 1);
+  return window.reduce((total, point) => total + point.count, 0) / windowSize;
+}
+
+function customerTrendComparison(points) {
+  if (points.length < 14) return null;
+  const latest = points.slice(-7).reduce((total, point) => total + point.count, 0) / 7;
+  const previous = points.slice(-14, -7).reduce((total, point) => total + point.count, 0) / 7;
+  const delta = latest - previous;
+  const direction = Math.abs(delta) < 0.001 ? 'flat' : (delta > 0 ? 'up' : 'down');
+  const percent = previous > 0 ? (delta / previous) * 100 : null;
+  return { latest, previous, delta, direction, percent };
+}
+
+function shortDateLabel(date) {
+  return new Date(date + 'T12:00:00').toLocaleDateString(undefined, {
+    month: 'short', day: 'numeric'
+  });
+}
+
+function renderCustomerTrend(date) {
+  const titleEl = document.getElementById('customer-trend-title');
+  const summaryEl = document.getElementById('customer-trend-summary');
+  const averageEl = document.getElementById('customer-trend-average-value');
+  const changeEl = document.getElementById('customer-trend-change-value');
+  const chartEl = document.getElementById('customer-trend-chart');
+  const noteEl = document.getElementById('customer-trend-note');
+  if (!titleEl || !summaryEl || !averageEl || !changeEl || !chartEl || !noteEl) return;
+
+  const label = currentCustomerTypeLabel();
+  const points = customerTrendDaysThrough(date).map(customerTrendPoint);
+  const comparison = customerTrendComparison(points);
+  const endDate = points.length ? points[points.length - 1].date : null;
+  titleEl.textContent = `${label.replace(/s$/, '')} Trend`;
+
+  if (!points.length) {
+    summaryEl.textContent = 'No closed-day trend data is available yet.';
+    averageEl.textContent = '-';
+    changeEl.textContent = '-';
+    changeEl.className = '';
+    chartEl.innerHTML = '<div class="empty">No trend data available.</div>';
+    chartEl.setAttribute('aria-label', `No ${label.toLowerCase()} trend data available`);
+    noteEl.textContent = '';
+    return;
+  }
+
+  summaryEl.textContent = `${points.length} closed days through ${businessDateLabel(endDate)} (ET).`;
+  if (comparison) {
+    averageEl.textContent = `${comparison.latest.toFixed(1)} / day`;
+    const directionLabel = { up: 'Up', down: 'Down', flat: 'Flat' }[comparison.direction];
+    const magnitude = Math.abs(comparison.delta).toFixed(1);
+    const percentText = comparison.percent == null
+      ? ''
+      : ` (${Math.abs(comparison.percent).toFixed(0)}%)`;
+    changeEl.textContent = comparison.direction === 'flat'
+      ? 'Flat'
+      : `${directionLabel} ${magnitude} / day${percentText}`;
+    changeEl.className = comparison.direction;
+  } else {
+    averageEl.textContent = points.length >= 7
+      ? `${trailingAverage(points, points.length - 1).toFixed(1)} / day`
+      : '-';
+    changeEl.textContent = 'Need 14 days';
+    changeEl.className = '';
+  }
+
+  const liveExcluded = date === currentBusinessDate();
+  noteEl.textContent = `Bars show daily ${label.toLowerCase()}; the line smooths each trailing 7-day period.${liveExcluded ? ' Today is excluded until the day closes.' : ''}`;
+  renderCustomerTrendChart(chartEl, points, label, comparison);
+}
+
+function renderCustomerTrendChart(el, points, label, comparison) {
+  const data = points.slice(-45);
+  const averages = data.map((point, index) => ({
+    ...point,
+    average: trailingAverage(points, points.length - data.length + index),
+  }));
+  const width = el.clientWidth || 820;
+  const height = 250;
+  const pad = { t: 18, r: 34, b: 32, l: 8 };
+  const chartW = width - pad.l - pad.r;
+  const chartH = height - pad.t - pad.b;
+  const maxValue = Math.max(1, ...data.map(point => point.count), ...averages.map(point => point.average || 0));
+  const yMax = Math.max(4, Math.ceil(maxValue));
+  const slotW = chartW / Math.max(data.length, 1);
+  const barW = Math.max(2, Math.min(12, slotW * 0.62));
+  const toX = index => pad.l + slotW * index + slotW / 2;
+  const toY = value => pad.t + chartH * (1 - Number(value || 0) / yMax);
+  let svg = `<svg viewBox="0 0 ${width} ${height}" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">`;
+
+  for (let index = 0; index <= 4; index += 1) {
+    const value = yMax - (yMax / 4) * index;
+    const y = toY(value);
+    svg += `<line x1="${pad.l}" y1="${y}" x2="${width - pad.r}" y2="${y}" stroke="#2b333a"/>`;
+    svg += `<text x="${width - pad.r + 5}" y="${y + 4}" fill="#75818a" font-size="10">${Number.isInteger(value) ? value : value.toFixed(1)}</text>`;
+  }
+
+  data.forEach((point, index) => {
+    const x = toX(index) - barW / 2;
+    const y = toY(point.count);
+    const barHeight = pad.t + chartH - y;
+    svg += `<rect class="customer-trend-bar" x="${x}" y="${y}" width="${barW}" height="${Math.max(barHeight, 1)}" rx="2" fill="#3b4c57"><title>${escapeHtml(shortDateLabel(point.date))}: ${point.count}</title></rect>`;
+  });
+
+  const averagePoints = averages
+    .map((point, index) => point.average == null ? null : ({ x: toX(index), y: toY(point.average), ...point }))
+    .filter(Boolean);
+  if (averagePoints.length) {
+    const line = averagePoints.map((point, index) => `${index ? 'L' : 'M'} ${point.x} ${point.y}`).join(' ');
+    svg += `<path class="customer-trend-average-line" d="${line}" fill="none" stroke="#00a3e7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+    const latest = averagePoints[averagePoints.length - 1];
+    svg += `<circle cx="${latest.x}" cy="${latest.y}" r="4" fill="#00a3e7"><title>${latest.average.toFixed(1)} per day</title></circle>`;
+  }
+
+  const labelIndexes = [];
+  for (let index = data.length - 1; index >= 0; index -= 7) labelIndexes.push(index);
+  if (labelIndexes[labelIndexes.length - 1] <= 3) {
+    labelIndexes[labelIndexes.length - 1] = 0;
+  } else {
+    labelIndexes.push(0);
+  }
+  [...new Set(labelIndexes)].sort((a, b) => a - b).forEach(index => {
+    const anchor = index === 0 ? 'start' : (index === data.length - 1 ? 'end' : 'middle');
+    svg += `<text x="${toX(index)}" y="${height - 7}" fill="#75818a" font-size="9" text-anchor="${anchor}">${escapeHtml(shortDateLabel(data[index].date))}</text>`;
+  });
+  svg += '</svg>';
+  el.innerHTML = svg;
+
+  const trendText = comparison
+    ? `${comparison.latest.toFixed(1)} per day in the latest 7 days, ${comparison.direction} versus ${comparison.previous.toFixed(1)} per day in the previous 7 days`
+    : 'not enough history to compare two 7-day periods';
+  el.setAttribute('aria-label', `${label} daily trend through ${data[data.length - 1].date}: ${trendText}`);
 }
 
 function serviceRowsForDate(date) {

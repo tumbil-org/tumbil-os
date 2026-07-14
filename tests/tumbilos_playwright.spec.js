@@ -298,6 +298,37 @@ test('@critical customer detail renders GA4 Google Ads source labels from the pa
   }
 });
 
+test('@critical new-customer detail shows daily history and a verified 7-day trend', async ({ page }) => {
+  const [customers, live] = await Promise.all([
+    readJson(page, 'customers.json'),
+    readJson(page, 'live.json'),
+  ]);
+  const liveDate = live?.today?.business_date;
+  const closedDays = (customers.days || []).filter(day => day.date !== liveDate);
+  expect(closedDays.length, 'need two complete 7-day periods for trend comparison').toBeGreaterThanOrEqual(14);
+  const targetDate = closedDays[closedDays.length - 1].date;
+  const latestSeven = closedDays.slice(-7);
+  const expectedAverage = latestSeven.reduce(
+    (total, day) => total + Number((day.counts || {}).brand_new || 0),
+    0,
+  ) / 7;
+
+  await page.goto(route(`?screen=customer&date=${targetDate}&customerType=brand_new`));
+  await expect(page.locator('#customer-trend-title')).toHaveText('New Customer Trend');
+  await expect(page.locator('#customer-trend-summary')).toContainText('closed days through');
+  await expect(page.locator('#customer-trend-average-value')).toHaveText(`${expectedAverage.toFixed(1)} / day`);
+  await expect(page.locator('#customer-trend-chart .customer-trend-bar')).toHaveCount(Math.min(45, closedDays.length));
+  await expect(page.locator('#customer-trend-chart .customer-trend-average-line')).toHaveCount(1);
+  await expect(page.locator('#customer-trend-note')).toContainText('trailing 7-day period');
+  await expect(page.locator('#customer-trend-chart')).toHaveAttribute('aria-label', /latest 7 days/);
+
+  if (liveDate) {
+    await page.goto(route(`?screen=customer&date=${liveDate}&customerType=brand_new`));
+    await expect(page.locator('#customer-trend-average-value')).toHaveText(`${expectedAverage.toFixed(1)} / day`);
+    await expect(page.locator('#customer-trend-note')).toContainText('Today is excluded until the day closes.');
+  }
+});
+
 test('priority board supports rapid local card creation, edit, and drag', async ({ page }) => {
   await page.getByRole('button', { name: 'Priorities' }).click();
   await expect(page.getByRole('button', { name: 'Sync' })).toHaveCount(0);
