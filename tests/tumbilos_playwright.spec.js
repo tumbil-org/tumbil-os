@@ -290,7 +290,10 @@ test('@critical customer detail renders GA4 Google Ads source labels from the pa
   await page.goto(route(`?screen=customer&date=${target.date}&customerType=brand_new`));
   await expect(page.locator('#customer-screen-title')).toContainText('New Customers');
 
-  const card = page.locator('.customer-card', { hasText: `Order #${Number(target.order.order_id).toLocaleString()}` });
+  const card = page.locator('#customer-list .customer-card', {
+    hasText: `Order #${Number(target.order.order_id).toLocaleString()}`,
+  });
+  await expect(card, 'the attributed order must render exactly once in the customer list').toHaveCount(1);
   await expect(card).toBeVisible();
   await expect(card.locator('.confidence', { hasText: 'Google Ads' })).toBeVisible();
   if ((target.order.source || {}).campaign) {
