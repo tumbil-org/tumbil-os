@@ -116,7 +116,8 @@ test('@critical all primary dashboard views render without uncaught errors', asy
   await expect(page.getByText('Brand New')).toHaveCount(0);
   await expect(page.getByText('Returning / Regular')).toHaveCount(0);
 
-  const tabs = ['Overview', 'Acquisition', 'Analyst Brief', 'Priorities', 'App Monitor', 'Data Health'];
+  // Priorities intentionally becomes a focused full-screen workspace, so visit it last.
+  const tabs = ['Overview', 'Acquisition', 'Analyst Brief', 'App Monitor', 'Data Health', 'Priorities'];
   for (const tab of tabs) {
     await page.locator('.tab', { hasText: tab }).click();
     await expect(page.locator('.view.active')).toBeVisible();
@@ -289,7 +290,10 @@ test('@critical customer detail renders GA4 Google Ads source labels from the pa
   await page.goto(route(`?screen=customer&date=${target.date}&customerType=brand_new`));
   await expect(page.locator('#customer-screen-title')).toContainText('New Customers');
 
-  const card = page.locator('.customer-card', { hasText: `Order #${Number(target.order.order_id).toLocaleString()}` });
+  const card = page.locator('#customer-list .customer-card', {
+    hasText: `Order #${Number(target.order.order_id).toLocaleString()}`,
+  });
+  await expect(card, 'the attributed order must render exactly once in the customer list').toHaveCount(1);
   await expect(card).toBeVisible();
   await expect(card.locator('.confidence', { hasText: 'Google Ads' })).toBeVisible();
   if ((target.order.source || {}).campaign) {
@@ -297,11 +301,44 @@ test('@critical customer detail renders GA4 Google Ads source labels from the pa
   }
 });
 
+test('@critical new-customer detail shows daily history and a verified 7-day trend', async ({ page }) => {
+  const [customers, live] = await Promise.all([
+    readJson(page, 'customers.json'),
+    readJson(page, 'live.json'),
+  ]);
+  const liveDate = live?.today?.business_date;
+  const closedDays = (customers.days || []).filter(day => day.date !== liveDate);
+  expect(closedDays.length, 'need two complete 7-day periods for trend comparison').toBeGreaterThanOrEqual(14);
+  const targetDate = closedDays[closedDays.length - 1].date;
+  const latestSeven = closedDays.slice(-7);
+  const expectedAverage = latestSeven.reduce(
+    (total, day) => total + Number((day.counts || {}).brand_new || 0),
+    0,
+  ) / 7;
+
+  await page.goto(route(`?screen=customer&date=${targetDate}&customerType=brand_new`));
+  await expect(page.locator('#customer-trend-title')).toHaveText('New Customer Trend');
+  await expect(page.locator('#customer-trend-summary')).toContainText('closed days through');
+  await expect(page.locator('#customer-trend-average-value')).toHaveText(`${expectedAverage.toFixed(1)} / day`);
+  await expect(page.locator('#customer-trend-chart .customer-trend-bar')).toHaveCount(Math.min(45, closedDays.length));
+  await expect(page.locator('#customer-trend-chart .customer-trend-average-line')).toHaveCount(1);
+  await expect(page.locator('#customer-trend-note')).toContainText('trailing 7-day period');
+  await expect(page.locator('#customer-trend-chart')).toHaveAttribute('aria-label', /latest 7 days/);
+
+  if (liveDate) {
+    await page.goto(route(`?screen=customer&date=${liveDate}&customerType=brand_new`));
+    await expect(page.locator('#customer-trend-average-value')).toHaveText(`${expectedAverage.toFixed(1)} / day`);
+    await expect(page.locator('#customer-trend-note')).toContainText('Today is excluded until the day closes.');
+  }
+});
+
 test('priority board supports rapid local card creation, edit, and drag', async ({ page }) => {
   await page.getByRole('button', { name: 'Priorities' }).click();
   await expect(page.getByRole('button', { name: 'Sync' })).toHaveCount(0);
 
-  const nowInput = page.locator('.quick-add[data-status="IN PROGRESS"] input');
+  const quickAdd = page.locator('.quick-add[data-status="IN PROGRESS"]');
+  await quickAdd.getByRole('button', { name: 'Add a card' }).click();
+  const nowInput = quickAdd.locator('textarea');
   await nowInput.fill('QA quick card');
   await nowInput.press('Enter');
   await expect(page.getByText('QA quick card')).toBeVisible();
@@ -313,7 +350,14 @@ test('priority board supports rapid local card creation, edit, and drag', async 
   await expect(page.getByText('QA edited card')).toBeVisible();
 
   const nextLane = page.locator('.lane[data-status="NEW FOR DISCUSSION"]');
-  await page.locator('.task', { hasText: 'QA edited card' }).dragTo(nextLane);
+  await page.locator('.task', { hasText: 'QA edited card' }).evaluate(source => {
+    const target = document.querySelector('.lane[data-status="NEW FOR DISCUSSION"] .lane-cards');
+    const transfer = new DataTransfer();
+    source.dispatchEvent(new DragEvent('dragstart', { bubbles: true, dataTransfer: transfer }));
+    target.dispatchEvent(new DragEvent('dragover', { bubbles: true, cancelable: true, dataTransfer: transfer }));
+    target.dispatchEvent(new DragEvent('drop', { bubbles: true, cancelable: true, dataTransfer: transfer }));
+    source.dispatchEvent(new DragEvent('dragend', { bubbles: true, dataTransfer: transfer }));
+  });
   await expect(nextLane.locator('.task', { hasText: 'QA edited card' })).toBeVisible();
 });
 
@@ -342,8 +386,44 @@ test('stale old-schema local priority draft does not override priority snapshot'
   await page.getByRole('button', { name: 'Priorities' }).click();
   await expect(page.locator('.lane[data-status="BACKLOG"]')).toBeVisible();
   await expect(page.locator('.lane[data-status="Next"]')).toHaveCount(0);
-  await expect(page.locator('#priorities-summary')).toContainText(`${snapshotCount} items`);
+  await expect(page.locator('#priorities-summary')).toContainText(`${snapshotCount} cards`);
   await expect(page.getByText('test', { exact: true })).toHaveCount(0);
+});
+
+test('@critical priorities use a focused board workspace with search and a dashboard return path', async ({ page }) => {
+  await page.getByRole('button', { name: 'Priorities' }).click();
+
+  await expect(page.locator('body')).toHaveClass(/priorities-mode/);
+  await expect(page.locator('body > .topbar')).toBeHidden();
+  await expect(page.locator('body > .tabs')).toBeHidden();
+  await expect(page.getByRole('button', { name: 'Back to TumbilOS dashboard' })).toBeVisible();
+  await expect(page.locator('#priority-board')).toBeVisible();
+
+  const search = page.getByRole('searchbox', { name: 'Search cards' });
+  await search.fill('REVIEW CLAWBACKS AND BONUSES');
+  await expect(page.locator('#priorities-summary')).toContainText('1 of');
+  await expect(page.locator('.task')).toHaveCount(1);
+
+  await page.getByRole('button', { name: 'Back to TumbilOS dashboard' }).click();
+  await expect(page.locator('#today-view')).toHaveClass(/active/);
+  await expect(page.locator('body')).not.toHaveClass(/priorities-mode/);
+  await expect(page.locator('body > .topbar')).toBeVisible();
+  await expect(page.locator('body > .tabs')).toBeVisible();
+});
+
+test('@critical card details use a focused Trello-style card back instead of an admin form', async ({ page }) => {
+  await page.getByRole('button', { name: 'Priorities' }).click();
+  await page.getByRole('button', { name: 'Edit REVIEW CLAWBACKS AND BONUSES' }).click();
+
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('textbox', { name: 'Title' })).toHaveValue('REVIEW CLAWBACKS AND BONUSES');
+  await expect(dialog.locator('#task-dialog-list')).toHaveText('BACKBURNER / ONGOING');
+  await expect(dialog.getByRole('heading', { name: 'Description' })).toBeVisible();
+  await expect(dialog.getByRole('heading', { name: 'Notes' })).toBeVisible();
+  await expect(dialog.getByRole('heading', { name: 'Links' })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Archive card' })).toBeVisible();
+  await expect(dialog.getByLabel('Your name')).toBeHidden();
 });
 
 test('@critical Overview KPI cards are grouped into daily / monthly / long-horizon families', async ({ page }) => {
