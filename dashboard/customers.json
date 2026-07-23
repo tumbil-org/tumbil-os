@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-23T10:08:32.033206-04:00",
+  "generated_at": "2026-07-23T10:45:34.659963-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -15332,7 +15332,7 @@
               "large": 3,
               "oversize": 0
             },
-            "weight_lbs": 57.0,
+            "weight_lbs": 88.4,
             "order_value_cad": 74.25,
             "prior_completed_orders": 2
           },
@@ -15753,7 +15753,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-07-23 08:00 PM",
             "delivery_by_et": "2026-07-24 08:00 PM",
@@ -16150,12 +16150,43 @@
     {
       "date": "2026-07-23",
       "counts": {
-        "brand_new": 0,
+        "brand_new": 1,
         "second_order": 2,
-        "regular": 3
+        "regular": 4
       },
       "customers_by_type": {
-        "brand_new": [],
+        "brand_new": [
+          {
+            "customer_id": 5876,
+            "order_id": 7030,
+            "name": "Thomas Mauser",
+            "email": "tom.mauser1@gmail.com",
+            "mobile": "6476131273",
+            "placed_at_et": "2026-07-23 10:13 AM",
+            "signup_at_et": "2026-07-22 07:36 PM",
+            "source": {
+              "bucket": "Direct / Unknown",
+              "confidence": "low",
+              "detail": "No GA4 attribution match for this user in the retained event window. AppsFlyer is not joined into this dashboard yet.",
+              "match_quality": "unmatched"
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-07-23 08:00 PM",
+            "delivery_by_et": "2026-07-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 2,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 28.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 0
+          }
+        ],
         "second_order": [
           {
             "customer_id": 131,
@@ -16201,7 +16232,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-07-23 08:00 PM",
             "delivery_by_et": "2026-07-24 08:00 PM",
@@ -16217,6 +16248,35 @@
           }
         ],
         "regular": [
+          {
+            "customer_id": 1057,
+            "order_id": 7031,
+            "name": "Andrea Dorman",
+            "email": "bodywisehr@gmail.com",
+            "mobile": "9055205028",
+            "placed_at_et": "2026-07-23 10:25 AM",
+            "signup_at_et": "2025-08-12 08:06 AM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-07-23 08:00 PM",
+            "delivery_by_et": "2026-07-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 3,
+              "oversize": 0
+            },
+            "weight_lbs": 57.0,
+            "order_value_cad": 74.25,
+            "prior_completed_orders": 44
+          },
           {
             "customer_id": 4499,
             "order_id": 7029,

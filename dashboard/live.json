@@ -1,24 +1,24 @@
 {
   "version": 1,
-  "generated_at": "2026-07-23T10:08:25.171706-04:00",
+  "generated_at": "2026-07-23T10:45:28.189232-04:00",
   "timezone": "America/Toronto",
   "today": {
-    "placed_orders": 5,
-    "order_value_cad": 190.0,
-    "aov_cad": 38.0,
+    "placed_orders": 7,
+    "order_value_cad": 302.25,
+    "aov_cad": 43.18,
     "customer_mix": {
-      "brand_new": 0,
+      "brand_new": 1,
       "second_order": 2,
-      "regular": 3,
-      "returning_regular_total": 5
+      "regular": 4,
+      "returning_regular_total": 6
     },
     "business_date": "2026-07-23",
-    "as_of_et": "2026-07-23T10:08:23.314826-04:00",
+    "as_of_et": "2026-07-23T10:45:21.147155-04:00",
     "target_placed_orders": 20,
-    "pace_to_target_pct": 25.0,
-    "same_time_7d_avg_orders": 3.6,
-    "same_time_delta_orders": 1.4,
-    "same_time_7d_avg_order_value_cad": 254.11,
+    "pace_to_target_pct": 35.0,
+    "same_time_7d_avg_orders": 3.9,
+    "same_time_delta_orders": 3.1,
+    "same_time_7d_avg_order_value_cad": 264.96,
     "same_time_7d_avg_new_customers": 0.6,
     "deliveries": {
       "count": 0,
@@ -35,8 +35,8 @@
   "same_time_7d_samples": [
     {
       "date": "2026-07-22",
-      "placed_orders": 7,
-      "order_value_cad": 296.0,
+      "placed_orders": 8,
+      "order_value_cad": 334.0,
       "new_customers": 0
     },
     {
@@ -71,19 +71,52 @@
     },
     {
       "date": "2026-07-16",
-      "placed_orders": 5,
-      "order_value_cad": 313.75,
+      "placed_orders": 6,
+      "order_value_cad": 351.75,
       "new_customers": 0
     }
   ],
   "acquisition": {
-    "new_customer_orders": 0,
-    "sources": [],
-    "classified_orders": [],
-    "unknown_orders": 0,
+    "new_customer_orders": 1,
+    "sources": [
+      {
+        "bucket": "Direct / Unknown",
+        "orders": 1,
+        "confidence": "low"
+      }
+    ],
+    "classified_orders": [
+      {
+        "order_id": 7030,
+        "bucket": "Direct / Unknown",
+        "confidence": "low",
+        "reason": "No GA4 match",
+        "match_quality": "unmatched",
+        "campaign": null,
+        "referral_code": null,
+        "referral_owner_name": null
+      }
+    ],
+    "unknown_orders": 1,
     "ga4_status": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "partial",
+      "primary": "ga4_data_api",
+      "ga4_data_api": {
+        "status": "ok",
+        "source": "ga4_data_api",
+        "rows": 0,
+        "row_count": 0,
+        "date_start": "2026-07-23",
+        "date_end": "2026-07-23",
+        "auth": "service_account",
+        "credentials": "/Users/cliffpeskin/.config/ga4-mcp/credentials.json"
+      },
+      "bigquery": {
+        "status": "ok",
+        "rows": 0,
+        "method": "rest"
+      },
+      "rows": 0
     },
     "appsflyer": {
       "status": "unavailable",
@@ -434,15 +467,32 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-07-23T10:08:23.314826-04:00"
+      "as_of_et": "2026-07-23T10:45:21.147155-04:00"
     },
     "ga4_attribution": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "partial",
+      "primary": "ga4_data_api",
+      "ga4_data_api": {
+        "status": "ok",
+        "source": "ga4_data_api",
+        "rows": 0,
+        "row_count": 0,
+        "date_start": "2026-07-23",
+        "date_end": "2026-07-23",
+        "auth": "service_account",
+        "credentials": "/Users/cliffpeskin/.config/ga4-mcp/credentials.json"
+      },
+      "bigquery": {
+        "status": "ok",
+        "rows": 0,
+        "method": "rest"
+      },
+      "rows": 0
     },
     "ga4_bigquery": {
-      "status": "skipped",
-      "reason": "No brand-new orders today"
+      "status": "ok",
+      "rows": 0,
+      "method": "rest"
     },
     "appsflyer": {
       "status": "unavailable",
