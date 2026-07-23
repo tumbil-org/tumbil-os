@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-23T12:50:58.205433-04:00",
+  "generated_at": "2026-07-23T12:56:09.632678-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16379,7 +16379,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-07-23 08:00 PM",
             "delivery_by_et": "2026-07-24 08:00 PM",
