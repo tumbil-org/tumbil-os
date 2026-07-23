@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-23T06:15:19.903976-04:00",
+  "generated_at": "2026-07-23T10:08:33.011697-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "days": [
@@ -9849,16 +9849,116 @@
     {
       "date": "2026-07-23",
       "tips": {
-        "tip_count": 0,
-        "total_tips_cad": 0,
-        "rows": []
+        "tip_count": 3,
+        "total_tips_cad": 25.0,
+        "rows": [
+          {
+            "order_id": 6857,
+            "customer_id": 1490,
+            "washpro_id": 2323,
+            "customer_name": "Lori Luechtefeld",
+            "washpro_name": "Javardo Cooper",
+            "tip_cad": 12.0,
+            "captured_at_et": "2026-07-23 07:44 AM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
+          {
+            "order_id": 6766,
+            "customer_id": 3608,
+            "washpro_id": 329,
+            "customer_name": "beverley obreckt",
+            "washpro_name": "sow adja",
+            "tip_cad": 8.0,
+            "captured_at_et": "2026-07-23 06:50 AM",
+            "status": "completed",
+            "delivery_type": "standard"
+          },
+          {
+            "order_id": 6764,
+            "customer_id": 5154,
+            "washpro_id": 3976,
+            "customer_name": "Debra Boyle",
+            "washpro_name": "Diya Fattah",
+            "tip_cad": 5.0,
+            "captured_at_et": "2026-07-23 06:50 AM",
+            "status": "completed",
+            "delivery_type": "standard"
+          }
+        ]
       },
       "ratings": {
-        "rating_count": 0,
-        "avg_rating": 0.0,
-        "five_star_count": 0,
+        "rating_count": 5,
+        "avg_rating": 4.8,
+        "five_star_count": 4,
         "low_rating_count": 0,
-        "rows": []
+        "rows": [
+          {
+            "order_id": 6857,
+            "customer_id": 1490,
+            "washpro_id": 2323,
+            "customer_name": "Lori Luechtefeld",
+            "washpro_name": "Javardo Cooper",
+            "rating": 5,
+            "submitted_at_et": "2026-07-23 07:44 AM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
+          {
+            "order_id": 6938,
+            "customer_id": 5820,
+            "washpro_id": 5118,
+            "customer_name": "Unknown customer",
+            "washpro_name": "Nathan Barnes",
+            "rating": 5,
+            "submitted_at_et": "2026-07-23 07:10 AM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
+          {
+            "order_id": 6852,
+            "customer_id": 4358,
+            "washpro_id": 3985,
+            "customer_name": "Chris Raynor",
+            "washpro_name": "Johanne Beaupre",
+            "rating": 4,
+            "submitted_at_et": "2026-07-23 06:57 AM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": false
+          },
+          {
+            "order_id": 6766,
+            "customer_id": 3608,
+            "washpro_id": 329,
+            "customer_name": "beverley obreckt",
+            "washpro_name": "sow adja",
+            "rating": 5,
+            "submitted_at_et": "2026-07-23 06:50 AM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          },
+          {
+            "order_id": 6764,
+            "customer_id": 5154,
+            "washpro_id": 3976,
+            "customer_name": "Debra Boyle",
+            "washpro_name": "Diya Fattah",
+            "rating": 5,
+            "submitted_at_et": "2026-07-23 06:50 AM",
+            "status": "completed",
+            "delivery_type": "standard",
+            "is_low_rating": false,
+            "is_five_star": true
+          }
+        ]
       }
     }
   ]
