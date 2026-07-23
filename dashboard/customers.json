@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-07-23T10:56:03.171850-04:00",
+  "generated_at": "2026-07-23T12:30:15.098955-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
   "ga4_source_status": {
     "status": "ok",
     "primary": "ga4_data_api",
-    "rows": 67,
+    "rows": 68,
     "ga4_data_api": {
       "status": "ok",
       "source": "ga4_data_api",
-      "rows": 14,
-      "row_count": 14,
+      "rows": 15,
+      "row_count": 15,
       "date_start": "2026-07-17",
       "date_end": "2026-07-23",
       "auth": "service_account",
@@ -15502,11 +15502,11 @@
             "placed_at_et": "2026-07-22 06:47 PM",
             "signup_at_et": "2026-06-07 11:05 PM",
             "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "bucket": "Organic Search",
+              "confidence": "medium",
+              "detail": "GA4 matched Google non-paid signal.",
+              "match_quality": "ga4_source_signal",
+              "campaign": "(organic)"
             },
             "referral_code": null,
             "referral": null,
@@ -15533,11 +15533,11 @@
             "placed_at_et": "2026-07-22 06:31 PM",
             "signup_at_et": "2026-07-21 07:38 PM",
             "source": {
-              "bucket": "Direct / Unknown",
-              "confidence": "low",
-              "detail": "GA4 source was direct or empty.",
-              "match_quality": "ga4_direct_or_empty",
-              "campaign": null
+              "bucket": "Google Ads",
+              "confidence": "high",
+              "detail": "GA4 purchase matched tumbil_id with Google Ads campaign City Target (GTA) Click.",
+              "match_quality": "ga4_purchase_tumbil_id",
+              "campaign": "City Target (GTA) Click"
             },
             "referral_code": null,
             "referral": null,
@@ -15565,7 +15565,7 @@
             "signup_at_et": "2026-07-22 02:59 PM",
             "source": {
               "bucket": "Google Ads",
-              "confidence": "medium",
+              "confidence": "high",
               "detail": "GA4 purchase matched tumbil_id with Google Ads campaign City Target (Ottawa).",
               "match_quality": "ga4_purchase_tumbil_id",
               "campaign": "City Target (Ottawa)"
@@ -15633,7 +15633,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "picked_up",
+            "status": "completed",
             "delivery_type": "standard",
             "pickup_by_et": "2026-07-22 10:00 PM",
             "delivery_by_et": "2026-07-23 10:00 PM",
@@ -15643,7 +15643,7 @@
               "large": 0,
               "oversize": 0
             },
-            "weight_lbs": 14.0,
+            "weight_lbs": 10.0,
             "order_value_cad": 38.0,
             "prior_completed_orders": 0
           }
@@ -16152,7 +16152,7 @@
       "counts": {
         "brand_new": 1,
         "second_order": 2,
-        "regular": 4
+        "regular": 6
       },
       "customers_by_type": {
         "brand_new": [
@@ -16249,6 +16249,64 @@
         ],
         "regular": [
           {
+            "customer_id": 4092,
+            "order_id": 7035,
+            "name": "Simon Lau",
+            "email": "simon@faithacupuncture.ca",
+            "mobile": "4372568148",
+            "placed_at_et": "2026-07-23 12:22 PM",
+            "signup_at_et": "2026-03-20 02:50 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-07-23 08:00 PM",
+            "delivery_by_et": "2026-07-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 1,
+              "large": 0,
+              "oversize": 0
+            },
+            "weight_lbs": 14.0,
+            "order_value_cad": 38.0,
+            "prior_completed_orders": 26
+          },
+          {
+            "customer_id": 4163,
+            "order_id": 7032,
+            "name": "Jordan Stellinga",
+            "email": "jordan@sunreadylandscaping.ca",
+            "mobile": "2892315878",
+            "placed_at_et": "2026-07-23 11:38 AM",
+            "signup_at_et": "2026-03-24 09:15 PM",
+            "source": {
+              "bucket": "Returning customer",
+              "confidence": "high",
+              "detail": "Source is only classified on first-order acquisition."
+            },
+            "referral_code": null,
+            "referral": null,
+            "status": "accepted",
+            "delivery_type": "standard",
+            "pickup_by_et": "2026-07-23 08:00 PM",
+            "delivery_by_et": "2026-07-24 08:00 PM",
+            "bags": {
+              "small": 0,
+              "regular": 0,
+              "large": 3,
+              "oversize": 0
+            },
+            "weight_lbs": 57.0,
+            "order_value_cad": 74.25,
+            "prior_completed_orders": 9
+          },
+          {
             "customer_id": 1057,
             "order_id": 7031,
             "name": "Andrea Dorman",
@@ -16263,7 +16321,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-07-23 08:00 PM",
             "delivery_by_et": "2026-07-24 08:00 PM",
@@ -16292,7 +16350,7 @@
             },
             "referral_code": null,
             "referral": null,
-            "status": "accepted",
+            "status": "picked_up",
             "delivery_type": "standard",
             "pickup_by_et": "2026-07-23 08:00 PM",
             "delivery_by_et": "2026-07-24 08:00 PM",
