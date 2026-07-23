@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-23T13:01:21.781269-04:00",
+  "generated_at": "2026-07-23T13:06:36.132815-04:00",
   "timezone": "America/Toronto",
   "coverage_days": 45,
   "recent_source_window_days": 7,
@@ -16024,7 +16024,7 @@
               "large": 1,
               "oversize": 0
             },
-            "weight_lbs": 19.0,
+            "weight_lbs": 12.8,
             "order_value_cad": 38.0,
             "prior_completed_orders": 39
           },
