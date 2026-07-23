@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-23T10:45:28.189232-04:00",
+  "generated_at": "2026-07-23T10:50:43.581075-04:00",
   "timezone": "America/Toronto",
   "today": {
     "placed_orders": 7,
@@ -13,7 +13,7 @@
       "returning_regular_total": 6
     },
     "business_date": "2026-07-23",
-    "as_of_et": "2026-07-23T10:45:21.147155-04:00",
+    "as_of_et": "2026-07-23T10:50:38.449614-04:00",
     "target_placed_orders": 20,
     "pace_to_target_pct": 35.0,
     "same_time_7d_avg_orders": 3.9,
@@ -270,19 +270,19 @@
       },
       {
         "months_since_first_order": 1,
-        "customers": 70,
-        "total_orders": 97,
+        "customers": 69,
+        "total_orders": 96,
         "orders_per_customer": 1.39,
-        "revenue_per_customer_cad": 81.7,
-        "ltv_per_customer_cad": 18.38
+        "revenue_per_customer_cad": 82.33,
+        "ltv_per_customer_cad": 18.52
       },
       {
         "months_since_first_order": 2,
-        "customers": 75,
-        "total_orders": 159,
-        "orders_per_customer": 2.12,
-        "revenue_per_customer_cad": 139.88,
-        "ltv_per_customer_cad": 31.47
+        "customers": 76,
+        "total_orders": 160,
+        "orders_per_customer": 2.11,
+        "revenue_per_customer_cad": 138.54,
+        "ltv_per_customer_cad": 31.17
       },
       {
         "months_since_first_order": 3,
@@ -416,11 +416,11 @@
       },
       {
         "cohort_days": 60,
-        "customers": 902,
-        "total_orders": 3286,
+        "customers": 903,
+        "total_orders": 3287,
         "orders_per_customer": 3.64,
-        "revenue_per_customer_cad": 200.2,
-        "ltv_per_customer_cad": 45.05
+        "revenue_per_customer_cad": 200.02,
+        "ltv_per_customer_cad": 45.0
       },
       {
         "cohort_days": 90,
@@ -467,7 +467,7 @@
   "data_health": {
     "db": {
       "status": "ok",
-      "as_of_et": "2026-07-23T10:45:21.147155-04:00"
+      "as_of_et": "2026-07-23T10:50:38.449614-04:00"
     },
     "ga4_attribution": {
       "status": "partial",
